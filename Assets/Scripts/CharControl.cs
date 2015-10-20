@@ -9,7 +9,7 @@ public class CharControl : MonoBehaviour{
         move = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    void Update()
 
     {   //Rotate player based on mouse position
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
