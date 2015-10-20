@@ -85,6 +85,23 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &7849900 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 156062, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
+  m_PrefabInternal: {fileID: 638704805}
+--- !u!114 &7849907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 7849900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3a2a2606018d54082b7be9cbc15fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 7
+  move: {fileID: 0}
 --- !u!1001 &114500483
 Prefab:
   m_ObjectHideFlags: 0
@@ -312,7 +329,20 @@ Prefab:
       propertyPath: maxSpeed
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11474060, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11474060, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11474060, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
+      propertyPath: speedV
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11474060, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &756785365
