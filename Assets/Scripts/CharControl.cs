@@ -2,11 +2,12 @@
 using System.Collections;
 
 public class CharControl : MonoBehaviour{
+
     public float speed;
-    public Rigidbody2D move;
+
     void Start()
     {
-        move = GetComponent<Rigidbody2D>();
+
     }
 
     void Update()
