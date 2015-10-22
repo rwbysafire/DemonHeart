@@ -16,10 +16,12 @@ public class EnemyAI : MonoBehaviour {
 			var player = GameObject.FindWithTag ("Player");
 			Vector3 playerPosition = new Vector3 (player.transform.position.x, player.transform.position.y, player.transform.position.z - 10);
 			if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= followDistance) {
-				Quaternion rotation = Quaternion.LookRotation (transform.position - playerPosition, Vector3.forward);
-				transform.eulerAngles = new Vector3 (0, 0, rotation.eulerAngles.z);
-			
-				transform.Translate (Vector3.up * speed * Time.deltaTime);
+				Vector3 diff = player.transform.position - transform.position;
+                diff.Normalize();
+                float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+
+                transform.Translate (Vector3.up * speed * Time.deltaTime);
 			}
 		}
 	}
