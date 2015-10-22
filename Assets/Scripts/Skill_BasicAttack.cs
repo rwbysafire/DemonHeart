@@ -21,7 +21,7 @@ public class Skill_BasicAttack : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (Input.GetKey(KeyCode.Mouse1) && remainingCD <= 0)
+        if (Input.GetKey(KeyCode.Mouse1) && remainingCD <= 0 && GameObject.FindWithTag("Player"))
         {
             fire();
             remainingCD = cooldown;
