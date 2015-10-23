@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Health : MonoBehaviour {
 
-	public float maxHealth, health, regen;
+	public int maxHealth, health;
 
 	// Use this for initialization
 	void Start () {
@@ -12,15 +12,11 @@ public class Health : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		health += regen * Time.deltaTime;
-		if (health > maxHealth)
-			health = maxHealth;
-		if (health <= 0) {
-			Destroy (gameObject);
-		}
+		if (health <= 0)
+			Destroy(gameObject);
 	}
 
-	public void hurt (float damage) {
+	public void hurt (int damage) {
 		health -= damage;
 	}
 }

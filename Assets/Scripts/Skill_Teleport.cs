@@ -4,10 +4,10 @@ using System.Collections;
 
 public class Skill_Teleport : MonoBehaviour {
 
-	public KeyCode keyBind;
 	public int maxDistance;
 	public float cooldown;
 	float remainingCD;
+	GameObject player;
 	Slider slider;
 	Text text;
 
@@ -15,12 +15,12 @@ public class Skill_Teleport : MonoBehaviour {
 	void Start () {
 		slider = GetComponent<Slider> ();
 		text = GetComponentInChildren<Text> ();
+		player = GameObject.FindWithTag ("Player");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey(keyBind) && remainingCD <= 0 && GameObject.FindWithTag ("Player")) {
-			GameObject player = GameObject.FindWithTag("Player");
+		if (Input.GetKey(KeyCode.Mouse0) && remainingCD <= 0 && GameObject.FindWithTag ("Player")) {
 			Vector3 mousePosition = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, transform.position.z);
 			player.transform.position = Vector3.MoveTowards(player.transform.position, mousePosition, maxDistance);
 			remainingCD = cooldown;

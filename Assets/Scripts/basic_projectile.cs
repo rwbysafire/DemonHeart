@@ -3,8 +3,8 @@ using System.Collections;
 
 public class basic_projectile : MonoBehaviour
 {
-    public float speed = 10, damage = 0, pierceChance = 0;
-    float timer;
+    public float speed;
+    public float timer;
 	// Use this for initialization
 	void Start ()
     {
@@ -26,12 +26,8 @@ public class basic_projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-		if (collider.CompareTag ("Enemy")) {
-			collider.gameObject.GetComponent<Health> ().hurt (damage);
-
-			//check if projectile will pierce
-			if (pierceChance < Random.Range(1, 100))
-				Destroy(gameObject);
-		}
+        if (collider.CompareTag("Enemy"))
+            collider.gameObject.GetComponent<Health>().hurt(10);
+        
     }
 }
