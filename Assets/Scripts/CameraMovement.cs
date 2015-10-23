@@ -13,7 +13,7 @@ public class CameraMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (GameObject.FindWithTag ("Player")) {
-			var player = GameObject.FindWithTag ("Player");
+			GameObject player = GameObject.FindWithTag ("Player");
 			playerPosition = new Vector2 (player.transform.position.x, player.transform.position.y);
 		}
 		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

@@ -2,15 +2,14 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Skill_Teleport : MonoBehaviour {
-
+public class Skill_Template : MonoBehaviour {
+	
 	public KeyCode keyBind;
-	public int maxDistance;
 	public float cooldown;
 	float remainingCD;
 	Slider slider;
 	Text text;
-
+	
 	// Use this for initialization
 	void Start () {
 		slider = GetComponent<Slider> ();
@@ -21,12 +20,12 @@ public class Skill_Teleport : MonoBehaviour {
 	void Update () {
 		if (Input.GetKey(keyBind) && remainingCD <= 0 && GameObject.FindWithTag ("Player")) {
 			GameObject player = GameObject.FindWithTag("Player");
-			Vector3 mousePosition = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, transform.position.z);
-			player.transform.position = Vector3.MoveTowards(player.transform.position, mousePosition, maxDistance);
+			// Place the skill's code in here \/\/\/
+
 			remainingCD = cooldown;
 		}
 		remainingCD -= Time.deltaTime;
-
+		
 		// Updates the skill's cooldown on the HUD
 		slider.maxValue = cooldown;
 		slider.value = remainingCD;
