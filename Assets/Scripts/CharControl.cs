@@ -4,10 +4,11 @@ using System.Collections;
 public class CharControl : MonoBehaviour{
 
     public float speed;
+	public Skill teleport;
 
     void Start()
     {
-
+		teleport = new SkillTeleport (GameObject.FindWithTag ("Player"));
     }
 
     void Update()
@@ -24,6 +25,10 @@ public class CharControl : MonoBehaviour{
         transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * Time.deltaTime * speed, Space.World);
         transform.Translate(Vector3.up * Input.GetAxis("Vertical") * Time.deltaTime * speed, Space.World);
 
+		if (Input.GetKey (KeyCode.E)) 
+		{
+			teleport.useSkill();
+		}
     }
 	
 }
