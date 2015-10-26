@@ -138,7 +138,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 20.3489227
+      value: 14.2252579
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -454,7 +454,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 22.2195892
+      value: 15.5330086
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -746,10 +746,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6297fb9d234a05499b71b54d038e395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyBind: 324
-  speed: 30
-  cooldown: .300000012
-  damage: 5
 --- !u!1001 &756785365
 Prefab:
   m_ObjectHideFlags: 0
@@ -1103,7 +1099,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 22.5870209
+      value: 15.7898483
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -1585,7 +1581,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 22.5870743
+      value: 15.7899055
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -1763,7 +1759,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 22.5870743
+      value: 15.7899055
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -2130,7 +2126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 19.9875698
+      value: 13.9726925
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -2369,7 +2365,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 19.9423294
+      value: 13.94104
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -2497,11 +2493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222ad9a781cf61f4989c448b39294dd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyBind: 49
-  speed: 20
-  cooldown: 5
-  damage: 20
-  pierceChance: 100
 --- !u!224 &1647771309 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5,
@@ -2661,7 +2652,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 22.5870743
+      value: 15.7899055
       objectReference: {fileID: 0}
     - target: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5, type: 2}
       propertyPath: m_AnchorMin.x
