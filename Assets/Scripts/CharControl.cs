@@ -13,7 +13,7 @@ public class CharControl : MonoBehaviour{
     {
 		teleport = new SkillTeleport (GameObject.FindWithTag ("Player"));
 		scattershot = new SkillScattershot (GameObject.FindWithTag ("Player"));
-		powershot = new SkillPowershot (GameObject.FindWithTag("Player"));
+		powershot = new SkillPowershot (GameObject.FindWithTag ("Player"));
 		basicAttack = new SkillBasicAttack (GameObject.FindWithTag ("Player"));
     }
 
@@ -35,9 +35,10 @@ public class CharControl : MonoBehaviour{
 		{
 			teleport.useSkill();
 		}
-		if (Input.GetKey (KeyCode.Q))
+		if (Input.GetKey (KeyCode.Q)) {
+		}
 			//scattershot.useSkill ();
-		if (Input.GetKey (KeyCode.F))
+		if (Input.GetKey (KeyCode.R))
 			powershot.useSkill (); 
 		if (Input.GetKey (KeyCode.Mouse0))
 			basicAttack.useSkill ();
