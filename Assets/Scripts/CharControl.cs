@@ -18,7 +18,6 @@ public class CharControl : MonoBehaviour{
     }
 
     void Update()
-
     {   //Rotate player based on mouse position
         Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         diff.Normalize();
@@ -43,5 +42,10 @@ public class CharControl : MonoBehaviour{
 		if (Input.GetKey (KeyCode.Mouse0))
 			basicAttack.useSkill ();
     }
+
+	public static Vector3 getTargetLocation()
+	{
+		return new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+	}
 	
 }
