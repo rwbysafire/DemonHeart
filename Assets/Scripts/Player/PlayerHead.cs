@@ -7,18 +7,19 @@ public class PlayerHead : MonoBehaviour {
 	public Skill scattershot;
 	public Skill powershot;
 	public Skill basicAttack;
+	public Skill volley;
 	
 	void Start()
 	{
 		teleport = new SkillTeleport (GameObject.FindWithTag ("Player"));
-		scattershot = new SkillScattershot (GameObject.Find ("Head"));
-		powershot = new SkillPowershot (GameObject.Find ("Head"));
-		basicAttack = new SkillBasicAttack (GameObject.Find ("Head"));
+		scattershot = new SkillScattershot (gameObject);
+		powershot = new SkillPowershot (gameObject);
+		basicAttack = new SkillBasicAttack (gameObject);
+		volley = new SkillVolley (gameObject);
 	}
 
 	// Update is called once per frame
 	void Update () {
-		transform.position = GameObject.Find ("Feet").transform.position;
 		Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 		diff.Normalize();
 		
@@ -37,5 +38,7 @@ public class PlayerHead : MonoBehaviour {
 			powershot.useSkill (); 
 		if (Input.GetKey (KeyCode.Mouse0))
 			basicAttack.useSkill ();
+		if (Input.GetKey (KeyCode.Mouse1))
+			volley.useSkill ();
 	}
 }
