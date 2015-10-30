@@ -3,7 +3,8 @@ using System.Collections;
 
 public class basic_projectile : MonoBehaviour
 {
-    public float speed = 10, damage = 0, pierceChance = 0, duration = 1;
+    public float speed = 10, damage = 0, pierceChance = 0, duration = 1; 
+	public float stunTime = 0;
 	public bool homing = false;
     float timer;
 	// Use this for initialization
@@ -37,6 +38,9 @@ public class basic_projectile : MonoBehaviour
     {
 		if (collider.CompareTag ("Enemy")) {
 			collider.gameObject.GetComponent<Health> ().hurt (damage);
+
+			if(stunTime > 0)
+				collider.gameObject.GetComponent<EnemyAI>().addStunTime(stunTime);
 
 			//check if projectile will pierce
 			if (pierceChance < Random.Range(1, 100))

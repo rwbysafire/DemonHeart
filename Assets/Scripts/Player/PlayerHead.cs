@@ -31,9 +31,8 @@ public class PlayerHead : MonoBehaviour {
 		{
 			teleport.useSkill();
 		}
-		if (Input.GetKey (KeyCode.Q)) {
-		}
-		//scattershot.useSkill ();
+		if (Input.GetKey (KeyCode.Q)) 
+			scattershot.useSkill ();
 		if (Input.GetKey (KeyCode.R))
 			powershot.useSkill (); 
 		if (Input.GetKey (KeyCode.Mouse0))
