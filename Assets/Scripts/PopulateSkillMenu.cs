@@ -20,8 +20,9 @@ public class PopulateSkillMenu : MonoBehaviour {
 	}
 
 	private void drawSkillItems() {
-		//GameObject skillFab1 = (GameObject) Instantiate(Resources.Load("test", typeof(GameObject)));
-		//skillFab1.transform.SetParent(this.transform, false);
-		//skillFab1.transform.position = new Vector3(760, 740, 1);
+		GameObject skillFab1 = (GameObject) Instantiate(Resources.Load("test", typeof(GameObject)));
+		skillFab1.transform.SetParent(this.transform, false);
+		skillFab1.transform.position = new Vector3(760, 740, 1);
+
 	}
 }
