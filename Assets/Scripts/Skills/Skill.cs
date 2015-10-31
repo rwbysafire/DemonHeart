@@ -3,24 +3,27 @@ using System.Collections;
 
 public abstract class Skill  
 {
-	private GameObject gameObject;
+	private GameObject gameObj;
+	private GameObject player;
 	private float cooldown;
 
-	public Skill(GameObject gameObject)
-	{
-		this.gameObject = gameObject;
+
+	public Skill(GameObject gameObj) {
+		player = GameObject.FindGameObjectWithTag("Player");
+		this.gameObj = gameObj;
 		cooldown = 0.0f; 
 	}
 
-	public GameObject getGameObject()
-	{
-		return gameObject; 
+	public GameObject getGameObject() {
+		return gameObj; 
 	}
 
-	public bool useSkill()
-	{
-		if (cooldown <= Time.fixedTime) 
-		{
+	public GameObject getPlayer() {
+		return player;
+	}
+
+	public bool useSkill() {
+		if (cooldown <= Time.fixedTime) {
 			skillLogic();
 			cooldown = Time.fixedTime + getMaxCooldown(); 
 			return true;
@@ -28,8 +31,7 @@ public abstract class Skill
 		return false; 
 	}
 
-	public float remainingCooldown()
-	{
+	public float remainingCooldown() {
 		float tempTime = cooldown - Time.fixedTime;
 		if (tempTime < 0)
 			tempTime = 0;

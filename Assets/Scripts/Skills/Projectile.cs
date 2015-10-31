@@ -20,13 +20,13 @@ public abstract class Projectile {
 			enemyTag = "Enemy"; 
 		else
 			enemyTag = "Player";
-		speed = getSpeed ();
-		damage = getDamage ();
+		//speed = getSpeed ();
+		//damage = getDamage ();
 		duration = getDuration ();
-		pierceChance = getPierceChance ();
-		stunTime = getStunTime ();
-		turnSpeed = getTurnSpeed ();
-		isHoming = getHoming ();
+		//pierceChance = getPierceChance ();
+		//stunTime = getStunTime ();
+		//turnSpeed = getTurnSpeed ();
+		//isHoming = getHoming ();
 		isForking = getForking ();
 		chainTimes = getChaining ();
 		timer = Time.fixedTime + duration;
@@ -38,10 +38,10 @@ public abstract class Projectile {
 
 	public void projectileLogic() {
 		//Moves projectile forward
-		gameObject.transform.Translate(Vector3.up * speed * Time.deltaTime);
+		gameObject.transform.Translate(Vector3.up * getSpeed() * Time.deltaTime);
 		//checks if he projectile is homing
-		if (isHoming)
-			homing (turnSpeed);
+		if (getHoming())
+			homing (getTurnSpeed());
 		//Projectile disappears after a certain amount of seconds
 		if (timer <= Time.fixedTime)
 			Object.Destroy(gameObject);
@@ -51,12 +51,12 @@ public abstract class Projectile {
 		if (collider.tag != tag && collider.tag != "Projectile" && collider.gameObject.GetInstanceID() != lastHit) {
 			lastHit = collider.gameObject.GetInstanceID();
 			OnHit();
-			collider.gameObject.GetComponent<Health>().hurt (damage);
+			collider.gameObject.GetComponent<Health>().hurt (getDamage());
 			//check if projectile will stun
-			if(stunTime > 0)
-				collider.gameObject.GetComponent<EnemyAI>().addStunTime(stunTime);
+			if(getStunTime() > 0)
+				collider.gameObject.GetComponent<EnemyAI>().addStunTime(getStunTime());
 			//check if projectile will pierce
-			if (pierceChance < Random.Range(1, 100)) {
+			if (getPierceChance() < Random.Range(1, 100)) {
 				//check if projectile will fork
 				if (isForking) {
 					fork();

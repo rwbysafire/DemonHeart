@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class EnableSkillMenu : MonoBehaviour {
 
@@ -54,19 +55,41 @@ public class EnableSkillMenu : MonoBehaviour {
 
 	//NOTE: "gameObject" is the parent of the script (aka the player), and "GameObject" refers to the actual object type.
 
-	private KeyCode openMenuKey;
 	private bool isActive;
+	private GameObject menu;
+	private Image img;
 
 	void Start() {
 		isActive = false;
-		openMenuKey = KeyCode.I;
-		showMenu(isActive);
+
+		// To get a focus effect on the skill menu, we'll overlay an opaque black fill behind the menu.
+		img = (Image) GameObject.Find("SkillFade").gameObject.GetComponent(typeof(Image)); // Our reference to the background object.
+		menu = GameObject.Find ("SkillMenu"); // We'll be using a SkillMenu variable for this too.
+
+		// The skill menu is hidden by default (it's a pain in the scene view), so we make a throwaway variable for enabling it.
+		var menuSprite = (Image) GameObject.Find("MenuSprite").gameObject.GetComponent(typeof(Image));
+
+		menuSprite.enabled = true; // Enables the skill menu.
+		img.enabled = true; // Enables the background black image (it's also obtrusive in the scene view).
+		showMenu(false); // showMenu is set to false. This hides the menu and background at startup. This must always be the last step.
 	}
 
 	void Update() {
-		if (Input.GetKeyDown(openMenuKey)) {
+		// Toggle skill menu logic
+		if (Input.GetKeyDown(KeyCode.I)) {
 			isActive = !isActive;
 			showMenu(isActive);
+		}
+
+		// Changes the opacity of SkillFade's image.
+		if (!menu.gameObject.activeSelf) { // If the Skill Menu object is not active...
+			var c = img.color;
+			c.a = 0; // ...we set the opacity to 0 (clear as crystal).
+			img.color = c;
+		} else { // Otherwise...
+			var c = img.color;
+			c.a = 0.4f; // ...the opacity of the image is 40%. Our background darken effect is achieved.
+			img.color = c;
 		}
 	}
 
@@ -79,7 +102,7 @@ public class EnableSkillMenu : MonoBehaviour {
 					population.enable = false;
 				} else {
 					foreach (Transform child2 in child.transform) {
-						if (child2.name == "Menu") {
+						if (child2.name == "MenuSprite") {
 							foreach (Transform child3 in child2.transform) {
 								GameObject.Destroy (child3.gameObject);
 							}

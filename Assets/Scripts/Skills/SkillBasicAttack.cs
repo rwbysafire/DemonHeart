@@ -5,20 +5,17 @@ public class SkillBasicAttack : Skill
 {
 	public Projectile projectile;
 
-	public SkillBasicAttack(GameObject gameObject) : base(gameObject) { }
-	
-	public override string getName ()
-	{
+	public SkillBasicAttack(GameObject gameObject) : base(gameObject) {}
+
+	public override string getName() {
 		return "Basic Attack";
 	}
 	
-	public override float getMaxCooldown ()
-	{
+	public override float getMaxCooldown() {
 		return 0.1f;
 	}
 	
-	public override void skillLogic()
-	{
+	public override void skillLogic() {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate(Resources.Load("Arrow_Placeholder")) as GameObject;
 		projectile = new BasicAttackProjectile (basicArrow, getGameObject());
@@ -33,7 +30,7 @@ public class SkillBasicAttack : Skill
 class BasicAttackProjectile : Projectile {
 	public BasicAttackProjectile(GameObject gameObject, GameObject origin) : base(gameObject, origin) {}
 	public override float getSpeed () {
-		return 10;
+		return 15;
 	}
 	public override float getDamage () {
 		return 10;

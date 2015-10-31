@@ -8,6 +8,7 @@ public class PlayerHead : MonoBehaviour {
 	public Skill powershot;
 	public Skill basicAttack;
 	public Skill volley;
+	public Skill stunArrow;
 	
 	void Start()
 	{
@@ -16,6 +17,7 @@ public class PlayerHead : MonoBehaviour {
 		powershot = new SkillPowershot (gameObject);
 		basicAttack = new SkillBasicAttack (gameObject);
 		volley = new SkillVolley (gameObject);
+		stunArrow = new SkillStunArrow (gameObject);
 	}
 
 	// Update is called once per frame
@@ -37,5 +39,7 @@ public class PlayerHead : MonoBehaviour {
 			basicAttack.useSkill ();
 		if (Input.GetKey (KeyCode.Mouse1))
 			volley.useSkill ();
+		if (Input.GetKey (KeyCode.C))
+			stunArrow.useSkill ();
 	}
 }
