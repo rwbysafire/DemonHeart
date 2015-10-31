@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SkillScattershot : Skill
 {
+	public Projectile projectile;
+
 	public SkillScattershot(GameObject gameObject) : base(gameObject) {}
 
 	private int arrowCount = 9;
@@ -29,15 +31,28 @@ public class SkillScattershot : Skill
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Arrow_Placeholder")) as GameObject;
-		basicArrow.GetComponent<basic_projectile>().speed = 5;
-		basicArrow.GetComponent<basic_projectile>().damage = 5;
-		basicArrow.GetComponent<basic_projectile>().pierceChance = 100;
-		basicArrow.GetComponent<basic_projectile> ().duration = 0.5f;
-
+		projectile = new ScatterShotProjectile (basicArrow, getGameObject());
+		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = this.getGameObject ().transform.position;
 		basicArrow.transform.rotation = this.getGameObject ().transform.rotation;
 		basicArrow.transform.Translate (Vector3.up * 0.7f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
+	}
+}
+
+class ScatterShotProjectile : Projectile {
+	public ScatterShotProjectile(GameObject gameObject, GameObject origin) : base(gameObject, origin) {}
+	public override float getSpeed () {
+		return 5;
+	}
+	public override float getDamage () {
+		return 5;
+	}
+	public override float getDuration () {
+		return 0.5f;
+	}
+	public override float getPierceChance () {
+		return 100;
 	}
 }

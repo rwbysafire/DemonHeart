@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SkillPowershot : Skill
 {
+	public Projectile projectile;
+
 	public SkillPowershot(GameObject gameObject) : base(gameObject) { }
 
 	public override string getName ()
@@ -19,9 +21,8 @@ public class SkillPowershot : Skill
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate(Resources.Load("Arrow_Placeholder")) as GameObject;
-		basicArrow.GetComponent<basic_projectile>().speed = 20;
-		basicArrow.GetComponent<basic_projectile>().damage = 20;
-		basicArrow.GetComponent<basic_projectile>().pierceChance = 100;
+		projectile = new PowerShotProjectile (basicArrow, getGameObject());
+		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.localScale = basicArrow.transform.localScale * 1;
 		basicArrow.transform.position = this.getGameObject().transform.position;
@@ -30,3 +31,15 @@ public class SkillPowershot : Skill
 	}
 }
 
+class PowerShotProjectile : Projectile {
+	public PowerShotProjectile(GameObject gameObject, GameObject origin) : base(gameObject, origin) {}
+	public override float getSpeed () {
+		return 20;
+	}
+	public override float getDamage () {
+		return 20;
+	}
+	public override float getPierceChance () {
+		return 100;
+	}
+}

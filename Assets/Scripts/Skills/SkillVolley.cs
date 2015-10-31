@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class SkillVolley : Skill {
+	
+	public Projectile projectile;
 
 	public SkillVolley(GameObject gameObject) : base(gameObject) { }
 	
@@ -24,14 +26,31 @@ public class SkillVolley : Skill {
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Arrow_Placeholder")) as GameObject;
-		basicArrow.GetComponent<basic_projectile>().speed = 20;
-		basicArrow.GetComponent<basic_projectile>().damage = 3;
-		basicArrow.GetComponent<basic_projectile>().pierceChance = 75;
-		basicArrow.GetComponent<basic_projectile>().homing = true;
+		projectile = new VolleyProjectile (basicArrow, getGameObject());
+		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = this.getGameObject ().transform.position;
 		basicArrow.transform.rotation = this.getGameObject ().transform.rotation;
 		basicArrow.transform.Translate (Vector3.up * 0.7f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
+	}
+}
+
+class VolleyProjectile : Projectile {
+	public VolleyProjectile(GameObject gameObject, GameObject origin) : base(gameObject, origin) {}
+	public override float getSpeed () {
+		return 20;
+	}
+	public override float getDamage () {
+		return 3;
+	}
+	public override int getChaining () {
+		return 2;
+	}
+	public override bool getForking () {
+		return true;
+	}
+	public override bool getHoming () {
+		return true;
 	}
 }

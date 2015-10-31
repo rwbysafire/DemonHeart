@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SkillBasicAttack : Skill
 {
+	public Projectile projectile;
+
 	public SkillBasicAttack(GameObject gameObject) : base(gameObject) { }
 	
 	public override string getName ()
@@ -19,8 +21,8 @@ public class SkillBasicAttack : Skill
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate(Resources.Load("Arrow_Placeholder")) as GameObject;
-		basicArrow.GetComponent<basic_projectile>().speed = 10;
-		basicArrow.GetComponent<basic_projectile>().damage = 10;
+		projectile = new BasicAttackProjectile (basicArrow, getGameObject());
+		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = this.getGameObject().transform.position;
 		basicArrow.transform.rotation = this.getGameObject().transform.rotation;
@@ -28,3 +30,12 @@ public class SkillBasicAttack : Skill
 	}
 }
 
+class BasicAttackProjectile : Projectile {
+	public BasicAttackProjectile(GameObject gameObject, GameObject origin) : base(gameObject, origin) {}
+	public override float getSpeed () {
+		return 10;
+	}
+	public override float getDamage () {
+		return 10;
+	}
+}

@@ -11,7 +11,7 @@ public class PlayerHead : MonoBehaviour {
 	
 	void Start()
 	{
-		teleport = new SkillTeleport (GameObject.FindWithTag ("Player"));
+		teleport = new SkillTeleport (GameObject.Find ("Player"));
 		scattershot = new SkillScattershot (gameObject);
 		powershot = new SkillPowershot (gameObject);
 		basicAttack = new SkillBasicAttack (gameObject);
@@ -28,9 +28,7 @@ public class PlayerHead : MonoBehaviour {
 
 		
 		if (Input.GetKey (KeyCode.E)) 
-		{
 			teleport.useSkill();
-		}
 		if (Input.GetKey (KeyCode.Q)) 
 			scattershot.useSkill ();
 		if (Input.GetKey (KeyCode.R))
