@@ -63,11 +63,11 @@ public class EnableSkillMenu : MonoBehaviour {
 		isActive = false;
 
 		// To get a focus effect on the skill menu, we'll overlay an opaque black fill behind the menu.
-		img = (Image) GameObject.Find("SkillBGFade").gameObject.GetComponent(typeof(Image)); // Our reference to the background object.
+		img = (Image) GameObject.Find("SkillFade").gameObject.GetComponent(typeof(Image)); // Our reference to the background object.
 		menu = GameObject.Find ("SkillMenu"); // We'll be using a SkillMenu variable for this too.
 
 		// The skill menu is hidden by default (it's a pain in the scene view), so we make a throwaway variable for enabling it.
-		var menuSprite = (Image) GameObject.Find("SkillMenu-Sprite").gameObject.GetComponent(typeof(Image));
+		var menuSprite = (Image) GameObject.Find("MenuSprite").gameObject.GetComponent(typeof(Image));
 
 		menuSprite.enabled = true; // Enables the skill menu.
 		img.enabled = true; // Enables the background black image (it's also obtrusive in the scene view).
@@ -102,7 +102,7 @@ public class EnableSkillMenu : MonoBehaviour {
 					population.enable = false;
 				} else {
 					foreach (Transform child2 in child.transform) {
-						if (child2.name == "SkillMenu_Sprite") {
+						if (child2.name == "MenuSprite") {
 							foreach (Transform child3 in child2.transform) {
 								GameObject.Destroy (child3.gameObject);
 							}
