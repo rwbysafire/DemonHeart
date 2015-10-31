@@ -3,29 +3,55 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Skill_Template : MonoBehaviour {
-	
-	public KeyCode keyBind;
-	public float cooldown;
-	float remainingCD;
+
+	// All skills have the following features:
+	//  - a keybind
+	//  - a cooldown
+	//  - a name
+	//  - an icon
+	//  - a mana cost
+	//  - an action
+
+	protected KeyCode keyBind;
+	protected float cooldown;
+	protected string title;
+	protected Image icon;
+	protected float manaCost;
+	protected float remainingCD;
+
 	Slider slider;
-	Text text;
+	Text text; 
 	
-	// Use this for initialization
+	public void setKeyBind(KeyCode bind) {
+		keyBind = bind;
+	}
+	
+	public void setCooldown(float CD) {
+		cooldown = CD;
+	}
+	
+	public void setTitle(string str) {
+		// Override me
+	}
+	
+	public void setIcon(Image image) {
+		// Override me
+	}
+
+	public void setManaCost(float cost) {
+		// Override me
+	}
+
+	public void activateSkill() {
+		// Override me
+	}
+
 	void Start () {
 		slider = GetComponent<Slider> ();
 		text = GetComponentInChildren<Text> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKey(keyBind) && remainingCD <= 0 && GameObject.FindWithTag ("Player")) {
-			GameObject player = GameObject.FindWithTag("Player");
-			// Place the skill's code in here \/\/\/
 
-			remainingCD = cooldown;
-		}
-		remainingCD -= Time.deltaTime;
-		
+	void Update () {
 		// Updates the skill's cooldown on the HUD
 		slider.maxValue = cooldown;
 		slider.value = remainingCD;
