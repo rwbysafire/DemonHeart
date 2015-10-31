@@ -14,7 +14,7 @@ GameObject:
   - 50: {fileID: 5011848}
   m_Layer: 0
   m_Name: Arrow_Placeholder
-  m_TagString: Arrow
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,8 +79,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c087dbbcc80db045897efaa9b9d498a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  timer: 0
 --- !u!212 &21293240
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -117,6 +115,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: speed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Projectile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

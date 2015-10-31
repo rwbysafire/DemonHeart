@@ -15,8 +15,8 @@ public class UI_Health : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GameObject.FindWithTag ("Player")) {
-			GameObject player = GameObject.FindWithTag ("Player");
+		if (GameObject.Find ("Player")) {
+			GameObject player = GameObject.Find ("Player");
 			slider.value = player.GetComponent<Health> ().health;
 			float playerHealth = Mathf.Ceil(player.GetComponent<Health>().health);
 			if (playerHealth < 0)

@@ -1,37 +1,32 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class SkillScattershot : Skill
-{
+public class SkillVolley : Skill {
+	
 	public Projectile projectile;
 
-	public SkillScattershot(GameObject gameObject) : base(gameObject) {}
-
-	private int arrowCount = 9;
-
+	public SkillVolley(GameObject gameObject) : base(gameObject) { }
+	
 	public override string getName ()
 	{
-		return "Scattershot";
+		return "Volley";
 	}
-
+	
 	public override float getMaxCooldown ()
 	{
-		return 5f;
+		return 0.5f;
 	}
-
-	public override void skillLogic ()
+	
+	public override void skillLogic()
 	{
-		for (int i = 0; i < arrowCount; i++) 
-		{
-			fireArrow(-45 + (i * 90 / (arrowCount - 1)) + Random.Range(-5,5));
-		}
+		fireArrow(-15);fireArrow(-10);fireArrow(-5);fireArrow(0);fireArrow(5);fireArrow(10);fireArrow(15);
 	}
 
 	void fireArrow(int rotate = 0)
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Arrow_Placeholder")) as GameObject;
-		projectile = new ScatterShotProjectile (basicArrow, getGameObject());
+		projectile = new VolleyProjectile (basicArrow, getGameObject());
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = this.getGameObject ().transform.position;
@@ -41,18 +36,21 @@ public class SkillScattershot : Skill
 	}
 }
 
-class ScatterShotProjectile : Projectile {
-	public ScatterShotProjectile(GameObject gameObject, GameObject origin) : base(gameObject, origin) {}
+class VolleyProjectile : Projectile {
+	public VolleyProjectile(GameObject gameObject, GameObject origin) : base(gameObject, origin) {}
 	public override float getSpeed () {
-		return 5;
+		return 20;
 	}
 	public override float getDamage () {
-		return 5;
+		return 3;
 	}
-	public override float getDuration () {
-		return 0.5f;
+	public override int getChaining () {
+		return 2;
 	}
-	public override float getPierceChance () {
-		return 100;
+	public override bool getForking () {
+		return true;
+	}
+	public override bool getHoming () {
+		return true;
 	}
 }

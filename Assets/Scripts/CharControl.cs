@@ -8,6 +8,7 @@ public class CharControl : MonoBehaviour{
 	public Skill scattershot;
 	public Skill powershot;
 	public Skill basicAttack;
+	public Skill stunArrow;
 
     void Start()
     {
@@ -15,10 +16,10 @@ public class CharControl : MonoBehaviour{
 		scattershot = new SkillScattershot (GameObject.FindWithTag ("Player"));
 		powershot = new SkillPowershot (GameObject.FindWithTag ("Player"));
 		basicAttack = new SkillBasicAttack (GameObject.FindWithTag ("Player"));
+		stunArrow = new SkillStunArrow (GameObject.FindWithTag ("Player"));
     }
 
     void Update()
-
     {   //Rotate player based on mouse position
         Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         diff.Normalize();
@@ -35,13 +36,19 @@ public class CharControl : MonoBehaviour{
 		{
 			teleport.useSkill();
 		}
-		if (Input.GetKey (KeyCode.Q)) {
-		}
-			//scattershot.useSkill ();
+		if (Input.GetKey (KeyCode.Q)) 
+			scattershot.useSkill ();
 		if (Input.GetKey (KeyCode.R))
 			powershot.useSkill (); 
 		if (Input.GetKey (KeyCode.Mouse0))
 			basicAttack.useSkill ();
+		if (Input.GetKey (KeyCode.X))
+			stunArrow.useSkill ();
     }
+
+	public static Vector3 getTargetLocation()
+	{
+		return new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+	}
 	
 }

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SkillTeleport : Skill
 {
+	private float maxDistance = 5;
+
 	public SkillTeleport(GameObject gameObject) : base(gameObject) { }
 
 	public override string getName ()
@@ -17,7 +19,7 @@ public class SkillTeleport : Skill
 
 	public override void skillLogic()
 	{
-		this.getGameObject ().transform.Translate (Vector3.up * 10);
+		this.getGameObject().transform.position = Vector3.MoveTowards(this.getGameObject().transform.position, CharControl.getTargetLocation(), maxDistance);
 	}
 }
 
