@@ -9,15 +9,18 @@ public class PlayerHead : MonoBehaviour {
 	public Skill basicAttack;
 	public Skill volley;
 	public Skill stunArrow;
+	public Stats playerStats = new Stats();
 	
 	void Start()
 	{
-		teleport = new SkillTeleport (GameObject.Find ("Player"));
-		scattershot = new SkillScattershot (gameObject);
-		powershot = new SkillPowershot (gameObject);
-		basicAttack = new SkillBasicAttack (gameObject);
-		volley = new SkillVolley (gameObject);
-		stunArrow = new SkillStunArrow (gameObject);
+		teleport = new SkillTeleport (GameObject.Find ("Player"), playerStats);
+		scattershot = new SkillScattershot (gameObject, playerStats);
+		powershot = new SkillPowershot (gameObject, playerStats);
+		basicAttack = new SkillBasicAttack (gameObject, playerStats);
+		volley = new SkillVolley (gameObject, playerStats);
+		stunArrow = new SkillStunArrow (gameObject, playerStats);
+		playerStats.attackDamage = 5;
+		playerStats.cooldown = 50;
 	}
 
 	// Update is called once per frame

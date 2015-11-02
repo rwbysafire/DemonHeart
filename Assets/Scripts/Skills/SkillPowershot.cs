@@ -5,7 +5,7 @@ public class SkillPowershot : Skill
 {
 	public Projectile projectile;
 
-	public SkillPowershot(GameObject gameObject) : base(gameObject) { }
+	public SkillPowershot(GameObject gameObject, Stats stats) : base(gameObject, stats) { }
 
 	public override string getName ()
 	{
@@ -14,14 +14,14 @@ public class SkillPowershot : Skill
 	
 	public override float getMaxCooldown ()
 	{
-		return 5f;
+		return 5f * (1 - getStats().cooldown / 100);
 	}
 	
 	public override void skillLogic()
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate(Resources.Load("Arrow_Placeholder")) as GameObject;
-		projectile = new PowerShotProjectile (basicArrow, getGameObject());
+		projectile = new PowerShotProjectile (basicArrow, getGameObject(), getStats());
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.localScale = basicArrow.transform.localScale * 1;
@@ -32,12 +32,12 @@ public class SkillPowershot : Skill
 }
 
 class PowerShotProjectile : Projectile {
-	public PowerShotProjectile(GameObject gameObject, GameObject origin) : base(gameObject, origin) {}
+	public PowerShotProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
 	public override float getSpeed () {
 		return 20;
 	}
 	public override float getDamage () {
-		return 20;
+		return 4 * stats.attackDamage;
 	}
 	public override float getPierceChance () {
 		return 100;

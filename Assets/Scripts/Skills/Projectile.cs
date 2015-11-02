@@ -4,6 +4,7 @@ using System.Collections;
 public abstract class Projectile {
 	
 	public GameObject gameObject, origin;
+	public Stats stats;
 	public float speed, damage, duration, pierceChance, stunTime, chainTimes, turnSpeed;
 	public bool isHoming, isForking;
 	public int lastHit;
@@ -12,9 +13,10 @@ public abstract class Projectile {
 	public string enemyTag;
 	
 	
-	public Projectile(GameObject gameObject, GameObject origin) {
+	public Projectile(GameObject gameObject, GameObject origin, Stats stats) {
 		this.gameObject = gameObject;
 		this.origin = origin;
+		this.stats = stats;
 		tag = origin.tag;
 		if (tag == "Player" || tag == "Ally")
 			enemyTag = "Enemy"; 

@@ -5,7 +5,7 @@ public class SkillVolley : Skill {
 	
 	public Projectile projectile;
 
-	public SkillVolley(GameObject gameObject) : base(gameObject) { }
+	public SkillVolley(GameObject gameObject, Stats stats) : base(gameObject, stats) { }
 	
 	public override string getName ()
 	{
@@ -14,7 +14,7 @@ public class SkillVolley : Skill {
 	
 	public override float getMaxCooldown ()
 	{
-		return 0.5f;
+		return 0.5f * (1 - (getStats().cooldown / 100));
 	}
 	
 	public override void skillLogic()
@@ -26,7 +26,7 @@ public class SkillVolley : Skill {
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Arrow_Placeholder")) as GameObject;
-		projectile = new VolleyProjectile (basicArrow, getGameObject());
+		projectile = new VolleyProjectile (basicArrow, getGameObject(), getStats());
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = this.getGameObject ().transform.position;
@@ -37,12 +37,12 @@ public class SkillVolley : Skill {
 }
 
 class VolleyProjectile : Projectile {
-	public VolleyProjectile(GameObject gameObject, GameObject origin) : base(gameObject, origin) {}
+	public VolleyProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
 	public override float getSpeed () {
 		return 20;
 	}
 	public override float getDamage () {
-		return 3;
+		return 0.5f * stats.attackDamage;
 	}
 	public override int getChaining () {
 		return 2;

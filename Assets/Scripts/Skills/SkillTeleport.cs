@@ -5,7 +5,7 @@ public class SkillTeleport : Skill
 {
 	private float maxDistance = 5;
 
-	public SkillTeleport(GameObject gameObject) : base(gameObject) { }
+	public SkillTeleport(GameObject gameObject, Stats stats) : base(gameObject, stats) { }
 
 	public override string getName ()
 	{
@@ -14,7 +14,7 @@ public class SkillTeleport : Skill
 
 	public override float getMaxCooldown ()
 	{
-		return 2f;
+		return 2f * (1 - getStats().cooldown / 100);
 	}
 
 	public override void skillLogic()

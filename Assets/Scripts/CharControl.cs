@@ -9,14 +9,17 @@ public class CharControl : MonoBehaviour{
 	public Skill powershot;
 	public Skill basicAttack;
 	public Skill stunArrow;
+	public Stats playerStats;
 
     void Start()
     {
-		teleport = new SkillTeleport (GameObject.FindWithTag ("Player"));
-		scattershot = new SkillScattershot (GameObject.FindWithTag ("Player"));
-		powershot = new SkillPowershot (GameObject.FindWithTag ("Player"));
-		basicAttack = new SkillBasicAttack (GameObject.FindWithTag ("Player"));
-		stunArrow = new SkillStunArrow (GameObject.FindWithTag ("Player"));
+		teleport = new SkillTeleport (GameObject.FindWithTag ("Player"), playerStats);
+		scattershot = new SkillScattershot (GameObject.FindWithTag ("Player"), playerStats);
+		powershot = new SkillPowershot (GameObject.FindWithTag ("Player"), playerStats);
+		basicAttack = new SkillBasicAttack (GameObject.FindWithTag ("Player"), playerStats);
+		stunArrow = new SkillStunArrow (GameObject.FindWithTag ("Player"), playerStats);
+		playerStats.attackDamage = 5;
+		playerStats.cooldown = 50;
     }
 
     void Update()

@@ -5,7 +5,7 @@ public class SkillStunArrow : Skill
 {
 	public Projectile projectile;
 
-	public SkillStunArrow(GameObject gameObject) : base(gameObject) { }
+	public SkillStunArrow(GameObject gameObject, Stats stats) : base(gameObject, stats) { }
 	
 	public override string getName ()
 	{
@@ -14,14 +14,14 @@ public class SkillStunArrow : Skill
 	
 	public override float getMaxCooldown ()
 	{
-		return 3f;
+		return 3f * (1 - getStats().cooldown / 100);
 	}
 	
 	public override void skillLogic()
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate(Resources.Load("Arrow_Placeholder")) as GameObject;
-		projectile = new StunArrowProjectile (basicArrow, getGameObject());
+		projectile = new StunArrowProjectile (basicArrow, getGameObject(), getStats());
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = this.getGameObject().transform.position;
@@ -32,12 +32,12 @@ public class SkillStunArrow : Skill
 }
 
 class StunArrowProjectile : Projectile {
-	public StunArrowProjectile(GameObject gameObject, GameObject origin) : base(gameObject, origin) {}
+	public StunArrowProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
 	public override float getSpeed () {
 		return 5;
 	}
 	public override float getDamage () {
-		return 10;
+		return 2 * stats.attackDamage;
 	}
 	public override float getStunTime () {
 		return 2;

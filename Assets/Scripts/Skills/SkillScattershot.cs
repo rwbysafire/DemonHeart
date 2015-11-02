@@ -5,7 +5,7 @@ public class SkillScattershot : Skill
 {
 	public Projectile projectile;
 
-	public SkillScattershot(GameObject gameObject) : base(gameObject) {}
+	public SkillScattershot(GameObject gameObject, Stats stats) : base(gameObject, stats) {}
 
 	private int arrowCount = 9;
 
@@ -16,7 +16,7 @@ public class SkillScattershot : Skill
 
 	public override float getMaxCooldown ()
 	{
-		return 5f;
+		return 5f * (1 - getStats().cooldown / 100);
 	}
 
 	public override void skillLogic ()
@@ -31,7 +31,7 @@ public class SkillScattershot : Skill
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Arrow_Placeholder")) as GameObject;
-		projectile = new ScatterShotProjectile (basicArrow, getGameObject());
+		projectile = new ScatterShotProjectile (basicArrow, getGameObject(), getStats());
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = this.getGameObject ().transform.position;
@@ -42,12 +42,12 @@ public class SkillScattershot : Skill
 }
 
 class ScatterShotProjectile : Projectile {
-	public ScatterShotProjectile(GameObject gameObject, GameObject origin) : base(gameObject, origin) {}
+	public ScatterShotProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
 	public override float getSpeed () {
 		return 5;
 	}
 	public override float getDamage () {
-		return 5;
+		return 1 * stats.attackDamage;
 	}
 	public override float getDuration () {
 		return 0.5f;

@@ -5,17 +5,23 @@ public abstract class Skill
 {
 	private GameObject gameObj;
 	private GameObject player;
+	private Stats stats;
 	private float cooldown;
 
 
-	public Skill(GameObject gameObj) {
+	public Skill(GameObject gameObj, Stats stats) {
 		player = GameObject.FindGameObjectWithTag("Player");
 		this.gameObj = gameObj;
+		this.stats = stats;
 		cooldown = 0.0f; 
 	}
 
 	public GameObject getGameObject() {
 		return gameObj; 
+	}
+
+	public Stats getStats() {
+		return stats; 
 	}
 
 	public GameObject getPlayer() {
