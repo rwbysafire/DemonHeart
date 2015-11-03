@@ -50,7 +50,7 @@ public abstract class Projectile {
 	}
 
 	public void collisionLogic(Collider2D collider) {
-		if (collider.tag != tag && collider.tag != "Projectile" && collider.gameObject.GetInstanceID() != lastHit) {
+		if (collider.tag != tag && collider.tag != "Projectile" && collider.tag != "EditorOnly" && collider.gameObject.GetInstanceID() != lastHit) {
 			lastHit = collider.gameObject.GetInstanceID();
 			OnHit();
 			collider.gameObject.GetComponent<Health>().hurt (getDamage());
