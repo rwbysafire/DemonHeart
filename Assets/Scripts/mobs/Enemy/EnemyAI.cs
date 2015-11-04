@@ -5,10 +5,16 @@ public class EnemyAI : MonoBehaviour {
 
 	public int speed, followDistance;
 	private float stunTime = 0;
+	public Skill basicAttack;
+	public Skill scattershot;
+	public Stats stats = new Stats();
 
 	// Use this for initialization
 	void Start () {
-	
+		basicAttack = new SkillBasicAttack (gameObject, stats);
+		scattershot = new SkillScattershot (gameObject, stats);
+		stats.attackDamage = 1;
+		stats.cooldown = -100;
 	}
 
 	public bool isStunned()
@@ -54,7 +60,11 @@ public class EnemyAI : MonoBehaviour {
 	                float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 	                transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
 
-	                transform.Translate (Vector3.up * speed * Time.deltaTime);
+					transform.Translate (Vector3.up * speed * Time.deltaTime);
+					if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 8)
+						basicAttack.useSkill ();
+					if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 2)
+						scattershot.useSkill ();
 				}
 			}
 		}

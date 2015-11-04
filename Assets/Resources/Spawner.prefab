@@ -91,7 +91,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: maxEnemies
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite

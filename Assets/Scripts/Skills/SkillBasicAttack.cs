@@ -12,7 +12,7 @@ public class SkillBasicAttack : Skill
 	}
 	
 	public override float getMaxCooldown() {
-		return 0.1f * (1 - getStats().cooldown / 100);
+		return 0.25f * (1 - getStats().cooldown / 100);
 	}
 	
 	public override void skillLogic() {

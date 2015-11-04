@@ -16,6 +16,7 @@ public class SpawnEnemies : MonoBehaviour {
 		if (Random.Range (1, maxEnemies) > GameObject.FindGameObjectsWithTag ("Enemy").GetLength (0)) {
 			GameObject enemy = Instantiate (spawn) as GameObject;
 			enemy.transform.position = new Vector3 (Random.Range (-transform.localScale.x/4, transform.localScale.x/4), Random.Range (-transform.localScale.y/4, transform.localScale.y/4)) + transform.position;
+			enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range(0, 360));
 		}
 	}
 }

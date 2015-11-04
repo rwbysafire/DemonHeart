@@ -44,13 +44,13 @@ public class SkillScattershot : Skill
 class ScatterShotProjectile : Projectile {
 	public ScatterShotProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
 	public override float getSpeed () {
-		return 5;
+		return 10;
 	}
 	public override float getDamage () {
 		return 1 * stats.attackDamage;
 	}
 	public override float getDuration () {
-		return 0.5f;
+		return 0.25f;
 	}
 	public override float getPierceChance () {
 		return 100;
