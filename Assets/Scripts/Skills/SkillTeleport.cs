@@ -19,7 +19,7 @@ public class SkillTeleport : Skill
 
 	public override void skillLogic()
 	{
-		this.getGameObject().transform.position = Vector3.MoveTowards(this.getGameObject().transform.position, CharControl.getTargetLocation(), maxDistance);
+		getGameObject().transform.position = Vector3.MoveTowards(this.getGameObject().transform.position, CharControl.getTargetLocation(), maxDistance);
 	}
 }
 

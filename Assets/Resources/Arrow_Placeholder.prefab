@@ -62,13 +62,13 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: -.0610000007, y: .469000012}
-      - {x: -.0610000007, y: .204999998}
-      - {x: -.0450000018, y: -.469000012}
-      - {x: .0390000008, y: -.469000012}
-      - {x: .0610000007, y: .328999996}
-      - {x: .0610000007, y: .465000004}
-      - {x: .0590000004, y: .469000012}
+    - - {x: -.0610000007, y: .0281399544}
+      - {x: -.0610000007, y: -.23586005}
+      - {x: -.0450000018, y: -.909860075}
+      - {x: .0390000008, y: -.909860075}
+      - {x: .0610000007, y: -.111860044}
+      - {x: .0610000007, y: .0241399538}
+      - {x: .0590000004, y: .0281399544}
 --- !u!96 &9689262
 TrailRenderer:
   m_ObjectHideFlags: 1
@@ -129,8 +129,8 @@ MonoBehaviour:
   destroyOnFinish: 0
   delay: .0500000007
   sprite:
-  - {fileID: 21300000, guid: 86ada678e434492479079bd8ee9dd0fa, type: 3}
-  - {fileID: 21300002, guid: 86ada678e434492479079bd8ee9dd0fa, type: 3}
+  - {fileID: 21300000, guid: 08082b463b90f044cb40ea22cf54f4a6, type: 3}
+  - {fileID: 21300002, guid: 08082b463b90f044cb40ea22cf54f4a6, type: 3}
 --- !u!114 &11436402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,7 +166,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 86ada678e434492479079bd8ee9dd0fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08082b463b90f044cb40ea22cf54f4a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -190,7 +190,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0ad1163cff92f084fb749db8c30c2ebe,
+      objectReference: {fileID: 21300000, guid: 08082b463b90f044cb40ea22cf54f4a6,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_Color.rgba
@@ -247,12 +247,12 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: sprite.Array.data[0]
       value: 
-      objectReference: {fileID: 21300000, guid: 0ad1163cff92f084fb749db8c30c2ebe,
+      objectReference: {fileID: 21300000, guid: 08082b463b90f044cb40ea22cf54f4a6,
         type: 3}
     - target: {fileID: 0}
       propertyPath: sprite.Array.data[1]
       value: 
-      objectReference: {fileID: 21300002, guid: 0ad1163cff92f084fb749db8c30c2ebe,
+      objectReference: {fileID: 21300002, guid: 08082b463b90f044cb40ea22cf54f4a6,
         type: 3}
     - target: {fileID: 0}
       propertyPath: destroyOnFinish
@@ -289,6 +289,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_MinVertexDistance
       value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

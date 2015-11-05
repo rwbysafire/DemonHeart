@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour {
 	public Skill basicAttack;
 	public Skill scattershot;
 	public Stats stats = new Stats();
+	private Vector3 playerPosition;
 
 	// Use this for initialization
 	void Start () {
@@ -47,24 +48,22 @@ public class EnemyAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (GameObject.FindWithTag ("Player")) 
-		{
-			if(!isStunned())
-			{
-				GameObject player = GameObject.FindWithTag ("Player");
-				Vector3 playerPosition = new Vector3 (player.transform.position.x, player.transform.position.y, player.transform.position.z - 10);
-				if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= followDistance) 
-				{
-					Vector3 diff = player.transform.position - transform.position;
-	                diff.Normalize();
-	                float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-	                transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+		//transform.Translate (Vector3.up * speed * Time.deltaTime);
+		if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 8)
+			basicAttack.useSkill ();
+	}
 
-					transform.Translate (Vector3.up * speed * Time.deltaTime);
-					if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 8)
-						basicAttack.useSkill ();
-					if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 2)
-						scattershot.useSkill ();
+	void FixedUpdate() {
+		if (GameObject.FindWithTag ("Player")) {
+			if(!isStunned()) {
+				GameObject player = GameObject.FindWithTag ("Player");
+				playerPosition = player.transform.position;
+				if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= followDistance) {
+					Vector3 diff = player.transform.position - transform.position;
+					diff.Normalize();
+					float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+					transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+					GetComponent<Rigidbody2D>().AddForce(transform.up * 60);
 				}
 			}
 		}

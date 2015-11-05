@@ -7,7 +7,7 @@ public class basic_projectile : MonoBehaviour
 	public Projectile projectile;
 
 	void Start() {
-
+		
 	}
 	
 	void Update() {
@@ -20,5 +20,10 @@ public class basic_projectile : MonoBehaviour
 
 	public void setProjectile(Projectile projectile) {
 		this.projectile = projectile;
+	}
+
+	public void StartChildCoroutine(IEnumerator coroutineMethod)
+	{
+		StartCoroutine(coroutineMethod);
 	}
 }

@@ -37,8 +37,8 @@ class PowerShotProjectile : Projectile {
 
 	public override void OnHit () {
 		GameObject explosion = GameObject.Instantiate(Resources.Load("Explosion")) as GameObject;
-		explosion.transform.position = collider.transform.position;
-		explosion.transform.Translate((gameObject.transform.position - collider.transform.position).normalized * collider.bounds.size.x/2);
+		RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.up);
+		explosion.transform.position = hit[1].point;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
 	}
 	public override float getSpeed () {

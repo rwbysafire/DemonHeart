@@ -75,13 +75,13 @@ public abstract class Projectile {
 					timer = Time.fixedTime + duration;
 				} else {
 					OnExplode();
-					Object.Destroy(gameObject);
+					gameObject.GetComponent<basic_projectile>().StartChildCoroutine(destroyOnNextFrame());
 				}
 			}
 		}
 		else if(collider.CompareTag("Wall")) {
 			OnExplode();
-			Object.Destroy(gameObject);
+			gameObject.GetComponent<basic_projectile>().StartChildCoroutine(destroyOnNextFrame());
 		}
 	}
 
@@ -120,7 +120,7 @@ public abstract class Projectile {
 		clonedProjectile.GetComponent<basic_projectile> ().setProjectile (projectile);
 		clonedProjectile.transform.RotateAround (clonedProjectile.transform.position, Vector3.forward, rotation);
 		projectile.setGameObject (clonedProjectile);
-		clonedProjectile.GetComponent<Rigidbody2D>().velocity = gameObject.transform.up * getSpeed();
+		clonedProjectile.GetComponent<Rigidbody2D>().velocity = clonedProjectile.transform.up * getSpeed();
 	}
 
 	GameObject FindClosestEnemy() {
@@ -136,6 +136,11 @@ public abstract class Projectile {
 			}
 		}
 		return closest;
+	}
+
+	IEnumerator destroyOnNextFrame() {
+		yield return null;
+		Object.Destroy(gameObject);
 	}
 
 	public abstract float getSpeed();
@@ -163,6 +168,9 @@ public abstract class Projectile {
 	}
 	public virtual void OnHit(){}
 	public virtual void OnExplode(){
+		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.up);
+		gameObject.transform.position = hit[1].point;
 		OnHit();
 	}
 }

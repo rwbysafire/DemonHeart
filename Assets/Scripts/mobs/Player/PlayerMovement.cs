@@ -42,9 +42,6 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void Update () {
-		//Displays and modifies player rotations
-		feetLogic();headLogic();
-
 		if (Input.GetKey (KeyCode.E)) {
 			StartCoroutine("playFireAnimation");
 			teleport.useSkill();
@@ -70,18 +67,23 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
+	void FixedUpdate() {
+		//Displays and modifies player rotations
+		feetLogic();headLogic();
+	}
+
 	void feetLogic () {
 		Vector2 direction = new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
 		if (direction != Vector2.zero) {
 			//Movement
 			Vector2 directionMagnitude = new Vector2(Mathf.Abs(direction.normalized.x) * direction.x, Mathf.Abs(direction.normalized.y) * direction.y);
-			transform.Translate (directionMagnitude * speed * Time.deltaTime);
+			GetComponent<Rigidbody2D>().AddForce(directionMagnitude * 100);
 			//Feet
 			feetDirection = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg - 90;
 			feet.transform.rotation = Quaternion.Euler (0f, 0f, feetDirection);
 			if(feetFrame >= feetSprite.Length - 1)
 				feetFrame = -1;
-			if (feetTimer + (1.03 - Mathf.Pow(directionMagnitude.magnitude, 0.1f)) <= Time.fixedTime) {
+			if (feetTimer + (1.03 - Mathf.Pow(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude, 0.1f)) <= Time.fixedTime) {
 				feet.GetComponent<SpriteRenderer> ().sprite = feetSprite[feetFrame += 1];
 				feetTimer = Time.fixedTime;
 			}
