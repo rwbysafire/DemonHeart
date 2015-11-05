@@ -2,7 +2,7 @@
 using System.Collections;
 
 public abstract class Projectile {
-	
+
 	public GameObject gameObject, origin;
 	public Stats stats;
 	public float speed, damage, duration, pierceChance, stunTime, chainTimes, turnSpeed;
@@ -11,6 +11,7 @@ public abstract class Projectile {
 	float timer;
 	public string tag;
 	public string enemyTag;
+	public Collider2D collider;
 	
 	
 	public Projectile(GameObject gameObject, GameObject origin, Stats stats) {
@@ -38,9 +39,13 @@ public abstract class Projectile {
 		this.gameObject = gameObject;
 	}
 
+	public void projectileOnStart() {
+		gameObject.GetComponent<Rigidbody2D>().velocity = gameObject.transform.up * getSpeed();
+	}
+
 	public void projectileLogic() {
 		//Moves projectile forward
-		gameObject.transform.Translate(Vector3.up * getSpeed() * Time.deltaTime);
+		//gameObject.transform.Translate(Vector3.up * getSpeed() * Time.deltaTime);
 		//checks if he projectile is homing
 		if (getHoming())
 			homing (getTurnSpeed());
@@ -50,6 +55,7 @@ public abstract class Projectile {
 	}
 
 	public void collisionLogic(Collider2D collider) {
+		this.collider = collider;
 		if (collider.tag == enemyTag && collider.gameObject.GetInstanceID() != lastHit) {
 			lastHit = collider.gameObject.GetInstanceID();
 			OnHit();
@@ -72,6 +78,10 @@ public abstract class Projectile {
 					Object.Destroy(gameObject);
 				}
 			}
+		}
+		else if(collider.CompareTag("Wall")) {
+			OnExplode();
+			Object.Destroy(gameObject);
 		}
 	}
 
@@ -98,6 +108,7 @@ public abstract class Projectile {
 			float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg - 90;
 			var angle = Quaternion.Angle(Quaternion.Euler(0, 0, rot_z), gameObject.transform.rotation);
 			gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, Quaternion.Euler(0, 0, rot_z), turnSpeed * Time.deltaTime / angle);
+			gameObject.GetComponent<Rigidbody2D>().velocity = gameObject.transform.up * getSpeed();
 		}
 	}
 
@@ -109,6 +120,7 @@ public abstract class Projectile {
 		clonedProjectile.GetComponent<basic_projectile> ().setProjectile (projectile);
 		clonedProjectile.transform.RotateAround (clonedProjectile.transform.position, Vector3.forward, rotation);
 		projectile.setGameObject (clonedProjectile);
+		clonedProjectile.GetComponent<Rigidbody2D>().velocity = gameObject.transform.up * getSpeed();
 	}
 
 	GameObject FindClosestEnemy() {
@@ -150,5 +162,7 @@ public abstract class Projectile {
 		return false;
 	}
 	public virtual void OnHit(){}
-	public virtual void OnExplode(){}
+	public virtual void OnExplode(){
+		OnHit();
+	}
 }

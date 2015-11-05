@@ -38,19 +38,26 @@ public class SkillScattershot : Skill
 		basicArrow.transform.rotation = this.getGameObject ().transform.rotation;
 		basicArrow.transform.Translate (Vector3.up * 0.7f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
+		projectile.projectileOnStart();
 	}
 }
 
 class ScatterShotProjectile : Projectile {
 	public ScatterShotProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
+	public override void OnHit () {
+		GameObject explosion = GameObject.Instantiate(Resources.Load("Explosion")) as GameObject;
+		explosion.transform.position = collider.transform.position;
+		explosion.transform.Translate((gameObject.transform.position - collider.transform.position).normalized * collider.bounds.size.x/2);
+		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
+	}
 	public override float getSpeed () {
-		return 10;
+		return 20;
 	}
 	public override float getDamage () {
 		return 1 * stats.attackDamage;
 	}
 	public override float getDuration () {
-		return 0.25f;
+		return 0.125f;
 	}
 	public override float getPierceChance () {
 		return 100;
