@@ -38,8 +38,15 @@ class BasicAttackProjectile : Projectile {
 	public BasicAttackProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
 	public override void OnHit () {
 		GameObject explosion = GameObject.Instantiate(Resources.Load("Explosion")) as GameObject;
-		RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.up);
-		explosion.transform.position = hit[1].point;
+		RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.up);
+		RaycastHit2D target = hit[0];
+		foreach (RaycastHit2D x in hit) {
+			if (x.collider.CompareTag(collider.tag)) {
+				target = x;
+				break;
+			}
+		}
+		explosion.transform.position = target.point;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
 	}
 	public override float getSpeed () {

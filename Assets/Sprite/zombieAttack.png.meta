@@ -1,0 +1,155 @@
+fileFormatVersion: 2
+guid: cea365a536a699e4591c717ac12e1027
+timeCreated: 1446877548
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: zombieAttack_0
+    21300002: zombieAttack_1
+    21300004: zombieAttack_2
+    21300006: zombieAttack_3
+    21300008: zombieAttack_4
+    21300010: zombieAttack_5
+    21300012: zombieAttack_6
+    21300014: zombieAttack_7
+    21300016: zombieAttack_8
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 125
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: zombieAttack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 637.333374
+        width: 294.666656
+        height: 318.666626
+      alignment: 9
+      pivot: {x: .529999971, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieAttack_1
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 637.333374
+        width: 294.666626
+        height: 318.666626
+      alignment: 9
+      pivot: {x: .529999971, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieAttack_2
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 637.333374
+        width: 294.666626
+        height: 318.666626
+      alignment: 9
+      pivot: {x: .529999971, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieAttack_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 318
+        width: 295
+        height: 319
+      alignment: 9
+      pivot: {x: .529999971, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieAttack_4
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 321
+        width: 295
+        height: 319
+      alignment: 9
+      pivot: {x: .529999971, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieAttack_5
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 319.333344
+        width: 294.666626
+        height: 318.666656
+      alignment: 9
+      pivot: {x: .529999971, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieAttack_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 295
+        height: 319
+      alignment: 9
+      pivot: {x: .529999971, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieAttack_7
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 1.33334351
+        width: 294.666626
+        height: 318.666656
+      alignment: 9
+      pivot: {x: .529999971, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieAttack_8
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 1.33334351
+        width: 294.666626
+        height: 318.666656
+      alignment: 9
+      pivot: {x: .529999971, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

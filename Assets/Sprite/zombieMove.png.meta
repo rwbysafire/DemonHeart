@@ -1,0 +1,243 @@
+fileFormatVersion: 2
+guid: 69589ad8672a5b54a9123670eb969bf9
+timeCreated: 1446878423
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: zombieMove_0
+    21300002: zombieMove_1
+    21300004: zombieMove_2
+    21300006: zombieMove_3
+    21300008: zombieMove_4
+    21300010: zombieMove_5
+    21300012: zombieMove_6
+    21300014: zombieMove_7
+    21300016: zombieMove_8
+    21300018: zombieMove_9
+    21300020: zombieMove_10
+    21300022: zombieMove_11
+    21300024: zombieMove_12
+    21300026: zombieMove_13
+    21300028: zombieMove_14
+    21300030: zombieMove_15
+    21300032: zombieMove_16
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 125
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: zombieMove_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_1
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_2
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_3
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_4
+      rect:
+        serializedVersion: 2
+        x: 1244
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_5
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_6
+      rect:
+        serializedVersion: 2
+        x: 1866
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_7
+      rect:
+        serializedVersion: 2
+        x: 2177
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_8
+      rect:
+        serializedVersion: 2
+        x: 2488
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_9
+      rect:
+        serializedVersion: 2
+        x: 2799
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_10
+      rect:
+        serializedVersion: 2
+        x: 3110
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_11
+      rect:
+        serializedVersion: 2
+        x: 3421
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_12
+      rect:
+        serializedVersion: 2
+        x: 3732
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_13
+      rect:
+        serializedVersion: 2
+        x: 4043
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_14
+      rect:
+        serializedVersion: 2
+        x: 4354
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_15
+      rect:
+        serializedVersion: 2
+        x: 4665
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: zombieMove_16
+      rect:
+        serializedVersion: 2
+        x: 4976
+        y: 0
+        width: 311
+        height: 288
+      alignment: 9
+      pivot: {x: .540000021, y: .400000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

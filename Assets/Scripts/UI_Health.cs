@@ -10,6 +10,7 @@ public class UI_Health : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		slider = GetComponent<Slider> ();
+		slider.maxValue = GameObject.Find ("Player").GetComponent<Health> ().maxHealth;
 		text = GetComponentInChildren<Text> ();
 	}
 	

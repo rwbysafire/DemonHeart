@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 498858}
   - 212: {fileID: 21200880}
   - 114: {fileID: 11444494}
-  - 61: {fileID: 6171222}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: EditorOnly
@@ -30,19 +29,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!61 &6171222
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193486}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: .5, y: .5}
 --- !u!114 &11444494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,8 +40,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ee809186a76264fb098005644dbcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemies: 100
-  spawn: {fileID: 109756, guid: 672127655e77a75428f9686486ecdc0f, type: 2}
+  maxEnemies: 700
+  spawn: {fileID: 100318, guid: bee289d1e818a074d9796315e7ad6c89, type: 2}
 --- !u!212 &21200880
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -91,7 +77,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: maxEnemies
-      value: 50
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
@@ -121,7 +107,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: spawn
       value: 
-      objectReference: {fileID: 109756, guid: 672127655e77a75428f9686486ecdc0f, type: 2}
+      objectReference: {fileID: 100318, guid: bee289d1e818a074d9796315e7ad6c89, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 193486}

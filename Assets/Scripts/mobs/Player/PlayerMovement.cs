@@ -16,20 +16,25 @@ public class PlayerMovement : MonoBehaviour {
 	public Skill basicAttack;
 	public Skill volley;
 	public Skill stunArrow;
+	public Skill slash;
 	public Stats playerStats = new Stats();
 
 	void Start () {
 		//Create head
 		head = new GameObject ("PlayerHead");
 		head.transform.SetParent(transform);
+		head.transform.position = transform.position;
 		head.tag = ("Player");
-		head.AddComponent<SpriteRenderer> ();
-		head.GetComponent<SpriteRenderer> ().sprite = headSprite[0];
+		head.AddComponent<SpriteRenderer>();
+		head.GetComponent<SpriteRenderer>().sprite = headSprite[0];
+		head.GetComponent<SpriteRenderer>().sortingOrder = 3;
 		//Create feet
 		feet = new GameObject ("PlayerFeet");
 		feet.transform.SetParent(transform);
+		feet.transform.position = transform.position;
 		feet.tag = ("Player");
-		feet.AddComponent<SpriteRenderer> ();
+		feet.AddComponent<SpriteRenderer>();
+		feet.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
 		teleport = new SkillTeleport (gameObject, playerStats);
 		scattershot = new SkillScattershot (head, playerStats);
@@ -37,33 +42,40 @@ public class PlayerMovement : MonoBehaviour {
 		basicAttack = new SkillBasicAttack (head, playerStats);
 		volley = new SkillVolley (head, playerStats);
 		stunArrow = new SkillStunArrow (head, playerStats);
+		slash = new SkillSlash (head, playerStats);
 		playerStats.attackDamage = 5;
 		playerStats.cooldown = 50;
 	}
 
 	void Update () {
-		if (Input.GetKey (KeyCode.E)) {
-			StartCoroutine("playFireAnimation");
-			teleport.useSkill();
-		}
-		if (Input.GetKey (KeyCode.Q)) {
-			StartCoroutine("playFireAnimation");
-			scattershot.useSkill ();
-		}
-		if (Input.GetKey (KeyCode.R)) {
-			StartCoroutine("playFireAnimation");
-			powershot.useSkill (); 
-		}
-		if (Input.GetKey (KeyCode.Mouse0)) {
-			StartCoroutine("playFireAnimation");
-			basicAttack.useSkill ();
-		}if (Input.GetKey (KeyCode.Mouse1)) {
-			StartCoroutine("playFireAnimation");
-			volley.useSkill ();
-		}
-		if (Input.GetKey (KeyCode.C)) {
-			StartCoroutine("playFireAnimation");
-			stunArrow.useSkill ();
+		if (Time.timeScale != 0) {
+			if (Input.GetKey (KeyCode.E)) {
+				StartCoroutine("playFireAnimation");
+				teleport.useSkill();
+			}
+			if (Input.GetKey (KeyCode.Q)) {
+				StartCoroutine("playFireAnimation");
+				scattershot.useSkill ();
+			}
+			if (Input.GetKey (KeyCode.R)) {
+				StartCoroutine("playFireAnimation");
+				powershot.useSkill (); 
+			}
+			if (Input.GetKey (KeyCode.Mouse0)) {
+				StartCoroutine("playFireAnimation");
+				basicAttack.useSkill ();
+			}if (Input.GetKey (KeyCode.Mouse1)) {
+				StartCoroutine("playFireAnimation");
+				volley.useSkill ();
+			}
+			if (Input.GetKey (KeyCode.C)) {
+				StartCoroutine("playFireAnimation");
+				stunArrow.useSkill ();
+			}
+			if (Input.GetKey (KeyCode.F)) {
+				StartCoroutine("playFireAnimation");
+				slash.useSkill ();
+			}
 		}
 	}
 
@@ -83,7 +95,7 @@ public class PlayerMovement : MonoBehaviour {
 			feet.transform.rotation = Quaternion.Euler (0f, 0f, feetDirection);
 			if(feetFrame >= feetSprite.Length - 1)
 				feetFrame = -1;
-			if (feetTimer + (1.03 - Mathf.Pow(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude, 0.1f)) <= Time.fixedTime) {
+			if (feetTimer + (1.28 - Mathf.Pow(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude, 0.1f)) <= Time.fixedTime) {
 				feet.GetComponent<SpriteRenderer> ().sprite = feetSprite[feetFrame += 1];
 				feetTimer = Time.fixedTime;
 			}

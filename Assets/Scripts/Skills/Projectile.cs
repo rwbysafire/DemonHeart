@@ -75,13 +75,13 @@ public abstract class Projectile {
 					timer = Time.fixedTime + duration;
 				} else {
 					OnExplode();
-					gameObject.GetComponent<basic_projectile>().StartChildCoroutine(destroyOnNextFrame());
+					Object.Destroy(gameObject);
 				}
 			}
 		}
 		else if(collider.CompareTag("Wall")) {
 			OnExplode();
-			gameObject.GetComponent<basic_projectile>().StartChildCoroutine(destroyOnNextFrame());
+			Object.Destroy(gameObject);
 		}
 	}
 
@@ -168,9 +168,6 @@ public abstract class Projectile {
 	}
 	public virtual void OnHit(){}
 	public virtual void OnExplode(){
-		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-		RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.up);
-		gameObject.transform.position = hit[1].point;
 		OnHit();
 	}
 }
