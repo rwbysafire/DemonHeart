@@ -53,27 +53,27 @@ public class EnemyAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(!isStunned() && !isAttacking) {
-			if (GameObject.FindWithTag ("Player") && Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 2) {
-				StartCoroutine("playAttackAnimation", 0.1);
-			}
+		if(isStunned() || isAttacking)
+			return;
+		if (GameObject.FindWithTag ("Player") && Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 2) {
+			StartCoroutine("playAttackAnimation", 0.1);
 		}
 	}
 
 	void FixedUpdate() {
+		if (isStunned() || isAttacking)
+			return;
 		if (GameObject.FindWithTag ("Player")) {
-			if(!isStunned() && !isAttacking) {
-				GameObject player = GameObject.FindWithTag ("Player");
-				playerPosition = player.transform.position;
-				Vector3 diff = player.transform.position - transform.position;
-				diff.Normalize();
-				float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-				transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-				if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= followDistance) {
-					GetComponent<Rigidbody2D>().AddForce(transform.up * speed);
-				} else
-					GetComponent<Rigidbody2D>().AddForce(transform.up * 30);
-			}
+			GameObject player = GameObject.FindWithTag ("Player");
+			playerPosition = player.transform.position;
+			Vector3 diff = player.transform.position - transform.position;
+			diff.Normalize();
+			float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+			transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+			if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= followDistance) {
+				GetComponent<Rigidbody2D>().AddForce(transform.up * speed);
+			} else
+				GetComponent<Rigidbody2D>().AddForce(transform.up * 30);
 		}
 	}
 
@@ -82,10 +82,12 @@ public class EnemyAI : MonoBehaviour {
 		isAttacking = true;
 		gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
 		do {
-			GetComponent<SpriteRenderer> ().sprite = spriteAttack[frame];
-			frame++;
-			if (frame == 6)
-				slash.useSkill ();
+			if(!isStunned()) {
+				GetComponent<SpriteRenderer> ().sprite = spriteAttack[frame];
+				if (frame == 6)
+					slash.useSkill ();
+				frame++;
+			}
 			yield return new WaitForSeconds(delay);
 		} while (frame < spriteAttack.Length);
 		isAttacking = false;

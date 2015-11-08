@@ -92,6 +92,7 @@ public abstract class Projectile {
 			diff.Normalize();
 			float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg - 90;
 			gameObject.transform.rotation = Quaternion.Euler(0f, 0f, rot_z);
+			gameObject.GetComponent<Rigidbody2D>().velocity = gameObject.transform.up * getSpeed();
 		}
 	}
 

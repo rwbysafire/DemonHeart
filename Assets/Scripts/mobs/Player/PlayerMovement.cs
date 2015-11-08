@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 	public Skill volley;
 	public Skill stunArrow;
 	public Skill slash;
+	public Skill explosiveArrow;
 	public Stats playerStats = new Stats();
 
 	void Start () {
@@ -43,6 +44,7 @@ public class PlayerMovement : MonoBehaviour {
 		volley = new SkillVolley (head, playerStats);
 		stunArrow = new SkillStunArrow (head, playerStats);
 		slash = new SkillSlash (head, playerStats);
+		explosiveArrow = new SkillExplosiveArrow (head, playerStats);
 		playerStats.attackDamage = 5;
 		playerStats.cooldown = 50;
 	}
@@ -64,7 +66,8 @@ public class PlayerMovement : MonoBehaviour {
 			if (Input.GetKey (KeyCode.Mouse0)) {
 				StartCoroutine("playFireAnimation");
 				basicAttack.useSkill ();
-			}if (Input.GetKey (KeyCode.Mouse1)) {
+			}
+			if (Input.GetKey (KeyCode.Mouse1)) {
 				StartCoroutine("playFireAnimation");
 				volley.useSkill ();
 			}
@@ -75,6 +78,10 @@ public class PlayerMovement : MonoBehaviour {
 			if (Input.GetKey (KeyCode.F)) {
 				StartCoroutine("playFireAnimation");
 				slash.useSkill ();
+			}
+			if (Input.GetKey (KeyCode.V)) {
+				StartCoroutine("playFireAnimation");
+				explosiveArrow.useSkill ();
 			}
 		}
 	}

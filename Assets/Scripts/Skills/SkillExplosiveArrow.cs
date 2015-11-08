@@ -1,29 +1,32 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class SkillBasicAttack : Skill
-{
+public class SkillExplosiveArrow : Skill {
+	
 	public Projectile projectile;
 
-	public SkillBasicAttack(GameObject gameObject, Stats stats) : base(gameObject, stats) {}
-
-	public override string getName() {
-		return "Basic Attack";
+	public SkillExplosiveArrow(GameObject gameObject, Stats stats) : base(gameObject, stats) { }
+	
+	public override string getName ()
+	{
+		return "Explosive Arrow";
 	}
 	
-	public override float getMaxCooldown() {
-		return 0.25f * (1 - getStats().cooldown / 100);
+	public override float getMaxCooldown ()
+	{
+		return 0.5f * (1 - (getStats().cooldown / 100));
 	}
 	
-	public override void skillLogic() {
-		fireArrow(Random.Range(-10, 10)/10f);
+	public override void skillLogic ()
+	{
+		fireArrow();
 	}
 
 	void fireArrow(float rotate = 0)
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Arrow_Placeholder")) as GameObject;
-		projectile = new BasicAttackProjectile (basicArrow, getGameObject(), getStats());
+		projectile = new ExplosiveArrowProjectile (basicArrow, getGameObject(), getStats());
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = this.getGameObject ().transform.position;
@@ -34,10 +37,11 @@ public class SkillBasicAttack : Skill
 	}
 }
 
-class BasicAttackProjectile : Projectile {
-	public BasicAttackProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
-	public override void OnHit () {
-		GameObject explosion = GameObject.Instantiate(Resources.Load("Explosion")) as GameObject;
+class ExplosiveArrowProjectile : Projectile {
+	public ExplosiveArrowProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
+	public override void OnExplode () {
+		GameObject explosion = GameObject.Instantiate(Resources.Load<GameObject>("FireExplosion"));
+		explosion.GetComponent<ExplosiveArrowExplosion>().damage = 2 * stats.attackDamage;
 		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
 		RaycastHit2D target = hit[0];
 		foreach (RaycastHit2D x in hit) {
@@ -48,6 +52,10 @@ class BasicAttackProjectile : Projectile {
 		}
 		explosion.transform.position = target.point;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
+		if (origin.tag == "Player" || origin.tag == "Ally")
+			explosion.GetComponent<ExplosiveArrowExplosion>().enemyTag = "Enemy"; 
+		else
+			explosion.GetComponent<ExplosiveArrowExplosion>().enemyTag = "Player";
 	}
 	public override float getSpeed () {
 		return 40;
@@ -60,3 +68,4 @@ class BasicAttackProjectile : Projectile {
 		return 1 * stats.attackDamage;
 	}
 }
+

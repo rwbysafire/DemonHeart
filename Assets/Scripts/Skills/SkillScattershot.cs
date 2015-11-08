@@ -46,7 +46,7 @@ class ScatterShotProjectile : Projectile {
 	public ScatterShotProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
 	public override void OnHit () {
 		GameObject explosion = GameObject.Instantiate(Resources.Load("Explosion")) as GameObject;
-		RaycastHit2D[] hit = Physics2D.RaycastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.up);
+		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
 		RaycastHit2D target = hit[0];
 		foreach (RaycastHit2D x in hit) {
 			if (x.collider.CompareTag(collider.tag)) {

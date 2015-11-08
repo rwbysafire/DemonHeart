@@ -12,7 +12,7 @@ public class SkillSlash : Skill {
 
 	public override float getMaxCooldown ()
 	{
-		return 0.5f * (1 - (getStats().cooldown / 100));
+		return 0.4f * (1 - (getStats().cooldown / 100));
 	}
 
 	public override void skillLogic ()

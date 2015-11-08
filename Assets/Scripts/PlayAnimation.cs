@@ -5,10 +5,12 @@ public class PlayAnimation : MonoBehaviour {
 
 	public bool repeat = true, destroyOnFinish = false;
 	public float delay = 0.05f;
+	public string fileName;
 	public Sprite[] sprite;
 	private int frame = 0;
 
 	void Start () {
+		sprite = Resources.LoadAll<Sprite>(fileName);
 		StartCoroutine("playAnimation", delay);
 	}
 
