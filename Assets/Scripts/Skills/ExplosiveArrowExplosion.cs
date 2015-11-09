@@ -12,7 +12,7 @@ public class ExplosiveArrowExplosion : MonoBehaviour {
 
 	void Start () {
 		sprite = Resources.LoadAll<Sprite>(fileName);
-		StartCoroutine("playAnimation", 0.01f);
+		StartCoroutine("playAnimation", 0.02f);
 	}
 	
 	IEnumerator playAnimation(float delay) {
@@ -21,8 +21,10 @@ public class ExplosiveArrowExplosion : MonoBehaviour {
 				frame = 0;
 			}
 			GetComponent<SpriteRenderer> ().sprite = sprite[frame];
-			if (frame == 12)
+			if (frame == 11) {
 				gameObject.GetComponent<CircleCollider2D>().enabled = true;
+				AudioSource.PlayClipAtPoint(Resources.Load <AudioClip>("Sounds/explosion"), gameObject.transform.position);
+			} 
 			else if (frame == 23)
 				gameObject.GetComponent<CircleCollider2D>().enabled = false;
 			frame++;

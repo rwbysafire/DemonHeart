@@ -4,10 +4,11 @@ using System.Collections;
 public class CameraMovement : MonoBehaviour {
 
 	Vector2 playerPosition;
+	public Texture2D cursorTexture;
 
 	// Use this for initialization
 	void Start () {
-	
+		Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width/2, cursorTexture.height/2), CursorMode.Auto);
 	}
 	
 	// Update is called once per frame

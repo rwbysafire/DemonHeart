@@ -19,7 +19,8 @@ public class SkillExplosiveArrow : Skill {
 	
 	public override void skillLogic ()
 	{
-		fireArrow();
+		fireArrow(-15);fireArrow(-10);fireArrow(-5);fireArrow(0);fireArrow(5);fireArrow(10);fireArrow(15);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/pew"), getGameObject().transform.position);
 	}
 
 	void fireArrow(float rotate = 0)
@@ -40,8 +41,6 @@ public class SkillExplosiveArrow : Skill {
 class ExplosiveArrowProjectile : Projectile {
 	public ExplosiveArrowProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
 	public override void OnExplode () {
-		GameObject explosion = GameObject.Instantiate(Resources.Load<GameObject>("FireExplosion"));
-		explosion.GetComponent<ExplosiveArrowExplosion>().damage = 2 * stats.attackDamage;
 		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
 		RaycastHit2D target = hit[0];
 		foreach (RaycastHit2D x in hit) {
@@ -50,9 +49,11 @@ class ExplosiveArrowProjectile : Projectile {
 				break;
 			}
 		}
+		GameObject explosion = GameObject.Instantiate(Resources.Load<GameObject>("FireExplosion"));
+		explosion.GetComponent<ExplosiveArrowExplosion>().damage = 2 * stats.attackDamage;
 		explosion.transform.position = target.point;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
-		if (origin.tag == "Player" || origin.tag == "Ally")
+		if (tag == "Player" || tag == "Ally")
 			explosion.GetComponent<ExplosiveArrowExplosion>().enemyTag = "Enemy"; 
 		else
 			explosion.GetComponent<ExplosiveArrowExplosion>().enemyTag = "Player";

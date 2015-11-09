@@ -17,6 +17,7 @@ public class SkillBasicAttack : Skill
 	
 	public override void skillLogic() {
 		fireArrow(Random.Range(-10, 10)/10f);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/pew"), getGameObject().transform.position);
 	}
 
 	void fireArrow(float rotate = 0)
@@ -37,7 +38,6 @@ public class SkillBasicAttack : Skill
 class BasicAttackProjectile : Projectile {
 	public BasicAttackProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
 	public override void OnHit () {
-		GameObject explosion = GameObject.Instantiate(Resources.Load("Explosion")) as GameObject;
 		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
 		RaycastHit2D target = hit[0];
 		foreach (RaycastHit2D x in hit) {
@@ -46,8 +46,10 @@ class BasicAttackProjectile : Projectile {
 				break;
 			}
 		}
+		GameObject explosion = GameObject.Instantiate(Resources.Load("Explosion")) as GameObject;
 		explosion.transform.position = target.point;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/boom"), explosion.transform.position);
 	}
 	public override float getSpeed () {
 		return 40;

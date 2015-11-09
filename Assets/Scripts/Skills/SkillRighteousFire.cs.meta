@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: cffa6277ec57cd543a2be118d40e36ad
-timeCreated: 1447012497
+guid: 2fae53cd0267820409d69dabae4b6d7f
+timeCreated: 1447036796
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - cursorTexture: {fileID: 2800000, guid: cdeadfd7df0c3ca4eaed5291f8c6a961, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -20,6 +20,7 @@ public class SkillVolley : Skill {
 	public override void skillLogic()
 	{
 		fireArrow(-15);fireArrow(-10);fireArrow(-5);fireArrow(0);fireArrow(5);fireArrow(10);fireArrow(15);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/pew"), getGameObject().transform.position);
 	}
 
 	void fireArrow(float rotate = 0)

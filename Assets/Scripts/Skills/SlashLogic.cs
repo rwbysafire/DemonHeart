@@ -14,6 +14,7 @@ public class SlashLogic : MonoBehaviour {
 	void Start() {
 		hitbox = gameObject.AddComponent<PolygonCollider2D>();
 		hitbox.isTrigger = true;
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/slash_" + Random.Range(0,3).ToString()), gameObject.transform.position);
 		StartCoroutine("playAnimation", 0.01f);
 	}
 	

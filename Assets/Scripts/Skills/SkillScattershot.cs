@@ -25,6 +25,7 @@ public class SkillScattershot : Skill
 		{
 			fireArrow(-45 + (i * 90 / (arrowCount - 1)) + Random.Range(-5,5));
 		}
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/pew"), getGameObject().transform.position);
 	}
 
 	void fireArrow(int rotate = 0)
