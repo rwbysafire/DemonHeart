@@ -3,8 +3,8 @@ using System.Collections;
 
 public abstract class Projectile {
 
-	public GameObject gameObject, origin;
-	public Stats stats;
+	public GameObject gameObject;
+	public Mob mob;
 	public float speed, damage, duration, pierceChance, stunTime, chainTimes, turnSpeed;
 	public bool isHoming, isForking;
 	public int lastHit;
@@ -14,11 +14,10 @@ public abstract class Projectile {
 	public Collider2D collider;
 	
 	
-	public Projectile(GameObject gameObject, GameObject origin, Stats stats) {
+	public Projectile(GameObject gameObject, Mob mob) {
 		this.gameObject = gameObject;
-		this.origin = origin;
-		this.stats = stats;
-		tag = origin.tag;
+		this.mob = mob;
+		tag = mob.gameObject.tag;
 		if (tag == "Player" || tag == "Ally")
 			enemyTag = "Enemy"; 
 		else
@@ -59,10 +58,10 @@ public abstract class Projectile {
 		if (collider.tag == enemyTag && collider.gameObject.GetInstanceID() != lastHit) {
 			lastHit = collider.gameObject.GetInstanceID();
 			OnHit();
-			collider.gameObject.GetComponent<Health>().hurt (getDamage());
+			collider.gameObject.GetComponent<Mob>().hurt(getDamage());
 			//check if projectile will stun
 			if(getStunTime() > 0)
-				collider.gameObject.GetComponent<EnemyAI>().addStunTime(getStunTime());
+				collider.gameObject.GetComponent<Mob>().addStunTime(getStunTime());
 			//check if projectile will pierce
 			if (getPierceChance() < Random.Range(1, 100)) {
 				//check if projectile will fork

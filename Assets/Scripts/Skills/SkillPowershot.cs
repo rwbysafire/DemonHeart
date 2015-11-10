@@ -5,7 +5,7 @@ public class SkillPowershot : Skill
 {
 	public Projectile projectile;
 
-	public SkillPowershot(GameObject gameObject, Stats stats) : base(gameObject, stats) { }
+	public SkillPowershot(Mob mob) : base(mob) { }
 
 	public override string getName ()
 	{
@@ -14,27 +14,27 @@ public class SkillPowershot : Skill
 	
 	public override float getMaxCooldown ()
 	{
-		return 5f * (1 - getStats().cooldown / 100);
+		return 5f * (1 - mob.stats.cooldownReduction / 100);
 	}
 	
 	public override void skillLogic()
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate(Resources.Load("Arrow_Placeholder")) as GameObject;
-		projectile = new PowerShotProjectile (basicArrow, getGameObject(), getStats());
+		projectile = new PowerShotProjectile (basicArrow, mob);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.localScale = basicArrow.transform.localScale * 1;
-		basicArrow.transform.position = this.getGameObject().transform.position;
-		basicArrow.transform.rotation = this.getGameObject().transform.rotation;
+		basicArrow.transform.position = mob.gameObject.transform.position;
+		basicArrow.transform.rotation = mob.rotation;
 		basicArrow.transform.Translate(Vector3.up * 0.7f);
 		projectile.projectileOnStart();
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/sniperShot"), getGameObject().transform.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/sniperShot"), mob.position);
 	}
 }
 
 class PowerShotProjectile : Projectile {
-	public PowerShotProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
+	public PowerShotProjectile(GameObject gameObject, Mob mob) : base(gameObject, mob) {}
 
 	public override void OnHit () {
 		GameObject explosion = GameObject.Instantiate(Resources.Load("Explosion")) as GameObject;
@@ -54,7 +54,7 @@ class PowerShotProjectile : Projectile {
 		return 40;
 	}
 	public override float getDamage () {
-		return 4 * stats.attackDamage;
+		return (2 * mob.stats.basicAttackDamage) + (0.2f * mob.stats.attackDamage);
 	}
 	public override float getDuration ()
 	{

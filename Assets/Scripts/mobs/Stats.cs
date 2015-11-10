@@ -2,65 +2,73 @@
 using System.Collections;
 
 public class Stats {
-	public int level;
-	public float exp;
-	public int STR, DEX, INT;
-	public float hp, defence, attackDamage;
-	public float evasion, criticalDamage, basicAttackDamage, attackSpeed, moveSpeed;
-	public float mana, manaRegen, abilityPower, magicProtection, cooldown;
-
-	public float getLevel() {
-		return level;
+	public int level = 0;
+	public float exp = 0;
+	public int strength = 10;
+	public int dexterity = 10;
+	public int intelligence = 10;
+	public float baseHealth = 400;
+	public float baseMana = 200;
+	public float maxHealth {
+		get {
+			return baseHealth + (10 * level) + (2 * strength);
+		}
 	}
-	public float getExp() {
-		return exp;
+	public float health;
+	public float healthRegen {
+		get {
+			return 3 + (0.1f * strength);
+		}
 	}
-	public float getSTR() {
-		return STR;
+	public float maxMana {
+		get {
+			return baseMana + (5 * level) + intelligence;
+		}
 	}
-	public float getDEX() {
-		return DEX;
+	public float mana;
+	public float manaRegen {
+		get {
+			return 1 + (0.2f * intelligence);
+		}
 	}
-	public float getINT() {
-		return INT;
+	public float basicAttackDamage {
+		get {
+			return 60 + level + (3 * dexterity);
+		}
 	}
-	public float getHp() {
-		return hp;
+	public float attackDamage {
+		get {
+			return 40 + (2 * level) + (2 * strength);
+		}
 	}
-	public float getDefence() {
-		return defence;
+	public float criticalDamage {
+		get {
+			return 200 + (0.2f * dexterity);
+		}
 	}
-	public float getAttackDamage() {
-		return attackDamage;
+	public float abilityPower {
+		get {
+			return 0 + (2 * intelligence);
+		}
 	}
-	public float getEvasion() {
-		return evasion;
+	public float attackSpeed {
+		get {
+			return 0.5f + (0.01f * dexterity);
+		}
 	}
-	public float getCriticalDamage() {
-		return criticalDamage;
+	public float defence {
+		get {
+			return 20 + level + strength;
+		}
 	}
-	public float getBasicAttackDamage() {
-		return basicAttackDamage;
+	public float cooldownReduction {
+		get {
+			return 0.1f * intelligence;
+		}
 	}
-	public float getAttackSpeed() {
-		return attackSpeed;
-	}
-	public float getMoveSpeed() {
-		return moveSpeed;
-	}
-	public float getMana() {
-		return mana;
-	}
-	public float getManaRegen() {
-		return manaRegen;
-	}
-	public float getAbilityPower() {
-		return abilityPower;
-	}
-	public float getMagicProtection() {
-		return magicProtection;
-	}
-	public float getCoolDown() {
-		return cooldown;
+	public float moveSpeed {
+		get {
+			return 100 + (0.3f * dexterity);
+		}
 	}
 }

@@ -3,29 +3,13 @@ using System.Collections;
 
 public abstract class Skill  
 {
-	private GameObject gameObj;
-	private GameObject player;
-	private Stats stats;
+	public Mob mob;
 	private float cooldown;
 
 
-	public Skill(GameObject gameObj, Stats stats) {
-		player = GameObject.FindGameObjectWithTag("Player");
-		this.gameObj = gameObj;
-		this.stats = stats;
+	public Skill(Mob mob) {
+		this.mob = mob;
 		cooldown = 0.0f; 
-	}
-
-	public GameObject getGameObject() {
-		return gameObj; 
-	}
-
-	public Stats getStats() {
-		return stats; 
-	}
-
-	public GameObject getPlayer() {
-		return player;
 	}
 
 	public bool useSkill() {

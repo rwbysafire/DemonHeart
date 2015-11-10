@@ -10,7 +10,7 @@ public class UI_Health : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		slider = GetComponent<Slider> ();
-		slider.maxValue = GameObject.Find ("Player").GetComponent<Health> ().maxHealth;
+		slider.maxValue = GameObject.Find ("Player").GetComponent<Mob> ().stats.maxHealth;
 		text = GetComponentInChildren<Text> ();
 	}
 	
@@ -18,11 +18,11 @@ public class UI_Health : MonoBehaviour {
 	void Update () {
 		if (GameObject.Find ("Player")) {
 			GameObject player = GameObject.Find ("Player");
-			slider.value = player.GetComponent<Health> ().health;
-			float playerHealth = Mathf.Ceil(player.GetComponent<Health>().health);
+			slider.value = player.GetComponent<Mob> ().stats.health;
+			float playerHealth = Mathf.Ceil(player.GetComponent<Mob> ().stats.health);
 			if (playerHealth < 0)
 				playerHealth = 0;
-			text.text = "Life: " + playerHealth.ToString() + " / " + Mathf.Ceil(player.GetComponent<Health>().maxHealth).ToString();
+			text.text = "Life: " + playerHealth.ToString() + " / " + Mathf.Ceil(player.GetComponent<Mob> ().stats.maxHealth).ToString();
 		}
 	}
 }

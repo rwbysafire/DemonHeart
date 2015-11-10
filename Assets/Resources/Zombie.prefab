@@ -9,10 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 452544}
   - 212: {fileID: 21266952}
-  - 114: {fileID: 11473832}
   - 58: {fileID: 5818196}
   - 50: {fileID: 5003020}
-  - 114: {fileID: 11492606}
+  - 114: {fileID: 11497868}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -61,7 +60,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .600000024
---- !u!114 &11473832
+--- !u!114 &11497868
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -69,35 +68,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaab229b81991e5489b3142506950497, type: 3}
+  m_Script: {fileID: 11500000, guid: ee5f5a260a21d0d46b01a93612fc5ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 60
-  followDistance: 9
-  spriteAttack:
-  - {fileID: 21300000, guid: cea365a536a699e4591c717ac12e1027, type: 3}
-  - {fileID: 21300002, guid: cea365a536a699e4591c717ac12e1027, type: 3}
-  - {fileID: 21300004, guid: cea365a536a699e4591c717ac12e1027, type: 3}
-  - {fileID: 21300006, guid: cea365a536a699e4591c717ac12e1027, type: 3}
-  - {fileID: 21300008, guid: cea365a536a699e4591c717ac12e1027, type: 3}
-  - {fileID: 21300010, guid: cea365a536a699e4591c717ac12e1027, type: 3}
-  - {fileID: 21300012, guid: cea365a536a699e4591c717ac12e1027, type: 3}
-  - {fileID: 21300014, guid: cea365a536a699e4591c717ac12e1027, type: 3}
-  - {fileID: 21300016, guid: cea365a536a699e4591c717ac12e1027, type: 3}
---- !u!114 &11492606
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 933affd7e73d256418020590fcb5f20b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 20
-  health: 0
-  regen: .5
+  spriteAttack: []
+  spriteWalk: []
+  spriteIdle: []
 --- !u!212 &21266952
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -138,6 +114,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Mass
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: followDistance
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

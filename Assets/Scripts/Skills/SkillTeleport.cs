@@ -5,7 +5,7 @@ public class SkillTeleport : Skill
 {
 	private float maxDistance = 5;
 
-	public SkillTeleport(GameObject gameObject, Stats stats) : base(gameObject, stats) { }
+	public SkillTeleport(Mob mob) : base(mob) { }
 
 	public override string getName ()
 	{
@@ -14,13 +14,13 @@ public class SkillTeleport : Skill
 
 	public override float getMaxCooldown ()
 	{
-		return 2f * (1 - getStats().cooldown / 100);
+		return 2f * (1 - mob.stats.cooldownReduction / 100);
 	}
 
 	public override void skillLogic()
 	{
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/teleport"), getGameObject().transform.position);
-		getGameObject().transform.position = Vector3.MoveTowards(this.getGameObject().transform.position, CharControl.getTargetLocation(), maxDistance);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/teleport"), mob.position);
+		mob.position = Vector3.MoveTowards(mob.position, mob.getTargetLocation(), maxDistance);
 	}
 }
 

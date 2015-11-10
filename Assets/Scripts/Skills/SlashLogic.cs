@@ -33,7 +33,7 @@ public class SlashLogic : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (collider.tag == enemyTag) {
-			collider.GetComponent<Health>().hurt(damage);
+			collider.GetComponent<Mob>().hurt(damage);
 		}
 	}
 }

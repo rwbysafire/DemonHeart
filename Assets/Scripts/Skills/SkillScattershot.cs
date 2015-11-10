@@ -5,7 +5,7 @@ public class SkillScattershot : Skill
 {
 	public Projectile projectile;
 
-	public SkillScattershot(GameObject gameObject, Stats stats) : base(gameObject, stats) {}
+	public SkillScattershot(Mob mob) : base(mob) {}
 
 	private int arrowCount = 9;
 
@@ -16,7 +16,7 @@ public class SkillScattershot : Skill
 
 	public override float getMaxCooldown ()
 	{
-		return 5f * (1 - getStats().cooldown / 100);
+		return 5f * (1 - mob.stats.cooldownReduction / 100);
 	}
 
 	public override void skillLogic ()
@@ -25,18 +25,18 @@ public class SkillScattershot : Skill
 		{
 			fireArrow(-45 + (i * 90 / (arrowCount - 1)) + Random.Range(-5,5));
 		}
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/pew"), getGameObject().transform.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/pew"), mob.position);
 	}
 
 	void fireArrow(int rotate = 0)
 	{
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Arrow_Placeholder")) as GameObject;
-		projectile = new ScatterShotProjectile (basicArrow, getGameObject(), getStats());
+		projectile = new ScatterShotProjectile (basicArrow, mob);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
-		basicArrow.transform.position = this.getGameObject ().transform.position;
-		basicArrow.transform.rotation = this.getGameObject ().transform.rotation;
+		basicArrow.transform.position = mob.position;
+		basicArrow.transform.rotation = mob.rotation;
 		basicArrow.transform.Translate (Vector3.up * 0.7f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
 		projectile.projectileOnStart();
@@ -44,7 +44,7 @@ public class SkillScattershot : Skill
 }
 
 class ScatterShotProjectile : Projectile {
-	public ScatterShotProjectile(GameObject gameObject, GameObject origin, Stats stats) : base(gameObject, origin, stats) {}
+	public ScatterShotProjectile(GameObject gameObject, Mob mob) : base(gameObject, mob) {}
 	public override void OnHit () {
 		GameObject explosion = GameObject.Instantiate(Resources.Load("Explosion")) as GameObject;
 		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
@@ -62,7 +62,7 @@ class ScatterShotProjectile : Projectile {
 		return 20;
 	}
 	public override float getDamage () {
-		return 1 * stats.attackDamage;
+		return (1 * mob.stats.basicAttackDamage) + (0.3f * mob.stats.attackDamage);
 	}
 	public override float getDuration () {
 		return 0.125f;
