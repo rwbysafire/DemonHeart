@@ -5,18 +5,20 @@ public class SkillRighteousFire : Skill {
 
 	public SkillRighteousFire(Mob mob) : base(mob) { }
 	
-	public override string getName ()
-	{
+	public override string getName () {
 		return "Righteous Fire";
 	}
 	
-	public override float getMaxCooldown ()
-	{
+	public override float getMaxCooldown () {
 		return 0.5f * (1 - (mob.stats.cooldownReduction / 100));
 	}
 	
-	public override void skillLogic ()
-	{
-
+	public override void skillLogic () {
+		if (mob.gameObject.transform.FindChild("RighteousFire(Clone)") == null) {
+			GameObject righteousFire = GameObject.Instantiate(Resources.Load<GameObject>("RighteousFire"));
+			righteousFire.transform.position = mob.position;
+			righteousFire.transform.SetParent(mob.gameObject.transform);
+			righteousFire.GetComponent<RighteousFire>().mob = mob;
+		}
 	}
 }

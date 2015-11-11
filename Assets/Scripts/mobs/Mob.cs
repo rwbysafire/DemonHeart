@@ -6,7 +6,7 @@ public abstract class Mob : MonoBehaviour{
 	public Stats stats = new Stats();
 	private float stunTime = 0;
 
-	public Skill[] skills = new Skill[8];
+	public Skill[] skills = new Skill[6];
 
 	public void replaceSkill(int skillNum, Skill skill) {
 		skills[skillNum] = skill;

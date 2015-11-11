@@ -38,11 +38,9 @@ public class Player : Mob {
 		replaceSkill(0, new SkillBasicAttack (this));
 		replaceSkill(1, new SkillVolley (this));
 		replaceSkill(2, new SkillScattershot (this));
-		replaceSkill(3, new SkillStunArrow (this));
+		replaceSkill(3, new SkillPowershot (this));
 		replaceSkill(4, new SkillTeleport (this));
-		replaceSkill(5, new SkillSlash (this));
-		replaceSkill(6, new SkillPowershot (this));
-		replaceSkill(7, new SkillExplosiveArrow (this));
+		replaceSkill(5, new SkillRighteousFire (this));
 		stats.strength = 20;
 		stats.dexterity = 30;
 		stats.intelligence = 10;
@@ -74,14 +72,6 @@ public class Player : Mob {
 			if (Input.GetKey (KeyCode.Alpha4)) {
 				StartCoroutine("playFireAnimation");
 				skills[5].useSkill ();
-			}
-			if (Input.GetKey (KeyCode.Alpha5)) {
-				StartCoroutine("playFireAnimation");
-				skills[6].useSkill ();
-			}
-			if (Input.GetKey (KeyCode.Alpha6)) {
-				StartCoroutine("playFireAnimation");
-				skills[7].useSkill ();
 			}
 		}
 	}
