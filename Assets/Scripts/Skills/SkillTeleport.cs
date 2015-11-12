@@ -25,12 +25,18 @@ public class SkillTeleport : Skill
 			teleportLocation = mob.position + ((mob.getTargetLocation() - mob.position).normalized * maxDistance);
 		else
 			teleportLocation = mob.getTargetLocation();
-		Collider2D[] overlap = Physics2D.OverlapPointAll(teleportLocation);
-		if (Physics2D.OverlapPointAll(teleportLocation).Length == 0)
+		if (!Physics2D.OverlapPoint(teleportLocation))
 			mob.position = teleportLocation;
 		else {
 			RaycastHit2D[] hit = Physics2D.LinecastAll(mob.position, teleportLocation);
-			mob.position = hit[hit.Length - overlap.Length].point;
+			for (int x = hit.Length - 1; x >= 0; x--) {
+				teleportLocation = hit[x].point;
+				teleportLocation -= (mob.getTargetLocation() - mob.position).normalized * mob.gameObject.GetComponent<CircleCollider2D>().radius;
+				if (Physics2D.OverlapPointAll(teleportLocation).Length == 0) {
+					mob.position = hit[x].point;
+					break;
+				}
+			}
 		}
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/teleport"), mob.position);
 	}
