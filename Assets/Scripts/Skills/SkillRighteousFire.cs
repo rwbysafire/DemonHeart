@@ -13,6 +13,10 @@ public class SkillRighteousFire : Skill {
 		return 0.5f * (1 - (mob.stats.cooldownReduction / 100));
 	}
 	
+	public override float getManaCost () {
+		return 0;
+	}
+	
 	public override void skillLogic () {
 		if (mob.gameObject.transform.FindChild("RighteousFire(Clone)") == null) {
 			GameObject righteousFire = GameObject.Instantiate(Resources.Load<GameObject>("RighteousFire"));

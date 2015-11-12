@@ -62,6 +62,13 @@ public abstract class Mob : MonoBehaviour{
 		return stats.health <= 0;
 	}
 
+	public bool useMana(float amount) {
+		bool enoughMana = (Mathf.Ceil(stats.mana) >= amount);
+		if (enoughMana)
+			stats.mana -= amount;
+		return enoughMana;
+	}
+
 	public abstract string getName();
 	public abstract Vector3 getTargetLocation();
 	void Start() {
@@ -79,6 +86,10 @@ public abstract class Mob : MonoBehaviour{
 			stats.health += stats.healthRegen * Time.deltaTime;
 		else if (stats.health > stats.maxHealth)
 			stats.health = stats.maxHealth;
+		if (stats.mana < stats.maxMana)
+			stats.mana += stats.manaRegen * Time.deltaTime;
+		else if (stats.mana > stats.maxMana)
+			stats.mana = stats.maxMana;
 	}
 	void FixedUpdate() {
 		if(isStunned())

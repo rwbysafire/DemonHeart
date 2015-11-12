@@ -7,24 +7,24 @@ public class SkillVolley : Skill {
 
 	public SkillVolley(Mob mob) : base(mob) { }
 	
-	public override string getName ()
-	{
+	public override string getName () {
 		return "Volley";
 	}
 	
-	public override float getMaxCooldown ()
-	{
+	public override float getMaxCooldown () {
 		return 0.5f * (1 - (mob.stats.cooldownReduction / 100));
 	}
 	
-	public override void skillLogic()
-	{
+	public override float getManaCost () {
+		return 15;
+	}
+	
+	public override void skillLogic() {
 		fireArrow(-15);fireArrow(-10);fireArrow(-5);fireArrow(0);fireArrow(5);fireArrow(10);fireArrow(15);
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/pew"), mob.position);
 	}
 
-	void fireArrow(float rotate = 0)
-	{
+	void fireArrow(float rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Arrow_Placeholder")) as GameObject;
 		projectile = new VolleyProjectile (basicArrow, mob);
@@ -52,6 +52,7 @@ class VolleyProjectile : Projectile {
 		}
 		explosion.transform.position = target.point;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/boom"), explosion.transform.position);
 	}
 	public override float getSpeed () {
 		return 40;
@@ -59,12 +60,10 @@ class VolleyProjectile : Projectile {
 	public override float getDamage () {
 		return (1 * mob.stats.basicAttackDamage) + (0.3f * mob.stats.attackDamage);
 	}
-	public override float getTurnSpeed ()
-	{
+	public override float getTurnSpeed () {
 		return 200;
 	}
-	public override float getDuration ()
-	{
+	public override float getDuration () {
 		return 0.5f;
 	}
 	public override int getChaining () {

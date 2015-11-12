@@ -8,7 +8,7 @@ public abstract class Projectile {
 	public float speed, damage, duration, pierceChance, stunTime, chainTimes, turnSpeed;
 	public bool isHoming, isForking;
 	public int lastHit;
-	float timer;
+	private float timer;
 	public string tag;
 	public string enemyTag;
 	public Collider2D collider;
@@ -57,7 +57,6 @@ public abstract class Projectile {
 		this.collider = collider;
 		if (collider.tag == enemyTag && collider.gameObject.GetInstanceID() != lastHit) {
 			lastHit = collider.gameObject.GetInstanceID();
-			OnHit();
 			collider.gameObject.GetComponent<Mob>().hurt(getDamage());
 			//check if projectile will stun
 			if(getStunTime() > 0)
@@ -66,9 +65,11 @@ public abstract class Projectile {
 			if (getPierceChance() < Random.Range(1, 100)) {
 				//check if projectile will fork
 				if (isForking) {
+					OnHit();
 					fork();
 					Object.Destroy(gameObject);
 				} else if (chainTimes > 0) {
+					OnHit();
 					chainTimes -= 1;
 					chain();
 					timer = Time.fixedTime + duration;
@@ -76,7 +77,8 @@ public abstract class Projectile {
 					OnExplode();
 					Object.Destroy(gameObject);
 				}
-			}
+			} else
+				OnHit();
 		}
 		else if(collider.CompareTag("Wall")) {
 			OnExplode();

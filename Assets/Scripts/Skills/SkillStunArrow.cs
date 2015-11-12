@@ -7,18 +7,19 @@ public class SkillStunArrow : Skill
 
 	public SkillStunArrow(Mob mob) : base(mob) { }
 	
-	public override string getName ()
-	{
+	public override string getName () {
 		return "Stun Arrow";
 	}
 	
-	public override float getMaxCooldown ()
-	{
+	public override float getMaxCooldown () {
 		return 3f * (1 - mob.stats.cooldownReduction / 100);
 	}
 	
-	public override void skillLogic()
-	{
+	public override float getManaCost () {
+		return 30;
+	}
+	
+	public override void skillLogic() {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate(Resources.Load("Arrow_Placeholder")) as GameObject;
 		projectile = new StunArrowProjectile (basicArrow, mob);

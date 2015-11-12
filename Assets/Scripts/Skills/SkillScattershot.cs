@@ -9,27 +9,26 @@ public class SkillScattershot : Skill
 
 	private int arrowCount = 9;
 
-	public override string getName ()
-	{
+	public override string getName () {
 		return "Scattershot";
 	}
 
-	public override float getMaxCooldown ()
-	{
+	public override float getMaxCooldown () {
 		return 5f * (1 - mob.stats.cooldownReduction / 100);
 	}
+	
+	public override float getManaCost () {
+		return 10;
+	}
 
-	public override void skillLogic ()
-	{
-		for (int i = 0; i < arrowCount; i++) 
-		{
+	public override void skillLogic () {
+		for (int i = 0; i < arrowCount; i++) {
 			fireArrow(-45 + (i * 90 / (arrowCount - 1)) + Random.Range(-5,5));
 		}
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/pew"), mob.position);
 	}
 
-	void fireArrow(int rotate = 0)
-	{
+	void fireArrow(int rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Arrow_Placeholder")) as GameObject;
 		projectile = new ScatterShotProjectile (basicArrow, mob);

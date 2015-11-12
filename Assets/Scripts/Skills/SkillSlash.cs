@@ -5,18 +5,19 @@ public class SkillSlash : Skill {
 
 	public SkillSlash(Mob mob) : base(mob) { }
 
-	public override string getName ()
-	{
+	public override string getName () {
 		return "Slash";
 	}
 
-	public override float getMaxCooldown ()
-	{
+	public override float getMaxCooldown () {
 		return 0.4f * (1 - (mob.stats.cooldownReduction / 100));
 	}
+	
+	public override float getManaCost () {
+		return 0;
+	}
 
-	public override void skillLogic ()
-	{
+	public override void skillLogic () {
 		GameObject slash = GameObject.Instantiate(Resources.Load<GameObject>("Slash"));
 		slash.transform.position = mob.position;
 		slash.transform.rotation = mob.rotation;

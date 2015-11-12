@@ -13,7 +13,7 @@ public abstract class Skill
 	}
 
 	public bool useSkill() {
-		if (cooldown <= Time.fixedTime) {
+		if (cooldown <= Time.fixedTime && mob.useMana(getManaCost())) {
 			skillLogic();
 			cooldown = Time.fixedTime + getMaxCooldown(); 
 			return true;
@@ -30,5 +30,6 @@ public abstract class Skill
 
 	public abstract string getName();
 	public abstract float getMaxCooldown();
+	public abstract float getManaCost();
 	public abstract void skillLogic(); 
 }
