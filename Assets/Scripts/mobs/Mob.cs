@@ -5,6 +5,7 @@ public abstract class Mob : MonoBehaviour{
 	
 	public Stats stats = new Stats();
 	private float stunTime = 0;
+	private float canMove = 0;
 
 	public Skill[] skills = new Skill[6];
 
@@ -18,6 +19,12 @@ public abstract class Mob : MonoBehaviour{
 		}
 		set {
 			gameObject.transform.rotation = value;
+		}
+	}
+
+	public virtual Transform feetTransform {
+		get {
+			return gameObject.transform;
 		}
 	}
 
@@ -91,11 +98,24 @@ public abstract class Mob : MonoBehaviour{
 		else if (stats.mana > stats.maxMana)
 			stats.mana = stats.maxMana;
 	}
+
 	void FixedUpdate() {
 		if(isStunned())
 			return;
+		if(canMove < Time.fixedTime)
+			movement();
 		OnFixedUpdate();
 	}
+
+	public void disableMovement(float time) {
+		canMove = Time.fixedTime + time;
+	}
+
+	public float getCanMove() {
+		return canMove;
+	}
+
+	public abstract void movement();
 	public virtual void OnStart() {}
 	public virtual void OnUpdate() {}
 	public virtual void OnFixedUpdate() {}

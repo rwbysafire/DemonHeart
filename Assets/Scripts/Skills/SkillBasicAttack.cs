@@ -21,7 +21,7 @@ public class SkillBasicAttack : Skill
 	
 	public override void skillLogic() {
 		fireArrow(Random.Range(-10, 10)/10f);
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/pew"), mob.gameObject.transform.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sound/pew"), mob.gameObject.transform.position);
 	}
 
 	void fireArrow(float rotate = 0) {
@@ -54,7 +54,7 @@ class BasicAttackProjectile : Projectile {
 		GameObject explosion = GameObject.Instantiate(Resources.Load("Explosion")) as GameObject;
 		explosion.transform.position = target.point;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/boom"), explosion.transform.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sound/boom"), explosion.transform.position);
 	}
 	public override float getSpeed () {
 		return 40;

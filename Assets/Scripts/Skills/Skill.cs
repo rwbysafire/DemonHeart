@@ -32,4 +32,6 @@ public abstract class Skill
 	public abstract float getMaxCooldown();
 	public abstract float getManaCost();
 	public abstract void skillLogic(); 
+	public virtual void skillPassive() {}
+	public virtual void skillFixedUpdate() {}
 }

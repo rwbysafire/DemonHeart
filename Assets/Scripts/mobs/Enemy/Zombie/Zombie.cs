@@ -27,7 +27,7 @@ public class Zombie : Mob {
 		spriteWalk = Resources.LoadAll<Sprite>("Sprite/zombieWalk");
 		spriteIdle = Resources.LoadAll<Sprite>("Sprite/zombieIdle");
 		replaceSkill(0, new SkillSlash (this));
-		replaceSkill(1, new SkillTeleport (this));
+		replaceSkill(1, new SkillCombatRoll (this));
 	}
 
 	// Update is called once per frame
@@ -39,8 +39,9 @@ public class Zombie : Mob {
 			StartCoroutine("playAttackAnimation", 0.1);
 		}
 	}
+
 	private float timer;
-	public override void OnFixedUpdate() {
+	public override void movement () {
 		if (isAttacking)
 			return;
 		if (GameObject.FindWithTag ("Player")) {
@@ -69,7 +70,6 @@ public class Zombie : Mob {
 		int frame = 0;
 		walkingFrame = 0;
 		isAttacking = true;
-		gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
 		do {
 			if(!isStunned()) {
 				GetComponent<SpriteRenderer> ().sprite = spriteAttack[frame];
@@ -80,6 +80,5 @@ public class Zombie : Mob {
 			yield return new WaitForSeconds(delay);
 		} while (frame < spriteAttack.Length);
 		isAttacking = false;
-		gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
 	}
 }

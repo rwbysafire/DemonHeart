@@ -30,7 +30,7 @@ public class SkillPowershot : Skill
 		basicArrow.transform.rotation = mob.rotation;
 		basicArrow.transform.Translate(Vector3.up * 0.7f);
 		projectile.projectileOnStart();
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/sniperShot"), mob.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sound/sniperShot"), mob.position);
 	}
 }
 
@@ -49,7 +49,7 @@ class PowerShotProjectile : Projectile {
 		}
 		explosion.transform.position = target.point;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/boom"), explosion.transform.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sound/boom"), explosion.transform.position);
 	}
 	public override float getSpeed () {
 		return 40;

@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ee809186a76264fb098005644dbcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemies: 700
+  maxEnemies: 100
   spawn: {fileID: 100318, guid: bee289d1e818a074d9796315e7ad6c89, type: 2}
 --- !u!212 &21200880
 SpriteRenderer:
@@ -77,7 +77,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: maxEnemies
-      value: 700
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite

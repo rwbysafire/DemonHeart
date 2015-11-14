@@ -23,7 +23,7 @@ public class ExplosiveArrowExplosion : MonoBehaviour {
 			GetComponent<SpriteRenderer> ().sprite = sprite[frame];
 			if (frame == 11) {
 				gameObject.GetComponent<CircleCollider2D>().enabled = true;
-				AudioSource.PlayClipAtPoint(Resources.Load <AudioClip>("Sounds/explosion"), gameObject.transform.position);
+				AudioSource.PlayClipAtPoint(Resources.Load <AudioClip>("Sound/explosion"), gameObject.transform.position);
 			} 
 			else if (frame == 23)
 				gameObject.GetComponent<CircleCollider2D>().enabled = false;

@@ -36,11 +36,11 @@ public class Player : Mob {
 	{
 		createPlayer ();
 		replaceSkill(0, new SkillBasicAttack (this));
-		replaceSkill(1, new SkillVolley (this));
+		replaceSkill(1, new SkillCombatRoll (this));
 		replaceSkill(2, new SkillScattershot (this));
 		replaceSkill(3, new SkillPowershot (this));
 		replaceSkill(4, new SkillTeleport (this));
-		replaceSkill(5, new SkillRighteousFire (this));
+		replaceSkill(5, new SkillExplosiveArrow (this));
 		stats.strength = 20;
 		stats.dexterity = 30;
 		stats.intelligence = 10;
@@ -73,13 +73,29 @@ public class Player : Mob {
 				StartCoroutine("playFireAnimation");
 				skills[5].useSkill ();
 			}
+			skills[0].skillPassive();
+			skills[1].skillPassive();
+			skills[2].skillPassive();
+			skills[3].skillPassive();
+			skills[4].skillPassive();
+			skills[5].skillPassive();
 		}
 	}
 
 	public override void OnFixedUpdate ()
 	{
 		//Displays and modifies player rotations
-		feetLogic();headLogic();
+		headLogic();
+		skills[0].skillFixedUpdate();
+		skills[1].skillFixedUpdate();
+		skills[2].skillFixedUpdate();
+		skills[3].skillFixedUpdate();
+		skills[4].skillFixedUpdate();
+		skills[5].skillFixedUpdate();
+	}
+
+	public override void movement() {
+		feetLogic();
 	}
 
 	public override Quaternion rotation {
@@ -88,6 +104,12 @@ public class Player : Mob {
 		}
 		set {
 			head.transform.rotation = value;
+		}
+	}
+	
+	public override Transform feetTransform {
+		get {
+			return feet.transform;
 		}
 	}
 

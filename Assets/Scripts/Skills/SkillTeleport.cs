@@ -38,7 +38,7 @@ public class SkillTeleport : Skill
 				}
 			}
 		}
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/teleport"), mob.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sound/teleport"), mob.position);
 	}
 }
 

@@ -30,7 +30,7 @@ public class SkillStunArrow : Skill
 		basicArrow.transform.localScale *= 4; 
 		basicArrow.transform.Translate(Vector3.up * 0.7f);
 		projectile.projectileOnStart();
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/pew"), mob.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sound/pew"), mob.position);
 	}	
 }
 

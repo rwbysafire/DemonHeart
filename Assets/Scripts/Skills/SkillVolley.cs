@@ -21,7 +21,7 @@ public class SkillVolley : Skill {
 	
 	public override void skillLogic() {
 		fireArrow(-15);fireArrow(-10);fireArrow(-5);fireArrow(0);fireArrow(5);fireArrow(10);fireArrow(15);
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/pew"), mob.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sound/pew"), mob.position);
 	}
 
 	void fireArrow(float rotate = 0) {
@@ -52,7 +52,7 @@ class VolleyProjectile : Projectile {
 		}
 		explosion.transform.position = target.point;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/boom"), explosion.transform.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sound/boom"), explosion.transform.position);
 	}
 	public override float getSpeed () {
 		return 40;
