@@ -40,7 +40,7 @@ public class Player : Mob {
 		replaceSkill(2, new SkillScattershot (this));
 		replaceSkill(3, new SkillPowershot (this));
 		replaceSkill(4, new SkillTeleport (this));
-		replaceSkill(5, new SkillExplosiveArrow (this));
+		replaceSkill(5, new SkillRighteousFire (this));
 		stats.strength = 20;
 		stats.dexterity = 30;
 		stats.intelligence = 10;
