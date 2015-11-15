@@ -8,6 +8,10 @@ public class SkillSlash : Skill {
 	public override string getName () {
 		return "Slash";
 	}
+	
+	public override Sprite getImage () {
+		return Resources.Load<Sprite>("Sprite/basicAttackIcon");
+	}
 
 	public override float getMaxCooldown () {
 		return 0.4f * (1 - (mob.stats.cooldownReduction / 100));

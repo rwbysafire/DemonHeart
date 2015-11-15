@@ -12,13 +12,17 @@ public class SkillScattershot : Skill
 	public override string getName () {
 		return "Scattershot";
 	}
+	
+	public override Sprite getImage () {
+		return Resources.Load<Sprite>("Sprite/volleyIcon");
+	}
 
 	public override float getMaxCooldown () {
 		return 5f * (1 - mob.stats.cooldownReduction / 100);
 	}
 	
 	public override float getManaCost () {
-		return 10;
+		return 25;
 	}
 
 	public override void skillLogic () {

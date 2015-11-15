@@ -11,12 +11,16 @@ public class SkillExplosiveArrow : Skill {
 		return "Explosive Arrow";
 	}
 	
+	public override Sprite getImage () {
+		return Resources.Load<Sprite>("Sprite/explosiveArrowIcon");
+	}
+	
 	public override float getMaxCooldown () {
 		return 0.5f * (1 - (mob.stats.cooldownReduction / 100));
 	}
 	
 	public override float getManaCost () {
-		return 10;
+		return 25;
 	}
 	
 	public override void skillLogic () {

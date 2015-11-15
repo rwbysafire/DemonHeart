@@ -29,6 +29,7 @@ public abstract class Skill
 	}
 
 	public abstract string getName();
+	public abstract Sprite getImage();
 	public abstract float getMaxCooldown();
 	public abstract float getManaCost();
 	public abstract void skillLogic(); 

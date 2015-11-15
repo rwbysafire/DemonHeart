@@ -10,6 +10,10 @@ public class SkillTeleport : Skill
 	public override string getName () {
 		return "Teleport";
 	}
+	
+	public override Sprite getImage () {
+		return Resources.Load<Sprite>("Sprite/flash");
+	}
 
 	public override float getMaxCooldown () {
 		return 2f * (1 - mob.stats.cooldownReduction / 100);

@@ -11,6 +11,10 @@ public class SkillStunArrow : Skill
 		return "Stun Arrow";
 	}
 	
+	public override Sprite getImage () {
+		return Resources.Load<Sprite>("Sprite/stunArrowIcon");
+	}
+	
 	public override float getMaxCooldown () {
 		return 3f * (1 - mob.stats.cooldownReduction / 100);
 	}

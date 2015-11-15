@@ -10,7 +10,11 @@ public class SkillBasicAttack : Skill
 	public override string getName() {
 		return "Basic Attack";
 	}
-	
+
+	public override Sprite getImage () {
+		return Resources.Load<Sprite>("Sprite/basicAttackIcon");
+	}
+
 	public override float getMaxCooldown() {
 		return 0.25f * (1 - mob.stats.cooldownReduction / 100);
 	}

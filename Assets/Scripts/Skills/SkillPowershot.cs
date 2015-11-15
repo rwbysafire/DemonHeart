@@ -11,12 +11,16 @@ public class SkillPowershot : Skill
 		return "Powershot";
 	}
 	
+	public override Sprite getImage () {
+		return Resources.Load<Sprite>("Sprite/powershot");
+	}
+	
 	public override float getMaxCooldown () {
 		return 5f * (1 - mob.stats.cooldownReduction / 100);
 	}
 	
 	public override float getManaCost () {
-		return 20;
+		return 40;
 	}
 	
 	public override void skillLogic() {

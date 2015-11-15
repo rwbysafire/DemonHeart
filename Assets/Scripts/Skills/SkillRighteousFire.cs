@@ -9,6 +9,10 @@ public class SkillRighteousFire : Skill {
 		return "Righteous Fire";
 	}
 	
+	public override Sprite getImage () {
+		return Resources.Load<Sprite>("Sprite/righteousFireIcon");
+	}
+	
 	public override float getMaxCooldown () {
 		return 0.5f * (1 - (mob.stats.cooldownReduction / 100));
 	}
