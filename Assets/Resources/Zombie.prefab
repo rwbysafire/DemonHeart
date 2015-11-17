@@ -123,6 +123,10 @@ Prefab:
       propertyPath: followDistance
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 097e5cff4b0368c4583a663452361f9f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100318}

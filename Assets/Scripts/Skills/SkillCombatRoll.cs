@@ -3,8 +3,9 @@ using System.Collections;
 
 public class SkillCombatRoll : Skill {
 
-	float timer;
 	bool rolling;
+	float timer;
+	GameObject knockback;
 
 	public SkillCombatRoll(Mob mob) : base(mob) {}
 	
@@ -27,6 +28,21 @@ public class SkillCombatRoll : Skill {
 	public override void skillLogic() {
 		mob.disableMovement(0.2f);
 		timer = Time.fixedTime + 0.2f;
-		mob.gameObject.GetComponent<Rigidbody2D>().velocity = mob.feetTransform.up * 50;
+		knockback = new GameObject();
+		knockback.transform.position = mob.transform.position;
+		knockback.transform.SetParent(mob.transform);
+		knockback.AddComponent<CircleCollider2D>();
+		knockback.AddComponent<Rigidbody2D>();
+		Physics2D.IgnoreCollision(knockback.GetComponent<CircleCollider2D>(), mob.gameObject.GetComponent<CircleCollider2D>());
+		knockback.GetComponent<Rigidbody2D>().isKinematic = true;
+		knockback.GetComponent<CircleCollider2D>().radius = mob.gameObject.GetComponent<CircleCollider2D>().radius + 1f;
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sound/dash"), mob.gameObject.transform.position);
+	}
+
+	public override void skillPassive() {
+		if (timer > Time.fixedTime)
+			mob.gameObject.GetComponent<Rigidbody2D>().velocity = mob.feetTransform.up * 70 * (timer-Time.fixedTime)/0.2f;
+		else if (knockback)
+			GameObject.Destroy(knockback);
 	}
 }
