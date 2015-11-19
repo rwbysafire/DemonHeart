@@ -16,11 +16,11 @@ public class SkillTeleport : Skill
 	}
 
 	public override float getMaxCooldown () {
-		return 1f * (1 - mob.stats.cooldownReduction / 100);
+		return 2f * (1 - mob.stats.cooldownReduction / 100);
 	}
 	
 	public override float getManaCost () {
-		return 0;
+		return 25;
 	}
 
 	public override void skillLogic() {

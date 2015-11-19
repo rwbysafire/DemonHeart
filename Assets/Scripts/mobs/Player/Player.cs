@@ -36,8 +36,8 @@ public class Player : Mob {
 	{
 		createPlayer ();
 		replaceSkill(0, new SkillBasicAttack (this));
-		replaceSkill(1, new SkillCombatRoll (this));
-		replaceSkill(2, new SkillScattershot (this));
+		replaceSkill(1, new SkillChainLightning (this));
+		replaceSkill(2, new SkillCombatRoll (this));
 		replaceSkill(3, new SkillPowershot (this));
 		replaceSkill(4, new SkillTeleport (this));
 		replaceSkill(5, new SkillExplosiveArrow (this));
