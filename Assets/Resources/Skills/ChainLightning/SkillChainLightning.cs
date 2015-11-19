@@ -17,11 +17,11 @@ public class SkillChainLightning : Skill {
 	}
 	
 	public override float getMaxCooldown () {
-		return 0.2f * (1 - mob.stats.cooldownReduction / 100);
+		return 0.01f * (1 - mob.stats.cooldownReduction / 100);
 	}
 	
 	public override float getManaCost () {
-		return 5;
+		return 0;
 	}
 
 	public override void skillLogic ()

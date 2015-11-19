@@ -79,6 +79,7 @@ public class Player : Mob {
 			skills[3].skillPassive();
 			skills[4].skillPassive();
 			skills[5].skillPassive();
+
 		}
 	}
 
@@ -143,8 +144,29 @@ public class Player : Mob {
 		float headDirection = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 		head.transform.rotation = Quaternion.Euler(0f, 0f, headDirection);
 	}
-	
-	IEnumerator playFireAnimation() {
+    public override void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Drop")) {
+            if (collider.name == "DexterityGem(Clone)")
+            {
+                stats.dexterity += 2;
+                print(stats.dexterity);
+            }
+            else if (collider.name == "StrengthGem(Clone)")
+            {
+                stats.strength += 2;
+                print(stats.strength);
+            }
+            else if (collider.name == "IntelGem(Clone)")
+            {
+                stats.intelligence += 2;
+                print(stats.intelligence);
+            }
+            Destroy(collider.gameObject);
+        }
+    }
+
+    IEnumerator playFireAnimation() {
 		for(headFrame = 1; headFrame < headSprite.Length; headFrame++) {
 			head.GetComponent<SpriteRenderer> ().sprite = headSprite[headFrame];
 			yield return null;

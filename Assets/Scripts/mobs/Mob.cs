@@ -83,9 +83,13 @@ public abstract class Mob : MonoBehaviour{
 		stats.health = stats.maxHealth;
 		stats.mana = stats.maxMana;
 	}
+
 	void Update() {
-		if (stats.health <= 0)
-			Destroy(gameObject);
+        if (stats.health <= 0)
+        {
+            DropItem();
+            Destroy(gameObject);
+        }
 		if(isStunned())
 			return;
 		OnUpdate();
@@ -98,6 +102,16 @@ public abstract class Mob : MonoBehaviour{
 		else if (stats.mana > stats.maxMana)
 			stats.mana = stats.maxMana;
 	}
+
+    string[] dropTable = { "StrengthGem", "DexterityGem", "IntelGem" };
+
+    void DropItem() {
+        if (Random.Range(1, 101) <= 10) {
+            GameObject Drop = Instantiate(Resources.Load<GameObject>(dropTable[Random.Range(0,3)]));
+            Drop.transform.position = position;
+        }
+
+    }
 
 	void FixedUpdate() {
 		if(isStunned())
@@ -115,8 +129,13 @@ public abstract class Mob : MonoBehaviour{
 		return canMove;
 	}
 
+    public virtual void OnTriggerEnter2D(Collider2D collider)
+    {
+        
+    }
+
 	public abstract void movement();
 	public virtual void OnStart() {}
 	public virtual void OnUpdate() {}
-	public virtual void OnFixedUpdate() {}
+	public virtual void OnFixedUpdate() { }
 }
