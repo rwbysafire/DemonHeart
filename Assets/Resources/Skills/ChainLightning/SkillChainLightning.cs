@@ -17,11 +17,11 @@ public class SkillChainLightning : Skill {
 	}
 	
 	public override float getMaxCooldown () {
-		return 0.01f * (1 - mob.stats.cooldownReduction / 100);
+		return 0.2f * (1 - mob.stats.cooldownReduction / 100);
 	}
 	
 	public override float getManaCost () {
-		return 0;
+		return 5;
 	}
 
 	public override void skillLogic ()
@@ -36,6 +36,12 @@ public class SkillChainLightning : Skill {
 			targetLocation = mob.position + ((mob.getTargetLocation() - mob.position).normalized * maxDistance);
 		else
 			targetLocation = mob.getTargetLocation();
+		foreach (RaycastHit2D lineCast in Physics2D.LinecastAll(mob.position, targetLocation)) {
+			if (lineCast.collider.CompareTag("Wall")) {
+				targetLocation = lineCast.point;
+				break;
+			}
+		}
 		GameObject enemy = FindClosestEnemy(targetLocation);
 		if (enemy != null) {
 			chainLightning.GetComponent<ChainLightning>().enemy = enemy;
@@ -62,8 +68,17 @@ public class SkillChainLightning : Skill {
 		foreach (var go in inRange) {
 			float curDistance = Vector3.Distance(((GameObject)go).transform.position, target);
 			if (curDistance < distance) {
-				closest = (GameObject)go;
-				distance = curDistance;
+				bool add = true;
+				foreach (RaycastHit2D lineCast in Physics2D.LinecastAll(mob.position, ((GameObject)go).transform.position)) {
+					if (lineCast.collider.CompareTag("Wall")) {
+						add = false;
+						break;
+					}
+				}
+				if (add) {
+					closest = (GameObject)go;
+					distance = curDistance;
+				}
 			}
 		}
 		return closest;

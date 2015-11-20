@@ -66,8 +66,17 @@ public class ChainLightning : MonoBehaviour {
 		GameObject[] gos = GameObject.FindGameObjectsWithTag(tag);
 		ArrayList inRange = new ArrayList();
 		foreach(GameObject go in gos) {
-			if (Vector3.Distance(go.transform.position, position) < maxDistance && !ignoreID.Contains(go.GetInstanceID()))
-				inRange.Add(go);
+			if (Vector3.Distance(go.transform.position, position) < maxDistance && !ignoreID.Contains(go.GetInstanceID())) {
+				bool add = true;
+				foreach (RaycastHit2D lineCast in Physics2D.LinecastAll(position, go.transform.position)) {
+					if (lineCast.collider.CompareTag("Wall")) {
+						add = false;
+						break;
+					}
+				}
+				if (add)
+					inRange.Add(go);
+			}
 		}
 		if (inRange.Count > 0)
 			return (GameObject)inRange.ToArray()[Random.Range(0, inRange.Count)];
