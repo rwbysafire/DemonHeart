@@ -150,17 +150,14 @@ public class Player : Mob {
             if (collider.name == "DexterityGem(Clone)")
             {
                 stats.dexterity += 2;
-                print(stats.dexterity);
             }
             else if (collider.name == "StrengthGem(Clone)")
             {
                 stats.strength += 2;
-                print(stats.strength);
             }
             else if (collider.name == "IntelGem(Clone)")
             {
                 stats.intelligence += 2;
-                print(stats.intelligence);
             }
             Destroy(collider.gameObject);
         }
