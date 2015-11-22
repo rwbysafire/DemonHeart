@@ -12,6 +12,7 @@ GameObject:
   - 58: {fileID: 5818196}
   - 50: {fileID: 5003020}
   - 114: {fileID: 11497868}
+  - 114: {fileID: 11485316}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -79,9 +80,8 @@ GameObject:
   - 223: {fileID: 22328498}
   - 114: {fileID: 11469916}
   - 114: {fileID: 11493118}
-  - 114: {fileID: 11417938}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: FloatingHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.6989803, y: -.557232857, z: 1}
+  m_LocalPosition: {x: 8.93201733, y: -4.00573921, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22454616}
@@ -145,17 +145,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .600000024
---- !u!114 &11417938
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7adbe1426be308843a576e6bf6722348, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11433382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: .878000021, g: .0529999994, b: .0529999994, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -252,6 +241,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11485316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7adbe1426be308843a576e6bf6722348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11493118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

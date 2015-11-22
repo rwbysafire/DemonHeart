@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SkillPowershot : Skill
 {
-	public Projectile projectile;
+	int maxDistance = 20;
 
 	public SkillPowershot(Mob mob) : base(mob) { }
 
@@ -16,55 +16,65 @@ public class SkillPowershot : Skill
 	}
 	
 	public override float getMaxCooldown () {
-		return 5f * (1 - mob.stats.cooldownReduction / 100);
+		return 1.5f * (1 - mob.stats.cooldownReduction / 100);
 	}
 	
 	public override float getManaCost () {
-		return 40;
+		return 20;
 	}
 	
 	public override void skillLogic() {
-		//Instantiates the projectile with some speed
-		GameObject basicArrow = MonoBehaviour.Instantiate(Resources.Load("Skills/Arrow_Placeholder")) as GameObject;
-		projectile = new PowerShotProjectile (basicArrow, mob);
-		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
-		//Initiates the projectile's position and rotation
-		basicArrow.transform.localScale = basicArrow.transform.localScale * 1;
-		basicArrow.transform.position = mob.gameObject.transform.position;
-		basicArrow.transform.rotation = mob.rotation;
-		basicArrow.transform.Translate(Vector3.up * 0.7f);
-		projectile.projectileOnStart();
+		Vector2 targetLocation = (mob.getTargetLocation() - mob.position).normalized * maxDistance + mob.position;
+		foreach (RaycastHit2D linecast in Physics2D.LinecastAll(mob.position + (mob.getTargetLocation() - mob.position).normalized * 1, targetLocation)) {
+			if (linecast.collider.CompareTag("Wall")) {
+				targetLocation = linecast.point;
+				break;
+			}
+		}
+		Vector2 startLocation = mob.position + (mob.getTargetLocation() - mob.position).normalized;
+		GameObject powershot = new GameObject();
+		powershot.transform.position = new Vector2(startLocation.x + (targetLocation.x - startLocation.x)/2, startLocation.y + (targetLocation.y - startLocation.y)/2);
+		powershot.transform.rotation = mob.rotation;
+		BoxCollider2D collider = powershot.AddComponent<BoxCollider2D>();
+		collider.isTrigger = true;
+		collider.transform.localScale = new Vector2(0.5f, Vector2.Distance(startLocation, targetLocation));
+		PowershotEffect p = powershot.AddComponent<PowershotEffect>();
+		p.mob = mob;
+		LineRenderer lineRenderer = powershot.AddComponent<LineRenderer>();
+		lineRenderer.material = Resources.Load<Material>("Skills/Powershot/PowershotLaser");
+		lineRenderer.sortingOrder = 4;
+		lineRenderer.SetPosition(0, startLocation);
+		lineRenderer.SetPosition(1, targetLocation);
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/Powershot/sniperShot"), mob.position);
 	}
 }
 
-class PowerShotProjectile : Projectile {
-	public PowerShotProjectile(GameObject gameObject, Mob mob) : base(gameObject, mob) {}
+class PowershotEffect : MonoBehaviour {
+	
+	float alpha = 0.8f;
+	Color c = Color.white;
+	string enemyTag;
+	public Mob mob;
 
-	public override void OnHit () {
-		GameObject explosion = GameObject.Instantiate(Resources.Load("Skills/Explosion")) as GameObject;
-		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
-		RaycastHit2D target = hit[0];
-		foreach (RaycastHit2D x in hit) {
-			if (x.collider.CompareTag(collider.tag)) {
-				target = x;
-				break;
-			}
-		}
-		explosion.transform.position = target.point;
-		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/boom"), explosion.transform.position);
+	void Start() {
+		if (mob.gameObject.tag == "Player" || mob.gameObject.tag == "Ally")
+			enemyTag = "Enemy"; 
+		else
+			enemyTag = "Player";
 	}
-	public override float getSpeed () {
-		return 40;
+
+	void FixedUpdate () {
+		c.a = alpha;
+		gameObject.GetComponent<LineRenderer>().SetColors(c, c);
+		alpha -= 0.03f;
+		if (alpha <= 0)
+			Destroy(gameObject);
+		else if (alpha <= 0.5f)
+			gameObject.GetComponent<BoxCollider2D>().enabled = false;
 	}
-	public override float getDamage () {
-		return (2 * mob.stats.basicAttackDamage) + (0.2f * mob.stats.attackDamage);
-	}
-	public override float getDuration () {
-		return 0.5f;
-	}
-	public override float getPierceChance () {
-		return 100;
+
+	void OnTriggerEnter2D(Collider2D collider) {
+		if (collider.CompareTag(enemyTag))
+			collider.GetComponent<Mob>().hurt ((2 * mob.stats.basicAttackDamage) + (0.2f * mob.stats.attackDamage));
 	}
 }

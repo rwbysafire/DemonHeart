@@ -38,7 +38,7 @@ public class ChainLightning : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		gameObject.GetComponent<LineRenderer>().SetColors(new Color(1,1,1,alpha), new Color(1,1,1,alpha));
 		gameObject.GetComponent<LineRenderer>().SetWidth(alpha/1.5f+0.25f, alpha/1.5f+0.25f);
 		alpha -= 0.15f;

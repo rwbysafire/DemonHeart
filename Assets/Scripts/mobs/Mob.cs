@@ -6,6 +6,8 @@ public abstract class Mob : MonoBehaviour{
 	public Stats stats = new Stats();
 	private float stunTime = 0;
 	private float canMove = 0;
+	private float lasthit;
+	public float lastHit{get{return lasthit;}}
 
 	public Skill[] skills = new Skill[6];
 
@@ -66,6 +68,7 @@ public abstract class Mob : MonoBehaviour{
 
 	public bool hurt(float damage) {
 		stats.health -= damage;
+		lasthit = Time.fixedTime;
 		return stats.health <= 0;
 	}
 
