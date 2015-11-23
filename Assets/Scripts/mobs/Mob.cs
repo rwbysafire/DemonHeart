@@ -91,6 +91,7 @@ public abstract class Mob : MonoBehaviour{
         if (stats.health <= 0)
         {
             DropItem();
+			OnDeath();
             Destroy(gameObject);
         }
 		if(isStunned())
@@ -105,6 +106,8 @@ public abstract class Mob : MonoBehaviour{
 		else if (stats.mana > stats.maxMana)
 			stats.mana = stats.maxMana;
 	}
+
+	public virtual void OnDeath() {}
 
     string[] dropTable = { "StrengthGem", "DexterityGem", "IntelGem" };
 
@@ -130,6 +133,13 @@ public abstract class Mob : MonoBehaviour{
 
 	public float getCanMove() {
 		return canMove;
+	}
+
+	public string getEnemyTag() {
+		if (gameObject.tag == "Player" || gameObject.tag == "Ally")
+			return "Enemy"; 
+		else
+			return "Player";
 	}
 
     public virtual void OnTriggerEnter2D(Collider2D collider)

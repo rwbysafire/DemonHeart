@@ -1,56 +1,56 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Zombie : Mob {
+public class Kamikaze : Mob {
 
-	private int speed = 50, followDistance = 8;
+	private int speed = 110, followDistance = 10;
 	private bool isAttacking;
 	private Vector3 playerPosition;
 	
-	public Sprite[] spriteAttack, spriteWalk, spriteIdle;
+	public Sprite[] spriteWalk;
 	private int walkingFrame;
 	private int idleFrame;
-
+	
 	private GameObject body;
-
+	
 	public override string getName ()
 	{
-		return "Zombie";
+		return "Kamikaze";
 	}
-
+	
 	public override Vector3 getTargetLocation ()
 	{
 		return playerPosition;
 	}
-
+	
 	void create (){
 		body = new GameObject ("PlayerHead");
 		body.transform.SetParent (transform);
 		body.transform.position = transform.position;
 		body.AddComponent<SpriteRenderer>();
 		body.GetComponent<SpriteRenderer>().sortingOrder = 2;
-		stats.strength = 20;
+		stats.strength = -50;
 	}
-
+	
 	// Use this for initialization
 	public override void OnStart () {
 		create ();
 		transform.rotation = new Quaternion(0,0,0,0);
-		spriteAttack = Resources.LoadAll<Sprite>("Sprite/zombieAttack");
-		spriteWalk = Resources.LoadAll<Sprite>("Sprite/zombieWalk");
-		spriteIdle = Resources.LoadAll<Sprite>("Sprite/zombieIdle");
-		replaceSkill(0, new SkillSlash (this));
-		replaceSkill(1, new SkillCombatRoll (this));
+		spriteWalk = Resources.LoadAll<Sprite>("Sprite/demon");
+		replaceSkill(0, new SkillSelfDestruct (this));
 	}
-
+	
 	// Update is called once per frame
 	public override void OnUpdate () 
 	{
 		if(isAttacking)
 			return;
-		if (GameObject.FindWithTag ("Player") && Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 2) {
-			StartCoroutine("playAttackAnimation", 0.1);
-		}
+		if (GameObject.FindWithTag ("Player") && Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 1.5)
+			skills[0].useSkill();
+	}
+
+	public override void OnDeath() {
+		skills[0].useSkill ();
 	}
 
 	public override Quaternion rotation {
@@ -61,13 +61,13 @@ public class Zombie : Mob {
 			body.transform.rotation = value;
 		}
 	}
-
+	
 	public override Transform feetTransform {
 		get {
 			return body.transform;
 		}
 	}
-
+	
 	private float timer;
 	public override void movement () {
 		if (isAttacking)
@@ -92,21 +92,5 @@ public class Zombie : Mob {
 				timer = Time.fixedTime;
 			}
 		}
-	}
-	
-	IEnumerator playAttackAnimation(float delay) {
-		int frame = 0;
-		walkingFrame = 0;
-		isAttacking = true;
-		do {
-			if(!isStunned()) {
-				body.GetComponent<SpriteRenderer> ().sprite = spriteAttack[frame];
-				if (frame == 6)
-					skills[0].useSkill ();
-					frame++;
-			}
-			yield return new WaitForSeconds(delay);
-		} while (frame < spriteAttack.Length);
-		isAttacking = false;
 	}
 }
