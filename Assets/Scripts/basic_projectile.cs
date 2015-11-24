@@ -7,7 +7,7 @@ public class basic_projectile : MonoBehaviour
 	public Projectile projectile;
 
 	void Start() {
-		
+
 	}
 	
 	void Update() {

@@ -11,7 +11,10 @@ public class PlayAnimation : MonoBehaviour {
 
 	void Start () {
 		sprite = Resources.LoadAll<Sprite>(fileName);
+		GetComponent<SpriteRenderer> ().sprite = sprite[frame];
 		StartCoroutine("playAnimation", delay);
+		PolygonCollider2D thing = gameObject.AddComponent<PolygonCollider2D>();
+		thing.isTrigger = true;
 	}
 
 	IEnumerator playAnimation(float delay) {
