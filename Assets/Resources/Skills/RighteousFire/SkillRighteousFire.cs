@@ -6,7 +6,7 @@ public class SkillRighteousFire : Skill {
 	public SkillRighteousFire(Mob mob) : base(mob) { }
 	
 	public override string getName () {
-		return "Righteous Fire";
+		return "Fire Aura";
 	}
 	
 	public override Sprite getImage () {

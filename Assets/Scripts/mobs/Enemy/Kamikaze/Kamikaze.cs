@@ -4,7 +4,6 @@ using System.Collections;
 public class Kamikaze : Mob {
 
 	private int speed = 110, followDistance = 10;
-	private bool isAttacking;
 	private Vector3 playerPosition;
 	
 	public Sprite[] spriteWalk;
@@ -43,8 +42,6 @@ public class Kamikaze : Mob {
 	// Update is called once per frame
 	public override void OnUpdate () 
 	{
-		if(isAttacking)
-			return;
 		if (GameObject.FindWithTag ("Player") && Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 1.5)
 			skills[0].useSkill();
 	}
@@ -70,8 +67,6 @@ public class Kamikaze : Mob {
 	
 	private float timer;
 	public override void movement () {
-		if (isAttacking)
-			return;
 		if (GameObject.FindWithTag ("Player")) {
 			GameObject player = GameObject.FindWithTag ("Player");
 			playerPosition = player.transform.position;

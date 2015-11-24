@@ -46,7 +46,7 @@ class BasicAttackProjectile : Projectile {
 	public BasicAttackProjectile(GameObject gameObject, Mob mob) : base(gameObject, mob) {}
 	public override void OnHit () {
 		if (collider.CompareTag("Enemy"))
-			mob.useMana(-2);
+			mob.useMana(-10);
 		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
 		RaycastHit2D target = hit[0];
 		foreach (RaycastHit2D x in hit) {

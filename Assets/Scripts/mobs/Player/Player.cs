@@ -41,7 +41,7 @@ public class Player : Mob {
 		replaceSkill(3, new SkillPowershot (this));
 		replaceSkill(4, new SkillTeleport (this));
 		replaceSkill(5, new SkillExplosiveArrow (this));
-		stats.strength = 20;
+		stats.strength = 20000;
 		stats.dexterity = 30;
 		stats.intelligence = 10;
 	}
