@@ -11,7 +11,7 @@ public class RighteousFire : MonoBehaviour {
 	public string enemyTag;
 
 	void Start () {
-		sprite = Resources.LoadAll<Sprite>("Skills/RighteousFire/righteousFire");
+		sprite = Resources.LoadAll<Sprite>("Skills/RighteousFire/FireAura");
 		if (mob.gameObject.tag == "Player" || mob.gameObject.tag == "Ally")
 			enemyTag = "Enemy"; 
 		else
@@ -20,13 +20,12 @@ public class RighteousFire : MonoBehaviour {
 	}
 
 	void Update () {
-		if (mob.stats.health > 1) {
-			mob.hurt(mob.stats.maxHealth * 0.1f * Time.deltaTime);
-			if (mob.stats.health < 1)
-				mob.stats.health = 1;
-		}
-		if (mob.stats.health <= 1)
+		if (!mob.useMana(20 * Time.deltaTime))
 			Destroy(gameObject);
+	}
+
+	void FixedUpdate() {
+		transform.RotateAround(transform.position, Vector3.forward, -1);
 	}
 
 	IEnumerator playAnimation(float delay) {

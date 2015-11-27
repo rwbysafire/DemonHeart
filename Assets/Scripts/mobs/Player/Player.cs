@@ -8,6 +8,7 @@ public class Player : Mob {
 	private Sprite[] headSprite, feetSprite;
 	private int feetFrame = 0, headFrame = 0;
 	private float feetTimer;
+	public Skill[] listOfSkills;
 
 	public override string getName ()
 	{
@@ -34,13 +35,25 @@ public class Player : Mob {
 
 	public override void OnStart ()
 	{
+		listOfSkills = new Skill[12]{new SkillBasicAttack(this),
+			new SkillChainLightning(this),
+			new SkillCombatRoll(this),
+			new SkillExplosiveArrow(this),
+			new SkillPowershot(this),
+			new SkillRighteousFire(this),
+			new SkillScattershot(this),
+			new SkillSelfDestruct(this),
+			new SkillSlash(this),
+			new SkillStunArrow(this),
+			new SkillTeleport(this),
+			new SkillVolley(this)};
 		createPlayer ();
-		replaceSkill(0, new SkillBasicAttack (this));
-		replaceSkill(1, new SkillChainLightning (this));
-		replaceSkill(2, new SkillCombatRoll (this));
-		replaceSkill(3, new SkillPowershot (this));
-		replaceSkill(4, new SkillTeleport (this));
-		replaceSkill(5, new SkillExplosiveArrow (this));
+		replaceSkill(0, listOfSkills[0]);
+		replaceSkill(1, listOfSkills[1]);
+		replaceSkill(2, listOfSkills[2]);
+		replaceSkill(3, listOfSkills[4]);
+		replaceSkill(4, listOfSkills[10]);
+		replaceSkill(5, listOfSkills[3]);
 		stats.strength = 20;
 		stats.dexterity = 30;
 		stats.intelligence = 10;
