@@ -29,7 +29,7 @@ public class SkillScattershot : Skill
 		for (int i = 0; i < arrowCount; i++) {
 			fireArrow(-45 + (i * 90 / (arrowCount - 1)) + Random.Range(-5,5));
 		}
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.headTransform.position);
 	}
 
 	void fireArrow(int rotate = 0) {
@@ -38,8 +38,8 @@ public class SkillScattershot : Skill
 		projectile = new ScatterShotProjectile (basicArrow, mob);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
-		basicArrow.transform.position = mob.position;
-		basicArrow.transform.rotation = mob.rotation;
+		basicArrow.transform.position = mob.headTransform.position;
+		basicArrow.transform.rotation = mob.headTransform.rotation;
 		basicArrow.transform.Translate (Vector3.up * 0.7f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
 		projectile.projectileOnStart();

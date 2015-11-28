@@ -53,4 +53,12 @@ public class Pause : MonoBehaviour {
 	public void muteAudio() {
 		Camera.main.GetComponent<AudioListener>().enabled = !Camera.main.GetComponent<AudioListener>().enabled;
 	}
+
+	public void mainMenu() {
+		Application.LoadLevel("MainMenu");
+	}
+	
+	public void exitGame() {
+		Application.Quit();
+	}
 }

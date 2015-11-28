@@ -29,35 +29,35 @@ public class SkillTeleport : Skill
 		lineRenderer.material = Resources.Load<Material>("Skills/Teleport/blur");
 		lineRenderer.SetColors(new Color(1,1,0,0.5f), new Color(1,1,0,1));
 		lineRenderer.SetWidth(1, 1);
-		lineRenderer.SetPosition(0, mob.position);
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/Teleport/teleport"), mob.position);
+		lineRenderer.SetPosition(0, mob.feetTransform.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/Teleport/teleport"), mob.feetTransform.position);
 		displayFlash();
 		Vector3 teleportLocation;
-		if (Vector3.Distance(mob.position, mob.getTargetLocation()) > maxDistance)
-			teleportLocation = mob.position + ((mob.getTargetLocation() - mob.position).normalized * maxDistance);
+		if (Vector3.Distance(mob.feetTransform.position, mob.getTargetLocation()) > maxDistance)
+			teleportLocation = mob.feetTransform.position + ((mob.getTargetLocation() - mob.feetTransform.position).normalized * maxDistance);
 		else
 			teleportLocation = mob.getTargetLocation();
 		if (!Physics2D.OverlapPoint(teleportLocation))
-			mob.position = teleportLocation;
+			mob.transform.position = teleportLocation;
 		else {
-			RaycastHit2D[] hit = Physics2D.LinecastAll(mob.position, teleportLocation);
+			RaycastHit2D[] hit = Physics2D.LinecastAll(mob.feetTransform.position, teleportLocation);
 			for (int x = hit.Length - 1; x >= 0; x--) {
 				teleportLocation = hit[x].point;
-				teleportLocation -= (mob.getTargetLocation() - mob.position).normalized * mob.gameObject.GetComponent<CircleCollider2D>().radius;
+				teleportLocation -= (mob.getTargetLocation() - mob.feetTransform.position).normalized * mob.gameObject.GetComponent<CircleCollider2D>().radius;
 				if (Physics2D.OverlapPointAll(teleportLocation).Length == 0) {
-					mob.position = hit[x].point;
+					mob.transform.position = hit[x].point;
 					break;
 				}
 			}
 		}
-		lineRenderer.SetPosition(1, (mob.getTargetLocation() - mob.position).normalized*mob.gameObject.GetComponent<CircleCollider2D>().radius*2 + mob.position);
+		lineRenderer.SetPosition(1, (mob.getTargetLocation() - mob.feetTransform.position).normalized*mob.gameObject.GetComponent<CircleCollider2D>().radius*2 + mob.feetTransform.position);
 		displayFlash();
 	}
 
 	void displayFlash()
 	{
 		GameObject flash = new GameObject ();
-		flash.transform.position = mob.position;
+		flash.transform.position = mob.feetTransform.position;
 		flash.AddComponent<SpriteRenderer> ();
 		flash.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Skills/Teleport/flash");
 		flash.GetComponent<SpriteRenderer> ().color = Color.yellow;

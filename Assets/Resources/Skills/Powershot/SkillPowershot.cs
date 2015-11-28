@@ -24,17 +24,17 @@ public class SkillPowershot : Skill
 	}
 	
 	public override void skillLogic() {
-		Vector2 targetLocation = (mob.getTargetLocation() - mob.position).normalized * maxDistance + mob.position;
-		foreach (RaycastHit2D linecast in Physics2D.LinecastAll(mob.position + (mob.getTargetLocation() - mob.position).normalized * 1, targetLocation)) {
+		Vector2 targetLocation = mob.headTransform.up * maxDistance + mob.headTransform.position;
+		Vector2 startLocation = mob.headTransform.position + mob.headTransform.up;
+		foreach (RaycastHit2D linecast in Physics2D.LinecastAll(startLocation, targetLocation)) {
 			if (linecast.collider.CompareTag("Wall")) {
 				targetLocation = linecast.point;
 				break;
 			}
 		}
-		Vector2 startLocation = mob.position + (mob.getTargetLocation() - mob.position).normalized;
 		GameObject powershot = new GameObject();
 		powershot.transform.position = new Vector2(startLocation.x + (targetLocation.x - startLocation.x)/2, startLocation.y + (targetLocation.y - startLocation.y)/2);
-		powershot.transform.rotation = mob.rotation;
+		powershot.transform.rotation = mob.headTransform.rotation;
 		BoxCollider2D collider = powershot.AddComponent<BoxCollider2D>();
 		collider.isTrigger = true;
 		collider.transform.localScale = new Vector2(0.5f, Vector2.Distance(startLocation, targetLocation));
@@ -45,7 +45,7 @@ public class SkillPowershot : Skill
 		lineRenderer.sortingOrder = 4;
 		lineRenderer.SetPosition(0, startLocation);
 		lineRenderer.SetPosition(1, targetLocation);
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/Powershot/sniperShot"), mob.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/Powershot/sniperShot"), mob.headTransform.position);
 	}
 }
 

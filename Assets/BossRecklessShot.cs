@@ -36,7 +36,7 @@ public class BossRecklessShot : Skill
 	{
 		if (fireOn) {
 			fireArrow (i);
-			AudioSource.PlayClipAtPoint (Resources.Load<AudioClip> ("Skills/pew"), mob.position);
+			AudioSource.PlayClipAtPoint (Resources.Load<AudioClip> ("Skills/pew"), mob.headTransform.position);
 			i += 30;
 			if(i == 360){
 				fireOn = false;
@@ -51,8 +51,8 @@ public class BossRecklessShot : Skill
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		basicArrow.GetComponent<PlayAnimation> ().fileName = "Sprite/fire";
 		//Initiates the projectile's position and rotation
-		basicArrow.transform.position = mob.position;
-		basicArrow.transform.rotation = mob.rotation;
+		basicArrow.transform.position = mob.headTransform.position;
+		basicArrow.transform.rotation = mob.headTransform.rotation;
 		basicArrow.transform.Translate (Vector3.up * 0.7f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
 		projectile.projectileOnStart();

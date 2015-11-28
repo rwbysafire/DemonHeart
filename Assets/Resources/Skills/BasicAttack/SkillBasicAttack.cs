@@ -34,8 +34,8 @@ public class SkillBasicAttack : Skill
 		projectile = new BasicAttackProjectile (basicArrow, mob);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
-		basicArrow.transform.position = mob.position;
-		basicArrow.transform.rotation = mob.rotation;
+		basicArrow.transform.position = mob.headTransform.position;
+		basicArrow.transform.rotation = mob.headTransform.rotation;
 		basicArrow.transform.Translate (Vector3.up * 0.7f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
 		projectile.projectileOnStart();

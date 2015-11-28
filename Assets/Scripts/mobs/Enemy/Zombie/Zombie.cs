@@ -53,16 +53,7 @@ public class Zombie : Mob {
 		}
 	}
 
-	public override Quaternion rotation {
-		get {
-			return body.transform.rotation;
-		}
-		set {
-			body.transform.rotation = value;
-		}
-	}
-
-	public override Transform feetTransform {
+	public override Transform headTransform {
 		get {
 			return body.transform;
 		}
@@ -75,10 +66,10 @@ public class Zombie : Mob {
 		if (GameObject.FindWithTag ("Player")) {
 			GameObject player = GameObject.FindWithTag ("Player");
 			playerPosition = player.transform.position;
-			Vector3 diff = (player.transform.position - position).normalized;
+			Vector3 diff = (player.transform.position - feetTransform.position).normalized;
 			float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-			rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-			if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - position.x, 2) + Mathf.Pow(playerPosition.y - position.y, 2)) <= followDistance) {
+			headTransform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+			if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - feetTransform.position.x, 2) + Mathf.Pow(playerPosition.y - feetTransform.position.y, 2)) <= followDistance) {
 				GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed);
 			} else
 				GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed/4);

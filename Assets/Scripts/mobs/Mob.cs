@@ -15,27 +15,15 @@ public abstract class Mob : MonoBehaviour{
 		skills[skillNum] = skill;
 	}
 
-	public virtual Quaternion rotation {
-		get {
-			return gameObject.transform.rotation;
-		}
-		set {
-			gameObject.transform.rotation = value;
-		}
-	}
-
-	public virtual Transform feetTransform {
+	public virtual Transform headTransform {
 		get {
 			return gameObject.transform;
 		}
 	}
 
-	public virtual Vector3 position {
+	public virtual Transform feetTransform {
 		get {
-			return gameObject.transform.position;
-		}
-		set {
-			gameObject.transform.position = value;
+			return headTransform;
 		}
 	}
 
@@ -114,7 +102,7 @@ public abstract class Mob : MonoBehaviour{
     void DropItem() {
         if (Random.Range(1, 101) <= 10) {
             GameObject Drop = Instantiate(Resources.Load<GameObject>(dropTable[Random.Range(0,3)]));
-            Drop.transform.position = position;
+            Drop.transform.position = feetTransform.position;
         }
 
     }

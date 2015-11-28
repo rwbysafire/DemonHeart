@@ -25,7 +25,7 @@ public class SkillVolley : Skill {
 	
 	public override void skillLogic() {
 		fireArrow(-15);fireArrow(-10);fireArrow(-5);fireArrow(0);fireArrow(5);fireArrow(10);fireArrow(15);
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.headTransform.position);
 	}
 
 	void fireArrow(float rotate = 0) {
@@ -34,8 +34,8 @@ public class SkillVolley : Skill {
 		projectile = new VolleyProjectile (basicArrow, mob);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
-		basicArrow.transform.position = mob.position;
-		basicArrow.transform.rotation = mob.rotation;
+		basicArrow.transform.position = mob.headTransform.position;
+		basicArrow.transform.rotation = mob.headTransform.rotation;
 		basicArrow.transform.Translate (Vector3.up * 0.7f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
 		projectile.projectileOnStart();

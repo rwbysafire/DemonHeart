@@ -111,16 +111,13 @@ public class Player : Mob {
 	public override void movement() {
 		feetLogic();
 	}
-
-	public override Quaternion rotation {
+	
+	public override Transform headTransform {
 		get {
-			return head.transform.rotation;
-		}
-		set {
-			head.transform.rotation = value;
+			return head.transform;
 		}
 	}
-	
+
 	public override Transform feetTransform {
 		get {
 			return feet.transform;

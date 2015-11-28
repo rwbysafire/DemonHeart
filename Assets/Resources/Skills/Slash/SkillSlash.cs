@@ -23,8 +23,8 @@ public class SkillSlash : Skill {
 
 	public override void skillLogic () {
 		GameObject slash = GameObject.Instantiate(Resources.Load<GameObject>("Skills/Slash/Slash"));
-		slash.transform.position = mob.position;
-		slash.transform.rotation = mob.rotation;
+		slash.transform.position = mob.headTransform.position;
+		slash.transform.rotation = mob.headTransform.rotation;
 		slash.transform.SetParent(mob.gameObject.transform);
 		slash.GetComponent<SlashLogic>().damage = 1f * mob.stats.attackDamage;
 		if (mob.gameObject.tag == "Player" || mob.gameObject.tag == "Ally")

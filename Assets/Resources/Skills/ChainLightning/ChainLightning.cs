@@ -58,7 +58,7 @@ public class ChainLightning : MonoBehaviour {
 			chainLightning.GetComponent<ChainLightning>().maxDistance = maxDistance;
 			chainLightning.GetComponent<ChainLightning>().lastHit = lastHit;
 			chainLightning.GetComponent<ChainLightning>().enemy = nextEnemy;
-			chainLightning.GetComponent<ChainLightning>().target = nextEnemy.GetComponent<Mob>().position;
+			chainLightning.GetComponent<ChainLightning>().target = nextEnemy.GetComponent<Mob>().feetTransform.position;
 		}
 	}
 

@@ -32,11 +32,11 @@ public class SkillChainLightning : Skill {
 		chainLightning.GetComponent<ChainLightning>().chainTimes = timesCanChain;
 		chainLightning.GetComponent<ChainLightning>().maxDistance = maxDistance;
 		Vector3 targetLocation;
-		if (Vector3.Distance(mob.position, mob.getTargetLocation()) > maxDistance)
-			targetLocation = mob.position + ((mob.getTargetLocation() - mob.position).normalized * maxDistance);
+		if (Vector3.Distance(mob.headTransform.position, mob.getTargetLocation()) > maxDistance)
+			targetLocation = mob.headTransform.position + (mob.headTransform.up * maxDistance);
 		else
 			targetLocation = mob.getTargetLocation();
-		foreach (RaycastHit2D lineCast in Physics2D.LinecastAll(mob.position, targetLocation)) {
+		foreach (RaycastHit2D lineCast in Physics2D.LinecastAll(mob.headTransform.position, targetLocation)) {
 			if (lineCast.collider.CompareTag("Wall")) {
 				targetLocation = lineCast.point;
 				break;
@@ -45,7 +45,7 @@ public class SkillChainLightning : Skill {
 		GameObject enemy = FindClosestEnemy(targetLocation);
 		if (enemy != null) {
 			chainLightning.GetComponent<ChainLightning>().enemy = enemy;
-			chainLightning.GetComponent<ChainLightning>().target = enemy.GetComponent<Mob>().position;
+			chainLightning.GetComponent<ChainLightning>().target = enemy.GetComponent<Mob>().feetTransform.position;
 		} else {
 			chainLightning.GetComponent<ChainLightning>().target = targetLocation;
 		}
@@ -60,7 +60,7 @@ public class SkillChainLightning : Skill {
 		GameObject[] gos = GameObject.FindGameObjectsWithTag(enemyTag);
 		ArrayList inRange = new ArrayList();
 		foreach(GameObject go in gos) {
-			if (Vector3.Distance(go.transform.position, mob.position) < maxDistance)
+			if (Vector3.Distance(go.transform.position, mob.headTransform.position) < maxDistance)
 				inRange.Add(go);
 		}
 		GameObject closest = null;
@@ -69,7 +69,7 @@ public class SkillChainLightning : Skill {
 			float curDistance = Vector3.Distance(((GameObject)go).transform.position, target);
 			if (curDistance < distance) {
 				bool add = true;
-				foreach (RaycastHit2D lineCast in Physics2D.LinecastAll(mob.position, ((GameObject)go).transform.position)) {
+				foreach (RaycastHit2D lineCast in Physics2D.LinecastAll(mob.headTransform.position, ((GameObject)go).transform.position)) {
 					if (lineCast.collider.CompareTag("Wall")) {
 						add = false;
 						break;

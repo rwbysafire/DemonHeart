@@ -24,7 +24,7 @@ public class SkillRighteousFire : Skill {
 	public override void skillLogic () {
 		if (mob.gameObject.transform.FindChild("RighteousFire(Clone)") == null) {
 			GameObject righteousFire = GameObject.Instantiate(Resources.Load<GameObject>("Skills/RighteousFire/RighteousFire"));
-			righteousFire.transform.position = mob.position;
+			righteousFire.transform.position = mob.feetTransform.position;
 			righteousFire.transform.SetParent(mob.gameObject.transform);
 			righteousFire.GetComponent<RighteousFire>().mob = mob;
 		}

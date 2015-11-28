@@ -29,12 +29,12 @@ public class SkillStunArrow : Skill
 		projectile = new StunArrowProjectile (basicArrow, mob);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
-		basicArrow.transform.position = mob.position;
-		basicArrow.transform.rotation = mob.rotation;
+		basicArrow.transform.position = mob.headTransform.position;
+		basicArrow.transform.rotation = mob.headTransform.rotation;
 		basicArrow.transform.localScale *= 4; 
 		basicArrow.transform.Translate(Vector3.up * 0.7f);
 		projectile.projectileOnStart();
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.position);
+		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.headTransform.position);
 	}	
 }
 
