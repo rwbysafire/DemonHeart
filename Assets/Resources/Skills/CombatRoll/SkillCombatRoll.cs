@@ -37,12 +37,11 @@ public class SkillCombatRoll : Skill {
 		knockback.GetComponent<Rigidbody2D>().isKinematic = true;
 		knockback.GetComponent<CircleCollider2D>().radius = mob.gameObject.GetComponent<CircleCollider2D>().radius + 1f;
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/CombatRoll/dash"), mob.gameObject.transform.position);
+		GameObject.Destroy(knockback, 0.2f);
 	}
 
 	public override void skillPassive() {
 		if (timer > Time.fixedTime)
 			mob.gameObject.GetComponent<Rigidbody2D>().velocity = mob.feetTransform.up * 70 * (timer-Time.fixedTime)/0.2f;
-		else if (knockback)
-			GameObject.Destroy(knockback);
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class DisplayStats : MonoBehaviour {
 
@@ -39,5 +40,21 @@ public class DisplayStats : MonoBehaviour {
 			mana.text = "Mana: " + Mathf.Ceil(playerStats.mana).ToString() + " / " + Mathf.Ceil(playerStats.maxMana).ToString();
 
 		}
+	}
+	
+	public void setLevel(int lvl) {
+		GameObject.Find("Player").GetComponent<Mob>().stats.level += lvl;
+	}
+	
+	public void setStr(int STR) {
+		GameObject.Find("Player").GetComponent<Mob>().stats.strength += STR;
+	}
+	
+	public void setInt(int INT) {
+		GameObject.Find("Player").GetComponent<Mob>().stats.intelligence += INT;
+	}
+	
+	public void setDex(int DEX) {
+		GameObject.Find("Player").GetComponent<Mob>().stats.dexterity += DEX;
 	}
 }
