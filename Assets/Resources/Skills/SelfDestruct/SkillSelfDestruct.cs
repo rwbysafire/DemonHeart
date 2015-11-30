@@ -27,6 +27,6 @@ public class SkillSelfDestruct : Skill {
 		explosion.transform.position = mob.transform.position;
 		explosion.GetComponent<bloodExplosion>().maxHealth = mob.stats.maxHealth;
 		explosion.GetComponent<bloodExplosion>().enemyTag = mob.getEnemyTag();
-		mob.hurt(mob.stats.health*2);
+		mob.hurt(mob.stats.health);
 	}
 }

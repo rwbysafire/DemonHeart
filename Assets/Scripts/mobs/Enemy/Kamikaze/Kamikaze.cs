@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Kamikaze : Mob {
 
-	private int speed = 110, followDistance = 10;
+	private int speed = 105, followDistance = 10;
 	private Vector3 playerPosition;
 	
 	public Sprite[] spriteWalk;
