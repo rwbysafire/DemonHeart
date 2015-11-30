@@ -15,8 +15,8 @@ public class SkillBasicAttack : Skill
 		return Resources.Load<Sprite>("Skills/BasicAttack/basicAttackIcon");
 	}
 
-	public override float getMaxCooldown() {
-		return 0.25f * (1 - mob.stats.cooldownReduction / 100);
+	public override float getAttackSpeed () {
+		return 1f;
 	}
 
 	public override float getManaCost () {

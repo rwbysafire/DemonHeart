@@ -15,6 +15,10 @@ public class SkillStunArrow : Skill
 		return Resources.Load<Sprite>("Skills/StunArrow/stunArrowIcon");
 	}
 	
+	public override float getAttackSpeed () {
+		return 1f;
+	}
+	
 	public override float getMaxCooldown () {
 		return 3f * (1 - mob.stats.cooldownReduction / 100);
 	}

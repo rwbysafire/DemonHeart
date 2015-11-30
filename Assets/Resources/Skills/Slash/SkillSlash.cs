@@ -12,9 +12,9 @@ public class SkillSlash : Skill {
 	public override Sprite getImage () {
 		return Resources.Load<Sprite>("Skills/Slash/slashIcon");
 	}
-
-	public override float getMaxCooldown () {
-		return 0.4f * (1 - (mob.stats.cooldownReduction / 100));
+	
+	public override float getAttackSpeed () {
+		return 0.5f;
 	}
 	
 	public override float getManaCost () {

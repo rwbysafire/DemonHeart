@@ -16,6 +16,10 @@ public class SkillScattershot : Skill
 	public override Sprite getImage () {
 		return Resources.Load<Sprite>("Skills/Scattershot/scattershotIcon");
 	}
+	
+	public override float getAttackSpeed () {
+		return 1f;
+	}
 
 	public override float getMaxCooldown () {
 		return 5f * (1 - mob.stats.cooldownReduction / 100);

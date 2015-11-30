@@ -15,6 +15,10 @@ public class SkillVolley : Skill {
 		return Resources.Load<Sprite>("Skills/Volley/volleyIcon");
 	}
 	
+	public override float getAttackSpeed () {
+		return 1f;
+	}
+	
 	public override float getMaxCooldown () {
 		return 0.5f * (1 - (mob.stats.cooldownReduction / 100));
 	}

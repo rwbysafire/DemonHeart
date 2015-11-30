@@ -4,7 +4,6 @@ using System.Collections;
 public class Zombie : Mob {
 
 	private int speed = 50, followDistance = 8;
-	private bool isAttacking;
 	private Vector3 playerPosition;
 	
 	public Sprite[] spriteAttack, spriteWalk, spriteIdle;
@@ -49,7 +48,7 @@ public class Zombie : Mob {
 		if(isAttacking)
 			return;
 		if (GameObject.FindWithTag ("Player") && Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 2) {
-			StartCoroutine("playAttackAnimation", 0.1);
+			skills[0].useSkill ();
 		}
 	}
 
@@ -85,18 +84,17 @@ public class Zombie : Mob {
 		}
 	}
 	
-	IEnumerator playAttackAnimation(float delay) {
+	public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
 		int frame = 0;
 		walkingFrame = 0;
-		isAttacking = true;
 		do {
 			if(!isStunned()) {
 				body.GetComponent<SpriteRenderer> ().sprite = spriteAttack[frame];
 				if (frame == 6)
-					skills[0].useSkill ();
+					skill.skillLogic ();
 					frame++;
 			}
-			yield return new WaitForSeconds(delay);
+			yield return new WaitForSeconds(attackTime/spriteAttack.Length);
 		} while (frame < spriteAttack.Length);
 		isAttacking = false;
 	}

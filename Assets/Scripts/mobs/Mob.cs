@@ -8,6 +8,7 @@ public abstract class Mob : MonoBehaviour{
 	private float canMove = 0;
 	private float lasthit;
 	public float lastHit{get{return lasthit;}}
+	public bool isAttacking = false;
 
 	public Skill[] skills = new Skill[6];
 
@@ -136,7 +137,12 @@ public abstract class Mob : MonoBehaviour{
     }
 
 	public abstract void movement();
+	public virtual void attack(Skill skill, float attackTime) {
+		isAttacking = true;
+		StartCoroutine(playAttackAnimation(skill, attackTime));
+	}
+	public abstract IEnumerator playAttackAnimation(Skill skill, float attackTime);
 	public virtual void OnStart() {}
 	public virtual void OnUpdate() {}
-	public virtual void OnFixedUpdate() { }
+	public virtual void OnFixedUpdate() {}
 }

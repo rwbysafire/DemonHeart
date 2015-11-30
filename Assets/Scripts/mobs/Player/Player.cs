@@ -63,27 +63,21 @@ public class Player : Mob {
 	{
 		if (Time.timeScale != 0) {
 			if (Input.GetKey (KeyCode.Mouse0)) {
-				StartCoroutine("playFireAnimation");
 				skills[0].useSkill();
 			}
 			if (Input.GetKey (KeyCode.Mouse1)) {
-				StartCoroutine("playFireAnimation");
 				skills[1].useSkill ();
 			}
 			if (Input.GetKey (KeyCode.Alpha1)) {
-				StartCoroutine("playFireAnimation");
 				skills[2].useSkill (); 
 			}
 			if (Input.GetKey (KeyCode.Alpha2)) {
-				StartCoroutine("playFireAnimation");
 				skills[3].useSkill ();
 			}
 			if (Input.GetKey (KeyCode.Alpha3)) {
-				StartCoroutine("playFireAnimation");
 				skills[4].useSkill ();
 			}
 			if (Input.GetKey (KeyCode.Alpha4)) {
-				StartCoroutine("playFireAnimation");
 				skills[5].useSkill ();
 			}
 			skills[0].skillPassive();
@@ -173,10 +167,13 @@ public class Player : Mob {
         }
     }
 
-    IEnumerator playFireAnimation() {
+	public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
 		for(headFrame = 1; headFrame < headSprite.Length; headFrame++) {
 			head.GetComponent<SpriteRenderer> ().sprite = headSprite[headFrame];
-			yield return null;
+			if (headFrame == 2)
+				skill.skillLogic();
+			yield return new WaitForSeconds(attackTime/headSprite.Length);
 		}
+		isAttacking = false;
 	}
 }

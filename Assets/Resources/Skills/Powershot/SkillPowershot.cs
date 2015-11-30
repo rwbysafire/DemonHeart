@@ -15,6 +15,10 @@ public class SkillPowershot : Skill
 		return Resources.Load<Sprite>("Skills/Powershot/powershot");
 	}
 	
+	public override float getAttackSpeed () {
+		return 1.5f;
+	}
+	
 	public override float getMaxCooldown () {
 		return 1.5f * (1 - mob.stats.cooldownReduction / 100);
 	}

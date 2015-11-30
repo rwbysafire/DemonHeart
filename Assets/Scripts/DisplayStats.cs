@@ -6,7 +6,7 @@ using System;
 public class DisplayStats : MonoBehaviour {
 
 	GameObject display;
-	Text level, exp, STR, DEX, INT, health, mana;
+	Text level, exp, STR, DEX, INT, health, mana, attackSpeed, cooldown;
 	Stats playerStats;
 
 	void Start () {
@@ -19,6 +19,8 @@ public class DisplayStats : MonoBehaviour {
 		INT = display.transform.FindChild("int").gameObject.GetComponent<Text>();
 		health = display.transform.FindChild("health").gameObject.GetComponent<Text>();
 		mana = display.transform.FindChild("mana").gameObject.GetComponent<Text>();
+		attackSpeed = display.transform.FindChild("attackSpeed").gameObject.GetComponent<Text>();
+		cooldown = display.transform.FindChild("cooldown").gameObject.GetComponent<Text>();
 		display.SetActive(false);
 	}
 
@@ -38,7 +40,8 @@ public class DisplayStats : MonoBehaviour {
 			INT.text = "Int: " + playerStats.intelligence.ToString();
 			health.text = "Health: " + Mathf.Ceil(playerStats.health).ToString() + " / " + Mathf.Ceil(playerStats.maxHealth).ToString();
 			mana.text = "Mana: " + Mathf.Ceil(playerStats.mana).ToString() + " / " + Mathf.Ceil(playerStats.maxMana).ToString();
-
+			attackSpeed.text = "Attack Speed: " + playerStats.attackSpeed.ToString();
+			cooldown.text = "cooldown:     " + playerStats.cooldownReduction.ToString() + "%";
 		}
 	}
 	

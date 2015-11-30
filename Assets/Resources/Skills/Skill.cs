@@ -13,8 +13,8 @@ public abstract class Skill
 	}
 
 	public bool useSkill() {
-		if (cooldown <= Time.fixedTime && mob.useMana(getManaCost())) {
-			skillLogic();
+		if (cooldown <= Time.fixedTime && !mob.isAttacking && mob.useMana(getManaCost())) {
+			mob.attack(this, getAttackSpeed()/mob.stats.attackSpeed);
 			cooldown = Time.fixedTime + getMaxCooldown(); 
 			return true;
 		}
@@ -30,7 +30,8 @@ public abstract class Skill
 
 	public abstract string getName();
 	public abstract Sprite getImage();
-	public abstract float getMaxCooldown();
+	public virtual float getMaxCooldown() {return 0;}
+	public virtual float getAttackSpeed() {return 0;}
 	public abstract float getManaCost();
 	public abstract void skillLogic(); 
 	public virtual void skillPassive() {}
