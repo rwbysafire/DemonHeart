@@ -20,6 +20,7 @@ public class CamViewScroll : MonoBehaviour {
 	void Start () {
 		currentZoom = defaultZoom;
 		cam = Camera.main;
+		cam.orthographicSize = currentZoom;
 	}
 
 	void Update () {
