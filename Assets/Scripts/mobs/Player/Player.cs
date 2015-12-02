@@ -4,11 +4,12 @@ using System.Collections;
 public class Player : Mob {
 
 	public float speed = 7;
-	private GameObject head, feet;
+	private GameObject head, feet, flashlight;
 	private Sprite[] headSprite, feetSprite;
 	private int feetFrame = 0, headFrame = 0;
 	private float feetTimer;
 	public Skill[] listOfSkills;
+	public bool hideMouseOnPlay = false;
 
 	public override string getName ()
 	{
@@ -23,6 +24,7 @@ public class Player : Mob {
 		head.transform.SetParent (transform);
 		head.transform.position = transform.position;
 		head.AddComponent<SpriteRenderer> ();
+		head.GetComponent<SpriteRenderer> ().material = (Material) Resources.Load("MapMaterial");
 		head.GetComponent<SpriteRenderer> ().sprite = headSprite [0];
 		head.GetComponent<SpriteRenderer> ().sortingOrder = 3;
 		//Create feet
@@ -30,7 +32,14 @@ public class Player : Mob {
 		feet.transform.SetParent (transform);
 		feet.transform.position = transform.position;
 		feet.AddComponent<SpriteRenderer> ();
+		feet.GetComponent<SpriteRenderer> ().material = (Material) Resources.Load("MapMaterial");
 		feet.GetComponent<SpriteRenderer> ().sortingOrder = 1;
+		//Create flashlight
+		flashlight = Instantiate(Resources.Load ("Flashlight")) as GameObject;
+		flashlight.transform.position = new Vector3(transform.position.x, transform.position.y, -0.45f);
+		flashlight.transform.SetParent(head.transform);
+
+		Cursor.visible = hideMouseOnPlay;
 	}
 
 	public override void OnStart ()
@@ -87,6 +96,10 @@ public class Player : Mob {
 			skills[4].skillPassive();
 			skills[5].skillPassive();
 
+		}
+
+		if (Input.GetKey (KeyCode.Escape)) {
+			Application.Quit();
 		}
 	}
 
