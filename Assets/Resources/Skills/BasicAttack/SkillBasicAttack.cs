@@ -31,12 +31,15 @@ public class SkillBasicAttack : Skill
 	void fireArrow(float rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
+		GameObject arrowGlow = MonoBehaviour.Instantiate(Resources.Load("ShotGlow")) as GameObject;
+		arrowGlow.transform.position = new Vector3(basicArrow.transform.position.x, basicArrow.transform.position.y, -0.3f);
+		arrowGlow.transform.SetParent (basicArrow.transform);
 		projectile = new BasicAttackProjectile (basicArrow, mob);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = mob.headTransform.position;
 		basicArrow.transform.rotation = mob.headTransform.rotation;
-		basicArrow.transform.Translate (Vector3.up * 0.7f);
+		basicArrow.transform.Translate (Vector3.up * 1.2f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
 		projectile.projectileOnStart();
 	}
