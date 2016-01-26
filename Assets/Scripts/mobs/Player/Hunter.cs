@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : Mob {
+public class Hunter : Mob {
 
 	public float speed = 7;
 	private GameObject head, feet;
@@ -12,7 +12,7 @@ public class Player : Mob {
 
 	public override string getName ()
 	{
-		return "Player";
+		return "Hunter";
 	}
 
 	void createPlayer (){
@@ -148,8 +148,6 @@ public class Player : Mob {
 		float headDirection = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 		head.transform.rotation = Quaternion.Euler(0f, 0f, headDirection);
 	}
-
-    //THis eventually needs to just pick up gems and add to inventory
     public override void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Drop")) {

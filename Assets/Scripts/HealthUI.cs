@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
+//Make sure UI is dynamic so that it can work for whatever name/character you are using
 public class HealthUI : MonoBehaviour {
 	
 	Slider slider, slider1;
