@@ -19,8 +19,9 @@ public class SkillSlot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GameObject.Find("Player")) {
-			skill = GameObject.Find("Player").GetComponent<Mob>().skills[index];
+        GameObject player = GameObject.Find("Player");
+        if (player != null && player.GetComponent<Mob>().skills[index] != null) {
+			skill = player.GetComponent<Mob>().skills[index];
 			slider.value = skill.remainingCooldown()/skill.getMaxCooldown();
 			image.sprite = skill.getImage();
 			if (skill.remainingCooldown() > 0)

@@ -9,7 +9,6 @@ public class Player : Mob {
 	private int feetFrame = 0, headFrame = 0;
 	private float feetTimer;
 	public Skill[] listOfSkills;
-	public bool hideMouseOnPlay = false;
 
 	public override string getName ()
 	{
@@ -38,8 +37,6 @@ public class Player : Mob {
 		flashlight = Instantiate(Resources.Load ("Flashlight")) as GameObject;
 		flashlight.transform.position = new Vector3(transform.position.x, transform.position.y, -0.45f);
 		flashlight.transform.SetParent(head.transform);
-
-		Cursor.visible = hideMouseOnPlay;
 	}
 
 	public override void OnStart ()
@@ -89,13 +86,10 @@ public class Player : Mob {
 			if (Input.GetKey (KeyCode.Alpha4)) {
 				skills[5].useSkill ();
 			}
-			skills[0].skillPassive();
-			skills[1].skillPassive();
-			skills[2].skillPassive();
-			skills[3].skillPassive();
-			skills[4].skillPassive();
-			skills[5].skillPassive();
-
+            foreach (Skill skill in skills) {
+                if (skill != null)
+                    skill.skillPassive();
+            }
 		}
 
 		if (Input.GetKey (KeyCode.Escape)) {
@@ -107,12 +101,10 @@ public class Player : Mob {
 	{
 		//Displays and modifies player rotations
 		headLogic();
-		skills[0].skillFixedUpdate();
-		skills[1].skillFixedUpdate();
-		skills[2].skillFixedUpdate();
-		skills[3].skillFixedUpdate();
-		skills[4].skillFixedUpdate();
-		skills[5].skillFixedUpdate();
+        foreach (Skill skill in skills) {
+            if (skill != null)
+                skill.skillFixedUpdate();
+        }
 	}
 
 	public override void movement() {
