@@ -148,8 +148,6 @@ public class Player : Mob {
 		float headDirection = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 		head.transform.rotation = Quaternion.Euler(0f, 0f, headDirection);
 	}
-
-    //THis eventually needs to just pick up gems and add to inventory
     public override void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Drop")) {
