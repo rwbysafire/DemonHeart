@@ -98,11 +98,14 @@ public abstract class Mob : MonoBehaviour{
 
 	public virtual void OnDeath() {}
 
-    string[] dropTable = { "StrengthGem", "DexterityGem", "IntelGem" };
+    string[] dropTable = { "StrengthGem", "DexterityGem", "IntelGem", "ItemGem" };
 
     void DropItem() {
         if (Random.Range(1, 101) <= 10) {
-            GameObject Drop = Instantiate(Resources.Load<GameObject>(dropTable[Random.Range(0,3)]));
+			GameObject Drop = (GameObject) Instantiate(
+				Resources.Load<GameObject>(dropTable[Random.Range(0, dropTable.Length)]),
+				this.gameObject.transform.position + new Vector3 (Random.Range (2f, 5f), Random.Range (2f, 5f), 0),
+				Quaternion.identity);
             Drop.transform.position = feetTransform.position;
         }
 
