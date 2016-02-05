@@ -37,12 +37,15 @@ public class InventoryUI : MonoBehaviour {
 		itemTemplate.SetActive (false);
 	}
 
-	public void AddItem (Item item) {
+	// return true if the item is added
+	public bool AddItem (Item item) {
 		if (itemCount < items.Length) {
 			itemHolder [itemCount].SetItem (item);
 			itemCount++;
+			return true;
 		} else {
-			Debug.Log ("Inventory full");
+//			Debug.Log ("Inventory full");
+			return false;
 		}
 	}
 	

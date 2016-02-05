@@ -171,9 +171,11 @@ public class Player : Mob {
             }
             Destroy(collider.gameObject);
 		} else if (collider.CompareTag("Item")) {
-//			Debug.Log ("Item picked");
-			inventory.AddItem (Instantiate(Resources.Load<Item>("Items/Item")));
-			Destroy(collider.gameObject);
+			if (inventory.AddItem (Instantiate (Resources.Load<Item> ("Items/Item")))) {
+				Destroy (collider.gameObject);
+			} else {
+				Debug.Log ("Item not picked due to full capacity");
+			}
 		}
     }
 
