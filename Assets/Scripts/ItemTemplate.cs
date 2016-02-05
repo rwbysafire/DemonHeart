@@ -12,6 +12,7 @@ public class ItemTemplate : MonoBehaviour {
 
 	public void SetItem (Item item) {
 		this.item = item;
+		this.item.transform.SetParent (transform, false);
 	}
 
 	public void OnClick () {
@@ -25,6 +26,7 @@ public class ItemTemplate : MonoBehaviour {
 			} else {
 				Debug.Log ("Slot --> Holder");
 				transform.GetChild (0).SetParent (moveHolder.transform, false);
+				moveHolder.transform.position = Input.mousePosition;
 				moveHolder.SetActive (true);
 			}
 		} else {
@@ -33,6 +35,8 @@ public class ItemTemplate : MonoBehaviour {
 				Debug.Log ("Holder --> Slot");
 				moveHolder.transform.GetChild (0).SetParent (this.transform, false);
 				moveHolder.SetActive (false);
+			} else {
+				Debug.Log ("Something goes wrong");
 			}
 		}
 	}

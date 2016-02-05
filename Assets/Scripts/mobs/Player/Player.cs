@@ -9,6 +9,7 @@ public class Player : Mob {
 	private int feetFrame = 0, headFrame = 0;
 	private float feetTimer;
 	public Skill[] listOfSkills;
+	public InventoryUI inventory;
 
 	public override string getName ()
 	{
@@ -169,7 +170,13 @@ public class Player : Mob {
                 stats.intelligence += 2;
             }
             Destroy(collider.gameObject);
-        }
+		} else if (collider.CompareTag("Item")) {
+			if (inventory.AddItem (Instantiate (Resources.Load<Item> ("Items/Item")))) {
+				Destroy (collider.gameObject);
+			} else {
+				Debug.Log ("Item not picked due to full capacity");
+			}
+		}
     }
 
 	public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
