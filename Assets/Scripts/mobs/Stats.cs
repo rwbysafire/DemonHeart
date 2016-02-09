@@ -7,7 +7,7 @@ public class Stats {
 	public int strength = 10;
 	public int dexterity = 10;
 	public int intelligence = 10;
-	public float baseHealth = 400;
+	public float baseHealth = 600;
 	public float baseMana = 200;
 	public float maxHealth {
 		get {

@@ -40,7 +40,7 @@ public class SpawnEnemies : MonoBehaviour {
             wave.count -= 1;
             enemy.transform.position = Vector3.zero;
             enemy.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0, 360));
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }
