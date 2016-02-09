@@ -8,7 +8,10 @@ TagManager:
   - Projectile
   - Wall
   - Drop
-  - skill_slot
+  - item
+  - item_skill
+  - item_weapon
+  - item_armor
   layers:
   - Default
   - TransparentFX

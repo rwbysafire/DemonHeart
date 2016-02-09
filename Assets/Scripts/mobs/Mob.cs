@@ -98,7 +98,8 @@ public abstract class Mob : MonoBehaviour{
 
 	public virtual void OnDeath() {}
 
-    string[] dropTable = { "StrengthGem", "DexterityGem", "IntelGem", "ItemGem" };
+	string[] dropTable = { "StrengthGem", "DexterityGem", "IntelGem",
+		"Items/ArmorGem", "Items/WeaponGem", "Items/SkillGem" };
 
     void DropItem() {
         if (Random.Range(1, 101) <= 10) {

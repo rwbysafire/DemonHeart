@@ -8,17 +8,12 @@ public class Item : MonoBehaviour{
 
 	public string itemName { get; set; }
 	public string itemDescription { get; set; }
-	private static string[] spritePaths = {"gem4", "gem5", "gem6"};
 
-	public Item (string name, string description) : base() {
-		this.itemName = name;
-		this.itemDescription = description;
-//		Debug.Log(spritePaths[0]);
-
+	public void SetSprite (Sprite sprite) {
+		itemImage.overrideSprite = sprite;
 	}
 
 	void Start () {
-		
-		itemImage.overrideSprite = Resources.Load<Sprite> ("Sprite/gems/" + spritePaths[(int) Random.Range(0, 2.9f)]);
+
 	}
 }

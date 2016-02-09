@@ -21,10 +21,6 @@ public class InventoryUI : MonoBehaviour {
 		RectTransform inventoryTransform = (RectTransform) inventory.transform;
 		float width = inventoryTransform.rect.width;
 		float height = inventoryTransform.rect.height;
-//		Debug.Log ("width: " + width.ToString ());
-//		Debug.Log ("height: " + height.ToString ());
-//
-//		Debug.Log ("count: " + itemSlotCount.ToString ());
 		items = new Item[itemSlotCount];
 		itemHolder = new ItemTemplate[itemSlotCount];
 		for (int i = 0; i < itemSlotCount; i++) {
@@ -44,7 +40,7 @@ public class InventoryUI : MonoBehaviour {
 			itemCount++;
 			return true;
 		} else {
-//			Debug.Log ("Inventory full");
+			// inventory is full
 			return false;
 		}
 	}
@@ -52,8 +48,6 @@ public class InventoryUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.B)) {
-			Debug.Log (skillImages.Count);
-			Debug.Log (playerScript.skills.Length);
 			for (int i = 0; i < playerScript.skills.Length; i++) {
 				skillImages [i].overrideSprite = playerScript.skills [i].getImage ();
 			}
