@@ -20,7 +20,7 @@ public class ItemTemplate : MonoBehaviour {
 		if (transform.childCount != 0) {
 			// has child
 			if (moveHolder.transform.childCount != 0) {
-				Debug.Log ("Replace");
+//				Debug.Log ("Replace");
 				// need to check the type of the gem
 				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.transform.GetChild (0).gameObject.tag) {
 					Transform slotItem = transform.GetChild (0);
@@ -32,7 +32,7 @@ public class ItemTemplate : MonoBehaviour {
 					moveHolder.SetActive (false);
 				}
 			} else {
-				Debug.Log ("Slot --> Holder");
+//				Debug.Log ("Slot --> Holder");
 				transform.GetChild (0).SetParent (moveHolder.transform, false);
 				lastSlot = this.gameObject;
 				moveHolder.transform.position = Input.mousePosition;
@@ -41,7 +41,7 @@ public class ItemTemplate : MonoBehaviour {
 		} else {
 			// no child
 			if (moveHolder.transform.childCount != 0) {
-				Debug.Log ("Holder --> Slot");
+//				Debug.Log ("Holder --> Slot");
 				// need to check the type of the gem
 				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.transform.GetChild (0).gameObject.tag) {
 					moveHolder.transform.GetChild (0).SetParent (this.transform, false);
