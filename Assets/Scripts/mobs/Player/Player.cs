@@ -170,8 +170,11 @@ public class Player : Mob {
                 stats.intelligence += 2;
             }
             Destroy(collider.gameObject);
-		} else if (collider.CompareTag("Item")) {
-			if (inventory.AddItem (Instantiate (Resources.Load<Item> ("Items/Item")))) {
+		} else if (collider.tag.ToLower ().StartsWith ("item")) {
+			Item item = Instantiate (Resources.Load<Item> ("Items/Item"));
+			if (inventory.AddItem (item)) {
+				item.SetSprite (collider.gameObject.GetComponent<SpriteRenderer> ().sprite);
+				item.gameObject.tag = collider.tag;
 				Destroy (collider.gameObject);
 			} else {
 				Debug.Log ("Item not picked due to full capacity");
