@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class InventoryUI : MonoBehaviour {
 
+	public Text ItemName;
+	public Text ItemDescription;
 	public GameObject itemTemplate;
 	public GameObject inventory;
 	public GameObject itemMoveHolder;
@@ -33,6 +35,15 @@ public class InventoryUI : MonoBehaviour {
 		itemTemplate.SetActive (false);
 	}
 
+	// setter for ItemText
+	public void SetItemName (string s) {
+		ItemName.text = s;
+	}
+
+	public void SetItemDescription (string s) {
+		ItemDescription.text = s;
+	}
+
 	// return true if the item is added
 	public bool AddItem (Item item) {
 		if (itemCount < items.Length) {
@@ -48,9 +59,15 @@ public class InventoryUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.B)) {
+			// update the images for the skills
 			for (int i = 0; i < playerScript.skills.Length; i++) {
 				skillImages [i].overrideSprite = playerScript.skills [i].getImage ();
 			}
+
+			// reset the text
+			ItemName.text = "";
+			ItemDescription.text = "";
+
 			inventory.SetActive (true);
 		} else if (Input.GetKeyUp (KeyCode.B)) {
 			inventory.SetActive (false);

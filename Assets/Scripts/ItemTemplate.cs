@@ -3,9 +3,10 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class ItemTemplate : MonoBehaviour {
+public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
 	public GameObject moveHolder;
+	public InventoryUI inventory;
 
 	private static GameObject lastSlot;
 	private Item item;
@@ -16,6 +17,22 @@ public class ItemTemplate : MonoBehaviour {
 		this.item.transform.SetParent (transform, false);
 	}
 
+	public void RemoveItem () {
+		this.item = null;
+	}
+
+	public void OnPointerEnter (PointerEventData eventData) {
+		if (item != null) {
+			inventory.SetItemName (item.itemName);
+			inventory.SetItemDescription (item.itemDescription);
+		}
+	}
+
+	public void OnPointerExit (PointerEventData eventData) {
+		inventory.SetItemName ("");
+		inventory.SetItemDescription ("");
+	}
+
 	public void OnClick () {
 		if (transform.childCount != 0) {
 			// has child
@@ -24,7 +41,7 @@ public class ItemTemplate : MonoBehaviour {
 				// need to check the type of the gem
 				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.transform.GetChild (0).gameObject.tag) {
 					Transform slotItem = transform.GetChild (0);
-					moveHolder.transform.GetChild (0).SetParent (transform, false);
+					this.SetItem (moveHolder.transform.GetChild (0).GetComponent<Item> ());
 					slotItem.SetParent (moveHolder.transform, false);
 				} else {
 					// reject the place and redo the pickup
@@ -33,6 +50,7 @@ public class ItemTemplate : MonoBehaviour {
 				}
 			} else {
 //				Debug.Log ("Slot --> Holder");
+				this.RemoveItem ();
 				transform.GetChild (0).SetParent (moveHolder.transform, false);
 				lastSlot = this.gameObject;
 				moveHolder.transform.position = Input.mousePosition;
@@ -44,7 +62,7 @@ public class ItemTemplate : MonoBehaviour {
 //				Debug.Log ("Holder --> Slot");
 				// need to check the type of the gem
 				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.transform.GetChild (0).gameObject.tag) {
-					moveHolder.transform.GetChild (0).SetParent (this.transform, false);
+					this.SetItem (moveHolder.transform.GetChild (0).GetComponent<Item> ());
 					moveHolder.SetActive (false);
 				} else {
 					// reject the place and redo the pickup

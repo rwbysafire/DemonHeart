@@ -175,6 +175,8 @@ public class Player : Mob {
 			if (inventory.AddItem (item)) {
 				item.SetSprite (collider.gameObject.GetComponent<SpriteRenderer> ().sprite);
 				item.gameObject.tag = collider.tag;
+				item.itemName = collider.name.Replace("(Clone)", "");
+				item.itemDescription = "I am a gem.";
 				Destroy (collider.gameObject);
 			} else {
 				Debug.Log ("Item not picked due to full capacity");
