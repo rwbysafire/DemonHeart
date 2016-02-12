@@ -92,7 +92,7 @@ public class InventoryUI : MonoBehaviour {
 	public void OnBackgroundClick () {
 		// delete item if there is any child
 		if (itemMoveHolder.transform.childCount > 0) {
-			
+			Destroy (itemMoveHolder.transform.GetChild (0).gameObject);
 		}
 	}
 }
