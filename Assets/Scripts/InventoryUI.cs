@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,6 +8,7 @@ public class InventoryUI : MonoBehaviour {
 
 	public Text ItemName;
 	public Text ItemDescription;
+	public GameObject ItemText;
 	public GameObject itemTemplate;
 	public GameObject inventory;
 	public GameObject itemMoveHolder;
@@ -36,12 +38,24 @@ public class InventoryUI : MonoBehaviour {
 	}
 
 	// setter for ItemText
-	public void SetItemName (string s) {
+	private void SetItemName (string s) {
 		ItemName.text = s;
 	}
 
-	public void SetItemDescription (string s) {
+	private void SetItemDescription (string s) {
 		ItemDescription.text = s;
+	}
+
+	public void ShowText (string name, string description) {
+		SetItemName (name);
+		SetItemDescription (description);
+		ItemText.SetActive (true);
+	}
+
+	public void HideText () {
+		SetItemName ("");
+		SetItemDescription ("");
+		ItemText.SetActive (false);
 	}
 
 	// return true if the item is added
@@ -65,13 +79,19 @@ public class InventoryUI : MonoBehaviour {
 			}
 
 			// reset the text
-			ItemName.text = "";
-			ItemDescription.text = "";
+			HideText ();
 
 			inventory.SetActive (true);
 		} else if (Input.GetKeyUp (KeyCode.B)) {
 			inventory.SetActive (false);
 		} else if (inventory.activeSelf) {
+			
+		}
+	}
+
+	public void OnBackgroundClick () {
+		// delete item if there is any child
+		if (itemMoveHolder.transform.childCount > 0) {
 			
 		}
 	}
