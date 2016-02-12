@@ -171,7 +171,6 @@ public class Player : Mob {
                 stats.intelligence += 2;
             }
             Destroy(collider.gameObject);
-		} else if (collider.tag.ToLower ().StartsWith ("item")) {
 		}
     }
 
