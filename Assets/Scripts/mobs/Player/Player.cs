@@ -154,6 +154,7 @@ public class Player : Mob {
 		float headDirection = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 		head.transform.rotation = Quaternion.Euler(0f, 0f, headDirection);
 	}
+
     public override void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Drop")) {
@@ -170,19 +171,18 @@ public class Player : Mob {
                 stats.intelligence += 2;
             }
             Destroy(collider.gameObject);
-		} else if (collider.tag.ToLower ().StartsWith ("item")) {
-			Item item = Instantiate (Resources.Load<Item> ("Items/Item"));
-			if (inventory.AddItem (item)) {
-				item.SetSprite (collider.gameObject.GetComponent<SpriteRenderer> ().sprite);
-				item.gameObject.tag = collider.tag;
-				item.itemName = collider.name.Replace("(Clone)", "");
-				item.itemDescription = "I am a gem.";
+		}
+    }
+
+	void OnTriggerStay2D (Collider2D collider) {
+		if (collider.tag.ToLower ().StartsWith ("item") && Input.GetKeyDown (KeyCode.E)) {
+			if (inventory.AddItem (collider.gameObject)) {
 				Destroy (collider.gameObject);
 			} else {
 				Debug.Log ("Item not picked due to full capacity");
 			}
 		}
-    }
+	}
 
 	public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
 		for(headFrame = 1; headFrame < headSprite.Length; headFrame++) {

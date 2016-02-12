@@ -8,7 +8,6 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	public GameObject moveHolder;
 	public InventoryUI inventory;
 
-	private static GameObject lastSlot;
 	private Item item;
 	private int count;
 
@@ -18,19 +17,22 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	}
 
 	public void RemoveItem () {
+		if (this.tag.Contains ("_")) {
+			inventory.itemListDictionary [this.item.type].Remove (this.item);	
+		} else {
+			inventory.itemListDictionary [Item.Type.General].Remove (this.item);
+		}
 		this.item = null;
 	}
 
 	public void OnPointerEnter (PointerEventData eventData) {
 		if (item != null) {
-			inventory.SetItemName (item.itemName);
-			inventory.SetItemDescription (item.itemDescription);
+			inventory.ShowText (item.itemName, item.itemDescription);
 		}
 	}
 
 	public void OnPointerExit (PointerEventData eventData) {
-		inventory.SetItemName ("");
-		inventory.SetItemDescription ("");
+		inventory.HideText ();
 	}
 
 	public void OnClick () {
@@ -44,15 +46,12 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 					this.SetItem (moveHolder.transform.GetChild (0).GetComponent<Item> ());
 					slotItem.SetParent (moveHolder.transform, false);
 				} else {
-					// reject the place and redo the pickup
-					moveHolder.transform.GetChild (0).SetParent (lastSlot.transform, false);
-					moveHolder.SetActive (false);
+					// reject the placing
 				}
 			} else {
 //				Debug.Log ("Slot --> Holder");
 				this.RemoveItem ();
 				transform.GetChild (0).SetParent (moveHolder.transform, false);
-				lastSlot = this.gameObject;
 				moveHolder.transform.position = Input.mousePosition;
 				moveHolder.SetActive (true);
 			}
@@ -62,12 +61,14 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 //				Debug.Log ("Holder --> Slot");
 				// need to check the type of the gem
 				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.transform.GetChild (0).gameObject.tag) {
+//					Item item = moveHolder.transform.GetChild (0).GetComponent<Item> ();
 					this.SetItem (moveHolder.transform.GetChild (0).GetComponent<Item> ());
+					inventory.AttachItem (
+						this.item,
+						gameObject.tag.Contains ("_")? this.item.type : Item.Type.General);
 					moveHolder.SetActive (false);
 				} else {
-					// reject the place and redo the pickup
-					moveHolder.transform.GetChild (0).SetParent (lastSlot.transform, false);
-					moveHolder.SetActive (false);
+					// reject the placing
 				}
 			} else {
 				Debug.Log ("Something goes wrong");
