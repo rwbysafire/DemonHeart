@@ -154,6 +154,7 @@ public class Player : Mob {
 		float headDirection = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 		head.transform.rotation = Quaternion.Euler(0f, 0f, headDirection);
 	}
+
     public override void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Drop")) {
@@ -171,6 +172,11 @@ public class Player : Mob {
             }
             Destroy(collider.gameObject);
 		} else if (collider.tag.ToLower ().StartsWith ("item")) {
+		}
+    }
+
+	void OnTriggerStay2D (Collider2D collider) {
+		if (collider.tag.ToLower ().StartsWith ("item") && Input.GetKeyDown (KeyCode.E)) {
 			Item item = Instantiate (Resources.Load<Item> ("Items/Item"));
 			if (inventory.AddItem (item)) {
 				item.SetSprite (collider.gameObject.GetComponent<SpriteRenderer> ().sprite);
