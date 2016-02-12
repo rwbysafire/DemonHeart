@@ -17,7 +17,11 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	}
 
 	public void RemoveItem () {
-		inventory.itemListDictionary[Item.Type.General].Remove (this.item);
+		if (this.tag.Contains ("_")) {
+			inventory.itemListDictionary [this.item.type].Remove (this.item);	
+		} else {
+			inventory.itemListDictionary [Item.Type.General].Remove (this.item);
+		}
 		this.item = null;
 	}
 

@@ -130,9 +130,9 @@ public class InventoryUI : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.B)) {
 			// output item status
-			foreach (KeyValuePair<Item.Type, List<Item>> entry in itemListDictionary) {
-				Debug.Log (entry.Key.ToString () + ": " + entry.Value.Count.ToString ());
-			}
+//			foreach (KeyValuePair<Item.Type, List<Item>> entry in itemListDictionary) {
+//				Debug.Log (entry.Key.ToString () + ": " + entry.Value.Count.ToString ());
+//			}
 
 			// update the images for the skills
 			for (int i = 0; i < playerScript.skills.Length; i++) {

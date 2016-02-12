@@ -3645,6 +3645,18 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1325076731}
     m_Modifications:
+    - target: {fileID: 11454070, guid: 2a0bda32a1c234cc39ac5c4b880cee7c, type: 2}
+      propertyPath: armorItems.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454070, guid: 2a0bda32a1c234cc39ac5c4b880cee7c, type: 2}
+      propertyPath: skillItems.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454070, guid: 2a0bda32a1c234cc39ac5c4b880cee7c, type: 2}
+      propertyPath: weaponItems.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 22409754, guid: 2a0bda32a1c234cc39ac5c4b880cee7c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
