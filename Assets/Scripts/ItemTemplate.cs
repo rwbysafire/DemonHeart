@@ -17,6 +17,7 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	}
 
 	public void RemoveItem () {
+		inventory.itemListDictionary[Item.Type.General].Remove (this.item);
 		this.item = null;
 	}
 
@@ -56,7 +57,11 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 //				Debug.Log ("Holder --> Slot");
 				// need to check the type of the gem
 				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.transform.GetChild (0).gameObject.tag) {
+//					Item item = moveHolder.transform.GetChild (0).GetComponent<Item> ();
 					this.SetItem (moveHolder.transform.GetChild (0).GetComponent<Item> ());
+					inventory.AttachItem (
+						this.item,
+						gameObject.tag.Contains ("_")? this.item.type : Item.Type.General);
 					moveHolder.SetActive (false);
 				} else {
 					// reject the placing

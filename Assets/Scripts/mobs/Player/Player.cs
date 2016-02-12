@@ -176,18 +176,13 @@ public class Player : Mob {
 
 	void OnTriggerStay2D (Collider2D collider) {
 		if (collider.tag.ToLower ().StartsWith ("item") && Input.GetKeyDown (KeyCode.E)) {
-			Item item = Instantiate (Resources.Load<Item> ("Items/Item"));
-			if (inventory.AddItem (item)) {
-				item.SetSprite (collider.gameObject.GetComponent<SpriteRenderer> ().sprite);
-				item.gameObject.tag = collider.tag;
-				item.itemName = collider.name.Replace("(Clone)", "");
-				item.itemDescription = "I am a gem.";
+			if (inventory.AddItem (collider.gameObject)) {
 				Destroy (collider.gameObject);
 			} else {
 				Debug.Log ("Item not picked due to full capacity");
 			}
 		}
-    }
+	}
 
 	public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
 		for(headFrame = 1; headFrame < headSprite.Length; headFrame++) {
