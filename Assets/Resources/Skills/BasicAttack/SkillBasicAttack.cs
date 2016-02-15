@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SkillBasicAttack : Skill
 {
@@ -7,7 +8,14 @@ public class SkillBasicAttack : Skill
 
 	public SkillBasicAttack(Mob mob) : base(mob) {}
 
-	public override string getName() {
+    public override void initProperties() {
+        properties = new Dictionary<string, int>();
+        properties.Add("projectileCount", 1);
+        properties.Add("projectileSpeed", 40);
+        properties.Add("chainCount", 0);
+    }
+
+    public override string getName() {
 		return "Basic Attack";
 	}
 
@@ -24,9 +32,22 @@ public class SkillBasicAttack : Skill
 	}
 	
 	public override void skillLogic() {
-		fireArrow(Random.Range(-10, 10)/10f);
+        attack();
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.gameObject.transform.position);
 	}
+
+    void attack() {
+        float y = Vector3.Distance(mob.getTargetLocation(), mob.transform.position);
+        if (y > 6)
+            y = 6;
+        else if (y < 2)
+            y = 2;
+        Debug.Log(y);
+        float angleOfSpread = (((1-(y-2)/4)*3)+1)*5;
+        for (int i = 0; i < properties["projectileCount"]; i++) {
+            fireArrow(((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
+        }
+    }
 
 	void fireArrow(float rotate = 0) {
 		//Instantiates the projectile with some speed
@@ -42,6 +63,7 @@ public class SkillBasicAttack : Skill
 		basicArrow.transform.Translate (Vector3.up * 1.2f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
 		projectile.projectileOnStart();
+        projectile.chainTimes = properties["chainCount"];
 	}
 }
 

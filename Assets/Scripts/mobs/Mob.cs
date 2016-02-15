@@ -102,7 +102,7 @@ public abstract class Mob : MonoBehaviour{
 		"Items/ArmorGem", "Items/WeaponGem", "Items/SkillGem" };
 
     void DropItem() {
-        if (Random.Range(1, 101) <= 10) {
+        if (Random.Range(1, 101) <= 100) {
 			GameObject Drop = (GameObject) Instantiate(
 				Resources.Load<GameObject>(dropTable[Random.Range(0, dropTable.Length)]),
 				this.gameObject.transform.position + new Vector3 (Random.Range (2f, 5f), Random.Range (2f, 5f), 0),
