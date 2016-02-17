@@ -1,0 +1,46 @@
+{
+  "waves": [
+    "1",
+    "i-can-be-a-string",
+    "03",
+    "_",
+    "5"
+  ],
+
+  "1": {
+    "count": 5,
+    "enemies": [
+      "Zombie"
+    ]
+  },
+
+  "i-can-be-a-string": {
+    "count": 5,
+    "enemies": [
+      "Kamikaze"
+    ]
+  },
+
+  "03": {
+    "count": 10,
+    "enemies": [
+      "Zombie"
+    ]
+  },
+
+  "_": {
+    "count": 10,
+    "enemies": [
+      "Zombie",
+      "Kamikaze"
+    ]
+  },
+
+  "5": {
+    "count": 50,
+    "enemies": [
+      "Zombie",
+      "Kamikaze"
+    ]
+  }
+}
