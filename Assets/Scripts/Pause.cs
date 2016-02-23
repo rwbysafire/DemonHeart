@@ -25,10 +25,10 @@ public class Pause : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Time.timeScale == 1)
+			if (!Pause.IsPaused ())
             {//stops the game when you press Esc, sets showText = true
                 showText = true;
-                Time.timeScale = 0;
+				Pause.PauseGame ();
 				pause.SetActive(true);
 				options.SetActive(false);
 				pauseWindow.SetActive(true);
@@ -36,11 +36,23 @@ public class Pause : MonoBehaviour {
             else
             {//continues the game when pressing Esc while still paused, makes "PAUSED" disappear
                 showText = false;
-				Time.timeScale = 1;
+				Pause.ResumeGame ();
 				pause.SetActive(false);
             }
         }
 	
+	}
+
+	public static void PauseGame() {
+		Time.timeScale = 0;
+	}
+
+	public static void ResumeGame() {
+		Time.timeScale = 1;
+	}
+
+	public static bool IsPaused() {
+		return Time.timeScale == 0;
 	}
 
 	public void respawnPlayer() {
