@@ -41,7 +41,7 @@ public class MiniMapScript : MonoBehaviour {
 		// update the position to the dots
 		for (int i = 0; i < enemies.Length; i++) {
 			Vector3 positionOffset = enemies[i].transform.position - player.transform.position;
-			enemyList[i].transform.localPosition = positionOffset * 15;
+			enemyList[i].transform.localPosition = positionOffset * 15 / 2;
 		}
 	}
 
