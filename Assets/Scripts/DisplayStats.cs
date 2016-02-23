@@ -26,10 +26,17 @@ public class DisplayStats : MonoBehaviour {
 
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.C)) {
-			display.SetActive(true);
+			if (Pause.IsPaused ()) {
+				// resume the game
+				Pause.ResumeGame ();
+				display.SetActive(false);
+			} else {
+				// pause the game
+				Pause.PauseGame ();
+				display.SetActive(true);
+			}
 		}
-		else if (Input.GetKeyUp(KeyCode.C))
-			display.SetActive(false);
+
 		if (display.activeSelf) {
 			if (GameObject.FindGameObjectWithTag("Player"))
 				playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<Mob>().stats;
