@@ -19,6 +19,7 @@ public class InventoryUI : MonoBehaviour {
 	public GameObject ItemText;
 	public GameObject itemTemplate;
 	public GameObject inventory;
+	public GameObject background;
 	public GameObject itemMoveHolder;
 	public Mob playerScript;
 	public List<Image> skillImages = new List<Image>();
@@ -129,24 +130,27 @@ public class InventoryUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.B)) {
-			// output item status
-//			foreach (KeyValuePair<Item.Type, List<Item>> entry in itemListDictionary) {
-//				Debug.Log (entry.Key.ToString () + ": " + entry.Value.Count.ToString ());
-//			}
+			if (Pause.IsPaused () && inventory.activeSelf) {
+				// resume the game
+				Pause.ResumeGame ();
 
-			// update the images for the skills
-			for (int i = 0; i < playerScript.skills.Length; i++) {
-				skillImages [i].overrideSprite = playerScript.skills [i].getImage ();
+				inventory.SetActive (false);
+				background.SetActive (false);
+			} else if (!Pause.IsPaused () && !inventory.activeSelf) {
+				// pause the game
+				Pause.PauseGame ();
+
+				// update the images for the skills
+				for (int i = 0; i < playerScript.skills.Length; i++) {
+					skillImages [i].overrideSprite = playerScript.skills [i].getImage ();
+				}
+
+				// reset the text
+				HideText ();
+
+				inventory.SetActive (true);
+				background.SetActive (true);
 			}
-
-			// reset the text
-			HideText ();
-
-			inventory.SetActive (true);
-		} else if (Input.GetKeyUp (KeyCode.B)) {
-			inventory.SetActive (false);
-		} else if (inventory.activeSelf) {
-			
 		}
 	}
 

@@ -71,7 +71,7 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 					// reject the placing
 				}
 			} else {
-				Debug.Log ("Something goes wrong");
+				// empty click
 			}
 		}
 	}

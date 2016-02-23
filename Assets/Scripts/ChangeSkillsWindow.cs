@@ -12,9 +12,16 @@ public class ChangeSkillsWindow: MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.V))
-			display.SetActive(true);
-		else if (Input.GetKeyUp(KeyCode.V))
-			display.SetActive(false);
+		if (Input.GetKeyDown (KeyCode.V)) {
+			if (Pause.IsPaused () && display.activeSelf) {
+				// resume the game
+				Pause.ResumeGame ();
+				display.SetActive(false);
+			} else if (!Pause.IsPaused () && !display.activeSelf) {
+				// pause the game
+				Pause.PauseGame ();
+				display.SetActive(true);
+			}
+		}
 	}
 }
