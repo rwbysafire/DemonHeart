@@ -13,11 +13,11 @@ public class ChangeSkillsWindow: MonoBehaviour {
 	
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.V)) {
-			if (Pause.IsPaused ()) {
+			if (Pause.IsPaused () && display.activeSelf) {
 				// resume the game
 				Pause.ResumeGame ();
 				display.SetActive(false);
-			} else {
+			} else if (!Pause.IsPaused () && !display.activeSelf) {
 				// pause the game
 				Pause.PauseGame ();
 				display.SetActive(true);

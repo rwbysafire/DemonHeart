@@ -19,6 +19,7 @@ public class InventoryUI : MonoBehaviour {
 	public GameObject ItemText;
 	public GameObject itemTemplate;
 	public GameObject inventory;
+	public GameObject background;
 	public GameObject itemMoveHolder;
 	public Mob playerScript;
 	public List<Image> skillImages = new List<Image>();
@@ -129,12 +130,13 @@ public class InventoryUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.B)) {
-			if (Pause.IsPaused ()) {
+			if (Pause.IsPaused () && inventory.activeSelf) {
 				// resume the game
 				Pause.ResumeGame ();
 
 				inventory.SetActive (false);
-			} else {
+				background.SetActive (false);
+			} else if (!Pause.IsPaused () && !inventory.activeSelf) {
 				// pause the game
 				Pause.PauseGame ();
 
@@ -147,6 +149,7 @@ public class InventoryUI : MonoBehaviour {
 				HideText ();
 
 				inventory.SetActive (true);
+				background.SetActive (true);
 			}
 		}
 	}
