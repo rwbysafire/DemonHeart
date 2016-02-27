@@ -42,6 +42,9 @@ public class Player : Mob {
 
 	public override void OnStart ()
 	{
+		stats.strength = 20000;
+		stats.dexterity = 30;
+		stats.intelligence = 10;
 		listOfSkills = new Skill[12]{new SkillBasicAttack(this),
 			new SkillChainLightning(this),
 			new SkillCombatRoll(this),
@@ -61,9 +64,6 @@ public class Player : Mob {
 		replaceSkill(3, listOfSkills[4]);
 		replaceSkill(4, listOfSkills[10]);
 		replaceSkill(5, listOfSkills[3]);
-		stats.strength = 20000;
-		stats.dexterity = 30;
-		stats.intelligence = 10000;
 	}
 
 	public override void OnUpdate ()

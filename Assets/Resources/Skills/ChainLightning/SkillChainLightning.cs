@@ -26,6 +26,7 @@ public class SkillChainLightning : Skill {
 
 	public override void skillLogic ()
 	{
+        Debug.Log("chainlightning");
 		GameObject chainLightning = GameObject.Instantiate(Resources.Load<GameObject>("Skills/ChainLightning/Chainlightning"));
 		chainLightning.transform.position = mob.transform.position;
 		chainLightning.GetComponent<ChainLightning>().mob = mob;

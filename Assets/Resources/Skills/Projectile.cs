@@ -12,9 +12,10 @@ public abstract class Projectile {
 	public string tag;
 	public string enemyTag;
 	public Collider2D collider;
+
+    public Skill skill;
 	
-	
-	public Projectile(GameObject gameObject, Mob mob) {
+	public Projectile(GameObject gameObject, Mob mob, Skill skill = null) {
 		this.gameObject = gameObject;
 		this.mob = mob;
 		tag = mob.gameObject.tag;
@@ -32,6 +33,8 @@ public abstract class Projectile {
 		isForking = getForking ();
 		chainTimes = getChaining ();
 		timer = Time.fixedTime + duration;
+
+        this.skill = skill;
 	}
 
 	public void setGameObject(GameObject gameObject) {

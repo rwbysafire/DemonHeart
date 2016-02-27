@@ -5,14 +5,12 @@ using System.Collections.Generic;
 public class SkillBasicAttack : Skill
 {
 	public Projectile projectile;
+    SkillType projectileSkill = new ProjectileSkill();
 
-	public SkillBasicAttack(Mob mob) : base(mob) {}
-
-    public override void initProperties() {
-        properties = new Dictionary<string, int>();
-        properties.Add("projectileCount", 1);
-        properties.Add("projectileSpeed", 40);
-        properties.Add("chainCount", 0);
+	public SkillBasicAttack(Mob mob) : base(mob) {
+        addSkillType(projectileSkill);
+        addGem(0, new GemExtraProjectiles());
+        addGem(1, new chainLightningOnHitGem());
     }
 
     public override string getName() {
@@ -42,7 +40,6 @@ public class SkillBasicAttack : Skill
             y = 6;
         else if (y < 2)
             y = 2;
-        Debug.Log(y);
         float angleOfSpread = (((1-(y-2)/4)*3)+1)*5;
         for (int i = 0; i < properties["projectileCount"]; i++) {
             fireArrow(((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
@@ -55,7 +52,7 @@ public class SkillBasicAttack : Skill
 		GameObject arrowGlow = MonoBehaviour.Instantiate(Resources.Load("ShotGlow")) as GameObject;
 		arrowGlow.transform.position = new Vector3(basicArrow.transform.position.x, basicArrow.transform.position.y, -0.3f);
 		arrowGlow.transform.SetParent (basicArrow.transform);
-		projectile = new BasicAttackProjectile (basicArrow, mob);
+		projectile = new BasicAttackProjectile (basicArrow, mob, this);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = mob.headTransform.position;
@@ -65,13 +62,20 @@ public class SkillBasicAttack : Skill
 		projectile.projectileOnStart();
         projectile.chainTimes = properties["chainCount"];
 	}
+    
 }
 
 class BasicAttackProjectile : Projectile {
-	public BasicAttackProjectile(GameObject gameObject, Mob mob) : base(gameObject, mob) {}
+	public BasicAttackProjectile(GameObject gameObject, Mob mob, Skill skill) : base(gameObject, mob, skill) {}
 	public override void OnHit () {
-		if (collider.CompareTag("Enemy"))
-			mob.useMana(-10);
+        if (collider.CompareTag("Enemy")) {
+            mob.useMana(-10);
+            foreach (Gem gem in skill.gems) {
+                if (gem != null) {
+                    gem.onHitEffect();
+                }
+            }
+        }
 		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
 		RaycastHit2D target = hit[0];
 		foreach (RaycastHit2D x in hit) {

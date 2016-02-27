@@ -6,19 +6,20 @@ public abstract class Skill
 {
 	public Mob mob;
 	private float cooldown;
-    public Dictionary<string, int> properties = new Dictionary<string, int>();
+    public Dictionary<string, float> properties = new Dictionary<string, float>();
     public Gem[] gems = new Gem[2];
+    private List<SkillType> skillTypes = new List<SkillType>();
 
 
 	public Skill(Mob mob) {
 		this.mob = mob;
 		cooldown = 0.0f;
         updateSkill();
-        addGem(0, new extraProjectilesGem());
-        addGem(1, new extraChainsGem());
     }
 
     private void updateSkill() {
+        properties = new Dictionary<string, float>();
+        initBaseProperties();
         initProperties();
         foreach (Gem gem in gems) {
             if (gem != null) {
@@ -31,12 +32,28 @@ public abstract class Skill
         }
     }
 
+    private void initBaseProperties() {
+        properties.Add("manaCost", getManaCost());
+        properties.Add("attackSpeed", getAttackSpeed());
+        properties.Add("cooldown", getMaxCooldown());
+        foreach (SkillType skillType in skillTypes) {
+            foreach (KeyValuePair<string, float> property in skillType.properties) {
+                properties.Add(property.Key, property.Value);
+            }
+        }
+    }
+
     public virtual void initProperties() { }
 
+    public void addSkillType(SkillType skillType) {
+        skillTypes.Add(skillType);
+        updateSkill();
+    }
+
     public bool useSkill() {
-		if (cooldown <= Time.fixedTime && !mob.isAttacking && mob.useMana(getManaCost())) {
-			mob.attack(this, getAttackSpeed()/mob.stats.attackSpeed);
-			cooldown = Time.fixedTime + getMaxCooldown(); 
+		if (cooldown <= Time.fixedTime && !mob.isAttacking && mob.useMana(properties["manaCost"])) {
+			mob.attack(this, properties["attackSpeed"] / mob.stats.attackSpeed);
+			cooldown = Time.fixedTime + properties["cooldown"]; 
 			return true;
 		}
 		return false; 
