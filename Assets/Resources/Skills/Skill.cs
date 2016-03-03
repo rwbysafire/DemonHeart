@@ -7,9 +7,9 @@ public abstract class Skill
 	public Mob mob;
 	private float cooldown;
     public Dictionary<string, float> properties = new Dictionary<string, float>();
-    public Gem[] gems = new Gem[2];
+	public List<Gem> gems = new List<Gem>();
+	public int gemLimitCount = 2;
     private List<SkillType> skillTypes = new List<SkillType>();
-
 
 	public Skill(Mob mob) {
 		this.mob = mob;
@@ -66,13 +66,18 @@ public abstract class Skill
 		return tempTime;
 	}
 
-    public void addGem(int slot, Gem gem) {
-        gems[slot] = gem;
-        updateSkill();
+    public bool addGem(Gem gem) {
+		if (gems.Count < gemLimitCount) {
+			gems.Add (gem);
+			updateSkill();
+			return true;
+		} else {
+			return false;
+		}
     }
 
-    public void removeGem(int slot) {
-        gems[slot] = null;
+	public void removeGem(Gem gem) {
+		gems.Remove (gem);
         updateSkill();
     }
 

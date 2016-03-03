@@ -20,7 +20,7 @@ public class InventoryUI : MonoBehaviour {
 	public GameObject itemTemplate;
 	public GameObject inventory;
 	public GameObject background;
-	public GameObject itemMoveHolder;
+	public ItemTemplate itemMoveHolder;
 	public Mob playerScript;
 	public List<Image> skillImages = new List<Image>();
 	public Dictionary<Item.Type, List<Item>> itemListDictionary;
@@ -95,6 +95,7 @@ public class InventoryUI : MonoBehaviour {
 	public bool AttachItem (Item item, Item.Type type) {
 		if (itemListDictionary[type].Count < itemListLength[type]) {
 			itemListDictionary[type].Add (item);
+
 			return true;
 		} else {
 			// inventory is full
@@ -103,28 +104,48 @@ public class InventoryUI : MonoBehaviour {
 	}
 
 	public bool AddItem (GameObject gameObject) {
-		Item item = Instantiate (Resources.Load<Item> ("Items/Item"));
-		item.SetSprite (gameObject.GetComponent<SpriteRenderer> ().sprite);
-		item.gameObject.tag = gameObject.tag;
-		item.itemName = gameObject.name.Replace("(Clone)", "");
-		item.itemDescription = "I am a gem.";
+		Item item = null;
 
 		switch (gameObject.tag) {
 		case "item_armor":
-			item.type = Item.Type.Armor;
+			item = new ArmorItem ();
 			break;
 		case "item_skill":
-			item.type = Item.Type.Skill;
+			switch (((int)Time.time) % 3) {
+			case 0:
+				item = new chainLightningOnHitGem ();
+				break;
+			case 1:
+				item = new GemExtraProjectiles ();
+				break;
+			case 2:
+				item = new GemExtraChains ();
+				break;
+			default:
+				item = new Gem ();
+				break;
+			}
 			break;
 		case "item_weapon":
-			item.type = Item.Type.Weapon;
+			item = new WeaponGem ();
 			break;
 		default:
-			item.type = Item.Type.General;
+			Debug.Log ("Error with tag: " + gameObject.tag);
 			break;
 		}
+			
+		item.tag = gameObject.tag;
+		item.itemName = gameObject.name.Replace("(Clone)", "");
 
 		return this.AddItem (item, Item.Type.General);
+	}
+
+	public void addSkillGem(int index, Gem gem) {
+		playerScript.skills [index].addGem (gem);
+	}
+
+	public void removeSkillGem (int index, Gem gem) {
+		playerScript.skills [index].removeGem (gem);
 	}
 	
 	// Update is called once per frame
@@ -156,8 +177,6 @@ public class InventoryUI : MonoBehaviour {
 
 	public void OnBackgroundClick () {
 		// delete item if there is any child
-		if (itemMoveHolder.transform.childCount > 0) {
-			Destroy (itemMoveHolder.transform.GetChild (0).gameObject);
-		}
+		itemMoveHolder.RemoveItem ();
 	}
 }
