@@ -5,24 +5,57 @@ using UnityEngine.EventSystems;
 
 public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
-	public GameObject moveHolder;
 	public InventoryUI inventory;
 
+	// only used in skill and weapon type yet
+	public int index;
+
+	private static ItemTemplate moveHolder;
+	private Image itemImage;
 	private Item item;
 	private int count;
 
-	public void SetItem (Item item) {
-		this.item = item;
-		this.item.transform.SetParent (transform, false);
+	void Awake () {
+		initObject ();
 	}
 
-	public void RemoveItem () {
+	void Start () {
+		
+	}
+
+	public void initObject () {
+		itemImage = transform.GetChild (0).GetComponentInChildren<Image> ();
+		if (itemImage == null) {
+			Debug.LogError ("image not found");
+		}
+
+		if (moveHolder == null) {
+			GameObject gameObject = GameObject.FindGameObjectWithTag ("item_move_holder");
+			moveHolder = gameObject.GetComponent<ItemTemplate> ();
+			moveHolder.gameObject.SetActive (false);
+		}
+	}
+
+	public void SetItem (Item item) {
+		this.item = item;
+		itemImage.overrideSprite = item.sprite;
+		itemImage.color = Color.white;
+		itemImage.transform.localPosition = new Vector2 (0, 0);
+//		this.item.transform.SetParent (transform, false);
+	}
+
+	public Item RemoveItem () {
 		if (this.tag.Contains ("_")) {
 			inventory.itemListDictionary [this.item.type].Remove (this.item);	
 		} else {
 			inventory.itemListDictionary [Item.Type.General].Remove (this.item);
 		}
+		Item removedItem = this.item;
 		this.item = null;
+		itemImage.sprite = null;
+		itemImage.color = Color.clear;
+
+		return removedItem;
 	}
 
 	public void OnPointerEnter (PointerEventData eventData) {
@@ -36,37 +69,49 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	}
 
 	public void OnClick () {
-		if (transform.childCount != 0) {
-			// has child
-			if (moveHolder.transform.childCount != 0) {
+		if (item != null) {
+			// has item
+			if (moveHolder.item != null) {
 //				Debug.Log ("Replace");
 				// need to check the type of the gem
-				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.transform.GetChild (0).gameObject.tag) {
-					Transform slotItem = transform.GetChild (0);
-					this.SetItem (moveHolder.transform.GetChild (0).GetComponent<Item> ());
-					slotItem.SetParent (moveHolder.transform, false);
+				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.item.tag) {
+					Item slotItem = this.RemoveItem ();
+					this.SetItem (moveHolder.RemoveItem ());
+					moveHolder.SetItem (slotItem);
+
+					if (gameObject.tag == "item_skill") {
+						inventory.removeSkillGem (this.index, (Gem) slotItem);
+						inventory.addSkillGem (this.index, (Gem) this.item);
+					}
 				} else {
 					// reject the placing
 				}
 			} else {
 //				Debug.Log ("Slot --> Holder");
-				this.RemoveItem ();
-				transform.GetChild (0).SetParent (moveHolder.transform, false);
+				if (gameObject.tag == "item_skill") {
+					inventory.removeSkillGem (this.index, (Gem)this.item);
+				}
+				moveHolder.SetItem (this.RemoveItem ());
 				moveHolder.transform.position = Input.mousePosition;
-				moveHolder.SetActive (true);
+				moveHolder.gameObject.SetActive (true);
 			}
 		} else {
-			// no child
-			if (moveHolder.transform.childCount != 0) {
+			// no item
+			if (moveHolder.item != null) {
 //				Debug.Log ("Holder --> Slot");
 				// need to check the type of the gem
-				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.transform.GetChild (0).gameObject.tag) {
-//					Item item = moveHolder.transform.GetChild (0).GetComponent<Item> ();
-					this.SetItem (moveHolder.transform.GetChild (0).GetComponent<Item> ());
-					inventory.AttachItem (
-						this.item,
-						gameObject.tag.Contains ("_")? this.item.type : Item.Type.General);
-					moveHolder.SetActive (false);
+				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.item.tag) {
+					this.SetItem (moveHolder.RemoveItem ());
+					if (inventory.AttachItem (
+						    this.item,
+						    gameObject.tag.Contains ("_") ? this.item.type : Item.Type.General)) {
+						if (gameObject.tag == "item_skill") {
+							inventory.addSkillGem (this.index, (Gem)this.item);
+						}
+					} else {
+						
+					}
+					moveHolder.gameObject.SetActive (false);
 				} else {
 					// reject the placing
 				}

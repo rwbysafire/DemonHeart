@@ -9,8 +9,8 @@ public class SkillBasicAttack : Skill
 
 	public SkillBasicAttack(Mob mob) : base(mob) {
         addSkillType(projectileSkill);
-        addGem(0, new GemExtraProjectiles());
-        addGem(1, new chainLightningOnHitGem());
+//        addGem(0, new GemExtraProjectiles());
+//        addGem(1, new chainLightningOnHitGem());
     }
 
     public override string getName() {
