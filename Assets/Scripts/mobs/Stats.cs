@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class Stats {
 	public int level = 0;
 	public float exp = 0;
