@@ -10,7 +10,6 @@ public abstract class Skill
     public Gem[] gems = new Gem[2];
     private List<SkillType> skillTypes = new List<SkillType>();
 
-
 	public Skill(Mob mob) {
 		this.mob = mob;
 		cooldown = 0.0f;
