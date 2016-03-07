@@ -36,24 +36,30 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		}
 	}
 
+	public bool HasItem() {
+		return this.item != null;
+	}
+
 	public void SetItem (Item item) {
 		this.item = item;
-		itemImage.overrideSprite = item.sprite;
+		itemImage.overrideSprite = Resources.Load<Sprite> (item.spritePath);
 		itemImage.color = Color.white;
 		itemImage.transform.localPosition = new Vector2 (0, 0);
-//		this.item.transform.SetParent (transform, false);
 	}
 
 	public Item RemoveItem () {
-		if (this.tag.Contains ("_")) {
-			inventory.itemListDictionary [this.item.type].Remove (this.item);	
-		} else {
-			inventory.itemListDictionary [Item.Type.General].Remove (this.item);
+		Item removedItem = null;
+		if (this.HasItem ()) {
+			if (this.tag.Contains ("_")) {
+				inventory.itemListDictionary [this.item.type].Remove (this.item);	
+			} else {
+				inventory.itemListDictionary [Item.Type.General].Remove (this.item);
+			}
+			removedItem = this.item;
+			this.item = null;
+			itemImage.sprite = null;
+			itemImage.color = Color.clear;
 		}
-		Item removedItem = this.item;
-		this.item = null;
-		itemImage.sprite = null;
-		itemImage.color = Color.clear;
 
 		return removedItem;
 	}
@@ -69,20 +75,26 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	}
 
 	public void OnClick () {
-		if (item != null) {
+		if (this.item != null) {
 			// has item
 			if (moveHolder.item != null) {
 //				Debug.Log ("Replace");
 				// need to check the type of the gem
 				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.item.tag) {
-					Item slotItem = this.RemoveItem ();
-					this.SetItem (moveHolder.RemoveItem ());
-					moveHolder.SetItem (slotItem);
+					Item item = moveHolder.RemoveItem ();
+					if (inventory.AttachItem (item,
+						    gameObject.tag.Contains ("_") ? item.type : Item.Type.General)) {
+						Item slotItem = this.RemoveItem ();
+						this.SetItem (item);
+						moveHolder.SetItem (slotItem);
 
-					if (gameObject.tag == "item_skill") {
-						inventory.removeSkillGem (this.index, (Gem) slotItem);
-						inventory.addSkillGem (this.index, (Gem) this.item);
-					}
+						if (gameObject.tag == "item_skill") {
+							inventory.removeSkillGem (this.index, (Gem) slotItem);
+							inventory.addSkillGem (this.index, (Gem) this.item);
+						}
+					} else {
+						moveHolder.SetItem (item);
+					}	
 				} else {
 					// reject the placing
 				}
@@ -101,15 +113,16 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 //				Debug.Log ("Holder --> Slot");
 				// need to check the type of the gem
 				if (!gameObject.tag.Contains("_") || gameObject.tag == moveHolder.item.tag) {
-					this.SetItem (moveHolder.RemoveItem ());
-					if (inventory.AttachItem (
-						    this.item,
-						    gameObject.tag.Contains ("_") ? this.item.type : Item.Type.General)) {
+					Item item = moveHolder.RemoveItem ();
+
+					if (inventory.AttachItem (item,
+						    gameObject.tag.Contains ("_") ? item.type : Item.Type.General)) {
+						this.SetItem (item);
 						if (gameObject.tag == "item_skill") {
 							inventory.addSkillGem (this.index, (Gem)this.item);
 						}
 					} else {
-						
+						moveHolder.SetItem (item);
 					}
 					moveHolder.gameObject.SetActive (false);
 				} else {

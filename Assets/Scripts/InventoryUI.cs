@@ -31,8 +31,14 @@ public class InventoryUI : MonoBehaviour {
 		new Dictionary<Item.Type, int> {
 		{ Item.Type.General, 12 },
 		{ Item.Type.Armor, 5 },
-		{ Item.Type.Skill, 12 },
-		{ Item.Type.Weapon, 3 }
+		{ Item.Type.Skill, 13 }
+	};
+
+	private static readonly Dictionary<Item.Type, string> itemTags =
+		new Dictionary<Item.Type, string> {
+		{ Item.Type.General, "item" },
+		{ Item.Type.Armor, "item_armor" },
+		{ Item.Type.Skill, "item_skill" }
 	};
 
 	// Use this for initialization
@@ -53,7 +59,7 @@ public class InventoryUI : MonoBehaviour {
 			itemHolder [i] = itemClone.GetComponent<ItemTemplate> ();
 		}
 
-		itemTemplate.SetActive (false);
+		Destroy (itemTemplate);
 	}
 
 	// setter for ItemText
@@ -63,6 +69,39 @@ public class InventoryUI : MonoBehaviour {
 
 	private void SetItemDescription (string s) {
 		ItemDescription.text = s;
+	}
+
+	// get dictionary of item and itemtemplate
+	public void setItemListDictionary(Dictionary<Item.Type, List<Item>> listDictionary) {
+		bool isChanged = !inventory.activeSelf;
+		if (isChanged) {
+			inventory.SetActive (true);
+		}
+		foreach (KeyValuePair<Item.Type, string> pair in itemTags) {
+			GameObject[] holders = GameObject.FindGameObjectsWithTag (pair.Value);
+
+			int listCount = 0;
+			for (int i = 0; i < holders.Length; i++) {
+				ItemTemplate holder = holders [i].GetComponent<ItemTemplate> ();
+				if (holder != null) {
+					if (listDictionary [pair.Key].Count > listCount) {
+						holder.SetItem (listDictionary [pair.Key] [listCount]);
+						listCount++;
+					} else {
+						holder.RemoveItem ();
+					}
+				}
+			}
+//			Debug.Log (itemTags [i] + holders.Length.ToString ());
+		}
+		if (isChanged) {
+			inventory.SetActive (false);
+		}
+
+		this.itemListDictionary = listDictionary;
+		foreach (KeyValuePair<Item.Type, List<Item>> pair in itemListDictionary) {
+			Debug.Log (pair.Key.ToString () + ":" + pair.Value.Count.ToString ());
+		}
 	}
 
 	public void ShowText (string name, string description) {
@@ -80,27 +119,45 @@ public class InventoryUI : MonoBehaviour {
 	// return true if the item is added
 	// use for pick up
 	public bool AddItem (Item item, Item.Type type) {
+		bool isAdded = false;
 //		Debug.Log (item.itemName + " : " + type.ToString ());
 		if (itemListDictionary[type].Count < itemListLength[type]) {
-			itemHolder [itemListDictionary[type].Count].SetItem (item);
-			itemListDictionary[type].Add (item);
-			return true;
+			// find the next available slot to put
+			for (int i = 0; i < itemHolder.Length; i++) {
+				if (!itemHolder [i].HasItem ()) {
+					itemHolder [i].SetItem (item);
+					itemListDictionary[type].Add (item);
+					isAdded = true;
+					break;
+				}
+			}
 		} else {
 			// inventory is full
-			return false;
 		}
+
+//		foreach (KeyValuePair<Item.Type, List<Item>> pair in itemListDictionary) {
+//			Debug.Log (pair.Key.ToString () + ":" + pair.Value.Count.ToString ());
+//		}
+
+		return isAdded;
 	}
 
 	// use for attach an item
 	public bool AttachItem (Item item, Item.Type type) {
+		bool isAdded = false;
 		if (itemListDictionary[type].Count < itemListLength[type]) {
 			itemListDictionary[type].Add (item);
 
-			return true;
+			isAdded = true;
 		} else {
 			// inventory is full
-			return false;
 		}
+
+//		foreach (KeyValuePair<Item.Type, List<Item>> pair in itemListDictionary) {
+//			Debug.Log (pair.Key.ToString () + ":" + pair.Value.Count.ToString ());
+//		}
+
+		return isAdded;
 	}
 
 	public bool AddItem (GameObject gameObject) {
@@ -113,7 +170,8 @@ public class InventoryUI : MonoBehaviour {
 		case "item_skill":
 			switch (((int)Time.time) % 3) {
 			case 0:
-				item = new chainLightningOnHitGem ();
+//				item = new chainLightningOnHitGem ();
+				item = new GemExtraProjectiles ();
 				break;
 			case 1:
 				item = new GemExtraProjectiles ();

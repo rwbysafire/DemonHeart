@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class Gem : Item {
     public Dictionary<string, int> properties = new Dictionary<string, int>();
 
     public virtual void onHitEffect() { }
 
-	public override Sprite defaultSprite () {
-		return Resources.Load<Sprite> ("Sprite/gems/gem5");
+	public override string defaultSpritePath () {
+		return "Sprite/gems/gem5";
 	}
 
 	public override Type defaultType() {
@@ -20,14 +21,15 @@ public class Gem : Item {
 	}
 }
 
+[System.Serializable]
 public class WeaponGem : Gem {
 	public WeaponGem () {
 		this.itemDescription = "Power up your weapon!";
 		properties.Add("projectileCount", 4);
 	}
 
-	public override Sprite defaultSprite () {
-		return Resources.Load<Sprite> ("Sprite/gems/gem4");
+	public override string defaultSpritePath () {
+		return "Sprite/gems/gem4";
 	}
 
 	public override Type defaultType() {
@@ -35,6 +37,7 @@ public class WeaponGem : Gem {
 	}
 }
 
+[System.Serializable]
 public class GemExtraProjectiles : Gem {
     public GemExtraProjectiles() {
         properties.Add("projectileCount", 4);
@@ -42,6 +45,7 @@ public class GemExtraProjectiles : Gem {
     }
 }
 
+[System.Serializable]
 public class GemExtraChains : Gem {
     public GemExtraChains() {
         properties.Add("chainCount", 5);
@@ -49,6 +53,8 @@ public class GemExtraChains : Gem {
     }
 }
 
+// need to be fixed
+// for serialization, it cannot contain the skill class
 public class chainLightningOnHitGem : Gem {
 
     private SkillChainLightning skillChainLightning;

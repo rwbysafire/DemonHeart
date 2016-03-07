@@ -12,7 +12,6 @@ TagManager:
   - item_skill
   - item_weapon
   - item_armor
-  - Item
   - item_move_holder
   layers:
   - Default
