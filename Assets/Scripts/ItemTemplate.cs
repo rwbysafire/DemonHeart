@@ -42,21 +42,24 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
 	public void SetItem (Item item) {
 		this.item = item;
-		itemImage.overrideSprite = item.sprite;
+		itemImage.overrideSprite = Resources.Load<Sprite> (item.spritePath);
 		itemImage.color = Color.white;
 		itemImage.transform.localPosition = new Vector2 (0, 0);
 	}
 
 	public Item RemoveItem () {
-		if (this.tag.Contains ("_")) {
-			inventory.itemListDictionary [this.item.type].Remove (this.item);	
-		} else {
-			inventory.itemListDictionary [Item.Type.General].Remove (this.item);
+		Item removedItem = null;
+		if (this.HasItem ()) {
+			if (this.tag.Contains ("_")) {
+				inventory.itemListDictionary [this.item.type].Remove (this.item);	
+			} else {
+				inventory.itemListDictionary [Item.Type.General].Remove (this.item);
+			}
+			removedItem = this.item;
+			this.item = null;
+			itemImage.sprite = null;
+			itemImage.color = Color.clear;
 		}
-		Item removedItem = this.item;
-		this.item = null;
-		itemImage.sprite = null;
-		itemImage.color = Color.clear;
 
 		return removedItem;
 	}

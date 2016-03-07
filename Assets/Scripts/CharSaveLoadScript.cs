@@ -1,16 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 [System.Serializable]
 public class SaveObject {
 	public Stats stats;
+	public Dictionary<Item.Type, List<Item>> items;
+
+	public SaveObject(Stats stats, Dictionary<Item.Type, List<Item>> items) {
+		this.stats = stats;
+		this.items = items;
+	}
 }
 
 public class CharSaveLoadScript : MonoBehaviour {
 
 	public Player player;
+	public InventoryUI inventory;
 	private BinaryFormatter bf;
 
 	// Use this for initialization
@@ -22,8 +30,7 @@ public class CharSaveLoadScript : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.N)) {
 			FileStream file = File.Create (Application.persistentDataPath + "/characters.data");
-			SaveObject saveObject = new SaveObject ();
-			saveObject.stats = player.stats;
+			SaveObject saveObject = new SaveObject (player.stats, inventory.itemListDictionary);
 			bf.Serialize (file, saveObject);
 			file.Close ();
 			Debug.Log ("Player saved to " + Application.persistentDataPath);
@@ -32,6 +39,7 @@ public class CharSaveLoadScript : MonoBehaviour {
 			SaveObject loadObject = (SaveObject) bf.Deserialize (file);
 			file.Close ();
 			player.stats = loadObject.stats;
+			inventory.setItemListDictionary (loadObject.items);
 			Debug.Log ("Player status loaded");
 		}
 	}

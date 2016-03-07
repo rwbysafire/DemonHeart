@@ -1030,8 +1030,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11408352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1043,8 +1043,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11408378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1237,8 +1237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11416052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1277,8 +1277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11416866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1402,8 +1402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11428680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1467,8 +1467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11429916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1513,8 +1513,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11430854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1526,8 +1526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11432358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1778,8 +1778,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11438842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1791,8 +1791,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11439574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2066,8 +2066,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11448856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2079,8 +2079,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11450028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2227,8 +2227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11454070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2245,7 +2245,8 @@ MonoBehaviour:
   ItemText: {fileID: 184646}
   itemTemplate: {fileID: 126342}
   inventory: {fileID: 174760}
-  itemMoveHolder: {fileID: 126876}
+  background: {fileID: 0}
+  itemMoveHolder: {fileID: 0}
   playerScript: {fileID: 0}
   skillImages:
   - {fileID: 11415130}
@@ -2345,8 +2346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11459960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2358,8 +2359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11460184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2398,8 +2399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11461938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2438,8 +2439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11464634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2559,8 +2560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11471666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2678,8 +2679,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11479938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2691,8 +2692,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11480576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3153,8 +3154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ef77ef62ea40399d5ac13ebacdd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveHolder: {fileID: 126876}
   inventory: {fileID: 11454070}
+  index: 0
 --- !u!114 &11492536
 MonoBehaviour:
   m_ObjectHideFlags: 1

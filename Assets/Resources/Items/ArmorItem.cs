@@ -2,13 +2,14 @@
 using UnityEngine.UI;
 using System.Collections;
 
+[System.Serializable]
 public class ArmorItem : Item {
 
 	public ArmorItem () {
 	}
 
-	public override Sprite defaultSprite () {
-		return Resources.Load<Sprite> ("Sprite/gems/gem6");
+	public override string defaultSpritePath () {
+		return "Sprite/gems/gem6";
 	}
 
 	public override Type defaultType() {

@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
+[System.Serializable]
 public abstract class Item {
 
 	public enum Type {
@@ -14,16 +15,16 @@ public abstract class Item {
 	public string itemName { get; set; }
 	public string itemDescription { get; set; }
 	public string tag { get; set; }
-	public Sprite sprite { get; set; }
+	public string spritePath { get; set; }
 	public Type type = Type.General;
 
 	public Item () {
-		this.sprite = defaultSprite ();
+		this.spritePath = defaultSpritePath ();
 		this.type = defaultType ();
 		this.itemDescription = defaultDescription ();
 	}
 
-	public abstract Sprite defaultSprite ();
+	public abstract string defaultSpritePath ();
 	public abstract Type defaultType ();
 	public abstract string defaultDescription ();
 }
