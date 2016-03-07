@@ -8,10 +8,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class SaveObject {
 	public Stats stats;
 	public Dictionary<Item.Type, List<Item>> items;
+	public string[] skillNames;
 
-	public SaveObject(Stats stats, Dictionary<Item.Type, List<Item>> items) {
+	public SaveObject(Stats stats, Dictionary<Item.Type, List<Item>> items, string[] skillNames) {
 		this.stats = stats;
 		this.items = items;
+		this.skillNames = skillNames;
 	}
 }
 
@@ -30,7 +32,13 @@ public class CharSaveLoadScript : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.N)) {
 			FileStream file = File.Create (Application.persistentDataPath + "/characters.data");
-			SaveObject saveObject = new SaveObject (player.stats, inventory.itemListDictionary);
+
+			string[] skillNames = new string[player.skills.Length];
+			for (int i = 0; i < player.skills.Length; i++) {
+				skillNames [i] = player.skills [i].getName ();
+			}
+
+			SaveObject saveObject = new SaveObject (player.stats, inventory.itemListDictionary, skillNames);
 			bf.Serialize (file, saveObject);
 			file.Close ();
 			Debug.Log ("Player saved to " + Application.persistentDataPath);
@@ -40,6 +48,15 @@ public class CharSaveLoadScript : MonoBehaviour {
 			file.Close ();
 			player.stats = loadObject.stats;
 			inventory.setItemListDictionary (loadObject.items);
+			for (int i = 0; i < loadObject.skillNames.Length; i++) {
+				for (int j = 0; j < player.listOfSkills.Length; j++) {
+					if (loadObject.skillNames[i] == player.listOfSkills[j].getName ()) {
+						player.replaceSkill (i, player.listOfSkills [j]);
+						break;
+					}
+				}
+			}
+
 			Debug.Log ("Player status loaded");
 		}
 	}
