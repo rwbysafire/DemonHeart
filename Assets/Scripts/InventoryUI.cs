@@ -31,8 +31,8 @@ public class InventoryUI : MonoBehaviour {
 		new Dictionary<Item.Type, int> {
 		{ Item.Type.General, 12 },
 		{ Item.Type.Armor, 5 },
-		{ Item.Type.Skill, 12 },
-		{ Item.Type.Weapon, 3 }
+		{ Item.Type.Skill, 13 },
+		{ Item.Type.Weapon, 0 }
 	};
 
 	// Use this for initialization
@@ -80,27 +80,45 @@ public class InventoryUI : MonoBehaviour {
 	// return true if the item is added
 	// use for pick up
 	public bool AddItem (Item item, Item.Type type) {
+		bool isAdded = false;
 //		Debug.Log (item.itemName + " : " + type.ToString ());
 		if (itemListDictionary[type].Count < itemListLength[type]) {
-			itemHolder [itemListDictionary[type].Count].SetItem (item);
-			itemListDictionary[type].Add (item);
-			return true;
+			// find the next available slot to put
+			for (int i = 0; i < itemHolder.Length; i++) {
+				if (!itemHolder [i].HasItem ()) {
+					itemHolder [i].SetItem (item);
+					itemListDictionary[type].Add (item);
+					isAdded = true;
+					break;
+				}
+			}
 		} else {
 			// inventory is full
-			return false;
 		}
+
+		foreach (KeyValuePair<Item.Type, List<Item>> pair in itemListDictionary) {
+			Debug.Log (pair.Key.ToString () + ":" + pair.Value.Count.ToString ());
+		}
+
+		return isAdded;
 	}
 
 	// use for attach an item
 	public bool AttachItem (Item item, Item.Type type) {
+		bool isAdded = false;
 		if (itemListDictionary[type].Count < itemListLength[type]) {
 			itemListDictionary[type].Add (item);
 
-			return true;
+			isAdded = true;
 		} else {
 			// inventory is full
-			return false;
 		}
+
+		foreach (KeyValuePair<Item.Type, List<Item>> pair in itemListDictionary) {
+			Debug.Log (pair.Key.ToString () + ":" + pair.Value.Count.ToString ());
+		}
+
+		return isAdded;
 	}
 
 	public bool AddItem (GameObject gameObject) {
