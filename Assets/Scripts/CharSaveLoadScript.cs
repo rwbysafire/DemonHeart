@@ -56,7 +56,7 @@ public class CharSaveLoadScript : MonoBehaviour {
 					}
 				}
 			}
-
+			inventory.updateInventorySkillImages ();
 			Debug.Log ("Player status loaded");
 		}
 	}

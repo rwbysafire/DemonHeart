@@ -227,10 +227,7 @@ public class InventoryUI : MonoBehaviour {
 				// pause the game
 				Pause.PauseGame ();
 
-				// update the images for the skills
-				for (int i = 0; i < playerScript.skills.Length; i++) {
-					skillImages [i].overrideSprite = playerScript.skills [i].getImage ();
-				}
+				updateInventorySkillImages ();
 
 				// reset the text
 				HideText ();
@@ -238,6 +235,13 @@ public class InventoryUI : MonoBehaviour {
 				inventory.SetActive (true);
 				background.SetActive (true);
 			}
+		}
+	}
+
+	public void updateInventorySkillImages () {
+		// update the images for the skills
+		for (int i = 0; i < playerScript.skills.Length; i++) {
+			skillImages [i].overrideSprite = playerScript.skills [i].getImage ();
 		}
 	}
 
