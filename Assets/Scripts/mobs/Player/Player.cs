@@ -94,7 +94,7 @@ public class Player : Mob {
 		}
 
 		if (Input.GetKey (KeyCode.Escape)) {
-			Application.Quit();
+//			Application.Quit();
 		}
 	}
 

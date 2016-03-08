@@ -72,6 +72,7 @@ public class InventoryUI : MonoBehaviour {
 	}
 
 	// get dictionary of item and itemtemplate
+	// mainly for save and load
 	public void setItemListDictionary(Dictionary<Item.Type, List<Item>> listDictionary) {
 		bool isChanged = !inventory.activeSelf;
 		if (isChanged) {
@@ -85,6 +86,10 @@ public class InventoryUI : MonoBehaviour {
 				ItemTemplate holder = holders [i].GetComponent<ItemTemplate> ();
 				if (holder != null) {
 					if (listDictionary [pair.Key].Count > listCount) {
+						if (pair.Key == Item.Type.Skill &&
+							holder.index != listDictionary [pair.Key] [listCount].itemIndex) {
+							continue;
+						}
 						holder.SetItem (listDictionary [pair.Key] [listCount]);
 						listCount++;
 					} else {
@@ -168,7 +173,7 @@ public class InventoryUI : MonoBehaviour {
 			item = new ArmorItem ();
 			break;
 		case "item_skill":
-			switch (((int)Time.time) % 5) {
+			switch (((int)Time.time) % 4) {
 			case 0:
 //				item = new chainLightningOnHitGem ();
 				item = new GemAttackSpeed ();

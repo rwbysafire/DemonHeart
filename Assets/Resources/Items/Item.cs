@@ -17,11 +17,13 @@ public abstract class Item {
 	public string tag { get; set; }
 	public string spritePath { get; set; }
 	public Type type = Type.General;
+	public int itemIndex { get; set; }
 
 	public Item () {
 		this.spritePath = defaultSpritePath ();
 		this.type = defaultType ();
 		this.itemDescription = defaultDescription ();
+		this.itemIndex = -1;
 	}
 
 	public abstract string defaultSpritePath ();

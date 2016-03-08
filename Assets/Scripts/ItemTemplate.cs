@@ -45,6 +45,12 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		itemImage.overrideSprite = Resources.Load<Sprite> (item.spritePath);
 		itemImage.color = Color.white;
 		itemImage.transform.localPosition = new Vector2 (0, 0);
+
+		if (gameObject.tag == "item_skill") {
+			item.itemIndex = this.index;
+		} else {
+			item.itemIndex = -1;
+		}
 	}
 
 	public Item RemoveItem () {

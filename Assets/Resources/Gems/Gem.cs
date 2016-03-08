@@ -71,6 +71,7 @@ public class GemAttackSpeed : Gem {
     }
 }
 
+[System.Serializable]
 public class GemCooldownReduction : Gem {
     public GemCooldownReduction() {
         properties.Add("cooldown", new property(0.5f, "*"));
