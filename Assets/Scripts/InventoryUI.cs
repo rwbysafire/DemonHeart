@@ -86,11 +86,16 @@ public class InventoryUI : MonoBehaviour {
 				ItemTemplate holder = holders [i].GetComponent<ItemTemplate> ();
 				if (holder != null) {
 					if (listDictionary [pair.Key].Count > listCount) {
-						if (pair.Key == Item.Type.Skill &&
-							holder.index != listDictionary [pair.Key] [listCount].itemIndex) {
-							continue;
+						Item item = listDictionary [pair.Key] [listCount];
+						if (pair.Key == Item.Type.Skill) {
+							if (holder.index != item.itemIndex) {
+								this.removeSkillGems (holder.index);
+								continue;
+							} else {
+								this.addSkillGem (holder.index, (Gem)item);
+							}
 						}
-						holder.SetItem (listDictionary [pair.Key] [listCount]);
+						holder.SetItem (item);
 						listCount++;
 					} else {
 						holder.RemoveItem ();
@@ -212,6 +217,10 @@ public class InventoryUI : MonoBehaviour {
 
 	public void removeSkillGem (int index, Gem gem) {
 		playerScript.skills [index].removeGem (gem);
+	}
+
+	public void removeSkillGems (int index) {
+		playerScript.skills [index].removeAllGem ();
 	}
 	
 	// Update is called once per frame

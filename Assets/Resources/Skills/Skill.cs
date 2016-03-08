@@ -81,7 +81,7 @@ public abstract class Skill
     public bool addGem(Gem gem) {
 		if (gems.Count < gemLimitCount) {
 			gems.Add (gem);
-			updateSkill();
+			updateSkill ();
 			return true;
 		} else {
 			return false;
@@ -90,8 +90,13 @@ public abstract class Skill
 
 	public void removeGem(Gem gem) {
 		gems.Remove (gem);
-        updateSkill();
+        updateSkill ();
     }
+
+	public void removeAllGem () {
+		gems.Clear ();
+		updateSkill ();
+	}
 
 	public abstract string getName();
 	public abstract Sprite getImage();
