@@ -168,10 +168,10 @@ public class InventoryUI : MonoBehaviour {
 			item = new ArmorItem ();
 			break;
 		case "item_skill":
-			switch (((int)Time.time) % 3) {
+			switch (((int)Time.time) % 5) {
 			case 0:
 //				item = new chainLightningOnHitGem ();
-				item = new GemExtraProjectiles ();
+				item = new GemAttackSpeed ();
 				break;
 			case 1:
 				item = new GemExtraProjectiles ();
@@ -179,7 +179,10 @@ public class InventoryUI : MonoBehaviour {
 			case 2:
 				item = new GemExtraChains ();
 				break;
-			default:
+            case 3:
+                item = new GemCooldownReduction ();
+                break;
+            default:
 				item = new Gem ();
 				break;
 			}

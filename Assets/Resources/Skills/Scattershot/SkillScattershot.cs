@@ -4,10 +4,12 @@ using System.Collections;
 public class SkillScattershot : Skill
 {
 	public Projectile projectile;
+    ProjectileSkill projectileSkill = new ProjectileSkill();
 
-	public SkillScattershot(Mob mob) : base(mob) {}
-
-	private int arrowCount = 30;
+    public SkillScattershot(Mob mob) : base(mob) {
+        projectileSkill.setProjectileCount(10);
+        addSkillType(projectileSkill);
+    }
 
 	public override string getName () {
 		return "Scattershot";
@@ -30,13 +32,23 @@ public class SkillScattershot : Skill
 	}
 
 	public override void skillLogic () {
-		for (int i = 0; i < arrowCount; i++) {
-			fireArrow(-45 + (i * 90 / (arrowCount - 1)) + Random.Range(-5,5));
-		}
-		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.headTransform.position);
+        attack();
+        AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.headTransform.position);
 	}
 
-	void fireArrow(int rotate = 0) {
+    void attack() {
+        float y = Vector3.Distance(mob.getTargetLocation(), mob.transform.position);
+        if (y > 6)
+            y = 6;
+        else if (y < 2)
+            y = 2;
+        float angleOfSpread = (((1 - (y - 2) / 4) * 3) + 1) * 5;
+        for (int i = 0; i < properties["projectileCount"]; i++) {
+            fireArrow(((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
+        }
+    }
+
+    void fireArrow(float rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
 		projectile = new ScatterShotProjectile (basicArrow, mob);
@@ -47,7 +59,8 @@ public class SkillScattershot : Skill
 		basicArrow.transform.Translate (Vector3.up * 0.7f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
 		projectile.projectileOnStart();
-	}
+        projectile.chainTimes = properties["chainCount"];
+    }
 }
 
 class ScatterShotProjectile : Projectile {

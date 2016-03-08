@@ -4,8 +4,12 @@ using System.Collections;
 public class SkillVolley : Skill {
 	
 	public Projectile projectile;
+    ProjectileSkill projectileSkill = new ProjectileSkill();
 
-	public SkillVolley(Mob mob) : base(mob) { }
+    public SkillVolley(Mob mob) : base(mob) {
+        projectileSkill.setProjectileCount(5);
+        addSkillType(projectileSkill);
+    }
 	
 	public override string getName () {
 		return "Volley";
@@ -28,11 +32,23 @@ public class SkillVolley : Skill {
 	}
 	
 	public override void skillLogic() {
-		fireArrow(-15);fireArrow(-10);fireArrow(-5);fireArrow(0);fireArrow(5);fireArrow(10);fireArrow(15);
+        attack();
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.headTransform.position);
-	}
+    }
 
-	void fireArrow(float rotate = 0) {
+    void attack() {
+        float y = Vector3.Distance(mob.getTargetLocation(), mob.transform.position);
+        if (y > 6)
+            y = 6;
+        else if (y < 2)
+            y = 2;
+        float angleOfSpread = (((1 - (y - 2) / 4) * 3) + 1) * 5;
+        for (int i = 0; i < properties["projectileCount"]; i++) {
+            fireArrow(((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
+        }
+    }
+
+    void fireArrow(float rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
 		projectile = new VolleyProjectile (basicArrow, mob);
@@ -43,7 +59,8 @@ public class SkillVolley : Skill {
 		basicArrow.transform.Translate (Vector3.up * 0.7f);
 		basicArrow.transform.RotateAround (basicArrow.transform.position, Vector3.forward, rotate);
 		projectile.projectileOnStart();
-	}
+        projectile.chainTimes = properties["chainCount"];
+    }
 }
 
 class VolleyProjectile : Projectile {

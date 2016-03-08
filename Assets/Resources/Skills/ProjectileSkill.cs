@@ -4,17 +4,21 @@ using System.Collections.Generic;
 
 public class ProjectileSkill : SkillType {
 
-    private Dictionary<string, float> _properties = new Dictionary<string, float>();
+    private Dictionary<string, float> Properties = new Dictionary<string, float>();
     public Dictionary<string, float> properties {
         get {
-            return _properties;
+            return Properties;
         }
     }
 
     public ProjectileSkill() {
-        properties.Add("projectileCount", 1);
-        properties.Add("projectileSpeed", 40);
-        properties.Add("chainCount", 0);
+        Properties.Add("projectileCount", 1);
+        Properties.Add("projectileSpeed", 40);
+        Properties.Add("chainCount", 0);
+    }
+
+    public void setProjectileCount(int projectileCount) {
+        Properties["projectileCount"] = projectileCount;
     }
 
     //public void shoot(Mob mob) {

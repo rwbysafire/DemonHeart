@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class Gem : Item {
-    public Dictionary<string, int> properties = new Dictionary<string, int>();
+    public Dictionary<string, property> properties = new Dictionary<string, property>();
 
     public virtual void onHitEffect() { }
 
@@ -19,13 +19,23 @@ public class Gem : Item {
 	public override string defaultDescription () {
 		return "No skill for this :)";
 	}
+
+    [System.Serializable]
+    public class property {
+        public float value;
+        public string operation;
+        public property(float value, string operation) {
+            this.value = value;
+            this.operation = operation;
+        }
+    }
 }
 
 [System.Serializable]
 public class WeaponGem : Gem {
 	public WeaponGem () {
 		this.itemDescription = "Power up your weapon!";
-		properties.Add("projectileCount", 4);
+		properties.Add("projectileCount", new property(2, "+"));
 	}
 
 	public override string defaultSpritePath () {
@@ -40,7 +50,7 @@ public class WeaponGem : Gem {
 [System.Serializable]
 public class GemExtraProjectiles : Gem {
     public GemExtraProjectiles() {
-        properties.Add("projectileCount", 4);
+        properties.Add("projectileCount", new property(2, "+"));
 		this.itemDescription = "Extra projectiles";
     }
 }
@@ -48,8 +58,23 @@ public class GemExtraProjectiles : Gem {
 [System.Serializable]
 public class GemExtraChains : Gem {
     public GemExtraChains() {
-        properties.Add("chainCount", 5);
+        properties.Add("chainCount", new property(2, "+"));
 		this.itemDescription = "Extra chains";
+    }
+}
+
+[System.Serializable]
+public class GemAttackSpeed : Gem {
+    public GemAttackSpeed() {
+        properties.Add("attackSpeed", new property(0.5f, "*"));
+        this.itemDescription = "Double attack speed";
+    }
+}
+
+public class GemCooldownReduction : Gem {
+    public GemCooldownReduction() {
+        properties.Add("cooldown", new property(0.5f, "*"));
+        this.itemDescription = "Reduce cooldown";
     }
 }
 
@@ -62,7 +87,7 @@ public class chainLightningOnHitGem : Gem {
     public chainLightningOnHitGem() {
         skillChainLightning = new SkillChainLightning(GameObject.Find("Player").GetComponent<Mob>());
         skillChainLightning.properties["manaCost"] = 0;
-        properties.Add("chainCount", 1);
+        properties.Add("chainCount", new property(1, "+"));
 
 		this.itemDescription = "Chain lightning";
     }

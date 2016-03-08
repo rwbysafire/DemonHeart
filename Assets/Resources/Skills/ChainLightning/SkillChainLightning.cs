@@ -3,10 +3,12 @@ using System.Collections;
 
 public class SkillChainLightning : Skill {
 
-	int timesCanChain = 6;
+	int timesCanChain = 2;
 	int maxDistance = 10;
 
-	public SkillChainLightning(Mob mob) : base(mob) { }
+	public SkillChainLightning(Mob mob) : base(mob) {
+        addBaseProperty("chainCount", timesCanChain);
+    }
 
 	public override string getName () {
 		return "Chain Lightning";
@@ -30,7 +32,7 @@ public class SkillChainLightning : Skill {
 		GameObject chainLightning = GameObject.Instantiate(Resources.Load<GameObject>("Skills/ChainLightning/Chainlightning"));
 		chainLightning.transform.position = mob.transform.position;
 		chainLightning.GetComponent<ChainLightning>().mob = mob;
-		chainLightning.GetComponent<ChainLightning>().chainTimes = timesCanChain;
+		chainLightning.GetComponent<ChainLightning>().chainTimes = (int)properties["chainCount"];
 		chainLightning.GetComponent<ChainLightning>().maxDistance = maxDistance;
 		Vector3 targetLocation;
 		if (Vector3.Distance(mob.headTransform.position, mob.getTargetLocation()) > maxDistance)
