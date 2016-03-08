@@ -5339,7 +5339,7 @@ GameObject:
   - 222: {fileID: 466571194}
   - 114: {fileID: 466571193}
   m_Layer: 5
-  m_Name: Text
+  m_Name: display_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14483,6 +14483,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 1430383561}
   - 225: {fileID: 1430383562}
+  - 114: {fileID: 1430383563}
   m_Layer: 5
   m_Name: WholeScreenText
   m_TagString: Untagged
@@ -14519,6 +14520,17 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &1430383563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1430383560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763a12470ed1e49299d3784d84abf555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1434740722
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,6 +41,7 @@ public class CharSaveLoadScript : MonoBehaviour {
 			SaveObject saveObject = new SaveObject (player.stats, inventory.itemListDictionary, skillNames);
 			bf.Serialize (file, saveObject);
 			file.Close ();
+			WholeScreenTextScript.ShowText ("Game saved");
 			Debug.Log ("Player saved to " + Application.persistentDataPath);
 		} else if (Input.GetKeyDown (KeyCode.M)) {
 			FileStream file = File.Open (Application.persistentDataPath + "/characters.data", FileMode.Open);
@@ -57,6 +58,7 @@ public class CharSaveLoadScript : MonoBehaviour {
 				}
 			}
 			inventory.updateInventorySkillImages ();
+			WholeScreenTextScript.ShowText ("Game loaded");
 			Debug.Log ("Player status loaded");
 		}
 	}

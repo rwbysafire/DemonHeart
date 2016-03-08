@@ -5,7 +5,6 @@ using SimpleJSON;
 
 public class SpawnEnemies : MonoBehaviour {
 
-	public CanvasGroup displayText;
     public int currentWave = 0;
 	public TextAsset waveFile;
 
@@ -48,14 +47,8 @@ public class SpawnEnemies : MonoBehaviour {
 		isSpawning = true;
 
 		// wait some seconds before start
-		displayText.alpha = 1f;
-		float secondsToWait = 2f;
-		float step = 0.025f;
-		while (displayText.alpha > 0) {
-			displayText.alpha = Mathf.Clamp01 (displayText.alpha - step);
-			yield return new WaitForSeconds(secondsToWait * step);
-		}
-		yield return new WaitForSeconds(0.5f);
+		WholeScreenTextScript.ShowText("New wave is comming...");
+		yield return new WaitForSeconds(2.5f);
 
         while (wave.count > 0) {
             GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
