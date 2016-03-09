@@ -32,7 +32,7 @@ public class MiniMapScript : MonoBehaviour {
 		} else if (difference < 0) {
 			// remove the dots
 			for (int i = 0; i < Mathf.Abs (difference); i++) {
-				Image dot = enemyList [enemies.Length + i];
+				Image dot = enemyList [enemyList.Count - 1];
 				enemyList.Remove (dot);
 				GameObject.Destroy (dot.gameObject);
 			}
