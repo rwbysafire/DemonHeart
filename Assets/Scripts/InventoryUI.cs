@@ -80,25 +80,32 @@ public class InventoryUI : MonoBehaviour {
 		}
 		foreach (KeyValuePair<Item.Type, string> pair in itemTags) {
 			GameObject[] holders = GameObject.FindGameObjectsWithTag (pair.Value);
-
+			List<Item> items = new List<Item> ();
+			foreach (Item item in listDictionary [pair.Key]) {
+				items.Add (item);
+			}
 			int listCount = 0;
 			for (int i = 0; i < holders.Length; i++) {
 				ItemTemplate holder = holders [i].GetComponent<ItemTemplate> ();
 				if (holder != null) {
-					if (listDictionary [pair.Key].Count > listCount) {
-						Item item = listDictionary [pair.Key] [listCount];
-						if (pair.Key == Item.Type.Skill) {
-							if (holder.index != item.itemIndex) {
-								this.removeSkillGems (holder.index);
-								continue;
-							} else {
-								this.addSkillGem (holder.index, (Gem)item);
+					holder.RemoveItem ();
+					if (pair.Key == Item.Type.Skill) {
+						// special case for skill gem
+						for (int j = 0; j < items.Count; j++) {
+							if (holder.index == items[j].itemIndex) {
+								this.addSkillGem (holder.index, (Gem) items[j]);
+								holder.SetItem (items[j]);
+								items.RemoveAt (j);
+								break;
 							}
 						}
-						holder.SetItem (item);
-						listCount++;
 					} else {
-						holder.RemoveItem ();
+						// general case
+						if (listDictionary [pair.Key].Count > listCount) {
+							Item item = listDictionary [pair.Key] [listCount];
+							holder.SetItem (item);
+							listCount++;
+						}
 					}
 				}
 			}
