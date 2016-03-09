@@ -8,11 +8,16 @@ public class WholeScreenTextScript : MonoBehaviour {
 	private static CanvasGroup cg;
 	private static bool isFading;
 	private static float step = 0.012f;
+	private static string lastShowString;
 
 	// Use this for initialization
 	void Start () {
 		if (cg == null) {
 			Init ();
+			if (lastShowString != "") {
+				ShowText (lastShowString);
+				lastShowString = "";
+			}
 		}
 	}
 
@@ -36,7 +41,9 @@ public class WholeScreenTextScript : MonoBehaviour {
 		if (cg != null) {
 			cg.alpha = 1f;
 			isFading = true;
-			displayText.text = text;	
+			displayText.text = text;
+		} else {
+			lastShowString = text;
 		}
 	}
 }
