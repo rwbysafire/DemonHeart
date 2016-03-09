@@ -11,6 +11,12 @@ public class WholeScreenTextScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (cg == null) {
+			Init ();
+		}
+	}
+
+	void Init() {
 		displayText = gameObject.GetComponentInChildren<Text> ();
 		cg = gameObject.GetComponent<CanvasGroup> ();
 	}
@@ -27,8 +33,10 @@ public class WholeScreenTextScript : MonoBehaviour {
 	}
 
 	public static void ShowText (string text) {
-		cg.alpha = 1f;
-		isFading = true;
-		displayText.text = text;
+		if (cg != null) {
+			cg.alpha = 1f;
+			isFading = true;
+			displayText.text = text;	
+		}
 	}
 }
