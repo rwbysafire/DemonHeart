@@ -30,36 +30,40 @@ public class CharSaveLoadScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.N)) {
-			FileStream file = File.Create (Application.persistentDataPath + "/characters.data");
+		
+	}
 
-			string[] skillNames = new string[player.skills.Length];
-			for (int i = 0; i < player.skills.Length; i++) {
-				skillNames [i] = player.skills [i].getName ();
-			}
+	public void SaveGame () {
+		FileStream file = File.Create (Application.persistentDataPath + "/characters.data");
 
-			SaveObject saveObject = new SaveObject (player.stats, inventory.itemListDictionary, skillNames);
-			bf.Serialize (file, saveObject);
-			file.Close ();
-			WholeScreenTextScript.ShowText ("Game saved");
-			Debug.Log ("Player saved to " + Application.persistentDataPath);
-		} else if (Input.GetKeyDown (KeyCode.M)) {
-			FileStream file = File.Open (Application.persistentDataPath + "/characters.data", FileMode.Open);
-			SaveObject loadObject = (SaveObject) bf.Deserialize (file);
-			file.Close ();
-			player.stats = loadObject.stats;
-			inventory.setItemListDictionary (loadObject.items);
-			for (int i = 0; i < loadObject.skillNames.Length; i++) {
-				for (int j = 0; j < player.listOfSkills.Length; j++) {
-					if (loadObject.skillNames[i] == player.listOfSkills[j].getName ()) {
-						player.replaceSkill (i, player.listOfSkills [j]);
-						break;
-					}
+		string[] skillNames = new string[player.skills.Length];
+		for (int i = 0; i < player.skills.Length; i++) {
+			skillNames [i] = player.skills [i].getName ();
+		}
+
+		SaveObject saveObject = new SaveObject (player.stats, inventory.itemListDictionary, skillNames);
+		bf.Serialize (file, saveObject);
+		file.Close ();
+		WholeScreenTextScript.ShowText ("Game saved");
+		Debug.Log ("Player saved to " + Application.persistentDataPath);
+	}
+
+	public void LoadGame () {
+		FileStream file = File.Open (Application.persistentDataPath + "/characters.data", FileMode.Open);
+		SaveObject loadObject = (SaveObject) bf.Deserialize (file);
+		file.Close ();
+		player.stats = loadObject.stats;
+		inventory.setItemListDictionary (loadObject.items);
+		for (int i = 0; i < loadObject.skillNames.Length; i++) {
+			for (int j = 0; j < player.listOfSkills.Length; j++) {
+				if (loadObject.skillNames[i] == player.listOfSkills[j].getName ()) {
+					player.replaceSkill (i, player.listOfSkills [j]);
+					break;
 				}
 			}
-			inventory.updateInventorySkillImages ();
-			WholeScreenTextScript.ShowText ("Game loaded");
-			Debug.Log ("Player status loaded");
 		}
+		inventory.updateInventorySkillImages ();
+		WholeScreenTextScript.ShowText ("Game loaded");
+		Debug.Log ("Player status loaded");
 	}
 }
