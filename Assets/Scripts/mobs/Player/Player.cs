@@ -155,24 +155,24 @@ public class Player : Mob {
 		head.transform.rotation = Quaternion.Euler(0f, 0f, headDirection);
 	}
 
-    public override void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.CompareTag("Drop")) {
-            if (collider.name == "DexterityGem(Clone)")
-            {
-                stats.dexterity += 2;
-            }
-            else if (collider.name == "StrengthGem(Clone)")
-            {
-                stats.strength += 2;
-            }
-            else if (collider.name == "IntelGem(Clone)")
-            {
-                stats.intelligence += 2;
-            }
-            Destroy(collider.gameObject);
-		}
-    }
+  //  public override void OnTriggerEnter2D(Collider2D collider)
+  //  {
+  //      if (collider.CompareTag("Drop")) {
+  //          if (collider.name == "DexterityGem(Clone)")
+  //          {
+  //              stats.dexterity += 2;
+  //          }
+  //          else if (collider.name == "StrengthGem(Clone)")
+  //          {
+  //              stats.strength += 2;
+  //          }
+  //          else if (collider.name == "IntelGem(Clone)")
+  //          {
+  //              stats.intelligence += 2;
+  //          }
+  //          Destroy(collider.gameObject);
+		//}
+  //  }
 
 	void OnTriggerStay2D (Collider2D collider) {
 		if (collider.tag.ToLower ().StartsWith ("item") && Input.GetKeyDown (KeyCode.E)) {
