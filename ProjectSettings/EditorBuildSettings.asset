@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/UITests.unity
   - enabled: 1
     path: Assets/Prototype.unity
+  - enabled: 1
+    path: Assets/Instruction.unity

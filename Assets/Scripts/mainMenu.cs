@@ -10,4 +10,9 @@ public class mainMenu : MonoBehaviour {
 	public void exitGame() {
 		Application.Quit();
 	}
+
+	public void Instruction() {
+		Application.LoadLevel ("Instruction");
+	}
+
 }
