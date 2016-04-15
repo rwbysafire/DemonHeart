@@ -45,6 +45,7 @@ public class Player : Mob {
 		stats.strength = 20000;
 		stats.dexterity = 30;
 		stats.intelligence = 10;
+		stats.exp = 0;
 		listOfSkills = new Skill[12]{new SkillBasicAttack(this),
 			new SkillChainLightning(this),
 			new SkillCombatRoll(this),
@@ -173,6 +174,25 @@ public class Player : Mob {
   //          Destroy(collider.gameObject);
 		//}
   //  }
+		
+    public override void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Drop")) {
+            if (collider.name == "DexterityGem(Clone)")
+            {
+                stats.dexterity += 2;
+            }
+            else if (collider.name == "StrengthGem(Clone)")
+            {
+                stats.strength += 2;
+            }
+            else if (collider.name == "IntelGem(Clone)")
+            {
+                stats.intelligence += 2;
+            }
+            Destroy(collider.gameObject);
+		}
+    }
 
 	void OnTriggerStay2D (Collider2D collider) {
 		if (collider.tag.ToLower ().StartsWith ("item") && Input.GetKeyDown (KeyCode.E)) {

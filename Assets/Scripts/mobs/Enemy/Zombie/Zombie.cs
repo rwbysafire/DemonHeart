@@ -29,6 +29,8 @@ public class Zombie : Mob {
 		body.AddComponent<SpriteRenderer>();
 		body.GetComponent<SpriteRenderer>().sortingOrder = 2;
 		stats.strength = 20;
+		// Z exp = 100
+		stats.exp = 100;
 	}
 
 	// Use this for initialization

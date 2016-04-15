@@ -29,6 +29,8 @@ public class Kamikaze : Mob {
 		body.AddComponent<SpriteRenderer>();
 		body.GetComponent<SpriteRenderer>().sortingOrder = 2;
 		stats.strength = -50;
+		// K exp = 50
+		stats.exp = 50;
 	}
 	
 	// Use this for initialization

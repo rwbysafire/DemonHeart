@@ -6,10 +6,10 @@ public abstract class Mob : MonoBehaviour{
 	public Stats stats = new Stats();
 	private float stunTime = 0;
 	private float canMove = 0;
+
 	private float lasthit;
 	public float lastHit{get{return lasthit;}}
 	public bool isAttacking = false;
-
 	public Skill[] skills = new Skill[6];
 
 	public void replaceSkill(int skillNum, Skill skill) {
@@ -77,12 +77,13 @@ public abstract class Mob : MonoBehaviour{
 	}
 
 	void Update() {
-        if (stats.health <= 0)
-        {
-            DropItem();
+		if (stats.health <= 0)
+		{
+			GameObject.Find ("Player").GetComponent<Mob> ().stats.exp += stats.exp;
+			DropItem();
 			OnDeath();
-            Destroy(gameObject);
-        }
+			Destroy(gameObject);
+		}
 		if(isStunned())
 			return;
 		OnUpdate();
@@ -94,12 +95,15 @@ public abstract class Mob : MonoBehaviour{
 			stats.mana += stats.manaRegen * Time.deltaTime;
 		else if (stats.mana > stats.maxMana)
 			stats.mana = stats.maxMana;
+		if (stats.exp >= stats.threshold) {
+			stats.level++;
+			stats.threshold = (stats.level + 1) * stats.threshold;
+		}
 	}
 
 	public virtual void OnDeath() {}
 
-	string[] dropTable = { "Gems/ArmorGem",
-        "Gems/SkillGem" };/*"Gems/StrengthGem", "Gems/DexterityGem", "Gems/IntelGem",*/
+	string[] dropTable = { "Gems/ArmorGem", "Gems/SkillGem" };/*"Gems/StrengthGem", "Gems/DexterityGem", "Gems/IntelGem",*/
 
     void DropItem() {
         if (Random.Range(1, 101) <= 100) {

@@ -10,6 +10,7 @@ public class Stats {
 	public int intelligence = 10;
 	public float baseHealth = 600;
 	public float baseMana = 200;
+	public float threshold = 200;
 	public float maxHealth {
 		get {
 			return baseHealth + (10 * level) + (2 * strength);
