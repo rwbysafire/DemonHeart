@@ -7,13 +7,15 @@ using System.Runtime.Serialization.Formatters.Binary;
 [System.Serializable]
 public class SaveObject {
 	public Stats stats;
+	public Buff buff;
 	public Dictionary<Item.Type, List<Item>> items;
 	public string[] skillNames;
 
-	public SaveObject(Stats stats, Dictionary<Item.Type, List<Item>> items, string[] skillNames) {
+	public SaveObject(Stats stats, Buff buff, Dictionary<Item.Type, List<Item>> items, string[] skillNames) {
 		this.stats = stats;
 		this.items = items;
 		this.skillNames = skillNames;
+		this.buff = buff;
 	}
 }
 
@@ -41,7 +43,7 @@ public class CharSaveLoadScript : MonoBehaviour {
 			skillNames [i] = player.skills [i].getName ();
 		}
 
-		SaveObject saveObject = new SaveObject (player.stats, inventory.itemListDictionary, skillNames);
+		SaveObject saveObject = new SaveObject (player.stats, player.buff, inventory.itemListDictionary, skillNames);
 		bf.Serialize (file, saveObject);
 		file.Close ();
 		WholeScreenTextScript.ShowText ("Game saved");
@@ -53,6 +55,7 @@ public class CharSaveLoadScript : MonoBehaviour {
 		SaveObject loadObject = (SaveObject) bf.Deserialize (file);
 		file.Close ();
 		player.stats = loadObject.stats;
+		player.buff = loadObject.buff;
 		inventory.setItemListDictionary (loadObject.items);
 		for (int i = 0; i < loadObject.skillNames.Length; i++) {
 			for (int j = 0; j < player.listOfSkills.Length; j++) {
