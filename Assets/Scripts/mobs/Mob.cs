@@ -12,6 +12,8 @@ public abstract class Mob : MonoBehaviour{
 	public bool isAttacking = false;
 	public Skill[] skills = new Skill[6];
 
+	public string[] dropTable = { "Gems/ArmorGem", "Gems/SkillGem" };/*"Gems/StrengthGem", "Gems/DexterityGem", "Gems/IntelGem",*/
+
 	public void replaceSkill(int skillNum, Skill skill) {
 		skills[skillNum] = skill;
 	}
@@ -103,8 +105,6 @@ public abstract class Mob : MonoBehaviour{
 
 	public virtual void OnDeath() {}
 
-	string[] dropTable = { "Gems/ArmorGem", "Gems/SkillGem" };/*"Gems/StrengthGem", "Gems/DexterityGem", "Gems/IntelGem",*/
-
     void DropItem() {
         if (Random.Range(1, 101) <= 100) {
 			GameObject Drop = (GameObject) Instantiate(
@@ -153,4 +153,12 @@ public abstract class Mob : MonoBehaviour{
 	public virtual void OnStart() {}
 	public virtual void OnUpdate() {}
 	public virtual void OnFixedUpdate() {}
+
+	public void AddBuffToStats (Buff buff) {
+		this.stats.AddBuff (buff);
+	}
+
+	public void RemoveBuffFromStats (Buff buff) {
+		this.stats.RemoveBuff (buff);
+	}
 }

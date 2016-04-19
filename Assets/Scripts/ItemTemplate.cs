@@ -97,6 +97,9 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 						if (gameObject.tag == "item_skill") {
 							inventory.removeSkillGem (this.index, (Gem) slotItem);
 							inventory.addSkillGem (this.index, (Gem) this.item);
+						} else if (gameObject.tag == "item_armor") {
+							inventory.RemoveArmorGem ((ArmorGem)slotItem);
+							inventory.AddArmorGem ((ArmorGem) this.item);
 						}
 					} else {
 						moveHolder.SetItem (item);
@@ -108,6 +111,8 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 //				Debug.Log ("Slot --> Holder");
 				if (gameObject.tag == "item_skill") {
 					inventory.removeSkillGem (this.index, (Gem)this.item);
+				} else if (gameObject.tag == "item_armor") {
+					inventory.RemoveArmorGem ((ArmorGem) this.item);
 				}
 				moveHolder.SetItem (this.RemoveItem ());
 				moveHolder.transform.position = Input.mousePosition;
@@ -126,6 +131,8 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 						this.SetItem (item);
 						if (gameObject.tag == "item_skill") {
 							inventory.addSkillGem (this.index, (Gem)this.item);
+						} else if (gameObject.tag == "item_armor") {
+							inventory.AddArmorGem ((ArmorGem) this.item);
 						}
 					} else {
 						moveHolder.SetItem (item);

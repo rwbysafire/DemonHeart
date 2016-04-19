@@ -79,6 +79,20 @@ public class GemCooldownReduction : Gem {
     }
 }
 
+[System.Serializable]
+public class ArmorGem : ArmorItem {
+	private Buff buff = new Buff ();
+
+	public ArmorGem () {
+		this.itemDescription = "Health +++";
+		buff.baseHealth = 99999;
+	}
+
+	public Buff GetBuff () {
+		return buff;
+	}
+}
+
 // need to be fixed
 // for serialization, it cannot contain the skill class
 public class chainLightningOnHitGem : Gem {

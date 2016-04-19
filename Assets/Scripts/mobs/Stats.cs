@@ -73,4 +73,26 @@ public class Stats {
 			return 100 + (0.3f * dexterity);
 		}
 	}
+
+	public void AddBuff (Buff buff) {
+		this.level += buff.level;
+		this.exp += buff.exp;
+		this.strength += buff.strength;
+		this.dexterity += buff.dexterity;
+		this.intelligence += buff.intelligence;
+		this.baseHealth += buff.baseHealth;
+		this.baseMana += buff.baseMana;
+		this.threshold += buff.threshold;
+	}
+
+	public void RemoveBuff (Buff buff) {
+		this.level -= buff.level;
+		this.exp -= buff.exp;
+		this.strength -= buff.strength;
+		this.dexterity -= buff.dexterity;
+		this.intelligence -= buff.intelligence;
+		this.baseHealth -= buff.baseHealth;
+		this.baseMana -= buff.baseMana;
+		this.threshold -= buff.threshold;
+	}
 }

@@ -182,7 +182,7 @@ public class InventoryUI : MonoBehaviour {
 
 		switch (gameObject.tag) {
 		case "item_armor":
-			item = new ArmorItem ();
+			item = new ArmorGem ();
 			break;
 		case "item_skill":
 			switch (((int)Time.time) % 4) {
@@ -228,6 +228,14 @@ public class InventoryUI : MonoBehaviour {
 
 	public void removeSkillGems (int index) {
 		playerScript.skills [index].removeAllGem ();
+	}
+
+	public void AddArmorGem (ArmorGem gem) {
+		playerScript.AddBuffToStats (gem.GetBuff ());
+	}
+
+	public void RemoveArmorGem (ArmorGem gem) {
+		playerScript.RemoveBuffFromStats (gem.GetBuff ());
 	}
 	
 	// Update is called once per frame
