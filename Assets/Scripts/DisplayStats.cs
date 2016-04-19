@@ -8,6 +8,7 @@ public class DisplayStats : MonoBehaviour {
 	GameObject display;
 	Text level, exp, STR, DEX, INT, health, mana, attackSpeed, cooldown;
 	Stats playerStats;
+	Buff playerBuff;
 
 	void Start () {
 		playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<Mob>().stats;
@@ -38,18 +39,29 @@ public class DisplayStats : MonoBehaviour {
 		}
 
 		if (display.activeSelf) {
-			if (GameObject.FindGameObjectWithTag("Player"))
-				playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<Mob>().stats;
+			if (GameObject.FindGameObjectWithTag ("Player")) {
+				Mob player = GameObject.FindGameObjectWithTag ("Player").GetComponent<Mob> ();
+				playerStats = player.stats;
+				playerBuff = player.buff;
+			}
 			level.text = "Level: " + playerStats.level.ToString();
 			exp.text = "Exp: " + playerStats.exp.ToString();
-			STR.text = "Str: " + playerStats.strength.ToString();
-			DEX.text = "Dex: " + playerStats.dexterity.ToString();
-			INT.text = "Int: " + playerStats.intelligence.ToString();
-			health.text = "Health: " + Mathf.Ceil(playerStats.health).ToString() + " / " + Mathf.Ceil(playerStats.maxHealth).ToString();
-			mana.text = "Mana: " + Mathf.Ceil(playerStats.mana).ToString() + " / " + Mathf.Ceil(playerStats.maxMana).ToString();
+			STR.text = GetDisplayPropertyString ("STR", playerStats.strength, playerBuff.strength);
+			DEX.text = GetDisplayPropertyString ("DEX", playerStats.dexterity, playerBuff.dexterity);
+			INT.text = GetDisplayPropertyString ("INT", playerStats.intelligence, playerBuff.intelligence);
+			health.text = GetDisplayProportionString ("Health", playerStats.health, playerStats.maxHealth, playerBuff.maxHealth);
+			mana.text = GetDisplayProportionString ("Mana", playerStats.mana, playerStats.maxMana, playerBuff.maxMana);
 			attackSpeed.text = "Attack Speed: " + playerStats.attackSpeed.ToString();
 			cooldown.text = "cooldown:     " + playerStats.cooldownReduction.ToString() + "%";
 		}
+	}
+
+	private string GetDisplayPropertyString (string name, float statValue, float buffValue) {
+		return name + ": " + (statValue - buffValue).ToString () + " (+" + buffValue.ToString () + ")";
+	}
+
+	private string GetDisplayProportionString (string name, float statValue, float maxValue, float buffValue) {
+		return name + ": " + Math.Ceiling (statValue).ToString () + " / " + Math.Ceiling (maxValue - buffValue).ToString () + " (+" + Math.Ceiling (buffValue).ToString () + ")";
 	}
 	
 	public void setLevel(int lvl) {
