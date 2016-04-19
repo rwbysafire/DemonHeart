@@ -4,6 +4,7 @@ using System.Collections;
 public abstract class Mob : MonoBehaviour{
 	
 	public Stats stats = new Stats();
+	public Buff buff = new Buff();
 	private float stunTime = 0;
 	private float canMove = 0;
 
@@ -156,9 +157,11 @@ public abstract class Mob : MonoBehaviour{
 
 	public void AddBuffToStats (Buff buff) {
 		this.stats.AddBuff (buff);
+		this.buff.AddBuff (buff);
 	}
 
 	public void RemoveBuffFromStats (Buff buff) {
 		this.stats.RemoveBuff (buff);
+		this.buff.RemoveBuff (buff);
 	}
 }
