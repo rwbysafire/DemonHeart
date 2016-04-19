@@ -7,7 +7,7 @@ public class SkillCombatRoll : Skill {
 	float timer;
 	GameObject knockback;
 
-	public SkillCombatRoll(Mob mob) : base(mob) {}
+	public SkillCombatRoll() : base() {}
 	
 	public override string getName() {
 		return "Combat Roll";
@@ -18,14 +18,14 @@ public class SkillCombatRoll : Skill {
 	}
 	
 	public override float getMaxCooldown() {
-		return 1f * (1 - mob.stats.cooldownReduction / 100);
+		return 1f;
 	}
 	
 	public override float getManaCost () {
 		return 15;
 	}
 	
-	public override void skillLogic() {
+	public override void skillLogic(Mob mob) {
 		mob.disableMovement(0.2f);
 		timer = Time.fixedTime + 0.2f;
 		knockback = new GameObject();
@@ -40,7 +40,7 @@ public class SkillCombatRoll : Skill {
 		GameObject.Destroy(knockback, 0.2f);
 	}
 
-	public override void skillPassive() {
+	public override void skillPassive(Mob mob) {
 		if (timer > Time.fixedTime)
 			mob.gameObject.GetComponent<Rigidbody2D>().velocity = mob.feetTransform.up * 70 * (timer-Time.fixedTime)/0.2f;
 	}

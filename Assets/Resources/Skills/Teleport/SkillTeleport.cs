@@ -5,7 +5,7 @@ public class SkillTeleport : Skill
 {
 	private float maxDistance = 5;
 
-	public SkillTeleport(Mob mob) : base(mob) { }
+	public SkillTeleport() : base() { }
 
 	public override string getName () {
 		return "Teleport";
@@ -16,14 +16,14 @@ public class SkillTeleport : Skill
 	}
 
 	public override float getMaxCooldown () {
-		return 2f * (1 - mob.stats.cooldownReduction / 100);
+		return 2f;
 	}
 	
 	public override float getManaCost () {
 		return 25;
 	}
 
-	public override void skillLogic() {
+	public override void skillLogic(Mob mob) {
 		GameObject teleport = GameObject.Instantiate(Resources.Load<GameObject>("Skills/Teleport/Teleport"));
 		LineRenderer lineRenderer = teleport.AddComponent<LineRenderer>();
 		lineRenderer.material = Resources.Load<Material>("Skills/Teleport/blur");
@@ -31,7 +31,7 @@ public class SkillTeleport : Skill
 		lineRenderer.SetWidth(1, 1);
 		lineRenderer.SetPosition(0, mob.feetTransform.position);
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/Teleport/teleport"), mob.feetTransform.position);
-		displayFlash();
+		displayFlash(mob);
 		Vector3 teleportLocation;
 		if (Vector3.Distance(mob.feetTransform.position, mob.getTargetLocation()) > maxDistance)
 			teleportLocation = mob.feetTransform.position + ((mob.getTargetLocation() - mob.feetTransform.position).normalized * maxDistance);
@@ -51,10 +51,10 @@ public class SkillTeleport : Skill
 			}
 		}
 		lineRenderer.SetPosition(1, (mob.getTargetLocation() - mob.feetTransform.position).normalized*mob.gameObject.GetComponent<CircleCollider2D>().radius*2 + mob.feetTransform.position);
-		displayFlash();
+		displayFlash(mob);
 	}
 
-	void displayFlash()
+	void displayFlash(Mob mob)
 	{
 		GameObject flash = new GameObject ();
 		flash.transform.position = mob.feetTransform.position;

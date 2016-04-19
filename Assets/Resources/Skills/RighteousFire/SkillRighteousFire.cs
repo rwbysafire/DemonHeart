@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SkillRighteousFire : Skill {
 
-	public SkillRighteousFire(Mob mob) : base(mob) { }
+	public SkillRighteousFire() : base() { }
 	
 	public override string getName () {
 		return "Fire Aura";
@@ -14,14 +14,14 @@ public class SkillRighteousFire : Skill {
 	}
 	
 	public override float getMaxCooldown () {
-		return 0.5f * (1 - (mob.stats.cooldownReduction / 100));
+		return 0.5f;
 	}
 	
 	public override float getManaCost () {
 		return 0;
 	}
 	
-	public override void skillLogic () {
+	public override void skillLogic (Mob mob) {
 		if (mob.gameObject.transform.FindChild("RighteousFire(Clone)") == null) {
 			GameObject righteousFire = GameObject.Instantiate(Resources.Load<GameObject>("Skills/RighteousFire/RighteousFire"));
 			righteousFire.transform.position = mob.feetTransform.position;

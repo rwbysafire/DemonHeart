@@ -6,7 +6,7 @@ public class SkillExplosiveArrow : Skill {
 	public Projectile projectile;
     SkillType projectileSkill = new ProjectileSkill();
 
-    public SkillExplosiveArrow(Mob mob) : base(mob) {
+    public SkillExplosiveArrow() : base() {
         addSkillType(projectileSkill);
     }
 	
@@ -23,19 +23,19 @@ public class SkillExplosiveArrow : Skill {
 	}
 	
 	public override float getMaxCooldown () {
-		return 0.5f * (1 - (mob.stats.cooldownReduction / 100));
+		return 0.5f;
 	}
 	
 	public override float getManaCost () {
 		return 25;
 	}
 	
-	public override void skillLogic () {
-        attack();
+	public override void skillLogic (Mob mob) {
+        attack(mob);
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.headTransform.position);
     }
 
-    void attack() {
+    void attack(Mob mob) {
         float y = Vector3.Distance(mob.getTargetLocation(), mob.transform.position);
         if (y > 6)
             y = 6;
@@ -43,11 +43,11 @@ public class SkillExplosiveArrow : Skill {
             y = 2;
         float angleOfSpread = (((1 - (y - 2) / 4) * 3) + 1) * 5;
         for (int i = 0; i < properties["projectileCount"]; i++) {
-            fireArrow(((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
+            fireArrow(mob, ((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
         }
     }
 
-    void fireArrow(float rotate = 0) {
+    void fireArrow(Mob mob, float rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
 		projectile = new ExplosiveArrowProjectile (basicArrow, mob);

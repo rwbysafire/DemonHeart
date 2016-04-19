@@ -46,18 +46,18 @@ public class Player : Mob {
 		stats.dexterity = 30;
 		stats.intelligence = 10;
 		stats.exp = 0;
-		listOfSkills = new Skill[12]{new SkillBasicAttack(this),
-			new SkillChainLightning(this),
-			new SkillCombatRoll(this),
-			new SkillExplosiveArrow(this),
-			new SkillPowershot(this),
-			new SkillRighteousFire(this),
-			new SkillScattershot(this),
-			new SkillSelfDestruct(this),
-			new SkillSlash(this),
-			new SkillStunArrow(this),
-			new SkillTeleport(this),
-			new SkillVolley(this)};
+		listOfSkills = new Skill[12]{new SkillBasicAttack(),
+			new SkillChainLightning(),
+			new SkillCombatRoll(),
+			new SkillExplosiveArrow(),
+			new SkillPowershot(),
+			new SkillRighteousFire(),
+			new SkillScattershot(),
+			new SkillSelfDestruct(),
+			new SkillSlash(),
+			new SkillStunArrow(),
+			new SkillTeleport(),
+			new SkillVolley()};
 		createPlayer ();
 		replaceSkill(0, listOfSkills[0]);
 		replaceSkill(1, listOfSkills[1]);
@@ -71,26 +71,26 @@ public class Player : Mob {
 	{
 		if (Time.timeScale != 0) {
 			if (Input.GetKey (KeyCode.Mouse0)) {
-				skills[0].useSkill();
+				skills[0].useSkill (this);
 			}
 			if (Input.GetKey (KeyCode.Mouse1)) {
-				skills[1].useSkill ();
+				skills[1].useSkill (this);
 			}
 			if (Input.GetKey (KeyCode.Alpha1)) {
-				skills[2].useSkill (); 
+				skills[2].useSkill (this); 
 			}
 			if (Input.GetKey (KeyCode.Alpha2)) {
-				skills[3].useSkill ();
+				skills[3].useSkill (this);
 			}
 			if (Input.GetKey (KeyCode.Alpha3)) {
-				skills[4].useSkill ();
+				skills[4].useSkill (this);
 			}
 			if (Input.GetKey (KeyCode.Alpha4)) {
-				skills[5].useSkill ();
+				skills[5].useSkill (this);
 			}
             foreach (Skill skill in skills) {
                 if (skill != null)
-                    skill.skillPassive();
+                    skill.skillPassive(this);
             }
 		}
 
@@ -174,25 +174,6 @@ public class Player : Mob {
   //          Destroy(collider.gameObject);
 		//}
   //  }
-		
-    public override void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.CompareTag("Drop")) {
-            if (collider.name == "DexterityGem(Clone)")
-            {
-                stats.dexterity += 2;
-            }
-            else if (collider.name == "StrengthGem(Clone)")
-            {
-                stats.strength += 2;
-            }
-            else if (collider.name == "IntelGem(Clone)")
-            {
-                stats.intelligence += 2;
-            }
-            Destroy(collider.gameObject);
-		}
-    }
 
 	void OnTriggerStay2D (Collider2D collider) {
 		if (collider.tag.ToLower ().StartsWith ("item") && Input.GetKeyDown (KeyCode.E)) {
@@ -208,7 +189,7 @@ public class Player : Mob {
 		for(headFrame = 1; headFrame < headSprite.Length; headFrame++) {
 			head.GetComponent<SpriteRenderer> ().sprite = headSprite[headFrame];
 			if (headFrame == 2)
-				skill.skillLogic();
+				skill.skillLogic(this);
 			yield return new WaitForSeconds(attackTime/headSprite.Length);
 		}
 		isAttacking = false;

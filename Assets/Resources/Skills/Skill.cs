@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public abstract class Skill  
 {
-	public Mob mob;
 	private float cooldown;
     public Dictionary<string, float> properties = new Dictionary<string, float>();
     public Dictionary<string, float> baseProperties = new Dictionary<string, float>();
@@ -12,8 +11,7 @@ public abstract class Skill
 	public int gemLimitCount = 3;
     private List<SkillType> skillTypes = new List<SkillType>();
 
-	public Skill(Mob mob) {
-		this.mob = mob;
+	public Skill() {
 		cooldown = 0.0f;
         updateSkill();
     }
@@ -62,10 +60,10 @@ public abstract class Skill
         updateSkill();
     }
 
-    public bool useSkill() {
+    public bool useSkill(Mob mob) {
 		if (cooldown <= Time.fixedTime && !mob.isAttacking && mob.useMana(properties["manaCost"])) {
 			mob.attack(this, properties["attackSpeed"] / mob.stats.attackSpeed);
-			cooldown = Time.fixedTime + properties["cooldown"]; 
+			cooldown = Time.fixedTime + properties["cooldown"] * (1 - (mob.stats.cooldownReduction / 100)); 
 			return true;
 		}
 		return false; 
@@ -103,7 +101,7 @@ public abstract class Skill
 	public virtual float getMaxCooldown() {return 0;}
 	public virtual float getAttackSpeed() {return 0;}
 	public abstract float getManaCost();
-	public abstract void skillLogic(); 
-	public virtual void skillPassive() {}
+	public abstract void skillLogic(Mob mob); 
+	public virtual void skillPassive(Mob mob) {}
 	public virtual void skillFixedUpdate() {}
 }

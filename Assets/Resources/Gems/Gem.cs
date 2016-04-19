@@ -86,7 +86,7 @@ public class chainLightningOnHitGem : Gem {
     private SkillChainLightning skillChainLightning;
 
     public chainLightningOnHitGem() {
-        skillChainLightning = new SkillChainLightning(GameObject.Find("Player").GetComponent<Mob>());
+        skillChainLightning = new SkillChainLightning();
         skillChainLightning.properties["manaCost"] = 0;
         properties.Add("chainCount", new property(1, "+"));
 
@@ -95,6 +95,6 @@ public class chainLightningOnHitGem : Gem {
 
     public override void onHitEffect() {
 //        Debug.Log("gem used");
-        skillChainLightning.skillLogic();
+        skillChainLightning.skillLogic(GameObject.Find("Player").GetComponent<Mob>());
     }
 }

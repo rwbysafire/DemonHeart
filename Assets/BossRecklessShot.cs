@@ -5,7 +5,7 @@ public class BossRecklessShot : Skill
 {
 	public Projectile projectile;
 	
-	public BossRecklessShot(Mob mob) : base(mob) {}
+	public BossRecklessShot() : base() {}
 	
 	private int arrowCount = 30;
 	private int i = 0;
@@ -20,22 +20,22 @@ public class BossRecklessShot : Skill
 	}
 	
 	public override float getMaxCooldown () {
-		return 5f * (1 - mob.stats.cooldownReduction / 100);
+		return 5f;
 	}
 	
 	public override float getManaCost () {
 		return 25;
 	}
 	
-	public override void skillLogic () {
+	public override void skillLogic (Mob mob) {
 		fireOn = true;
 		i = 0;
 	}
 
-	public override void skillPassive ()
+	public override void skillPassive (Mob mob)
 	{
 		if (fireOn) {
-			fireArrow (i);
+			fireArrow (mob, i);
 			AudioSource.PlayClipAtPoint (Resources.Load<AudioClip> ("Skills/pew"), mob.headTransform.position);
 			i += 30;
 			if(i == 360){
@@ -44,7 +44,7 @@ public class BossRecklessShot : Skill
 		}
 	}
 
-	void fireArrow(int rotate = 0) {
+	void fireArrow(Mob mob, int rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
 		projectile = new BossRecklessShotProjectile (basicArrow, mob);

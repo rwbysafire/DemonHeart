@@ -40,8 +40,8 @@ public class Zombie : Mob {
 		spriteAttack = Resources.LoadAll<Sprite>("Sprite/zombieAttack");
 		spriteWalk = Resources.LoadAll<Sprite>("Sprite/zombieWalk");
 		spriteIdle = Resources.LoadAll<Sprite>("Sprite/zombieIdle");
-		replaceSkill(0, new SkillSlash (this));
-		replaceSkill(1, new SkillCombatRoll (this));
+		replaceSkill(0, new SkillSlash ());
+		replaceSkill(1, new SkillCombatRoll ());
 	}
 
 	// Update is called once per frame
@@ -50,7 +50,7 @@ public class Zombie : Mob {
 		if(isAttacking)
 			return;
 		if (GameObject.FindWithTag ("Player") && Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 2) {
-			skills[0].useSkill ();
+			skills[0].useSkill (this);
 		}
 	}
 
@@ -93,7 +93,7 @@ public class Zombie : Mob {
 			if(!isStunned()) {
 				body.GetComponent<SpriteRenderer> ().sprite = spriteAttack[frame];
 				if (frame == 6)
-					skill.skillLogic ();
+					skill.skillLogic (this);
 					frame++;
 			}
 			yield return new WaitForSeconds(attackTime/spriteAttack.Length);

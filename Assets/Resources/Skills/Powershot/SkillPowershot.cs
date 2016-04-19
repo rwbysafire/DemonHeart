@@ -5,7 +5,7 @@ public class SkillPowershot : Skill
 {
 	int maxDistance = 20;
 
-	public SkillPowershot(Mob mob) : base(mob) { }
+	public SkillPowershot() : base() { }
 
 	public override string getName () {
 		return "Powershot";
@@ -20,14 +20,14 @@ public class SkillPowershot : Skill
 	}
 	
 	public override float getMaxCooldown () {
-		return 1.5f * (1 - mob.stats.cooldownReduction / 100);
+		return 1.5f;
 	}
 	
 	public override float getManaCost () {
 		return 20;
 	}
 	
-	public override void skillLogic() {
+	public override void skillLogic(Mob mob) {
 		Vector2 targetLocation = mob.headTransform.up * maxDistance + mob.headTransform.position;
 		Vector2 startLocation = mob.headTransform.position + mob.headTransform.up;
 		foreach (RaycastHit2D linecast in Physics2D.LinecastAll(startLocation, targetLocation)) {

@@ -7,7 +7,7 @@ public class SkillBasicAttack : Skill
 	public Projectile projectile;
     SkillType projectileSkill = new ProjectileSkill();
 
-	public SkillBasicAttack(Mob mob) : base(mob) {
+	public SkillBasicAttack() : base() {
         addSkillType(projectileSkill);
 //        addGem(0, new GemExtraProjectiles());
 //        addGem(1, new chainLightningOnHitGem());
@@ -29,12 +29,12 @@ public class SkillBasicAttack : Skill
 		return 0;
 	}
 	
-	public override void skillLogic() {
-        attack();
+	public override void skillLogic(Mob mob) {
+        attack(mob);
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.gameObject.transform.position);
 	}
 
-    void attack() {
+    void attack(Mob mob) {
         float y = Vector3.Distance(mob.getTargetLocation(), mob.transform.position);
         if (y > 6)
             y = 6;
@@ -42,11 +42,11 @@ public class SkillBasicAttack : Skill
             y = 2;
         float angleOfSpread = (((1-(y-2)/4)*3)+1)*5;
         for (int i = 0; i < properties["projectileCount"]; i++) {
-            fireArrow(((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
+            fireArrow(mob, ((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
         }
     }
 
-	void fireArrow(float rotate = 0) {
+	void fireArrow(Mob mob, float rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
 		GameObject arrowGlow = MonoBehaviour.Instantiate(Resources.Load("ShotGlow")) as GameObject;

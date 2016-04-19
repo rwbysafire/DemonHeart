@@ -38,18 +38,18 @@ public class Kamikaze : Mob {
 		create ();
 		transform.rotation = new Quaternion(0,0,0,0);
 		spriteWalk = Resources.LoadAll<Sprite>("Sprite/demon");
-		replaceSkill(0, new SkillSelfDestruct (this));
+		replaceSkill(0, new SkillSelfDestruct ());
 	}
 	
 	// Update is called once per frame
 	public override void OnUpdate () 
 	{
 		if (GameObject.FindWithTag ("Player") && Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 1.5)
-			skills[0].useSkill();
+			skills[0].useSkill(this);
 	}
 
 	public override void OnDeath() {
-		skills[0].useSkill ();
+		skills[0].useSkill (this);
 	}
 
 	public override Transform headTransform {
@@ -83,7 +83,7 @@ public class Kamikaze : Mob {
 	}
 
 	public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
-		skill.skillLogic();
+		skill.skillLogic(this);
 		yield return null;
 	}
 }

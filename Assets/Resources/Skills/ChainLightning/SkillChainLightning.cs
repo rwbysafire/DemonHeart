@@ -6,7 +6,7 @@ public class SkillChainLightning : Skill {
 	int timesCanChain = 2;
 	int maxDistance = 10;
 
-	public SkillChainLightning(Mob mob) : base(mob) {
+	public SkillChainLightning() : base() {
         addBaseProperty("chainCount", timesCanChain);
     }
 
@@ -19,14 +19,14 @@ public class SkillChainLightning : Skill {
 	}
 	
 	public override float getMaxCooldown () {
-		return 0.2f * (1 - mob.stats.cooldownReduction / 100);
+		return 0.2f;
 	}
 	
 	public override float getManaCost () {
 		return 5;
 	}
 
-	public override void skillLogic ()
+	public override void skillLogic (Mob mob)
 	{
 //        Debug.Log("chainlightning");
 		GameObject chainLightning = GameObject.Instantiate(Resources.Load<GameObject>("Skills/ChainLightning/Chainlightning"));
@@ -45,7 +45,7 @@ public class SkillChainLightning : Skill {
 				break;
 			}
 		}
-		GameObject enemy = FindClosestEnemy(targetLocation);
+		GameObject enemy = FindClosestEnemy(mob, targetLocation);
 		if (enemy != null) {
 			chainLightning.GetComponent<ChainLightning>().enemy = enemy;
 			chainLightning.GetComponent<ChainLightning>().target = enemy.GetComponent<Mob>().feetTransform.position;
@@ -54,7 +54,7 @@ public class SkillChainLightning : Skill {
 		}
 	}
 
-	GameObject FindClosestEnemy(Vector3 target) {
+	GameObject FindClosestEnemy(Mob mob, Vector3 target) {
 		string enemyTag;
 		if (mob.gameObject.tag == "Player" || mob.gameObject.tag == "Ally")
 			enemyTag = "Enemy"; 

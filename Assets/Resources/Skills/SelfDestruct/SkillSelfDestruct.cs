@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SkillSelfDestruct : Skill {
 
-	public SkillSelfDestruct(Mob mob) : base(mob) { }
+	public SkillSelfDestruct() : base() { }
 	
 	public override string getName () {
 		return "Self Destruct";
@@ -14,14 +14,14 @@ public class SkillSelfDestruct : Skill {
 	}
 	
 	public override float getMaxCooldown () {
-		return 1f * (1 - mob.stats.cooldownReduction / 100);
+		return 1f;
 	}
 	
 	public override float getManaCost () {
 		return 0;
 	}
 
-	public override void skillLogic ()
+	public override void skillLogic (Mob mob)
 	{
 		GameObject explosion = GameObject.Instantiate(Resources.Load<GameObject>("Skills/SelfDestruct/selfDestructExplosion"));
 		explosion.transform.position = mob.transform.position;

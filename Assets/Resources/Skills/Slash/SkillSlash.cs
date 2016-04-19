@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SkillSlash : Skill {
 
-	public SkillSlash(Mob mob) : base(mob) { }
+	public SkillSlash() : base() { }
 
 	public override string getName () {
 		return "Slash";
@@ -21,7 +21,7 @@ public class SkillSlash : Skill {
 		return 0;
 	}
 
-	public override void skillLogic () {
+	public override void skillLogic (Mob mob) {
 		GameObject slash = GameObject.Instantiate(Resources.Load<GameObject>("Skills/Slash/Slash"));
 		slash.transform.position = mob.headTransform.position;
 		slash.transform.rotation = mob.headTransform.rotation;
