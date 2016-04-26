@@ -69,14 +69,14 @@ public class DisplayStats : MonoBehaviour {
 	}
 	
 	public void setStr(int STR) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.strength += STR;
+		GameObject.Find("Player").GetComponent<Mob>().stats.baseStrength += STR;
 	}
 	
 	public void setInt(int INT) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.intelligence += INT;
+		GameObject.Find("Player").GetComponent<Mob>().stats.baseIntelligence += INT;
 	}
 	
 	public void setDex(int DEX) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.dexterity += DEX;
+		GameObject.Find("Player").GetComponent<Mob>().stats.baseDexterity += DEX;
 	}
 }

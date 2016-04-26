@@ -7,54 +7,43 @@ public class Stats {
 	public float exp = 0;
 
 	private int _strength = 10;
+	public int baseStrength {
+		get {return this._strength;}
+		set {this._strength = value;}
+	}
 	public int strengthAddon = 0;
 	public int strengthActualAddon {
-		get {
-			return this.strengthAddon * level;
-		}
+		get {return this.strengthAddon * level;}
 	}
 	public int strength {
-		get {
-			return this._strength + strengthActualAddon;
-		}
+		get {return this._strength + strengthActualAddon;}
 
-		set {
-			this._strength = value;
-		}
 	}
 
 	private int _dexterity = 10;
+	public int baseDexterity {
+		get {return this._dexterity;}
+		set {this._dexterity = value;}
+	}
 	public int dexterityAddon = 0;
 	public int dexterityActualAddon {
-		get {
-			return this.dexterityAddon * level;
-		}
+		get {return this.dexterityAddon * level;}
 	}
 	public int dexterity {
-		get {
-			return this._dexterity + dexterityActualAddon;
-		}
-
-		set {
-			this._dexterity = value;
-		}
+		get {return this._dexterity + dexterityActualAddon;}
 	}
 
 	private int _intelligence = 10;
+	public int baseIntelligence {
+		get {return this._intelligence;}
+		set {this._intelligence = value;}
+	}
 	public int intelligenceAddon = 0;
 	public int intelligenceActualAddon {
-		get {
-			return this.intelligenceAddon * level;
-		}
+		get {return this.intelligenceAddon * level;}
 	}
 	public int intelligence {
-		get {
-			return this._intelligence + intelligenceActualAddon;
-		}
-
-		set {
-			this._intelligence = value;
-		}
+		get {return this._intelligence + intelligenceActualAddon;}
 	}
 
 	public float baseHealth = 600;
@@ -124,30 +113,30 @@ public class Stats {
 	}
 
 	public void AddBuff (Buff buff) {
-		this.level += buff.level;
-		this.exp += buff.exp;
-		this.strength += buff.strength;
-		this.dexterity += buff.dexterity;
-		this.intelligence += buff.intelligence;
+		this.baseStrength += buff.baseStrength;
+		this.baseDexterity += buff.baseDexterity;
+		this.baseIntelligence += buff.baseIntelligence;
+
 		this.baseHealth += buff.baseHealth;
 		this.baseMana += buff.baseMana;
 		this.threshold += buff.threshold;
+
 		this.strengthAddon += buff.strengthAddon;
 		this.dexterityAddon += buff.dexterityAddon;
 		this.intelligenceAddon += buff.intelligenceAddon;
 	}
 
 	public void RemoveBuff (Buff buff) {
-		this.level -= buff.level;
-		this.exp -= buff.exp;
-		this.strength -= buff.strength;
-		this.dexterity -= buff.dexterity;
-		this.intelligence -= buff.intelligence;
 		this.baseHealth -= buff.baseHealth;
 		this.baseMana -= buff.baseMana;
 		this.threshold -= buff.threshold;
+
 		this.strengthAddon -= buff.strengthAddon;
 		this.dexterityAddon -= buff.dexterityAddon;
 		this.intelligenceAddon -= buff.intelligenceAddon;
+
+		this.baseStrength -= buff.baseStrength;
+		this.baseDexterity -= buff.baseDexterity;
+		this.baseIntelligence -= buff.baseIntelligence;
 	}
 }

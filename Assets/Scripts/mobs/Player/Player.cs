@@ -42,9 +42,9 @@ public class Player : Mob {
 
 	public override void OnStart ()
 	{
-		stats.strength = 20000;
-		stats.dexterity = 30;
-		stats.intelligence = 10;
+		stats.baseStrength = 20000;
+		stats.baseDexterity = 30;
+		stats.baseIntelligence = 10;
 		stats.exp = 0;
 		listOfSkills = new Skill[12]{new SkillBasicAttack(),
 			new SkillChainLightning(),
