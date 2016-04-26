@@ -214,7 +214,6 @@ public class InventoryUI : MonoBehaviour {
 		}
 			
 		item.tag = gameObject.tag;
-		item.itemName = gameObject.name.Replace("(Clone)", "");
 
 		return this.AddItem (item, Item.Type.General);
 	}

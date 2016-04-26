@@ -6,6 +6,10 @@ using System.Collections.Generic;
 public class Gem : Item {
     public Dictionary<string, property> properties = new Dictionary<string, property>();
 
+	public Gem () {
+		this.itemName = "Skill Gem";
+	}
+
     public virtual void onHitEffect() { }
 
 	public override string defaultSpritePath () {
@@ -35,6 +39,7 @@ public class Gem : Item {
 public class WeaponGem : Gem {
 	public WeaponGem () {
 		this.itemDescription = "Power up your weapon!";
+		this.itemName = "Weapon Gem";
 		properties.Add("projectileCount", new property(2, "+"));
 	}
 

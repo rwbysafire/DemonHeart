@@ -47,6 +47,40 @@ public class ArmorGemOfStrength : ArmorGem {
 	protected override void InitBuff() {
 		buff.strength = Random.Range (5, 11);
 		buff.strengthAddon = 3;
+		this.itemName = "Gem of Strength";
 		this.itemDescription = string.Format("STR +{0}(+{1}/lv)", buff.strength, buff.strengthAddon);
+	}
+}
+
+[System.Serializable]
+public class ArmorGemOfDexterity : ArmorGem {
+	protected override void InitBuff() {
+		buff.dexterity = Random.Range (5, 11);
+		buff.dexterityAddon = 3;
+		this.itemName = "Gem of Dexterity";
+		this.itemDescription = string.Format("DEX +{0}(+{1}/lv)", buff.dexterity, buff.dexterityAddon);
+	}
+}
+
+[System.Serializable]
+public class ArmorGemOfIntelligence : ArmorGem {
+	protected override void InitBuff() {
+		buff.intelligence = Random.Range (5, 11);
+		buff.intelligenceAddon = 3;
+		this.itemName = "Gem of Intelligence";
+		this.itemDescription = string.Format("INT +{0}(+{1}/lv)", buff.intelligence, buff.intelligenceAddon);
+	}
+}
+
+[System.Serializable]
+public class ArmorGemOfPower : ArmorGem {
+	protected override void InitBuff() {
+		buff.strength = Random.Range (3, 7);
+		buff.strengthAddon = 2;
+		buff.dexterity = Random.Range (2, 5);
+		buff.dexterityAddon = 1;
+		this.itemName = "Gem of Power";
+		this.itemDescription = string.Format("STR +{0}(+{1}/lv)\nDEX +{2}(+{3}/lv)",
+			buff.strength, buff.strengthAddon, buff.dexterity, buff.dexterityAddon);
 	}
 }
