@@ -46,9 +46,9 @@ public class DisplayStats : MonoBehaviour {
 			}
 			level.text = "Level: " + playerStats.level.ToString();
 			exp.text = "Exp: " + playerStats.exp.ToString();
-			STR.text = GetDisplayPropertyString ("STR", playerStats.strength, playerBuff.strength);
-			DEX.text = GetDisplayPropertyString ("DEX", playerStats.dexterity, playerBuff.dexterity);
-			INT.text = GetDisplayPropertyString ("INT", playerStats.intelligence, playerBuff.intelligence);
+			STR.text = GetDisplayPropertyString ("STR", playerStats.strength, playerBuff.strength + playerStats.strengthActualAddon);
+			DEX.text = GetDisplayPropertyString ("DEX", playerStats.dexterity, playerBuff.dexterity + playerStats.dexterityActualAddon);
+			INT.text = GetDisplayPropertyString ("INT", playerStats.intelligence, playerBuff.intelligence + playerStats.intelligenceActualAddon);
 			health.text = GetDisplayProportionString ("Health", playerStats.health, playerStats.maxHealth, playerBuff.maxHealth);
 			mana.text = GetDisplayProportionString ("Mana", playerStats.mana, playerStats.maxMana, playerBuff.maxMana);
 			attackSpeed.text = "Attack Speed: " + playerStats.attackSpeed.ToString();

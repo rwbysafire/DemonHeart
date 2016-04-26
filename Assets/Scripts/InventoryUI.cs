@@ -182,7 +182,8 @@ public class InventoryUI : MonoBehaviour {
 
 		switch (gameObject.tag) {
 		case "item_armor":
-			item = new ArmorGem ();
+//			item = new ArmorGem ();
+			item = new ArmorGemOfStrength();
 			break;
 		case "item_skill":
 			switch (((int)Time.time) % 4) {

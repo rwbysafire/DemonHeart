@@ -5,9 +5,58 @@ using System.Collections;
 public class Stats {
 	public int level = 0;
 	public float exp = 0;
-	public int strength = 10;
-	public int dexterity = 10;
-	public int intelligence = 10;
+
+	private int _strength = 10;
+	public int strengthAddon = 0;
+	public int strengthActualAddon {
+		get {
+			return this.strengthAddon * level;
+		}
+	}
+	public int strength {
+		get {
+			return this._strength + strengthActualAddon;
+		}
+
+		set {
+			this._strength = value;
+		}
+	}
+
+	private int _dexterity = 10;
+	public int dexterityAddon = 0;
+	public int dexterityActualAddon {
+		get {
+			return this.dexterityAddon * level;
+		}
+	}
+	public int dexterity {
+		get {
+			return this._dexterity + dexterityActualAddon;
+		}
+
+		set {
+			this._dexterity = value;
+		}
+	}
+
+	private int _intelligence = 10;
+	public int intelligenceAddon = 0;
+	public int intelligenceActualAddon {
+		get {
+			return this.intelligenceAddon * level;
+		}
+	}
+	public int intelligence {
+		get {
+			return this._intelligence + intelligenceActualAddon;
+		}
+
+		set {
+			this._intelligence = value;
+		}
+	}
+
 	public float baseHealth = 600;
 	public float baseMana = 200;
 	public float threshold = 200;
@@ -83,6 +132,9 @@ public class Stats {
 		this.baseHealth += buff.baseHealth;
 		this.baseMana += buff.baseMana;
 		this.threshold += buff.threshold;
+		this.strengthAddon += buff.strengthAddon;
+		this.dexterityAddon += buff.dexterityAddon;
+		this.intelligenceAddon += buff.intelligenceAddon;
 	}
 
 	public void RemoveBuff (Buff buff) {
@@ -94,5 +146,8 @@ public class Stats {
 		this.baseHealth -= buff.baseHealth;
 		this.baseMana -= buff.baseMana;
 		this.threshold -= buff.threshold;
+		this.strengthAddon -= buff.strengthAddon;
+		this.dexterityAddon -= buff.dexterityAddon;
+		this.intelligenceAddon -= buff.intelligenceAddon;
 	}
 }

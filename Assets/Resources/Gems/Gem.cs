@@ -79,44 +79,6 @@ public class GemCooldownReduction : Gem {
     }
 }
 
-[System.Serializable]
-public class ArmorGem : ArmorItem {
-	private Buff buff = new Buff ();
-
-	public ArmorGem () {
-		InitBuff ();
-	}
-
-	private void InitBuff () {
-		switch (Random.Range (0, 5)) {
-		case 0:
-			buff.baseHealth = Random.Range (100, 300);
-			this.itemDescription = "Health +" + buff.baseHealth.ToString ();
-			break;
-		case 1:
-			buff.baseMana = Random.Range (100, 300);
-			this.itemDescription = "Mana +" + buff.baseMana.ToString ();
-			break;
-		case 2:
-			buff.strength = Random.Range (10, 50);
-			this.itemDescription = "Strength +" + buff.strength.ToString ();
-			break;
-		case 3:
-			buff.intelligence = Random.Range (10, 50);
-			this.itemDescription = "Intelligence +" + buff.intelligence.ToString ();
-			break;
-		case 4:
-			buff.dexterity = Random.Range (10, 50);
-			this.itemDescription = "Dexterity +" + buff.dexterity.ToString ();
-			break;
-		}
-	}
-
-	public Buff GetBuff () {
-		return buff;
-	}
-}
-
 // need to be fixed
 // for serialization, it cannot contain the skill class
 public class chainLightningOnHitGem : Gem {
