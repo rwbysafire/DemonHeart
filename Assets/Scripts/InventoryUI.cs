@@ -182,7 +182,26 @@ public class InventoryUI : MonoBehaviour {
 
 		switch (gameObject.tag) {
 		case "item_armor":
-			item = new ArmorGem ();
+			switch (((int)Time.time) % 5) {
+			case 0:
+				item = new ArmorGemOfDexterity ();
+				break;
+			case 1:
+				item = new ArmorGemOfIntelligence ();
+				break;
+			case 2:
+				item = new ArmorGemOfPower ();
+				break;
+			case 3:
+				item = new ArmorGemOfSpeed ();
+				break;
+			case 4:
+				item = new ArmorGemOfStrength ();
+				break;
+			default:
+				item = new Gem ();
+				break;
+			}
 			break;
 		case "item_skill":
 			switch (((int)Time.time) % 4) {
@@ -213,7 +232,6 @@ public class InventoryUI : MonoBehaviour {
 		}
 			
 		item.tag = gameObject.tag;
-		item.itemName = gameObject.name.Replace("(Clone)", "");
 
 		return this.AddItem (item, Item.Type.General);
 	}

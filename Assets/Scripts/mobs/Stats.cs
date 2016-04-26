@@ -5,9 +5,47 @@ using System.Collections;
 public class Stats {
 	public int level = 0;
 	public float exp = 0;
-	public int strength = 10;
-	public int dexterity = 10;
-	public int intelligence = 10;
+
+	private int _strength = 10;
+	public int baseStrength {
+		get {return this._strength;}
+		set {this._strength = value;}
+	}
+	public int strengthAddon = 0;
+	public int strengthActualAddon {
+		get {return this.strengthAddon * level;}
+	}
+	public int strength {
+		get {return this._strength + strengthActualAddon;}
+
+	}
+
+	private int _dexterity = 10;
+	public int baseDexterity {
+		get {return this._dexterity;}
+		set {this._dexterity = value;}
+	}
+	public int dexterityAddon = 0;
+	public int dexterityActualAddon {
+		get {return this.dexterityAddon * level;}
+	}
+	public int dexterity {
+		get {return this._dexterity + dexterityActualAddon;}
+	}
+
+	private int _intelligence = 10;
+	public int baseIntelligence {
+		get {return this._intelligence;}
+		set {this._intelligence = value;}
+	}
+	public int intelligenceAddon = 0;
+	public int intelligenceActualAddon {
+		get {return this.intelligenceAddon * level;}
+	}
+	public int intelligence {
+		get {return this._intelligence + intelligenceActualAddon;}
+	}
+
 	public float baseHealth = 600;
 	public float baseMana = 200;
 	public float threshold = 200;
@@ -75,24 +113,30 @@ public class Stats {
 	}
 
 	public void AddBuff (Buff buff) {
-		this.level += buff.level;
-		this.exp += buff.exp;
-		this.strength += buff.strength;
-		this.dexterity += buff.dexterity;
-		this.intelligence += buff.intelligence;
+		this.baseStrength += buff.baseStrength;
+		this.baseDexterity += buff.baseDexterity;
+		this.baseIntelligence += buff.baseIntelligence;
+
 		this.baseHealth += buff.baseHealth;
 		this.baseMana += buff.baseMana;
 		this.threshold += buff.threshold;
+
+		this.strengthAddon += buff.strengthAddon;
+		this.dexterityAddon += buff.dexterityAddon;
+		this.intelligenceAddon += buff.intelligenceAddon;
 	}
 
 	public void RemoveBuff (Buff buff) {
-		this.level -= buff.level;
-		this.exp -= buff.exp;
-		this.strength -= buff.strength;
-		this.dexterity -= buff.dexterity;
-		this.intelligence -= buff.intelligence;
 		this.baseHealth -= buff.baseHealth;
 		this.baseMana -= buff.baseMana;
 		this.threshold -= buff.threshold;
+
+		this.strengthAddon -= buff.strengthAddon;
+		this.dexterityAddon -= buff.dexterityAddon;
+		this.intelligenceAddon -= buff.intelligenceAddon;
+
+		this.baseStrength -= buff.baseStrength;
+		this.baseDexterity -= buff.baseDexterity;
+		this.baseIntelligence -= buff.baseIntelligence;
 	}
 }

@@ -156,8 +156,8 @@ public abstract class Mob : MonoBehaviour{
 	public virtual void OnFixedUpdate() {}
 
 	public void AddBuffToStats (Buff buff) {
-		this.stats.AddBuff (buff);
 		this.buff.AddBuff (buff);
+		this.stats.AddBuff (buff);
 	}
 
 	public void RemoveBuffFromStats (Buff buff) {
