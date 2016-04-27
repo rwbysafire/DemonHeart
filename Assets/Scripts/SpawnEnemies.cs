@@ -47,7 +47,7 @@ public class SpawnEnemies : MonoBehaviour {
 		isSpawning = true;
 
 		// wait some seconds before start
-		WholeScreenTextScript.ShowText("New wave is comming...");
+		WholeScreenTextScript.ShowText("Wave " + (currentWave + 1).ToString() + " is coming...");
 		yield return new WaitForSeconds(2.5f);
 
         while (wave.count > 0) {
