@@ -110,7 +110,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.93201733, y: -4.00573921, z: 1}
+  m_LocalPosition: {x: 8.932017, y: -4.005739, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22454616}
@@ -123,9 +123,10 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100318}
+  m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 10
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -139,12 +140,13 @@ CircleCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100318}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 6200000, guid: 5feea8fda2c126b48a6d5adc93a2483d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .600000024
+  m_Radius: 0.6
 --- !u!114 &11433382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .878000021, g: .0529999994, b: .0529999994, a: 1}
+  m_Color: {r: 0.878, g: 0.053, b: 0.053, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -213,11 +215,11 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: .960784316, g: .960784316, b: .960784316, a: 1}
-    m_PressedColor: {r: .784313738, g: .784313738, b: .784313738, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: .100000001
+    m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -279,6 +281,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5f5a260a21d0d46b01a93612fc5ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    level: 0
+    exp: 0
+    strengthAddon: 0
+    dexterityAddon: 0
+    intelligenceAddon: 0
+    baseHealth: 600
+    baseMana: 200
+    threshold: 200
+    health: 0
+    mana: 0
+  buff:
+    level: 0
+    exp: 0
+    strengthAddon: 0
+    dexterityAddon: 0
+    intelligenceAddon: 0
+    baseHealth: 0
+    baseMana: 0
+    threshold: 0
+    health: 0
+    mana: 0
+  isAttacking: 0
+  dropTable:
+  - Gems/ArmorGem
+  - Gems/SkillGem
   spriteAttack: []
   spriteWalk: []
   spriteIdle: []
@@ -327,14 +355,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: cea365a536a699e4591c717ac12e1027, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!222 &22275268
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -364,6 +396,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 9999
+  m_TargetDisplay: 0
 --- !u!224 &22407844
 RectTransform:
   m_ObjectHideFlags: 1
@@ -382,7 +415,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: .5, y: .5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22408346
 RectTransform:
   m_ObjectHideFlags: 1
@@ -397,9 +430,9 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 5.96046448e-08}
+  m_AnchoredPosition: {x: 0, y: 0.000000059604645}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: .5, y: .5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22454616
 RectTransform:
   m_ObjectHideFlags: 1
@@ -416,8 +449,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1.55499995, y: .151999995}
-  m_Pivot: {x: .5, y: -6.06434155}
+  m_SizeDelta: {x: 1.555, y: 0.152}
+  m_Pivot: {x: 0.5, y: -6.0643415}
 --- !u!224 &22469272
 RectTransform:
   m_ObjectHideFlags: 1
@@ -431,11 +464,11 @@ RectTransform:
   - {fileID: 22477590}
   m_Father: {fileID: 22407844}
   m_RootOrder: 1
-  m_AnchorMin: {x: .0101093315, y: .0936588943}
-  m_AnchorMax: {x: .990522563, y: .893000066}
-  m_AnchoredPosition: {x: 4.19095159e-08, y: -1.53668225e-08}
-  m_SizeDelta: {x: 2.3842e-07, y: -2.23520004e-07}
-  m_Pivot: {x: .5, y: .5}
+  m_AnchorMin: {x: 0.010109331, y: 0.093658894}
+  m_AnchorMax: {x: 0.99052256, y: 0.89300007}
+  m_AnchoredPosition: {x: 0.000000041909516, y: -0.000000015366822}
+  m_SizeDelta: {x: 0.00000023842, y: -0.00000022352}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22477590
 RectTransform:
   m_ObjectHideFlags: 1
@@ -452,7 +485,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: .5, y: .5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -487,6 +520,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
