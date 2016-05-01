@@ -27,10 +27,10 @@ public class SkillStunArrow : Skill
 		return 30;
 	}
 	
-	public override void skillLogic(Mob mob) {
+	public override void skillLogic(Entity mob, Stats stats) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate(Resources.Load("Skills/Arrow_Placeholder")) as GameObject;
-		projectile = new StunArrowProjectile (basicArrow, mob);
+		projectile = new StunArrowProjectile (basicArrow, stats);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = mob.headTransform.position;
@@ -43,7 +43,7 @@ public class SkillStunArrow : Skill
 }
 
 class StunArrowProjectile : Projectile {
-	public StunArrowProjectile(GameObject gameObject, Mob mob) : base(gameObject, mob) {}
+	public StunArrowProjectile(GameObject gameObject, Stats stats) : base(gameObject, stats) {}
 	public override void OnHit () {
 		GameObject explosion = GameObject.Instantiate(Resources.Load("Skills/Explosion")) as GameObject;
 		explosion.transform.position = collider.transform.position;
@@ -54,7 +54,7 @@ class StunArrowProjectile : Projectile {
 		return 5;
 	}
 	public override float getDamage () {
-		return 2 * mob.stats.attackDamage;
+		return 2 * stats.attackDamage;
 	}
 	public override float getStunTime () {
 		return 2;

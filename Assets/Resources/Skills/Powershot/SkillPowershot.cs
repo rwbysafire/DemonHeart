@@ -27,7 +27,7 @@ public class SkillPowershot : Skill
 		return 20;
 	}
 	
-	public override void skillLogic(Mob mob) {
+	public override void skillLogic(Entity mob, Stats stats) {
 		Vector2 targetLocation = mob.headTransform.up * maxDistance + mob.headTransform.position;
 		Vector2 startLocation = mob.headTransform.position + mob.headTransform.up;
 		foreach (RaycastHit2D linecast in Physics2D.LinecastAll(startLocation, targetLocation)) {
@@ -47,7 +47,7 @@ public class SkillPowershot : Skill
 		collider.isTrigger = true;
         collider.size = new Vector2(0.5f, 1f);
         PowershotEffect p = powershot.AddComponent<PowershotEffect>();
-		p.mob = mob;
+		p.mob = mob.gameObject.GetComponent<Mob>();
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/Powershot/sniperShot"), mob.headTransform.position);
 	}
 }

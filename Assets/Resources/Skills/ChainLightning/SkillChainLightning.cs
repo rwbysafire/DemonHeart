@@ -26,12 +26,12 @@ public class SkillChainLightning : Skill {
 		return 5;
 	}
 
-	public override void skillLogic (Mob mob)
+	public override void skillLogic (Entity mob, Stats stats)
 	{
 //        Debug.Log("chainlightning");
 		GameObject chainLightning = GameObject.Instantiate(Resources.Load<GameObject>("Skills/ChainLightning/Chainlightning"));
-		chainLightning.transform.position = mob.transform.position;
-		chainLightning.GetComponent<ChainLightning>().mob = mob;
+		chainLightning.transform.position = mob.headTransform.position;
+		chainLightning.GetComponent<ChainLightning>().stats = stats;
 		chainLightning.GetComponent<ChainLightning>().chainTimes = (int)properties["chainCount"];
 		chainLightning.GetComponent<ChainLightning>().maxDistance = maxDistance;
 		Vector3 targetLocation;
@@ -45,7 +45,7 @@ public class SkillChainLightning : Skill {
 				break;
 			}
 		}
-		GameObject enemy = FindClosestEnemy(mob, targetLocation);
+		GameObject enemy = FindClosestEnemy(mob, stats.tag, targetLocation);
 		if (enemy != null) {
 			chainLightning.GetComponent<ChainLightning>().enemy = enemy;
 			chainLightning.GetComponent<ChainLightning>().target = enemy.GetComponent<Mob>().feetTransform.position;
@@ -54,9 +54,9 @@ public class SkillChainLightning : Skill {
 		}
 	}
 
-	GameObject FindClosestEnemy(Mob mob, Vector3 target) {
+	GameObject FindClosestEnemy(Entity mob, string tag, Vector3 target) {
 		string enemyTag;
-		if (mob.gameObject.tag == "Player" || mob.gameObject.tag == "Ally")
+		if (tag == "Player" || tag == "Ally")
 			enemyTag = "Enemy"; 
 		else
 			enemyTag = "Player";

@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour {
 	public Skill basicAttack;
 	public Skill scattershot;
 	public Skill slash;
-	public Stats stats = new Stats();
+	public Stats stats = new Stats("Enemy");
 	private Vector3 playerPosition;
 	
 	public Sprite[] spriteAttack, spriteWalk, spriteIdle;

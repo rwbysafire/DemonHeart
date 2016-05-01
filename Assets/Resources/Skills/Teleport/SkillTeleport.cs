@@ -23,7 +23,7 @@ public class SkillTeleport : Skill
 		return 25;
 	}
 
-	public override void skillLogic(Mob mob) {
+	public override void skillLogic(Entity mob, Stats stats) {
 		GameObject teleport = GameObject.Instantiate(Resources.Load<GameObject>("Skills/Teleport/Teleport"));
 		LineRenderer lineRenderer = teleport.AddComponent<LineRenderer>();
 		lineRenderer.material = Resources.Load<Material>("Skills/Teleport/blur");
@@ -38,14 +38,14 @@ public class SkillTeleport : Skill
 		else
 			teleportLocation = mob.getTargetLocation();
 		if (!Physics2D.OverlapPoint(teleportLocation))
-			mob.transform.position = teleportLocation;
+			mob.gameObject.transform.position = teleportLocation;
 		else {
 			RaycastHit2D[] hit = Physics2D.LinecastAll(mob.feetTransform.position, teleportLocation);
 			for (int x = hit.Length - 1; x >= 0; x--) {
 				teleportLocation = hit[x].point;
 				teleportLocation -= (mob.getTargetLocation() - mob.feetTransform.position).normalized * mob.gameObject.GetComponent<CircleCollider2D>().radius;
 				if (Physics2D.OverlapPointAll(teleportLocation).Length == 0) {
-					mob.transform.position = hit[x].point;
+					mob.gameObject.transform.position = hit[x].point;
 					break;
 				}
 			}
@@ -54,7 +54,7 @@ public class SkillTeleport : Skill
 		displayFlash(mob);
 	}
 
-	void displayFlash(Mob mob)
+	void displayFlash(Entity mob)
 	{
 		GameObject flash = new GameObject ();
 		flash.transform.position = mob.feetTransform.position;

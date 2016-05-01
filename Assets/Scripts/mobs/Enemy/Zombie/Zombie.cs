@@ -93,7 +93,7 @@ public class Zombie : Mob {
 			if(!isStunned()) {
 				body.GetComponent<SpriteRenderer> ().sprite = spriteAttack[frame];
 				if (frame == 6)
-					skill.skillLogic (this);
+					skill.skillLogic (this, stats);
 					frame++;
 			}
 			yield return new WaitForSeconds(attackTime/spriteAttack.Length);

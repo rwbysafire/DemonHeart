@@ -30,27 +30,27 @@ public class SkillExplosiveArrow : Skill {
 		return 25;
 	}
 	
-	public override void skillLogic (Mob mob) {
-        attack(mob);
+	public override void skillLogic (Entity mob, Stats stats) {
+        attack(mob, stats);
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.headTransform.position);
     }
 
-    void attack(Mob mob) {
-        float y = Vector3.Distance(mob.getTargetLocation(), mob.transform.position);
+    void attack(Entity mob, Stats stats) {
+        float y = Vector3.Distance(mob.getTargetLocation(), mob.headTransform.position);
         if (y > 6)
             y = 6;
         else if (y < 2)
             y = 2;
         float angleOfSpread = (((1 - (y - 2) / 4) * 3) + 1) * 5;
         for (int i = 0; i < properties["projectileCount"]; i++) {
-            fireArrow(mob, ((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
+            fireArrow(mob, stats, ((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
         }
     }
 
-    void fireArrow(Mob mob, float rotate = 0) {
+    void fireArrow(Entity mob, Stats stats, float rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
-		projectile = new ExplosiveArrowProjectile (basicArrow, mob);
+		projectile = new ExplosiveArrowProjectile (basicArrow, stats);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = mob.headTransform.position;
@@ -63,7 +63,7 @@ public class SkillExplosiveArrow : Skill {
 }
 
 class ExplosiveArrowProjectile : Projectile {
-	public ExplosiveArrowProjectile(GameObject gameObject, Mob mob) : base(gameObject, mob) {}
+	public ExplosiveArrowProjectile(GameObject gameObject, Stats stats) : base(gameObject, stats) {}
 	public override void OnHit () {
 		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
 		RaycastHit2D target = hit[0];
@@ -74,7 +74,7 @@ class ExplosiveArrowProjectile : Projectile {
 			}
 		}
 		GameObject explosion = GameObject.Instantiate(Resources.Load<GameObject>("Skills/ExplosiveArrow/FireExplosion"));
-		explosion.GetComponent<ExplosiveArrowExplosion>().damage = 2 * mob.stats.attackDamage;
+		explosion.GetComponent<ExplosiveArrowExplosion>().damage = 2 * stats.attackDamage;
 		explosion.transform.position = target.point;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
 		if (tag == "Player" || tag == "Ally")
@@ -89,7 +89,7 @@ class ExplosiveArrowProjectile : Projectile {
 		return 0.5f;
 	}
 	public override float getDamage () {
-		return 1 * mob.stats.basicAttackDamage;
+		return 1 * stats.basicAttackDamage;
 	}
 }
 

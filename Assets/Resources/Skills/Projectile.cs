@@ -4,7 +4,6 @@ using System.Collections;
 public abstract class Projectile {
 
 	public GameObject gameObject;
-	public Mob mob;
 	public float speed, damage, duration, pierceChance, stunTime, chainTimes, turnSpeed;
 	public bool isHoming, isForking;
 	public int lastHit;
@@ -12,13 +11,14 @@ public abstract class Projectile {
 	public string tag;
 	public string enemyTag;
 	public Collider2D collider;
+    public Stats stats;
 
     public Skill skill;
 	
-	public Projectile(GameObject gameObject, Mob mob, Skill skill = null) {
+	public Projectile(GameObject gameObject, Stats stats, Skill skill = null) {
 		this.gameObject = gameObject;
-		this.mob = mob;
-		tag = mob.gameObject.tag;
+        this.stats = stats;
+        this.tag = stats.tag;
 		if (tag == "Player" || tag == "Ally")
 			enemyTag = "Enemy"; 
 		else

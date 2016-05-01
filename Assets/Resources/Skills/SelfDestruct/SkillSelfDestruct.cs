@@ -21,12 +21,12 @@ public class SkillSelfDestruct : Skill {
 		return 0;
 	}
 
-	public override void skillLogic (Mob mob)
+	public override void skillLogic (Entity mob, Stats stats)
 	{
 		GameObject explosion = GameObject.Instantiate(Resources.Load<GameObject>("Skills/SelfDestruct/selfDestructExplosion"));
-		explosion.transform.position = mob.transform.position;
-		explosion.GetComponent<bloodExplosion>().maxHealth = mob.stats.maxHealth;
+		explosion.transform.position = mob.feetTransform.position;
+		explosion.GetComponent<bloodExplosion>().maxHealth = stats.maxHealth;
 		explosion.GetComponent<bloodExplosion>().enemyTag = mob.getEnemyTag();
-		mob.hurt(mob.stats.health);
+		mob.gameObject.GetComponent<Mob>().hurt(stats.health);
 	}
 }

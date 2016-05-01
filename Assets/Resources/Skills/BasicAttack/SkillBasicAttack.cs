@@ -29,30 +29,30 @@ public class SkillBasicAttack : Skill
 		return 0;
 	}
 	
-	public override void skillLogic(Mob mob) {
-        attack(mob);
+	public override void skillLogic(Entity mob, Stats stats) {
+        attack(mob, stats);
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.gameObject.transform.position);
 	}
 
-    void attack(Mob mob) {
-        float y = Vector3.Distance(mob.getTargetLocation(), mob.transform.position);
+    void attack(Entity mob, Stats stats) {
+        float y = Vector3.Distance(mob.getTargetLocation(), mob.headTransform.position);
         if (y > 6)
             y = 6;
         else if (y < 2)
             y = 2;
         float angleOfSpread = (((1-(y-2)/4)*3)+1)*5;
         for (int i = 0; i < properties["projectileCount"]; i++) {
-            fireArrow(mob, ((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
+            fireArrow(mob, stats, ((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
         }
     }
 
-	void fireArrow(Mob mob, float rotate = 0) {
+	void fireArrow(Entity mob, Stats stats, float rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
 		GameObject arrowGlow = MonoBehaviour.Instantiate(Resources.Load("ShotGlow")) as GameObject;
 		arrowGlow.transform.position = new Vector3(basicArrow.transform.position.x, basicArrow.transform.position.y, -0.3f);
 		arrowGlow.transform.SetParent (basicArrow.transform);
-		projectile = new BasicAttackProjectile (basicArrow, mob, this);
+		projectile = new BasicAttackProjectile (basicArrow, stats, this);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = mob.headTransform.position;
@@ -66,13 +66,13 @@ public class SkillBasicAttack : Skill
 }
 
 class BasicAttackProjectile : Projectile {
-	public BasicAttackProjectile(GameObject gameObject, Mob mob, Skill skill) : base(gameObject, mob, skill) {}
+	public BasicAttackProjectile(GameObject gameObject, Stats stats, Skill skill) : base(gameObject, stats, skill) {}
 	public override void OnHit () {
         if (collider.CompareTag("Enemy")) {
-            mob.useMana(-10);
+            stats.mana += 10;
             foreach (Gem gem in skill.gems) {
                 if (gem != null) {
-                    gem.onHitEffect();
+                    gem.onHitEffect(gameObject.GetComponent<basic_projectile>(), stats);
                 }
             }
         }
@@ -96,6 +96,6 @@ class BasicAttackProjectile : Projectile {
 		return 0.5f;
 	}
 	public override float getDamage () {
-		return 1 * mob.stats.basicAttackDamage;
+		return 1 * stats.basicAttackDamage;
 	}
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 [System.Serializable]
 public class Buff : Stats {
-	public Buff () {
+	public Buff (string tag = "") : base (tag){
 		this.level = 0;
 		this.exp = 0;
 		this.baseStrength = 0;

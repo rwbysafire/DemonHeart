@@ -27,7 +27,7 @@ public class BossRecklessShot : Skill
 		return 25;
 	}
 	
-	public override void skillLogic (Mob mob) {
+	public override void skillLogic (Entity mob, Stats stats) {
 		fireOn = true;
 		i = 0;
 	}
@@ -35,7 +35,7 @@ public class BossRecklessShot : Skill
 	public override void skillPassive (Mob mob)
 	{
 		if (fireOn) {
-			fireArrow (mob, i);
+			fireArrow (mob, mob.stats, i);
 			AudioSource.PlayClipAtPoint (Resources.Load<AudioClip> ("Skills/pew"), mob.headTransform.position);
 			i += 30;
 			if(i == 360){
@@ -44,10 +44,10 @@ public class BossRecklessShot : Skill
 		}
 	}
 
-	void fireArrow(Mob mob, int rotate = 0) {
+	void fireArrow(Entity mob, Stats stats, int rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
-		projectile = new BossRecklessShotProjectile (basicArrow, mob);
+		projectile = new BossRecklessShotProjectile (basicArrow, stats);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		basicArrow.GetComponent<PlayAnimation> ().fileName = "Sprite/fire";
 		//Initiates the projectile's position and rotation
@@ -60,7 +60,7 @@ public class BossRecklessShot : Skill
 }
 
 class BossRecklessShotProjectile : Projectile {
-	public BossRecklessShotProjectile(GameObject gameObject, Mob mob) : base(gameObject, mob) {}
+	public BossRecklessShotProjectile(GameObject gameObject, Stats stats) : base(gameObject, stats) {}
 	public override void OnHit () {
 		GameObject explosion = GameObject.Instantiate(Resources.Load("Skills/Explosion")) as GameObject;
 		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
@@ -78,7 +78,7 @@ class BossRecklessShotProjectile : Projectile {
 		return 10;
 	}
 	public override float getDamage () {
-		return (1 * mob.stats.basicAttackDamage) + (0.3f * mob.stats.attackDamage);
+		return (1 * stats.basicAttackDamage) + (0.3f * stats.attackDamage);
 	}
 	public override float getDuration () {
 		return 3f;

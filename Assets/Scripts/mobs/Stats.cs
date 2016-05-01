@@ -3,6 +3,12 @@ using System.Collections;
 
 [System.Serializable]
 public class Stats {
+    public string tag;
+
+    public Stats (string tag) {
+        this.tag = tag;
+    }
+
 	public int level = 0;
 	public float exp = 0;
 

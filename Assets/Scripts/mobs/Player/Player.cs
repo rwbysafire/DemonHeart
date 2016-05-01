@@ -189,7 +189,7 @@ public class Player : Mob {
 		for(headFrame = 1; headFrame < headSprite.Length; headFrame++) {
 			head.GetComponent<SpriteRenderer> ().sprite = headSprite[headFrame];
 			if (headFrame == 2)
-				skill.skillLogic(this);
+				skill.skillLogic(this, stats);
 			yield return new WaitForSeconds(attackTime/headSprite.Length);
 		}
 		isAttacking = false;

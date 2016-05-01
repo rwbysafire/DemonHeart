@@ -83,7 +83,7 @@ public class Kamikaze : Mob {
 	}
 
 	public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
-		skill.skillLogic(this);
+		skill.skillLogic(this, stats);
 		yield return null;
 	}
 }

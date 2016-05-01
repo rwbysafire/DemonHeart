@@ -10,7 +10,7 @@ public class Gem : Item {
 		this.itemName = "Skill Gem";
 	}
 
-    public virtual void onHitEffect() { }
+    public virtual void onHitEffect(Entity entity, Stats stats) { }
 
 	public override string defaultSpritePath () {
 		return "Sprite/gems/gem5";
@@ -86,20 +86,20 @@ public class GemCooldownReduction : Gem {
 
 // need to be fixed
 // for serialization, it cannot contain the skill class
-public class chainLightningOnHitGem : Gem {
+[System.Serializable]
+public class GemChainLightningOnHit : Gem {
 
-    private SkillChainLightning skillChainLightning;
-
-    public chainLightningOnHitGem() {
-        skillChainLightning = new SkillChainLightning();
-        skillChainLightning.properties["manaCost"] = 0;
-        properties.Add("chainCount", new property(1, "+"));
+    public GemChainLightningOnHit() {
+        //properties.Add("chainCount", new property(1, "+"));
 
 		this.itemDescription = "Chain lightning";
     }
 
-    public override void onHitEffect() {
-//        Debug.Log("gem used");
-        skillChainLightning.skillLogic(GameObject.Find("Player").GetComponent<Mob>());
+    public override void onHitEffect(Entity entity, Stats stats) {
+        //Debug.Log("gem used");
+        SkillChainLightning skillChainLightning = new SkillChainLightning();
+        Debug.Log(stats.tag);
+        skillChainLightning.properties["manaCost"] = 0;
+        skillChainLightning.skillLogic(entity, stats);
     }
 }

@@ -1,12 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class basic_projectile : MonoBehaviour
+public class basic_projectile : MonoBehaviour, Entity
 {
 
 	public Projectile projectile;
 
-	void Start() {
+    public Transform headTransform {
+        get {
+            return transform;
+        }
+    }
+
+    public Transform feetTransform {
+        get {
+            return transform;
+        }
+    }
+
+    void Start() {
 
 	}
 	
@@ -26,4 +38,12 @@ public class basic_projectile : MonoBehaviour
 	{
 		StartCoroutine(coroutineMethod);
 	}
+
+    public Vector3 getTargetLocation() {
+        return transform.forward;
+    }
+
+    public string getEnemyTag() {
+        return projectile.enemyTag;
+    }
 }

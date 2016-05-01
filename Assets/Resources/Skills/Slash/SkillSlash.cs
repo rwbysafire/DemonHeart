@@ -21,15 +21,12 @@ public class SkillSlash : Skill {
 		return 0;
 	}
 
-	public override void skillLogic (Mob mob) {
+	public override void skillLogic (Entity mob, Stats stats) {
 		GameObject slash = GameObject.Instantiate(Resources.Load<GameObject>("Skills/Slash/Slash"));
 		slash.transform.position = mob.headTransform.position;
 		slash.transform.rotation = mob.headTransform.rotation;
-		slash.transform.SetParent(mob.gameObject.transform);
-		slash.GetComponent<SlashLogic>().damage = 1f * mob.stats.attackDamage;
-		if (mob.gameObject.tag == "Player" || mob.gameObject.tag == "Ally")
-			slash.GetComponent<SlashLogic>().enemyTag = "Enemy"; 
-		else
-			slash.GetComponent<SlashLogic>().enemyTag = "Player";
+		slash.transform.SetParent(mob.headTransform);
+		slash.GetComponent<SlashLogic>().damage = 1f * stats.attackDamage;
+		slash.GetComponent<SlashLogic>().enemyTag = mob.getEnemyTag();
 	}
 }

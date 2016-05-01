@@ -204,9 +204,8 @@ public class InventoryUI : MonoBehaviour {
 			}
 			break;
 		case "item_skill":
-			switch (((int)Time.time) % 4) {
+			switch (((int)Time.time) % 5) {
 			case 0:
-//				item = new chainLightningOnHitGem ();
 				item = new GemAttackSpeed ();
 				break;
 			case 1:
@@ -217,6 +216,9 @@ public class InventoryUI : MonoBehaviour {
 				break;
             case 3:
                 item = new GemCooldownReduction ();
+                break;
+            case 4:
+                item = new GemChainLightningOnHit();
                 break;
             default:
 				item = new Gem ();

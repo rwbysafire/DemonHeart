@@ -21,12 +21,12 @@ public class SkillRighteousFire : Skill {
 		return 0;
 	}
 	
-	public override void skillLogic (Mob mob) {
+	public override void skillLogic (Entity mob, Stats stats) {
 		if (mob.gameObject.transform.FindChild("RighteousFire(Clone)") == null) {
 			GameObject righteousFire = GameObject.Instantiate(Resources.Load<GameObject>("Skills/RighteousFire/RighteousFire"));
 			righteousFire.transform.position = mob.feetTransform.position;
 			righteousFire.transform.SetParent(mob.gameObject.transform);
-			righteousFire.GetComponent<RighteousFire>().mob = mob;
+			righteousFire.GetComponent<RighteousFire>().mob = mob.gameObject.GetComponent<Mob>();
 		}
 	}
 }

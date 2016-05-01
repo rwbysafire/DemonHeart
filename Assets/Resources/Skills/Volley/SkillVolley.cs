@@ -31,27 +31,27 @@ public class SkillVolley : Skill {
 		return 25;
 	}
 	
-	public override void skillLogic(Mob mob) {
-        attack(mob);
+	public override void skillLogic(Entity mob, Stats stats) {
+        attack(mob, stats);
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/pew"), mob.headTransform.position);
     }
 
-    void attack(Mob mob) {
-        float y = Vector3.Distance(mob.getTargetLocation(), mob.transform.position);
+    void attack(Entity mob, Stats stats) {
+        float y = Vector3.Distance(mob.getTargetLocation(), mob.headTransform.position);
         if (y > 6)
             y = 6;
         else if (y < 2)
             y = 2;
         float angleOfSpread = (((1 - (y - 2) / 4) * 3) + 1) * 5;
         for (int i = 0; i < properties["projectileCount"]; i++) {
-            fireArrow(mob, ((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
+            fireArrow(mob, stats, ((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
         }
     }
 
-    void fireArrow(Mob mob, float rotate = 0) {
+    void fireArrow(Entity mob, Stats stats, float rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
-		projectile = new VolleyProjectile (basicArrow, mob);
+		projectile = new VolleyProjectile (basicArrow, stats);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = mob.headTransform.position;
@@ -64,7 +64,7 @@ public class SkillVolley : Skill {
 }
 
 class VolleyProjectile : Projectile {
-	public VolleyProjectile(GameObject gameObject, Mob mob) : base(gameObject, mob) {}
+	public VolleyProjectile(GameObject gameObject, Stats stats) : base(gameObject, stats) {}
 	public override void OnHit () {
 		GameObject explosion = GameObject.Instantiate(Resources.Load("Skills/Explosion")) as GameObject;
 		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
@@ -83,7 +83,7 @@ class VolleyProjectile : Projectile {
 		return 40;
 	}
 	public override float getDamage () {
-		return (1 * mob.stats.basicAttackDamage) + (0.3f * mob.stats.attackDamage);
+		return (1 * stats.basicAttackDamage) + (0.3f * stats.attackDamage);
 	}
 	public override float getTurnSpeed () {
 		return 200;

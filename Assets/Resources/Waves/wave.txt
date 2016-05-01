@@ -4,7 +4,8 @@
     "i-can-be-a-string",
     "03",
     "_",
-    "5"
+    "5",
+	"endless"
   ],
 
   "1": {
@@ -42,5 +43,14 @@
       "Zombie",
       "Kamikaze"
     ]
+  },
+
+  "endless": {
+    "count": 99999999,
+    "enemies": [
+      "Zombie",
+      "Kamikaze"
+    ]
   }
+
 }

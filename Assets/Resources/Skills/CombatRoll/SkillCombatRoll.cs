@@ -25,12 +25,12 @@ public class SkillCombatRoll : Skill {
 		return 15;
 	}
 	
-	public override void skillLogic(Mob mob) {
-		mob.disableMovement(0.2f);
+	public override void skillLogic(Entity mob, Stats stats) {
+		mob.gameObject.GetComponent<Mob>().disableMovement(0.2f);
 		timer = Time.fixedTime + 0.2f;
 		knockback = new GameObject();
-		knockback.transform.position = mob.transform.position;
-		knockback.transform.SetParent(mob.transform);
+		knockback.transform.position = mob.feetTransform.position;
+		knockback.transform.SetParent(mob.feetTransform);
 		knockback.AddComponent<CircleCollider2D>();
 		knockback.AddComponent<Rigidbody2D>();
 		Physics2D.IgnoreCollision(knockback.GetComponent<CircleCollider2D>(), mob.gameObject.GetComponent<CircleCollider2D>());

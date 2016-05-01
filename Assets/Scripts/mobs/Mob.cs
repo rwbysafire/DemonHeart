@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Mob : MonoBehaviour{
+public abstract class Mob : MonoBehaviour , Entity{
 	
-	public Stats stats = new Stats();
+	public Stats stats;
 	public Buff buff = new Buff();
 	private float stunTime = 0;
 	private float canMove = 0;
@@ -74,7 +74,8 @@ public abstract class Mob : MonoBehaviour{
 	public abstract string getName();
 	public abstract Vector3 getTargetLocation();
 	void Start() {
-		OnStart();
+        stats = new Stats(tag);
+        OnStart();
 		stats.health = stats.maxHealth;
 		stats.mana = stats.maxMana;
 	}

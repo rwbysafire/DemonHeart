@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ChainLightning : MonoBehaviour {
 	
-	public Mob mob;
+	public Stats stats;
 	float alpha = 1f;
 	ArrayList lastHit = new ArrayList();
 	public int chainTimes;
@@ -15,18 +15,18 @@ public class ChainLightning : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (mob.gameObject.tag == "Player" || mob.gameObject.tag == "Ally")
+		if (stats.tag == "Player" || stats.tag == "Ally")
 			enemyTag = "Enemy"; 
 		else
 			enemyTag = "Player";
-		LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer>();
+        LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer>();
 		lineRenderer.material = Resources.Load<Material>("Skills/ChainLightning/lightningMaterial");
 		lineRenderer.sortingOrder = 4;
 		lineRenderer.SetPosition(0, transform.position);
 		lineRenderer.SetPosition(1, target);
 		displayFlash(target);
 		if (enemy != null) {
-			enemy.GetComponent<Mob>().hurt(2 * mob.stats.abilityPower);
+			enemy.GetComponent<Mob>().hurt(2 * stats.abilityPower);
 			if (chainTimes > 0) {
 				lastHit.Insert(0, enemy.GetInstanceID());
 				if (lastHit.Count > 2)
@@ -53,7 +53,7 @@ public class ChainLightning : MonoBehaviour {
 		if (nextEnemy != null) {
 			GameObject chainLightning = GameObject.Instantiate(Resources.Load<GameObject>("Skills/ChainLightning/Chainlightning"));
 			chainLightning.transform.position = target;
-			chainLightning.GetComponent<ChainLightning>().mob = mob;
+			chainLightning.GetComponent<ChainLightning>().stats = stats;
 			chainLightning.GetComponent<ChainLightning>().chainTimes = chainTimes - 1;
 			chainLightning.GetComponent<ChainLightning>().maxDistance = maxDistance;
 			chainLightning.GetComponent<ChainLightning>().lastHit = lastHit;
@@ -63,7 +63,7 @@ public class ChainLightning : MonoBehaviour {
 	}
 
 	GameObject FindRandomEnemy(Vector3 position, string tag, ArrayList ignoreID) {
-		GameObject[] gos = GameObject.FindGameObjectsWithTag(tag);
+        GameObject[] gos = GameObject.FindGameObjectsWithTag(tag);
 		ArrayList inRange = new ArrayList();
 		foreach(GameObject go in gos) {
 			if (Vector3.Distance(go.transform.position, position) < maxDistance && !ignoreID.Contains(go.GetInstanceID())) {
