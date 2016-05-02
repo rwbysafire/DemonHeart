@@ -10,6 +10,7 @@ public class SpawnEnemies : MonoBehaviour {
 
 	private List<Wave> waveList;
 	private bool isSpawning = false;
+	private Vector3 ClosetSpawn;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +31,7 @@ public class SpawnEnemies : MonoBehaviour {
 		Debug.Log (waveList.Count.ToString () + " waves loaded");
 
 		StartCoroutine("spawnEnemy", waveList[currentWave]);
+
     }
 	
 	// Update is called once per frame
@@ -37,6 +39,7 @@ public class SpawnEnemies : MonoBehaviour {
 		// need to fix, this method is slow (?)
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 		if (enemies.Length == 0 && currentWave < waveList.Count - 1 && !isSpawning) {
+
             currentWave += 1;
             StartCoroutine("spawnEnemy", waveList[currentWave]);
 			print ("Starting wave: " + currentWave.ToString ());
@@ -50,10 +53,28 @@ public class SpawnEnemies : MonoBehaviour {
 		WholeScreenTextScript.ShowText("Wave " + (currentWave + 1).ToString() + " is coming...");
 		yield return new WaitForSeconds(2.5f);
 
-        while (wave.count > 0) {
+		List<Vector3> SpawnSpots = new List<Vector3>();
+		SpawnSpots.Add(new Vector3(0f,20f,0f));
+		SpawnSpots.Add(new Vector3(0f,-20f,0f));
+		SpawnSpots.Add(new Vector3(30f,0f,0f));
+		SpawnSpots.Add(new Vector3(-30f,0f,0f));
+		GameObject curPlayer = GameObject.Find ("Player");
+		Vector3 PlayerPos = curPlayer.transform.position;
+		ClosetSpawn = SpawnSpots [0];
+		for (int i = 1; i < 4; i++) 
+		{
+			float temp = Vector3.Distance(PlayerPos, SpawnSpots[i]);
+			if (temp < Vector3.Distance(PlayerPos, ClosetSpawn)) 
+			{
+				ClosetSpawn = SpawnSpots [i];
+			}
+		}
+
+        while (wave.count > 0) 
+		{
             GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
             wave.count -= 1;
-            enemy.transform.position = Vector3.zero;
+			enemy.transform.position = ClosetSpawn;
             enemy.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0, 360));
             yield return new WaitForSeconds(0.5f);
         }
