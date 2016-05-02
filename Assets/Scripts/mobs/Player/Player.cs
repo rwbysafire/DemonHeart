@@ -186,12 +186,22 @@ public class Player : Mob {
 	}
 
 	public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
-		for(headFrame = 1; headFrame < headSprite.Length; headFrame++) {
-			head.GetComponent<SpriteRenderer> ().sprite = headSprite[headFrame];
-			if (headFrame == 2)
-				skill.skillLogic(this, stats);
-			yield return new WaitForSeconds(attackTime/headSprite.Length);
-		}
-		isAttacking = false;
+        bool hasntAttacked = true;
+        float endTime = Time.fixedTime + attackTime;
+        float remainingTime = endTime - Time.fixedTime;
+        while (remainingTime > 0) {
+            int currentFrame = (int)(((attackTime - remainingTime) / attackTime) * headSprite.Length);
+            head.GetComponent<SpriteRenderer> ().sprite = headSprite[currentFrame];
+            if (hasntAttacked && currentFrame > 1) {
+                hasntAttacked = false;
+                skill.skillLogic(this, stats);
+            }
+			yield return new WaitForSeconds(0);
+            remainingTime = endTime - Time.fixedTime;
+        }
+        head.GetComponent<SpriteRenderer>().sprite = headSprite[0];
+        if (hasntAttacked)
+            skill.skillLogic(this, stats);
+        isAttacking = false;
 	}
 }

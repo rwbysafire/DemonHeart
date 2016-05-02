@@ -98,7 +98,6 @@ public class GemChainLightningOnHit : Gem {
     public override void onHitEffect(Entity entity, Stats stats) {
         //Debug.Log("gem used");
         SkillChainLightning skillChainLightning = new SkillChainLightning();
-        Debug.Log(stats.tag);
         skillChainLightning.properties["manaCost"] = 0;
         skillChainLightning.skillLogic(entity, stats);
     }
