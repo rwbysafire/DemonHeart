@@ -39,20 +39,11 @@ public class SpawnEnemies : MonoBehaviour {
 		// need to fix, this method is slow (?)
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag ("Enemy");
 		if (enemies.Length == 0 && currentWave < waveList.Count - 1 && !isSpawning) {
-
             currentWave += 1;
             StartCoroutine("spawnEnemy", waveList[currentWave]);
 			print ("Starting wave: " + currentWave.ToString ());
         }
-	}
-		
-    IEnumerator spawnEnemy(Wave wave) {
-		isSpawning = true;
-
-		// wait some seconds before start
-		WholeScreenTextScript.ShowText("Wave " + (currentWave + 1).ToString() + " is coming...");
-		yield return new WaitForSeconds(2.5f);
-
+			
 		List<Vector3> SpawnSpots = new List<Vector3>();
 		SpawnSpots.Add(new Vector3(0f,20f,0f));
 		SpawnSpots.Add(new Vector3(0f,-20f,0f));
@@ -69,6 +60,14 @@ public class SpawnEnemies : MonoBehaviour {
 				ClosetSpawn = SpawnSpots [i];
 			}
 		}
+	}
+		
+    IEnumerator spawnEnemy(Wave wave) {
+		isSpawning = true;
+
+		// wait some seconds before start
+		WholeScreenTextScript.ShowText("Wave " + (currentWave + 1).ToString() + " is coming...");
+		yield return new WaitForSeconds(2.5f);
 
         while (wave.count > 0) 
 		{
