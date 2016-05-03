@@ -42,7 +42,7 @@ public class Player : Mob {
 
 	public override void OnStart ()
 	{
-		stats.baseStrength = 20000;
+		stats.baseStrength = 20;
 		stats.baseDexterity = 30;
 		stats.baseIntelligence = 10;
 		stats.exp = 0;

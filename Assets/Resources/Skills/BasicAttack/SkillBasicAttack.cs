@@ -35,12 +35,11 @@ public class SkillBasicAttack : Skill
 	}
 
     void attack(Entity mob, Stats stats) {
-        float y = Vector3.Distance(mob.getTargetLocation(), mob.headTransform.position);
-        if (y > 6)
-            y = 6;
-        else if (y < 2)
-            y = 2;
-        float angleOfSpread = (((1-(y-2)/4)*3)+1)*5;
+        float spreadCalcDistance = 6;
+        float startDistance = 2;
+        float baseAngle = 5;
+        float ratio = (Mathf.Clamp(Vector3.Distance(mob.getTargetLocation(), mob.headTransform.position), startDistance, spreadCalcDistance + startDistance) - startDistance) / spreadCalcDistance;
+        float angleOfSpread = (((1 - ratio) * 4) + ratio) * baseAngle;
         for (int i = 0; i < properties["projectileCount"]; i++) {
             fireArrow(mob, stats, ((properties["projectileCount"] - 1) * angleOfSpread / -2) + i * angleOfSpread);
         }

@@ -25,7 +25,7 @@
   "03": {
     "count": 10,
     "enemies": [
-      "Zombie"
+      "RangedEnemy"
     ]
   },
 
@@ -41,7 +41,8 @@
     "count": 50,
     "enemies": [
       "Zombie",
-      "Kamikaze"
+      "Kamikaze",
+      "RangedEnemy"
     ]
   },
 
@@ -49,7 +50,8 @@
     "count": 99999999,
     "enemies": [
       "Zombie",
-      "Kamikaze"
+      "Kamikaze",
+      "RangedEnemy"
     ]
   }
 

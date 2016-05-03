@@ -40,7 +40,7 @@ public class basic_projectile : MonoBehaviour, Entity
 	}
 
     public Vector3 getTargetLocation() {
-        return transform.forward;
+        return transform.position + transform.up;
     }
 
     public string getEnemyTag() {
