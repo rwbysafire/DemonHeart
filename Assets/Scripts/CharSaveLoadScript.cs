@@ -21,18 +21,27 @@ public class SaveObject {
 
 public class CharSaveLoadScript : MonoBehaviour {
 
+	public static string PREFS_LOAD_GAME = "LOAD_GAME";
+
 	public Player player;
 	public InventoryUI inventory;
-	private BinaryFormatter bf;
+
+	private bool hasTriedLoading = false;
+	private static BinaryFormatter bf = new BinaryFormatter ();
 
 	// Use this for initialization
 	void Start () {
-		bf = new BinaryFormatter ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (!hasTriedLoading) {
+			if (PlayerPrefs.GetInt (CharSaveLoadScript.PREFS_LOAD_GAME) == 1) {
+				Debug.Log ("Autoload game");
+				LoadGame ();
+			}
+			hasTriedLoading = true;
+		}
 	}
 
 	public void SaveGame () {
@@ -68,5 +77,12 @@ public class CharSaveLoadScript : MonoBehaviour {
 		inventory.updateInventorySkillImages ();
 		WholeScreenTextScript.ShowText ("Game loaded");
 		Debug.Log ("Player status loaded");
+	}
+
+	public static bool HasSavedData () {
+		FileStream file = File.Open (Application.persistentDataPath + "/characters.data", FileMode.Open);
+		SaveObject loadObject = (SaveObject) bf.Deserialize (file);
+		file.Close ();
+		return loadObject != null;
 	}
 }
