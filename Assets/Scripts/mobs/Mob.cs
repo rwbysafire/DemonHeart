@@ -84,6 +84,7 @@ public abstract class Mob : MonoBehaviour , Entity{
 		if (stats.health <= 0)
 		{
 			GameObject.Find ("Player").GetComponent<Mob> ().stats.exp += stats.exp;
+			GameObject.Find ("Player").GetComponent<Mob> ().stats.CurExp += stats.exp;
 			DropItem();
 			OnDeath();
 			Destroy(gameObject);
@@ -99,9 +100,10 @@ public abstract class Mob : MonoBehaviour , Entity{
 			stats.mana += stats.manaRegen * Time.deltaTime;
 		else if (stats.mana > stats.maxMana)
 			stats.mana = stats.maxMana;
-		if (stats.exp >= stats.threshold) {
+		if (stats.CurExp >= stats.threshold) {
+			stats.CurExp -= stats.threshold;
 			stats.level++;
-			stats.threshold = (stats.level + 1) * stats.threshold;
+			stats.threshold = (stats.level+1) * 200;
 		}
 	}
 

@@ -6,7 +6,7 @@ using System;
 public class DisplayStats : MonoBehaviour {
 
 	GameObject display;
-	Text level, exp, STR, DEX, INT, health, mana, attackSpeed, cooldown;
+	Text level, exp, Curexp, STR, DEX, INT, health, mana, attackSpeed, cooldown;
 	Stats playerStats;
 	Buff playerBuff;
 
@@ -15,6 +15,7 @@ public class DisplayStats : MonoBehaviour {
 		display = transform.FindChild("StatsDisplayBackground").gameObject;
 		level = display.transform.FindChild("level").gameObject.GetComponent<Text>();
 		exp = display.transform.FindChild("exp").gameObject.GetComponent<Text>();
+		Curexp = display.transform.FindChild("CurrentExp").gameObject.GetComponent<Text>();
 		STR = display.transform.FindChild("str").gameObject.GetComponent<Text>();
 		DEX = display.transform.FindChild("dex").gameObject.GetComponent<Text>();
 		INT = display.transform.FindChild("int").gameObject.GetComponent<Text>();
@@ -46,6 +47,7 @@ public class DisplayStats : MonoBehaviour {
 			}
 			level.text = "Level: " + playerStats.level.ToString();
 			exp.text = "Exp: " + playerStats.exp.ToString();
+			Curexp.text = "CurrentExp: " + playerStats.CurExp.ToString();
 			STR.text = GetDisplayPropertyString ("STR", playerStats.strength, playerBuff.strength + playerStats.strengthActualAddon);
 			DEX.text = GetDisplayPropertyString ("DEX", playerStats.dexterity, playerBuff.dexterity + playerStats.dexterityActualAddon);
 			INT.text = GetDisplayPropertyString ("INT", playerStats.intelligence, playerBuff.intelligence + playerStats.intelligenceActualAddon);

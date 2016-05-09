@@ -10,7 +10,8 @@ public class SpawnEnemies : MonoBehaviour {
 
 	private List<Wave> waveList;
 	private bool isSpawning = false;
-	private Vector3 ClosetSpawn;
+	private List<Vector3> ClosestSpawn;
+	private int mark = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -43,25 +44,61 @@ public class SpawnEnemies : MonoBehaviour {
             StartCoroutine("spawnEnemy", waveList[currentWave]);
 			print ("Starting wave: " + currentWave.ToString ());
         }
-			
+		CalClosestPos ();
+	}
+
+	// Calculat the closest 3 spawn positions
+	void CalClosestPos()
+	{
 		List<Vector3> SpawnSpots = new List<Vector3>();
-		SpawnSpots.Add(new Vector3(0f,20f,0f));
 		SpawnSpots.Add(new Vector3(0f,-20f,0f));
+		SpawnSpots.Add(new Vector3(0f,20f,0f));
+		SpawnSpots.Add(new Vector3(0f,30f,0f));
+		SpawnSpots.Add(new Vector3(15f,0f,0f));
+		SpawnSpots.Add(new Vector3(-15f,0f,0f));
 		SpawnSpots.Add(new Vector3(30f,0f,0f));
 		SpawnSpots.Add(new Vector3(-30f,0f,0f));
+		SpawnSpots.Add(new Vector3(-15f,15f,0f));
+		SpawnSpots.Add(new Vector3(-30f,15f,0f));
+		SpawnSpots.Add(new Vector3(-15f,-15f,0f));
+		SpawnSpots.Add(new Vector3(15f,-15f,0f));
+		SpawnSpots.Add(new Vector3(20f,10f,0f));
+		SpawnSpots.Add(new Vector3(10f,20f,0f));
 		GameObject curPlayer = GameObject.Find ("Player");
 		Vector3 PlayerPos = curPlayer.transform.position;
-		ClosetSpawn = SpawnSpots [0];
-		for (int i = 1; i < 4; i++) 
+
+		ClosestSpawn = new List<Vector3>();
+		ClosestSpawn.Add(new Vector3(0f,0f,0f));
+		ClosestSpawn.Add(new Vector3(0f,10f,0f));
+		ClosestSpawn.Add(new Vector3(0f,-10f,0f));
+
+		for (int i = 0; i < 13; i++) 
 		{
 			float temp = Vector3.Distance(PlayerPos, SpawnSpots[i]);
-			if (temp < Vector3.Distance(PlayerPos, ClosetSpawn)) 
+			int index = 0;
+			bool f = false;
+			for (int j = 0; j < 3; j++) 
 			{
-				ClosetSpawn = SpawnSpots [i];
+				if (Vector3.Distance(PlayerPos, ClosestSpawn [j]) > temp)
+				{
+					temp = Vector3.Distance (PlayerPos, ClosestSpawn [j]);
+					index = j;
+					f = true;
+				}
+			}
+			if (f) 
+			{
+				ClosestSpawn [index] = SpawnSpots [i];
 			}
 		}
+
+		for (int j = 1; j < 3; j++) 
+		{
+			if (Vector3.Distance (PlayerPos, ClosestSpawn [j]) < Vector3.Distance (PlayerPos, ClosestSpawn [mark]))
+				mark = j;
+		}
 	}
-		
+
     IEnumerator spawnEnemy(Wave wave) {
 		isSpawning = true;
 
@@ -71,10 +108,24 @@ public class SpawnEnemies : MonoBehaviour {
 
         while (wave.count > 0) 
 		{
-            GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
-            wave.count -= 1;
-			enemy.transform.position = ClosetSpawn;
-            enemy.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0, 360));
+//            GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
+			if (wave.count >= 3)
+			{
+				for (int i = 0; i < 3; i++) 
+				{
+					GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
+					wave.count -= 1;
+					enemy.transform.position = ClosestSpawn [i];
+					enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
+				}
+			} 
+			else 
+			{
+				GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
+				wave.count -= 1;
+				enemy.transform.position = ClosestSpawn [mark];
+				enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
+			}
             yield return new WaitForSeconds(0.5f);
         }
 		isSpawning = false;

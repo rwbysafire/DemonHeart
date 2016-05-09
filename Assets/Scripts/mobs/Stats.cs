@@ -11,6 +11,7 @@ public class Stats {
 
 	public int level = 0;
 	public float exp = 0;
+	public float CurExp = 0;
 
 	private int _strength = 10;
 	public int baseStrength {
