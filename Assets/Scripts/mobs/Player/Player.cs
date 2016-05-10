@@ -10,6 +10,7 @@ public class Player : Mob {
 	private float feetTimer;
 	public Skill[] listOfSkills;
 	public InventoryUI inventory;
+	public HintTextScript hintText;
 
 	public override string getName ()
 	{
@@ -175,12 +176,31 @@ public class Player : Mob {
 		//}
   //  }
 
+	void OnTriggerEnter2D (Collider2D collider) {
+		if (collider.tag.ToLower ().StartsWith ("item")) {
+//			 show hint
+			DropItemScript drop = collider.gameObject.GetComponent<DropItemScript>();
+			hintText.ShowHint (drop.item.itemName, drop.item.itemDescription);
+//			Debug.Log(drop.item.itemName);
+//			Debug.Log(drop.item.itemDescription);
+		}
+	}
+
+	void OnTriggerLeave2D (Collider2D collider) {
+		Debug.Log ("leave");
+		hintText.HideHint ();
+	}
+
 	void OnTriggerStay2D (Collider2D collider) {
-		if (collider.tag.ToLower ().StartsWith ("item") && Input.GetKey (KeyCode.Space)) {
-			if (inventory.AddItem (collider.gameObject)) {
-				Destroy (collider.gameObject);
-			} else {
-				Debug.Log ("Item not picked due to full capacity");
+		if (collider.tag.ToLower ().StartsWith ("item")) {
+
+			// pick up
+			if (Input.GetKey (KeyCode.Space)) {
+				if (inventory.AddItem (collider.gameObject)) {
+					Destroy (collider.gameObject);
+				} else {
+					Debug.Log ("Item not picked due to full capacity");
+				}
 			}
 		}
 	}
