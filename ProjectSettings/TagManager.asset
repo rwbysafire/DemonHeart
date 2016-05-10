@@ -13,6 +13,7 @@ TagManager:
   - item_weapon
   - item_armor
   - item_move_holder
+  - Item
   layers:
   - Default
   - TransparentFX

@@ -27,6 +27,7 @@ public class SkillSlash : Skill {
 		slash.transform.rotation = mob.headTransform.rotation;
 		slash.transform.SetParent(mob.headTransform);
 		slash.GetComponent<SlashLogic>().damage = 1f * stats.attackDamage;
+		slash.GetComponent<SlashLogic>().attackSpeed = properties["attackSpeed"] / stats.attackSpeed /2;
 		slash.GetComponent<SlashLogic>().enemyTag = mob.getEnemyTag();
 	}
 }

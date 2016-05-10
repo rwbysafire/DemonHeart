@@ -10,16 +10,9 @@ public class Kamikaze : Mob {
 	private int walkingFrame;
 	private int idleFrame;
 	
-	private GameObject body;
-	
 	public override string getName ()
 	{
 		return "Kamikaze";
-	}
-	
-	public override Vector3 getTargetLocation ()
-	{
-		return playerPosition;
 	}
 	
 	void create (){
@@ -63,13 +56,13 @@ public class Kamikaze : Mob {
 		if (GameObject.FindWithTag ("Player")) {
 			GameObject player = GameObject.FindWithTag ("Player");
 			playerPosition = player.transform.position;
-			Vector3 diff = (player.transform.position - feetTransform.position).normalized;
+			Vector3 diff = (getTargetLocation() - feetTransform.position).normalized;
 			float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 			headTransform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
 			if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - feetTransform.position.x, 2) + Mathf.Pow(playerPosition.y - feetTransform.position.y, 2)) <= followDistance) {
 				GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed);
 			} else
-				GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed/4);
+				GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed/2);
 		}
 		if (gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > 0.05f) {
 			if (timer + (1.20 - Mathf.Pow(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude, 0.1f)) <= Time.fixedTime) {

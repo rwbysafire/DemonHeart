@@ -8,6 +8,7 @@ public class SlashLogic : MonoBehaviour {
 	public Sprite[] sprite;
 	private int frame = 0;
 	public float damage;
+    public float attackSpeed;
 	
 	public string enemyTag;
 
@@ -15,19 +16,20 @@ public class SlashLogic : MonoBehaviour {
 		hitbox = gameObject.AddComponent<PolygonCollider2D>();
 		hitbox.isTrigger = true;
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/Slash/slash_" + Random.Range(0,3).ToString()), gameObject.transform.position);
-		StartCoroutine("playAnimation", 0.01f);
+		StartCoroutine("playAnimation", attackSpeed);
 	}
 	
-	IEnumerator playAnimation(float delay) {
-		do {
-			if(frame >= sprite.Length) {
-				frame = 0;
-			}
-			GetComponent<SpriteRenderer> ().sprite = sprite[frame];
-			hitbox.points = hitboxes[frame].points;
-			frame++;
-			yield return new WaitForSeconds(delay);
-		} while (frame < sprite.Length);
+	IEnumerator playAnimation(float duration) {
+        print(duration);
+        float endTime = Time.fixedTime + duration;
+        float remainingTime = endTime - Time.fixedTime;
+        while (remainingTime > 0) {
+            int currentFrame = (int)(((duration - remainingTime) / duration) * sprite.Length);
+			GetComponent<SpriteRenderer> ().sprite = sprite[currentFrame];
+			hitbox.points = hitboxes[currentFrame].points;
+			yield return new WaitForSeconds(0f);
+            remainingTime = endTime - Time.fixedTime;
+        }
 		Destroy(gameObject);
 	}
 

@@ -10,16 +10,9 @@ public class Zombie : Mob {
 	private int walkingFrame;
 	private int idleFrame;
 
-	private GameObject body;
-
 	public override string getName ()
 	{
 		return "Zombie";
-	}
-
-	public override Vector3 getTargetLocation ()
-	{
-		return playerPosition;
 	}
 
 	void create (){
@@ -29,8 +22,9 @@ public class Zombie : Mob {
 		body.AddComponent<SpriteRenderer>();
 		body.GetComponent<SpriteRenderer>().sortingOrder = 2;
 		stats.baseStrength = 20;
-		// Z exp = 100
-		stats.exp = 100;
+        stats.baseDexterity = -50;
+        // Z exp = 100
+        stats.exp = 100;
 	}
 
 	// Use this for initialization
@@ -67,13 +61,13 @@ public class Zombie : Mob {
 		if (GameObject.FindWithTag ("Player")) {
 			GameObject player = GameObject.FindWithTag ("Player");
 			playerPosition = player.transform.position;
-			Vector3 diff = (player.transform.position - feetTransform.position).normalized;
+			Vector3 diff = (getTargetLocation() - feetTransform.position).normalized;
 			float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 			headTransform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
 			if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - feetTransform.position.x, 2) + Mathf.Pow(playerPosition.y - feetTransform.position.y, 2)) <= followDistance) {
 				GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed);
 			} else
-				GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed/4);
+				GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed/2);
 		}
 		if (gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > 0.05f) {
 			if (timer + (1.20 - Mathf.Pow(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude, 0.1f)) <= Time.fixedTime) {
@@ -87,17 +81,23 @@ public class Zombie : Mob {
 	}
 	
 	public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
-		int frame = 0;
-		walkingFrame = 0;
-		do {
-			if(!isStunned()) {
-				body.GetComponent<SpriteRenderer> ().sprite = spriteAttack[frame];
-				if (frame == 6)
-					skill.skillLogic (this, stats);
-					frame++;
-			}
-			yield return new WaitForSeconds(attackTime/spriteAttack.Length);
-		} while (frame < spriteAttack.Length);
-		isAttacking = false;
-	}
+        walkingFrame = 0;
+        bool hasntAttacked = true;
+        float endTime = Time.fixedTime + attackTime;
+        float remainingTime = endTime - Time.fixedTime;
+        while (remainingTime > 0) {
+            int currentFrame = (int)(((attackTime - remainingTime) / attackTime) * spriteAttack.Length);
+            body.GetComponent<SpriteRenderer>().sprite = spriteAttack[currentFrame];
+            if (hasntAttacked && currentFrame > 3) {
+                hasntAttacked = false;
+                skill.skillLogic(this, stats);
+            }
+            yield return new WaitForSeconds(0);
+            remainingTime = endTime - Time.fixedTime;
+        }
+        body.GetComponent<SpriteRenderer>().sprite = spriteAttack[0];
+        if (hasntAttacked)
+            skill.skillLogic(this, stats);
+        isAttacking = false;
+    }
 }

@@ -176,7 +176,7 @@ public class Player : Mob {
   //  }
 
 	void OnTriggerStay2D (Collider2D collider) {
-		if (collider.tag.ToLower ().StartsWith ("item") && Input.GetKey (KeyCode.E)) {
+		if (collider.tag.ToLower ().StartsWith ("item") && Input.GetKey (KeyCode.Space)) {
 			if (inventory.AddItem (collider.gameObject)) {
 				Destroy (collider.gameObject);
 			} else {
