@@ -192,11 +192,13 @@ public class Player : Mob {
 
 	void OnTriggerStay2D (Collider2D collider) {
 		if (collider.tag.ToLower ().StartsWith ("item")) {
-
 			// pick up
+
 			if (Input.GetKey (KeyCode.Space)) {
-				if (inventory.AddItem (collider.gameObject)) {
+				DropItemScript drop = collider.gameObject.GetComponent<DropItemScript>();
+				if (inventory.AddItem (drop.item)) {
 					Destroy (collider.gameObject);
+					hintText.HideHint ();
 				} else {
 					Debug.Log ("Item not picked due to full capacity");
 				}

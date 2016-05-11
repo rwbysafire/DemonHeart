@@ -2567,7 +2567,7 @@ RectTransform:
   - {fileID: 1676611702}
   - {fileID: 311097548}
   m_Father: {fileID: 1325076731}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_AnchorMin: {x: 0.3, y: 0.3}
   m_AnchorMax: {x: 0.7, y: 0.7}
   m_AnchoredPosition: {x: -0.00024414062, y: -0.0000076293945}
@@ -6461,6 +6461,67 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 565265147}
+--- !u!1 &582200669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 582200672}
+  - 114: {fileID: 582200671}
+  - 114: {fileID: 582200670}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &582200670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 582200669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &582200671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 582200669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &582200672
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 582200669}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!224 &593297958 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22429324, guid: 38366555c7c5ca846a1a7be2069f18f5,
@@ -9788,7 +9849,7 @@ RectTransform:
   - {fileID: 761796434}
   - {fileID: 169813542}
   m_Father: {fileID: 1325076731}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -13017,7 +13078,7 @@ RectTransform:
   - {fileID: 123985906}
   - {fileID: 55840723}
   m_Father: {fileID: 1325076731}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -13365,13 +13426,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1430383561}
   - {fileID: 1300472767}
   - {fileID: 1834696470}
   - {fileID: 2021847850}
   - {fileID: 1973812761}
   - {fileID: 924594104}
   - {fileID: 211150778}
-  - {fileID: 1430383561}
   - {fileID: 196778844}
   - {fileID: 471753482}
   m_Father: {fileID: 0}
@@ -14474,7 +14535,7 @@ RectTransform:
   m_Children:
   - {fileID: 466571192}
   m_Father: {fileID: 1325076731}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.00044250488, y: -0.000015258789}
@@ -18155,7 +18216,7 @@ RectTransform:
   m_Children:
   - {fileID: 333811}
   m_Father: {fileID: 1325076731}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_AnchorMin: {x: 0.52860135, y: 0.01573041}
   m_AnchorMax: {x: 0.9856052, y: 0.295745}
   m_AnchoredPosition: {x: 0.000015258789, y: 0.000015258789}
@@ -19821,7 +19882,7 @@ RectTransform:
   - {fileID: 508343109}
   - {fileID: 1055593238}
   m_Father: {fileID: 1325076731}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_AnchorMin: {x: 0.25, y: 0.3}
   m_AnchorMax: {x: 0.75, y: 0.7}
   m_AnchoredPosition: {x: 0.0000060796738, y: 0}
@@ -20280,7 +20341,7 @@ RectTransform:
   m_Children:
   - {fileID: 2143167822}
   m_Father: {fileID: 1325076731}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0.3, y: 0.3}
   m_AnchorMax: {x: 0.7, y: 0.7}
   m_AnchoredPosition: {x: 0, y: 0}

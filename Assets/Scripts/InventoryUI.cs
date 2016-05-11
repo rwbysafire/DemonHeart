@@ -177,10 +177,7 @@ public class InventoryUI : MonoBehaviour {
 		return isAdded;
 	}
 
-	public bool AddItem (GameObject gameObject) {
-		Item item = null;
-		item.tag = gameObject.tag;
-
+	public bool AddItem (Item item) {
 		return this.AddItem (item, Item.Type.General);
 	}
 
