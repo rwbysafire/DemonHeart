@@ -166,11 +166,6 @@ public abstract class Mob : MonoBehaviour , Entity{
 			return "Player";
 	}
 
-    public virtual void OnTriggerEnter2D(Collider2D collider)
-    {
-        
-    }
-
 	public abstract void movement();
 	public virtual void attack(Skill skill, float attackTime) {
 		isAttacking = true;
