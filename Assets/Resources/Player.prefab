@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5, y: -11.4799995, z: 0}
+  m_LocalPosition: {x: 5, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -37,9 +37,10 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137566}
+  m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 10
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -53,12 +54,13 @@ CircleCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137566}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 6200000, guid: 5feea8fda2c126b48a6d5adc93a2483d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .5
+  m_Radius: 0.5
 --- !u!114 &11469942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,7 +72,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad1333692ed3614f873b66c8334140c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  stats:
+    tag: 
+    level: 0
+    exp: 0
+    CurExp: 0
+    strengthAddon: 0
+    dexterityAddon: 0
+    intelligenceAddon: 0
+    baseHealth: 0
+    baseMana: 0
+    threshold: 0
+    health: 0
+    mana: 0
+  buff:
+    tag: 
+    level: 0
+    exp: 0
+    CurExp: 0
+    strengthAddon: 0
+    dexterityAddon: 0
+    intelligenceAddon: 0
+    baseHealth: 0
+    baseMana: 0
+    threshold: 0
+    health: 0
+    mana: 0
+  isAttacking: 0
+  body: {fileID: 0}
+  dropTable:
+  - Gems/ArmorGem
+  - Gems/SkillGem
+  speed: 100
+  inventory: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -18,7 +18,7 @@ public class SkillRighteousFire : Skill {
 	}
 	
 	public override float getManaCost () {
-		return 0;
+		return 20;
 	}
 	
 	public override void skillLogic (Entity mob, Stats stats) {
@@ -27,6 +27,7 @@ public class SkillRighteousFire : Skill {
 			righteousFire.transform.position = mob.feetTransform.position;
 			righteousFire.transform.SetParent(mob.gameObject.transform);
 			righteousFire.GetComponent<RighteousFire>().mob = mob.gameObject.GetComponent<Mob>();
-		}
+            righteousFire.GetComponent<RighteousFire>().manaCost = properties["manaCost"];
+        }
 	}
 }

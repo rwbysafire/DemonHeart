@@ -9,8 +9,9 @@ public class RighteousFire : MonoBehaviour {
 	private int frame = 0;
 	
 	public string enemyTag;
+    public float manaCost;
 
-	void Start () {
+    void Start () {
 		sprite = Resources.LoadAll<Sprite>("Skills/RighteousFire/FireAura");
 		if (mob.gameObject.tag == "Player" || mob.gameObject.tag == "Ally")
 			enemyTag = "Enemy"; 
@@ -20,7 +21,7 @@ public class RighteousFire : MonoBehaviour {
 	}
 
 	void Update () {
-		if (!mob.useMana(20 * Time.deltaTime))
+		if (!mob.useMana(manaCost * Time.deltaTime))
 			Destroy(gameObject);
 	}
 
@@ -46,6 +47,6 @@ public class RighteousFire : MonoBehaviour {
 	}
 
 	public float getDamage() {
-		return mob.stats.maxHealth * 1;
+		return mob.stats.strength * 1;
 	}
 }

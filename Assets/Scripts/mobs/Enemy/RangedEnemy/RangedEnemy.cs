@@ -41,8 +41,11 @@ public class RangedEnemy : Mob {
     public override void OnUpdate() {
         if (isAttacking)
             return;
-        if (GameObject.FindWithTag("Player") && Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 12) {
-            skills[0].useSkill(this);
+        if (GameObject.FindWithTag("Player")) {
+            float distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2));
+            RaycastHit2D hitPlayer = Physics2D.Raycast(body.transform.position + (playerPosition - body.transform.position).normalized * GetComponent<CircleCollider2D>().radius * 1.1f, playerPosition - body.transform.position);
+            if (distance <= 12 && hitPlayer.collider.CompareTag("Player"))
+                skills[0].useSkill(this);
         }
     }
 
@@ -62,11 +65,7 @@ public class RangedEnemy : Mob {
             Vector3 diff = (getTargetLocation() - feetTransform.position).normalized;
             float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
             headTransform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-            if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - feetTransform.position.x, 2) + Mathf.Pow(playerPosition.y - feetTransform.position.y, 2)) <= followDistance) {
-                GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed);
-            }
-            else
-                GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed / 2);
+            GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed);
         }
         if (gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > 0.05f) {
             if (timer + (1.20 - Mathf.Pow(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude, 0.1f)) <= Time.fixedTime) {

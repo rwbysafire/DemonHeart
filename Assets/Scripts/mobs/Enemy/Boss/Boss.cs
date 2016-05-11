@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Boss : Mob {
 
-    private int speed = 80, followDistance = 8;
+    private int speed = 110, followDistance = 8;
     private Vector3 playerPosition;
 
     public Sprite[] spriteAttack, spriteWalk, spriteIdle;
@@ -20,6 +20,7 @@ public class Boss : Mob {
         body.transform.position = transform.position;
         body.AddComponent<SpriteRenderer>();
         body.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        stats.baseHealth = 100000;
         stats.baseStrength = 20;
         // Z exp = 100
         stats.exp = 100;
@@ -35,15 +36,23 @@ public class Boss : Mob {
         replaceSkill(0, new SkillBasicAttack());
         skills[0].properties["projectileCount"] = 3;
         replaceSkill(2, new SkillRighteousFire());
+        skills[2].properties["manaCost"] = 0;
     }
 
     // Update is called once per frame
     public override void OnUpdate() {
         if (isAttacking)
             return;
-        //if (GameObject.FindWithTag("Player") && Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) >= 5) {
-        //    skills[0].useSkill(this);
-        //}
+        if (stats.health < stats.baseHealth / 2) {
+            skills[2].useSkill(this);
+        }
+        if (GameObject.FindWithTag("Player")) {
+            float distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2));
+            RaycastHit2D hitPlayer = Physics2D.Raycast(body.transform.position + (playerPosition - body.transform.position).normalized * GetComponent<CircleCollider2D>().radius * 1.1f, playerPosition - body.transform.position);
+            if (distance >= 4 && distance <= 9 && hitPlayer.collider.CompareTag("Player")) {
+                skills[0].useSkill(this);
+            }
+        }
     }
 
     public override Transform headTransform {
@@ -62,11 +71,10 @@ public class Boss : Mob {
             Vector3 diff = (getTargetLocation() - feetTransform.position).normalized;
             float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
             headTransform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-            if (Mathf.Sqrt(Mathf.Pow(playerPosition.x - feetTransform.position.x, 2) + Mathf.Pow(playerPosition.y - feetTransform.position.y, 2)) <= followDistance) {
+            if (stats.health > stats.baseHealth/2)
                 GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed);
-            }
             else
-                GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed);
+                GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed * 1.4f);
         }
         if (gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > 0.05f) {
             if (timer + (1.20 - Mathf.Pow(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude, 0.1f)) <= Time.fixedTime) {

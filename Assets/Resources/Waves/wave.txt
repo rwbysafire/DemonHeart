@@ -1,5 +1,6 @@
 {
   "waves": [
+	"Boss",
     "1",
     "i-can-be-a-string",
     "03",
@@ -43,6 +44,13 @@
       "Zombie",
       "Kamikaze",
       "RangedEnemy"
+    ]
+  },
+
+  "Boss": {
+    "count": 1,
+    "enemies": [
+      "Boss"
     ]
   },
 

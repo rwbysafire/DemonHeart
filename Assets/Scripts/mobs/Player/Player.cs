@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : Mob {
 
-	public float speed = 7;
+	public float speed = 100;
 	private GameObject head, feet, flashlight;
 	private Sprite[] headSprite, feetSprite;
 	private int feetFrame = 0, headFrame = 0;
@@ -134,7 +134,7 @@ public class Player : Mob {
 		if (direction != Vector2.zero) {
 			//Movement
 			Vector2 directionMagnitude = new Vector2(Mathf.Abs(direction.normalized.x) * direction.x, Mathf.Abs(direction.normalized.y) * direction.y);
-			GetComponent<Rigidbody2D>().AddForce(directionMagnitude * 100);
+			GetComponent<Rigidbody2D>().AddForce(directionMagnitude * speed);
 			//Feet
 			float feetDirection = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg - 90;
 			feet.transform.rotation = Quaternion.Euler (0f, 0f, feetDirection);

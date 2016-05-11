@@ -20,7 +20,6 @@ public class SlashLogic : MonoBehaviour {
 	}
 	
 	IEnumerator playAnimation(float duration) {
-        print(duration);
         float endTime = Time.fixedTime + duration;
         float remainingTime = endTime - Time.fixedTime;
         while (remainingTime > 0) {
