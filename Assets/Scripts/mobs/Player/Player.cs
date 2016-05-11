@@ -186,8 +186,7 @@ public class Player : Mob {
 		}
 	}
 
-	void OnTriggerLeave2D (Collider2D collider) {
-		Debug.Log ("leave");
+	void OnTriggerExit2D (Collider2D collider) {
 		hintText.HideHint ();
 	}
 
