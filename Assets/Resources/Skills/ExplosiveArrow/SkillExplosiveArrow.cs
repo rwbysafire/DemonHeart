@@ -65,17 +65,17 @@ public class SkillExplosiveArrow : Skill {
 class ExplosiveArrowProjectile : Projectile {
 	public ExplosiveArrowProjectile(GameObject gameObject, Stats stats) : base(gameObject, stats) {}
 	public override void OnHit () {
-		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
-		RaycastHit2D target = hit[0];
-		foreach (RaycastHit2D x in hit) {
-			if (x.collider.CompareTag(collider.tag)) {
-				target = x;
-				break;
-			}
-		}
-		GameObject explosion = GameObject.Instantiate(Resources.Load<GameObject>("Skills/ExplosiveArrow/FireExplosion"));
+        RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
+        Vector3 target = gameObject.transform.position;
+        foreach (RaycastHit2D x in hit) {
+            if (x.collider.CompareTag(collider.tag)) {
+                target = x.point;
+                break;
+            }
+        }
+        GameObject explosion = GameObject.Instantiate(Resources.Load<GameObject>("Skills/ExplosiveArrow/FireExplosion"));
 		explosion.GetComponent<ExplosiveArrowExplosion>().damage = 2 * stats.attackDamage;
-		explosion.transform.position = target.point;
+		explosion.transform.position = target;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
 		if (tag == "Player" || tag == "Ally")
 			explosion.GetComponent<ExplosiveArrowExplosion>().enemyTag = "Enemy"; 

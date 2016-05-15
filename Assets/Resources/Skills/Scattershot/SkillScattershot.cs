@@ -67,15 +67,15 @@ class ScatterShotProjectile : Projectile {
 	public ScatterShotProjectile(GameObject gameObject, Stats stats) : base(gameObject, stats) {}
 	public override void OnHit () {
 		GameObject explosion = GameObject.Instantiate(Resources.Load("Skills/Explosion")) as GameObject;
-		RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
-		RaycastHit2D target = hit[0];
-		foreach (RaycastHit2D x in hit) {
-			if (x.collider.CompareTag(collider.tag)) {
-				target = x;
-				break;
-			}
-		}
-		explosion.transform.position = target.point;
+        RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
+        Vector3 target = gameObject.transform.position;
+        foreach (RaycastHit2D x in hit) {
+            if (x.collider.CompareTag(collider.tag)) {
+                target = x.point;
+                break;
+            }
+        }
+        explosion.transform.position = target;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
 	}
 	public override float getSpeed () {

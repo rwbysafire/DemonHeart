@@ -20,7 +20,7 @@ public class Boss : Mob {
         body.transform.position = transform.position;
         body.AddComponent<SpriteRenderer>();
         body.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        stats.baseHealth = 100000;
+        stats.baseHealth = 10000;
         stats.baseStrength = 20;
         // Z exp = 100
         stats.exp = 100;
@@ -46,7 +46,13 @@ public class Boss : Mob {
         if (stats.health < stats.baseHealth / 2) {
             skills[2].useSkill(this);
         }
-        if (GameObject.FindWithTag("Player")) {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player) {
+            playerPosition = player.transform.position;
+            Vector3 diff = (getTargetLocation() - feetTransform.position).normalized;
+            float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+            headTransform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+
             float distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2));
             RaycastHit2D hitPlayer = Physics2D.Raycast(body.transform.position + (playerPosition - body.transform.position).normalized * GetComponent<CircleCollider2D>().radius * 1.1f, playerPosition - body.transform.position);
             if (distance >= 4 && distance <= 9 && hitPlayer.collider.CompareTag("Player")) {

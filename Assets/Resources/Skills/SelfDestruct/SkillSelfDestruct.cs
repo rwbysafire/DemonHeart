@@ -11,9 +11,13 @@ public class SkillSelfDestruct : Skill {
 	
 	public override Sprite getImage () {
 		return Resources.Load<Sprite>("Skills/SelfDestruct/SelfDestructIcon");
-	}
-	
-	public override float getMaxCooldown () {
+    }
+
+    public override float getAttackSpeed() {
+        return 0.5f;
+    }
+
+    public override float getMaxCooldown () {
 		return 1f;
 	}
 	

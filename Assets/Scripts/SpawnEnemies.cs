@@ -68,9 +68,9 @@ public class SpawnEnemies : MonoBehaviour {
 		Vector3 PlayerPos = curPlayer.transform.position;
 
 		ClosestSpawn = new List<Vector3>();
-		ClosestSpawn.Add(new Vector3(0f,0f,0f));
-		ClosestSpawn.Add(new Vector3(0f,10f,0f));
-		ClosestSpawn.Add(new Vector3(0f,-10f,0f));
+		ClosestSpawn.Add(new Vector3(0f, -20f, 0f));
+		ClosestSpawn.Add(new Vector3(0f, 20f, 0f));
+		ClosestSpawn.Add(new Vector3(0f, 30f, 0f));
 
 		for (int i = 0; i < 13; i++) 
 		{

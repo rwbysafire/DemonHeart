@@ -6,7 +6,7 @@ public class Kamikaze : Mob {
 	private int speed = 105, followDistance = 10;
 	private Vector3 playerPosition;
 	
-	public Sprite[] spriteWalk;
+	public Sprite[] spriteWalk, spriteAttack;
 	private int walkingFrame;
 	private int idleFrame;
 	
@@ -31,7 +31,8 @@ public class Kamikaze : Mob {
 		create ();
 		transform.rotation = new Quaternion(0,0,0,0);
 		spriteWalk = Resources.LoadAll<Sprite>("Sprite/demon");
-		replaceSkill(0, new SkillSelfDestruct ());
+        spriteAttack = Resources.LoadAll<Sprite>("Sprite/demonAttack");
+        replaceSkill(0, new SkillSelfDestruct ());
 	}
 	
 	// Update is called once per frame
@@ -39,10 +40,6 @@ public class Kamikaze : Mob {
 	{
 		if (GameObject.FindWithTag ("Player") && Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2)) <= 1.5)
 			skills[0].useSkill(this);
-	}
-
-	public override void OnDeath() {
-		skills[0].useSkill (this);
 	}
 
 	public override Transform headTransform {
@@ -53,7 +50,9 @@ public class Kamikaze : Mob {
 	
 	private float timer;
 	public override void movement () {
-		if (GameObject.FindWithTag ("Player")) {
+        if (isAttacking)
+            return;
+        if (GameObject.FindWithTag ("Player")) {
 			GameObject player = GameObject.FindWithTag ("Player");
 			playerPosition = player.transform.position;
 			Vector3 diff = (getTargetLocation() - feetTransform.position).normalized;
@@ -76,7 +75,14 @@ public class Kamikaze : Mob {
 	}
 
 	public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
-		skill.skillLogic(this, stats);
-		yield return null;
-	}
+        float endTime = Time.fixedTime + attackTime;
+        float remainingTime = endTime - Time.fixedTime;
+        while (remainingTime > 0) {
+            int currentFrame = (int)(((attackTime - remainingTime) / attackTime) * spriteAttack.Length);
+            body.GetComponent<SpriteRenderer>().sprite = spriteAttack[currentFrame];
+            yield return new WaitForSeconds(0);
+            remainingTime = endTime - Time.fixedTime;
+        }
+        skill.skillLogic(this, stats);
+    }
 }
