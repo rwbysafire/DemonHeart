@@ -5,6 +5,7 @@ public class CameraMovement : MonoBehaviour {
 
 	Vector2 playerPosition;
 	public Texture2D cursorTexture;
+    public float amountToStickToPlayer = 5;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +19,7 @@ public class CameraMovement : MonoBehaviour {
 			playerPosition = new Vector2 (player.transform.position.x, player.transform.position.y);
 		}
 		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Vector3 camPosision = new Vector3 ((playerPosition.x * 4 + mousePosition.x) / 5, (playerPosition.y * 4 + mousePosition.y) / 5, transform.position.z);
+		Vector3 camPosision = new Vector3 ((playerPosition.x * (amountToStickToPlayer - 1) + mousePosition.x) / amountToStickToPlayer, (playerPosition.y * (amountToStickToPlayer-1) + mousePosition.y) / amountToStickToPlayer, transform.position.z);
 		transform.position = Vector3.MoveTowards(transform.position, camPosision, Mathf.Pow(Mathf.Pow(camPosision.x - transform.position.x, 2) + Mathf.Pow(camPosision.y - transform.position.y, 2), 0.75f) * Time.deltaTime * 5);
 	}
 }

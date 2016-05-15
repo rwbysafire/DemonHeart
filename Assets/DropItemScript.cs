@@ -58,7 +58,8 @@ public class DropItemScript : MonoBehaviour {
 			Debug.Log ("Error with tag: " + gameObject.tag);
 			break;
 		}
-	}
+        item.tag = gameObject.tag;
+    }
 
 	// Use this for initialization
 	void Start () {

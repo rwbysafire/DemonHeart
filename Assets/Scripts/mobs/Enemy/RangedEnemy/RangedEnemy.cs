@@ -19,6 +19,7 @@ public class RangedEnemy : Mob {
         body.transform.SetParent(transform);
         body.transform.position = transform.position;
         body.AddComponent<SpriteRenderer>();
+        body.GetComponent<SpriteRenderer>().material = (Material)Resources.Load("MapMaterial");
         body.GetComponent<SpriteRenderer>().sortingOrder = 2;
         stats.baseStrength = 15;
         stats.baseDexterity = 5;

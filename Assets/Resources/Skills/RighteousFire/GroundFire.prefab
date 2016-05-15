@@ -1,17 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &191022
+--- !u!1 &171788
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 495016}
-  - 212: {fileID: 21266688}
-  - 114: {fileID: 11480936}
-  - 58: {fileID: 5825028}
-  - 114: {fileID: 11445560}
+  - 4: {fileID: 458152}
+  - 212: {fileID: 21234848}
+  - 114: {fileID: 11491124}
+  - 58: {fileID: 5807078}
+  - 114: {fileID: 11462812}
   m_Layer: 0
   m_Name: GroundFire
   m_TagString: Untagged
@@ -19,24 +19,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &495016
+--- !u!4 &458152
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191022}
+  m_GameObject: {fileID: 171788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.263, y: -11.979, z: 0}
+  m_LocalPosition: {x: 8.091152, y: -11.814017, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!58 &5825028
+--- !u!58 &5807078
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191022}
+  m_GameObject: {fileID: 171788}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -45,23 +45,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.8
---- !u!114 &11445560
+--- !u!114 &11462812
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191022}
+  m_GameObject: {fileID: 171788}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50af99eda63efcf4895ba3b941b3219e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11480936
+--- !u!114 &11491124
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191022}
+  m_GameObject: {fileID: 171788}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0aea6ad0c300d104d88dd5db76998295, type: 3}
@@ -72,12 +72,12 @@ MonoBehaviour:
   delay: 0.05
   fileName: Skills/RighteousFire/GroundFire
   sprite: []
---- !u!212 &21266688
+--- !u!212 &21234848
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191022}
+  m_GameObject: {fileID: 171788}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -108,12 +108,8 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_Color.a
-      value: 0.78431374
-      objectReference: {fileID: 0}
+    m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 191022}
+  m_RootGameObject: {fileID: 171788}
   m_IsPrefabParent: 1

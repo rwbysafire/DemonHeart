@@ -50,7 +50,7 @@ public class SkillVolley : Skill {
 
     void fireArrow(Entity mob, Stats stats, float rotate = 0) {
 		//Instantiates the projectile with some speed
-		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
+		GameObject basicArrow = MonoBehaviour.Instantiate<GameObject>(Resources.Load<GameObject>("Skills/Arrow_Placeholder"));
 		projectile = new VolleyProjectile (basicArrow, stats);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation

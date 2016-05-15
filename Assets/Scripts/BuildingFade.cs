@@ -4,7 +4,8 @@ using System.Collections;
 public class BuildingFade : MonoBehaviour {
 
 	private GameObject player;
-	private Sprite sprite;
+    private GameObject camera;
+    private Sprite sprite;
 	private float alpha;
 	private SpriteRenderer spriteComponent;
 
@@ -14,7 +15,8 @@ public class BuildingFade : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-		spriteComponent = (SpriteRenderer) gameObject.GetComponent(typeof(SpriteRenderer));
+        camera = Camera.main.gameObject;
+        spriteComponent = (SpriteRenderer) gameObject.GetComponent(typeof(SpriteRenderer));
 		sprite = spriteComponent.sprite;
 		alpha = 1f;
 	}
@@ -25,8 +27,10 @@ public class BuildingFade : MonoBehaviour {
 		var yy = gameObject.transform.position.y;
 
 		if (reverseXTrigger && !reverseYTrigger) {
-			if (player.transform.position.x >= xx &&
-			    player.transform.position.y >= yy) {
+			if ((player.transform.position.x >= xx &&
+			    player.transform.position.y >= yy) ||
+                (camera.transform.position.x >= xx &&
+                camera.transform.position.y >= yy)){
 				if (alpha > 0f) {
 					alpha -= 0.05f;
 				} else {
@@ -40,8 +44,10 @@ public class BuildingFade : MonoBehaviour {
 				}
 			}
 		} else if (!reverseXTrigger && reverseYTrigger) {
-			if (player.transform.position.x <= xx &&
-			    player.transform.position.y <= yy) {
+			if ((player.transform.position.x <= xx &&
+                player.transform.position.y <= yy) ||
+                (camera.transform.position.x <= xx &&
+                camera.transform.position.y <= yy)) {
 				if (alpha > 0f) {
 					alpha -= 0.05f;
 				} else {
@@ -55,8 +61,10 @@ public class BuildingFade : MonoBehaviour {
 				}
 			}
 		} else if (reverseXTrigger && reverseYTrigger) {
-			if (player.transform.position.x >= xx &&
-			    player.transform.position.y <= yy) {
+			if ((player.transform.position.x >= xx &&
+                player.transform.position.y <= yy) ||
+                (camera.transform.position.x >= xx &&
+                camera.transform.position.y <= yy)) {
 				if (alpha > 0f) {
 					alpha -= 0.05f;
 				} else {
@@ -70,8 +78,10 @@ public class BuildingFade : MonoBehaviour {
 				}
 			}
 		} else {
-			if (player.transform.position.x <= xx &&
-			    player.transform.position.y >= yy) {
+			if ((player.transform.position.x <= xx &&
+                player.transform.position.y >= yy) ||
+                (camera.transform.position.x <= xx &&
+                camera.transform.position.y >= yy)) {
 				if (alpha > 0f) {
 					alpha -= 0.05f;
 				} else {

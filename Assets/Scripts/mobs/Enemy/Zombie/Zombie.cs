@@ -19,8 +19,9 @@ public class Zombie : Mob {
 		body = new GameObject ("PlayerHead");
 		body.transform.SetParent (transform);
 		body.transform.position = transform.position;
-		body.AddComponent<SpriteRenderer>();
-		body.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        body.AddComponent<SpriteRenderer>();
+        body.GetComponent<SpriteRenderer>().material = (Material)Resources.Load("MapMaterial");
+        body.GetComponent<SpriteRenderer>().sortingOrder = 2;
 		stats.baseStrength = 20;
         stats.baseDexterity = -50;
         // Z exp = 100

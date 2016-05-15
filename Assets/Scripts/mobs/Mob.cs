@@ -76,15 +76,15 @@ public abstract class Mob : MonoBehaviour , Entity{
 	public abstract string getName();
 	public virtual Vector3 getTargetLocation() {
         GameObject player = GameObject.FindWithTag("Player");
-        float radius = GetComponent<CircleCollider2D>().radius * 1.1f;
-        //Debug.DrawLine(body.transform.position, body.transform.position + (player.transform.position - body.transform.position).normalized * 2, Color.red);
+        float radius = GetComponent<CircleCollider2D>().radius * transform.localScale.x * 1.1f;
+        Debug.DrawLine(body.transform.position, body.transform.position + (player.transform.position - body.transform.position).normalized * 2, Color.red);
         foreach (RaycastHit2D lineCast in Physics2D.LinecastAll(body.transform.position + (player.transform.position - body.transform.position).normalized * radius, body.transform.position + (player.transform.position - body.transform.position).normalized * 2)) {
             if (lineCast.collider.CompareTag("Wall") || lineCast.collider.CompareTag("Enemy")) {
-                //Debug.DrawLine(body.transform.position, (body.transform.position + body.transform.up * 2), Color.blue);
+                Debug.DrawLine(body.transform.position, (body.transform.position + body.transform.up * 2), Color.blue);
                 foreach (RaycastHit2D directionCast in Physics2D.LinecastAll(body.transform.position + body.transform.up * radius, (body.transform.position + body.transform.up * 2))) {
                     if (directionCast.collider.CompareTag("Wall") || directionCast.collider.CompareTag("Enemy")) {
-                        //Debug.DrawLine(body.transform.position, Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0))).point, Color.green);
-                        //Debug.DrawLine(body.transform.position, Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0))).point, Color.green);
+                        Debug.DrawLine(body.transform.position, Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0))).point, Color.green);
+                        Debug.DrawLine(body.transform.position, Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0))).point, Color.green);
                         if (Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0))).distance > Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0))).distance)
                             return body.transform.position + body.transform.TransformDirection(new Vector3(0.1f, 1, 0).normalized);
                         else

@@ -42,14 +42,21 @@ public class SkillPowershot : Skill
         spriteRenderer.sortingOrder = 4;
         powershot.transform.position = new Vector2(startLocation.x + (targetLocation.x - startLocation.x)/2, startLocation.y + (targetLocation.y - startLocation.y)/2);
 		powershot.transform.rotation = mob.headTransform.rotation;
-        powershot.transform.localScale = new Vector2(1f, Vector2.Distance(startLocation, targetLocation));
+        powershot.transform.localScale = new Vector3(1f, Vector2.Distance(startLocation, targetLocation), 1f);
         BoxCollider2D collider = powershot.AddComponent<BoxCollider2D>();
 		collider.isTrigger = true;
         collider.size = new Vector2(0.5f, 1f);
         PowershotEffect p = powershot.AddComponent<PowershotEffect>();
 		p.mob = mob.gameObject.GetComponent<Mob>();
 		AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/Powershot/sniperShot"), mob.headTransform.position);
-	}
+        for (int i = 0; i < Vector3.Distance(startLocation, targetLocation); i++) {
+            GameObject arrowGlow = MonoBehaviour.Instantiate(Resources.Load("ShotGlow")) as GameObject;
+            arrowGlow.GetComponent<Light>().intensity = 3;
+            arrowGlow.transform.SetParent(powershot.transform);
+            Vector3 position = startLocation + ((targetLocation - startLocation).normalized * i);
+            arrowGlow.transform.position = new Vector3(position.x, position.y, -2);
+        }
+    }
 }
 
 class PowershotEffect : MonoBehaviour {
@@ -69,6 +76,9 @@ class PowershotEffect : MonoBehaviour {
 	void FixedUpdate () {
 		c.a = alpha;
 		gameObject.GetComponent<SpriteRenderer>().color = c;
+        foreach (Transform child in transform) {
+            child.GetComponent<Light>().intensity -= 0.1f;
+        }
 		alpha -= 0.03f;
 		if (alpha <= 0)
 			Destroy(gameObject);

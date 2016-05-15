@@ -58,7 +58,7 @@ public class Player : Mob {
 			new SkillSlash(),
 			new SkillStunArrow(),
 			new SkillTeleport(),
-			new SkillVolley()};
+			new SkillFireBolt()};
 		createPlayer ();
 		replaceSkill(0, listOfSkills[0]);
 		replaceSkill(1, listOfSkills[1]);

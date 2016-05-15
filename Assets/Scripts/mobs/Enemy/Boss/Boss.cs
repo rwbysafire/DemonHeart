@@ -5,6 +5,8 @@ public class Boss : Mob {
 
     private int speed = 110, followDistance = 8;
     private Vector3 playerPosition;
+    private float distance;
+    private RaycastHit2D lineOfSight;
 
     public Sprite[] spriteAttack, spriteWalk, spriteIdle;
     private int walkingFrame;
@@ -17,8 +19,10 @@ public class Boss : Mob {
     void create() {
         body = new GameObject("Boss");
         body.transform.SetParent(transform);
+        body.transform.localScale = Vector3.one;
         body.transform.position = transform.position;
         body.AddComponent<SpriteRenderer>();
+        body.GetComponent<SpriteRenderer>().material = (Material)Resources.Load("MapMaterial");
         body.GetComponent<SpriteRenderer>().sortingOrder = 2;
         stats.baseHealth = 10000;
         stats.baseStrength = 20;
@@ -33,8 +37,11 @@ public class Boss : Mob {
         spriteAttack = Resources.LoadAll<Sprite>("Sprite/zombieAttack");
         spriteWalk = Resources.LoadAll<Sprite>("Sprite/zombieWalk");
         spriteIdle = Resources.LoadAll<Sprite>("Sprite/zombieIdle");
-        replaceSkill(0, new SkillBasicAttack());
+        replaceSkill(0, new SkillFireBolt());
+        skills[0].properties["manaCost"] = 0;
         skills[0].properties["projectileCount"] = 3;
+        skills[0].properties["attackSpeed"] = 1f;
+        skills[0].properties["cooldown"] = 0;
         replaceSkill(2, new SkillRighteousFire());
         skills[2].properties["manaCost"] = 0;
     }
@@ -44,6 +51,7 @@ public class Boss : Mob {
         if (isAttacking)
             return;
         if (stats.health < stats.baseHealth / 2) {
+            skills[0].properties["attackSpeed"] = 0.75f;
             skills[2].useSkill(this);
         }
         GameObject player = GameObject.FindWithTag("Player");
@@ -53,9 +61,9 @@ public class Boss : Mob {
             float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
             headTransform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
 
-            float distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2));
-            RaycastHit2D hitPlayer = Physics2D.Raycast(body.transform.position + (playerPosition - body.transform.position).normalized * GetComponent<CircleCollider2D>().radius * 1.1f, playerPosition - body.transform.position);
-            if (distance >= 4 && distance <= 9 && hitPlayer.collider.CompareTag("Player")) {
+            distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2));
+            lineOfSight = Physics2D.Raycast(body.transform.position + (playerPosition - body.transform.position).normalized * GetComponent<CircleCollider2D>().radius * transform.localScale.x * 1.1f, playerPosition - body.transform.position);
+            if (distance >= 4 && distance <= 10 && lineOfSight.collider.CompareTag("Player")) {
                 skills[0].useSkill(this);
             }
         }
@@ -77,10 +85,12 @@ public class Boss : Mob {
             Vector3 diff = (getTargetLocation() - feetTransform.position).normalized;
             float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
             headTransform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-            if (stats.health > stats.baseHealth/2)
-                GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed);
-            else
-                GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed * 1.4f);
+            if (distance >= 6 || !lineOfSight.collider.CompareTag("Player")) {
+                if (stats.health > stats.baseHealth / 2)
+                    GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed);
+                else
+                    GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed * 1.4f);
+            }
         }
         if (gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > 0.05f) {
             if (timer + (1.20 - Mathf.Pow(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude, 0.1f)) <= Time.fixedTime) {
