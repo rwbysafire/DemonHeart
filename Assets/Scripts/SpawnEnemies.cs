@@ -12,11 +12,13 @@ public class SpawnEnemies : MonoBehaviour {
 	private bool isSpawning = false;
 	private List<Vector3> ClosestSpawn;
 	private int mark = 0;
+    private float zPosition = 0;
 
-	// Use this for initialization
-	void Start () {
-		// load the wave file
-		waveList = new List<Wave>();
+    // Use this for initialization
+    void Start () {
+        // load the wave file
+        zPosition = 0;
+        waveList = new List<Wave>();
 		JSONNode wavesData = JSON.Parse(waveFile.text);
 		JSONArray wavesName = wavesData ["waves"].AsArray;
 		for (int i = 0; i < wavesName.Count; i++) {
@@ -45,7 +47,9 @@ public class SpawnEnemies : MonoBehaviour {
 			print ("Starting wave: " + currentWave.ToString ());
         }
 		CalClosestPos ();
-	}
+        if (zPosition > 0.1f)
+            zPosition = 0;
+    }
 
 	// Calculat the closest 3 spawn positions
 	void CalClosestPos()
@@ -115,16 +119,18 @@ public class SpawnEnemies : MonoBehaviour {
 				{
 					GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
 					wave.count -= 1;
-					enemy.transform.position = ClosestSpawn [i];
-					enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
+					enemy.transform.position = new Vector3(ClosestSpawn [i].x, ClosestSpawn[i].y, zPosition);
+                    zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
+                    enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
 				}
 			} 
 			else 
 			{
 				GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
 				wave.count -= 1;
-				enemy.transform.position = ClosestSpawn [mark];
-				enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
+                enemy.transform.position = new Vector3(ClosestSpawn[mark].x, ClosestSpawn[mark].y, zPosition);
+                zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
+                enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
 			}
             yield return new WaitForSeconds(0.5f);
         }
