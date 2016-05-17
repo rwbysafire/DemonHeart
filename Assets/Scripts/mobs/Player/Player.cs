@@ -47,7 +47,7 @@ public class Player : Mob {
 		stats.baseDexterity = 30;
 		stats.baseIntelligence = 10;
 		stats.exp = 0;
-		listOfSkills = new Skill[12]{new SkillBasicAttack(),
+		listOfSkills = new Skill[12]{new SkillMortar(),
 			new SkillChainLightning(),
 			new SkillCombatRoll(),
 			new SkillExplosiveArrow(),

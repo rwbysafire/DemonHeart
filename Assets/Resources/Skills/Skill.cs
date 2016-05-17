@@ -100,7 +100,7 @@ public abstract class Skill
 	public abstract Sprite getImage();
 	public virtual float getMaxCooldown() {return 0;}
 	public virtual float getAttackSpeed() {return 0;}
-	public abstract float getManaCost();
+	public virtual float getManaCost() {return 0;}
 	public abstract void skillLogic(Entity entity, Stats stats); 
 	public virtual void skillPassive(Mob mob) {}
 	public virtual void skillFixedUpdate() {}
