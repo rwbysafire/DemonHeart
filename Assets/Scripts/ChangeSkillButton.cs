@@ -27,8 +27,10 @@ public class ChangeSkillButton : MonoBehaviour {
 			Skill skill = GameObject.Find("Player").GetComponent<Mob>().skills[index];
 //			if (skills.ContainsValue(skill.getName()) == false)
 //			{
-			GetComponent<Image> ().sprite = skill.getImage ();
-			GetComponentInChildren<Text> ().text = skill.getName ();
+			if (skill != null) {
+				GetComponent<Image> ().sprite = skill.getImage ();
+				GetComponentInChildren<Text> ().text = skill.getName ();
+			}
 //				skills.Add(index, skill.getName());
 //			}
 		}

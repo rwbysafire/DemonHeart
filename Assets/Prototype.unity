@@ -615,7 +615,6 @@ GameObject:
   - 222: {fileID: 24526271}
   - 114: {fileID: 24526270}
   - 114: {fileID: 24526269}
-  - 114: {fileID: 24526272}
   m_Layer: 5
   m_Name: dexdown
   m_TagString: Untagged
@@ -680,7 +679,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 24526272}
+      - m_Target: {fileID: 1973812762}
         m_MethodName: setdex
         m_Mode: 3
         m_Arguments:
@@ -726,17 +725,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 24526267}
---- !u!114 &24526272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 24526267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483c9b17a9f55ca4ab13d9a4c6c321b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &30975489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,6 +2012,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1055593239}
         m_MethodName: setIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1973812762}
+        m_MethodName: FullSkills
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4728,6 +4727,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1973812762}
+        m_MethodName: FullSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &355088879
@@ -6297,7 +6307,6 @@ GameObject:
   - 222: {fileID: 474297647}
   - 114: {fileID: 474297646}
   - 114: {fileID: 474297645}
-  - 114: {fileID: 474297648}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -6362,7 +6371,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 474297648}
+      - m_Target: {fileID: 1973812762}
         m_MethodName: play
         m_Mode: 1
         m_Arguments:
@@ -6408,17 +6417,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 474297643}
---- !u!114 &474297648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 474297643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483c9b17a9f55ca4ab13d9a4c6c321b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &480342980
 GameObject:
   m_ObjectHideFlags: 0
@@ -6603,7 +6601,6 @@ GameObject:
   - 222: {fileID: 501861309}
   - 114: {fileID: 501861308}
   - 114: {fileID: 501861307}
-  - 114: {fileID: 501861310}
   m_Layer: 5
   m_Name: dexup
   m_TagString: Untagged
@@ -6668,7 +6665,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 501861310}
+      - m_Target: {fileID: 1973812762}
         m_MethodName: setdex
         m_Mode: 3
         m_Arguments:
@@ -6714,17 +6711,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 501861305}
---- !u!114 &501861310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 501861305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483c9b17a9f55ca4ab13d9a4c6c321b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &508343108
 GameObject:
   m_ObjectHideFlags: 0
@@ -8103,6 +8089,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1055593239}
         m_MethodName: setIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 508343108}
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9920,7 +9917,6 @@ GameObject:
   - 222: {fileID: 813779232}
   - 114: {fileID: 813779231}
   - 114: {fileID: 813779230}
-  - 114: {fileID: 813779233}
   m_Layer: 5
   m_Name: intdown
   m_TagString: Untagged
@@ -9985,7 +9981,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 813779233}
+      - m_Target: {fileID: 1973812762}
         m_MethodName: setint
         m_Mode: 3
         m_Arguments:
@@ -10031,17 +10027,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 813779228}
---- !u!114 &813779233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 813779228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483c9b17a9f55ca4ab13d9a4c6c321b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &817309734
 GameObject:
   m_ObjectHideFlags: 0
@@ -15629,7 +15614,6 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -16733,6 +16717,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1973812762}
+        m_MethodName: FullSkills
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1414707278
@@ -16779,7 +16774,6 @@ GameObject:
   - 222: {fileID: 1415492640}
   - 114: {fileID: 1415492639}
   - 114: {fileID: 1415492638}
-  - 114: {fileID: 1415492641}
   m_Layer: 5
   m_Name: intup
   m_TagString: Untagged
@@ -16844,7 +16838,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1415492641}
+      - m_Target: {fileID: 1973812762}
         m_MethodName: setint
         m_Mode: 3
         m_Arguments:
@@ -16890,17 +16884,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1415492636}
---- !u!114 &1415492641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1415492636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483c9b17a9f55ca4ab13d9a4c6c321b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1427586384
 GameObject:
   m_ObjectHideFlags: 0
@@ -16912,7 +16895,6 @@ GameObject:
   - 222: {fileID: 1427586388}
   - 114: {fileID: 1427586387}
   - 114: {fileID: 1427586386}
-  - 114: {fileID: 1427586389}
   m_Layer: 5
   m_Name: strup
   m_TagString: Untagged
@@ -16977,7 +16959,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1427586389}
+      - m_Target: {fileID: 1973812762}
         m_MethodName: setstr
         m_Mode: 3
         m_Arguments:
@@ -17023,17 +17005,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1427586384}
---- !u!114 &1427586389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1427586384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483c9b17a9f55ca4ab13d9a4c6c321b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1430383560
 GameObject:
   m_ObjectHideFlags: 0
@@ -18322,7 +18293,6 @@ GameObject:
   - 222: {fileID: 1569410979}
   - 114: {fileID: 1569410978}
   - 114: {fileID: 1569410977}
-  - 114: {fileID: 1569410980}
   m_Layer: 5
   m_Name: strdown
   m_TagString: Untagged
@@ -18387,7 +18357,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1569410980}
+      - m_Target: {fileID: 1973812762}
         m_MethodName: setstr
         m_Mode: 3
         m_Arguments:
@@ -18433,17 +18403,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1569410975}
---- !u!114 &1569410980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1569410975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483c9b17a9f55ca4ab13d9a4c6c321b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1576437612
 GameObject:
   m_ObjectHideFlags: 0
@@ -18675,6 +18634,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1055593239}
         m_MethodName: setIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1973812762}
+        m_MethodName: FullSkills
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
