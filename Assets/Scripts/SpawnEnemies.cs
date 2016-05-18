@@ -30,7 +30,11 @@ public class SpawnEnemies : MonoBehaviour {
 			Wave w = new Wave();
 			for (int j = 0; j < enemies.Count; j++) {
 				JSONNode enemyData = enemies [j];
-				w.AddEnemy (Resources.Load<GameObject>(enemyData ["enemy"]), enemyData ["count"].AsInt, enemyData ["mustBeKilled"].AsBool);
+				w.AddEnemy (new SpawnSet(
+					Resources.Load<GameObject>(enemyData ["enemy"]),
+					enemyData ["count"].AsInt,
+					enemyData ["mustBeKilled"].AsBool,
+					enemyData ["interval"].AsFloat));
 			}
 			waveList.Add (w);
 		}
@@ -109,31 +113,37 @@ public class SpawnEnemies : MonoBehaviour {
 		WholeScreenTextScript.ShowText("Wave " + (currentWave + 1).ToString() + " is coming...");
 		yield return new WaitForSeconds(2.5f);
 		foreach (SpawnSet spawnSet in wave.enemies) {
-			StartCoroutine (SpawnEnemy(spawnSet.obj, spawnSet.count, spawnSet.mustBeKilled));
-			yield return new WaitForSeconds(2f);
+			StartCoroutine (SpawnEnemy(spawnSet));
+			yield return new WaitForSeconds(1f);
 		}
 			
 		isSpawnFinished = true;
     }
 
-	IEnumerator SpawnEnemy(GameObject obj, int count, bool mustBeKilled) {
+	IEnumerator SpawnEnemy(SpawnSet spawnSet) {
+		int count = spawnSet.count;
 		while (count > 0) {
-			GameObject enemy = Instantiate<GameObject> (obj);
-			enemy.transform.SetParent (mustBeKilled ? mustKillEnemies.transform : normalEnemies.transform);
-			enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
-			zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
 			if (count >= 3) {
 				for (int i = 0; i < 3; i++) {
+					GameObject enemy = Instantiate<GameObject> (spawnSet.obj);
+					enemy.transform.SetParent (spawnSet.mustBeKilled ? mustKillEnemies.transform : normalEnemies.transform);
+					enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
+					zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
 					enemy.transform.position = new Vector3 (ClosestSpawn [i].x, ClosestSpawn [i].y, zPosition);
+					yield return new WaitForSeconds(spawnSet.interval);
+					count--;
 				}
 			} else {
+				GameObject enemy = Instantiate<GameObject> (spawnSet.obj);
+				enemy.transform.SetParent (spawnSet.mustBeKilled ? mustKillEnemies.transform : normalEnemies.transform);
+				enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
+				zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
 				enemy.transform.position = new Vector3 (ClosestSpawn [mark].x, ClosestSpawn [mark].y, zPosition);
+				yield return new WaitForSeconds(spawnSet.interval);
+				count--;
 			}
-			count--;
-			yield return new WaitForSeconds(0.5f);
+
 		}
-
-
 	}
 }
 
@@ -145,8 +155,7 @@ public class Wave
 		enemies = new List<SpawnSet> ();
     }
 
-	public void AddEnemy (GameObject obj, int count, bool mustBeKilled) {
-		SpawnSet spawnSet = new SpawnSet (obj, count, mustBeKilled);
+	public void AddEnemy (SpawnSet spawnSet) {
 		enemies.Add (spawnSet);
 	}
 
@@ -156,10 +165,12 @@ public class SpawnSet {
 	public GameObject obj;
 	public int count;
 	public bool mustBeKilled;
+	public float interval;
 
-	public SpawnSet (GameObject obj, int count, bool mustBeKilled) {
+	public SpawnSet (GameObject obj, int count, bool mustBeKilled, float interval) {
 		this.obj = obj;
 		this.count = count;
 		this.mustBeKilled = mustBeKilled;
+		this.interval = interval;
 	}
 }
