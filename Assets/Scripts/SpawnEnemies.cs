@@ -7,9 +7,10 @@ public class SpawnEnemies : MonoBehaviour {
 
     public int currentWave = 0;
 	public TextAsset waveFile;
+	public GameObject mustKillEnemies, normalEnemies;
 
 	private List<Wave> waveList;
-	private bool isSpawning = false;
+	private bool isSpawnFinished = false;
 	private List<Vector3> ClosestSpawn;
 	private int mark = 0;
     private float zPosition = 0;
@@ -25,23 +26,26 @@ public class SpawnEnemies : MonoBehaviour {
 			JSONNode waveData = wavesData [wavesName [i]];
 			int count = waveData ["count"].AsInt;
 			JSONArray enemies = waveData ["enemies"].AsArray;
-			GameObject[] enemiesGameObject = new GameObject[enemies.Count];
-			for (int j = 0; j < enemiesGameObject.Length; j++) {
-				enemiesGameObject [j] = Resources.Load<GameObject> (enemies[j]);
+//			GameObject[] enemiesGameObject = new GameObject[enemies.Count];
+			Wave w = new Wave();
+			for (int j = 0; j < enemies.Count; j++) {
+				JSONNode enemyData = enemies [j];
+				w.AddEnemy (new SpawnSet(
+					Resources.Load<GameObject>(enemyData ["enemy"]),
+					enemyData ["count"].AsInt,
+					enemyData ["mustBeKilled"].AsBool,
+					enemyData ["interval"].AsFloat));
 			}
-			waveList.Add (new Wave(enemiesGameObject, count));
+			waveList.Add (w);
 		}
 		Debug.Log (waveList.Count.ToString () + " waves loaded");
-
 		StartCoroutine("spawnEnemy", waveList[currentWave]);
-
     }
 	
 	// Update is called once per frame
 	void Update () {
-		// need to fix, this method is slow (?)
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag ("Enemy");
-		if (enemies.Length == 0 && currentWave < waveList.Count - 1 && !isSpawning) {
+		if (mustKillEnemies.transform.childCount == 0 && currentWave < waveList.Count - 1 && isSpawnFinished) {
+			isSpawnFinished = false;
             currentWave += 1;
             StartCoroutine("spawnEnemy", waveList[currentWave]);
 			print ("Starting wave: " + currentWave.ToString ());
@@ -104,46 +108,69 @@ public class SpawnEnemies : MonoBehaviour {
 	}
 
     IEnumerator spawnEnemy(Wave wave) {
-		isSpawning = true;
 
 		// wait some seconds before start
 		WholeScreenTextScript.ShowText("Wave " + (currentWave + 1).ToString() + " is coming...");
 		yield return new WaitForSeconds(2.5f);
-
-        while (wave.count > 0) 
-		{
-//            GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
-			if (wave.count >= 3)
-			{
-				for (int i = 0; i < 3; i++) 
-				{
-					GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
-					wave.count -= 1;
-					enemy.transform.position = new Vector3(ClosestSpawn [i].x, ClosestSpawn[i].y, zPosition);
-                    zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
-                    enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
-				}
-			} 
-			else 
-			{
-				GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
-				wave.count -= 1;
-                enemy.transform.position = new Vector3(ClosestSpawn[mark].x, ClosestSpawn[mark].y, zPosition);
-                zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
-                enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
-			}
-            yield return new WaitForSeconds(0.5f);
-        }
-		isSpawning = false;
+		foreach (SpawnSet spawnSet in wave.enemies) {
+			StartCoroutine (SpawnEnemy(spawnSet));
+			yield return new WaitForSeconds(1f);
+		}
+			
+		isSpawnFinished = true;
     }
+
+	IEnumerator SpawnEnemy(SpawnSet spawnSet) {
+		int count = spawnSet.count;
+		while (count > 0) {
+			if (count >= 3) {
+				for (int i = 0; i < 3; i++) {
+					GameObject enemy = Instantiate<GameObject> (spawnSet.obj);
+					enemy.transform.SetParent (spawnSet.mustBeKilled ? mustKillEnemies.transform : normalEnemies.transform);
+					enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
+					zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
+					enemy.transform.position = new Vector3 (ClosestSpawn [i].x, ClosestSpawn [i].y, zPosition);
+					yield return new WaitForSeconds(spawnSet.interval);
+					count--;
+				}
+			} else {
+				GameObject enemy = Instantiate<GameObject> (spawnSet.obj);
+				enemy.transform.SetParent (spawnSet.mustBeKilled ? mustKillEnemies.transform : normalEnemies.transform);
+				enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
+				zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
+				enemy.transform.position = new Vector3 (ClosestSpawn [mark].x, ClosestSpawn [mark].y, zPosition);
+				yield return new WaitForSeconds(spawnSet.interval);
+				count--;
+			}
+
+		}
+	}
 }
 
 public class Wave
 {
-    public GameObject[] enemies;
-    public int count;
-    public Wave(GameObject[] enemies, int count) {
-        this.enemies = enemies;
-        this.count = count;
+	public List<SpawnSet> enemies;
+    
+    public Wave() {
+		enemies = new List<SpawnSet> ();
     }
+
+	public void AddEnemy (SpawnSet spawnSet) {
+		enemies.Add (spawnSet);
+	}
+
+}
+
+public class SpawnSet {
+	public GameObject obj;
+	public int count;
+	public bool mustBeKilled;
+	public float interval;
+
+	public SpawnSet (GameObject obj, int count, bool mustBeKilled, float interval) {
+		this.obj = obj;
+		this.count = count;
+		this.mustBeKilled = mustBeKilled;
+		this.interval = interval;
+	}
 }

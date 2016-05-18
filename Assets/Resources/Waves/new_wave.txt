@@ -1,0 +1,31 @@
+{
+  "waves": [
+    "1",
+    "2",
+    "boss"
+  ],
+
+  "1": {
+    "enemies": [
+      {"enemy": "Zombie", "count": 1, "mustBeKilled": false, "interval":1},
+      {"enemy": "Kamikaze", "count": 1, "mustBeKilled": true, "interval":0.5},
+    ]
+  },
+
+  "2": {
+    "enemies": [
+      {"enemy": "Zombie", "count": 2, "mustBeKilled": true, "interval":0.7},
+      {"enemy": "Kamikaze", "count": 2, "mustBeKilled": false, "interval":0.1},
+    ]
+  },
+
+  "boss": {
+    "enemies": [
+      {"enemy": "Boss", "count": 1, "mustBeKilled": true, "interval":1},
+      {"enemy": "Kamikaze", "count": 2, "mustBeKilled": false, "interval":1},
+      {"enemy": "Zombie", "count": 2, "mustBeKilled": false, "interval":1},
+      {"enemy": "Kamikaze", "count": 2, "mustBeKilled": false, "interval":1},
+      {"enemy": "Zombie", "count": 2, "mustBeKilled": false, "interval":1}
+    ]
+  }
+}
