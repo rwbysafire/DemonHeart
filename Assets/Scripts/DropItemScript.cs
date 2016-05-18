@@ -59,6 +59,8 @@ public class DropItemScript : MonoBehaviour {
 			Debug.Log ("Error with tag: " + gameObject.tag);
 			break;
 		}
+
+		item.tag = gameObject.tag;
 	}
 
 	private void Timeout () {
