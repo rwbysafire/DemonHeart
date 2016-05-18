@@ -49,7 +49,7 @@ public class Player : Mob {
 		stats.baseDexterity = 30;
 		stats.baseIntelligence = 10;
 		stats.exp = 0;
-		listOfSkills = new Skill[12]{new SkillMortar(),
+		listOfSkills = new Skill[12]{new SkillBasicAttack(),
 			new SkillChainLightning(),
 			new SkillCombatRoll(),
 			new SkillExplosiveArrow(),
@@ -63,11 +63,11 @@ public class Player : Mob {
 			new SkillFireBolt()};
 		createPlayer ();
 		replaceSkill(0, listOfSkills[0]);
-		replaceSkill(1, listOfSkills[1]);
-		replaceSkill(2, listOfSkills[2]);
-		replaceSkill(3, listOfSkills[4]);
-		replaceSkill(4, listOfSkills[10]);
-		replaceSkill(5, listOfSkills[3]);
+//		replaceSkill(1, listOfSkills[1]);
+//		replaceSkill(2, listOfSkills[2]);
+//		replaceSkill(3, listOfSkills[4]);
+//		replaceSkill(4, listOfSkills[10]);
+//		replaceSkill(5, listOfSkills[3]);
 	}
 
 	public override void OnUpdate ()

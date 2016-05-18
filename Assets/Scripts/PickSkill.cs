@@ -5,11 +5,11 @@ public class PickSkill : MonoBehaviour {
 
 	int index;
 	Skill[] skills;
-
-	void Update () {
-		if (Input.GetKeyUp(KeyCode.V))
-			gameObject.SetActive(false);
-	}
+//
+//	void Update () {
+//		if (Input.GetKeyUp(KeyCode.V))
+//			gameObject.SetActive(false);
+//	}
 
 	public void setIndex(int i) {
 		index = i;
