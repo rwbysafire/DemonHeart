@@ -7,6 +7,7 @@ public class SpawnEnemies : MonoBehaviour {
 
     public int currentWave = 0;
 	public TextAsset waveFile;
+	public GameObject mustKillEnemies, normalEnemies;
 
 	private List<Wave> waveList;
 	private bool isSpawning = false;
@@ -25,16 +26,16 @@ public class SpawnEnemies : MonoBehaviour {
 			JSONNode waveData = wavesData [wavesName [i]];
 			int count = waveData ["count"].AsInt;
 			JSONArray enemies = waveData ["enemies"].AsArray;
-			GameObject[] enemiesGameObject = new GameObject[enemies.Count];
-			for (int j = 0; j < enemiesGameObject.Length; j++) {
-				enemiesGameObject [j] = Resources.Load<GameObject> (enemies[j]);
+//			GameObject[] enemiesGameObject = new GameObject[enemies.Count];
+			Wave w = new Wave();
+			for (int j = 0; j < enemies.Count; j++) {
+				JSONNode enemyData = enemies [j];
+				w.AddEnemy (Resources.Load<GameObject>(enemyData ["enemy"]), enemyData ["count"].AsInt, enemyData ["mustBeKilled"].AsBool);
 			}
-			waveList.Add (new Wave(enemiesGameObject, count));
+			waveList.Add (w);
 		}
 		Debug.Log (waveList.Count.ToString () + " waves loaded");
-
 		StartCoroutine("spawnEnemy", waveList[currentWave]);
-
     }
 	
 	// Update is called once per frame
@@ -109,41 +110,62 @@ public class SpawnEnemies : MonoBehaviour {
 		// wait some seconds before start
 		WholeScreenTextScript.ShowText("Wave " + (currentWave + 1).ToString() + " is coming...");
 		yield return new WaitForSeconds(2.5f);
+		foreach (KeyValuePair<GameObject, int> pair in wave.normalEnemies) {
+			StartCoroutine (SpawnEnemy(pair.Key, pair.Value, false));
+			yield return new WaitForSeconds(2f);
+		}
 
-        while (wave.count > 0) 
-		{
-//            GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
-			if (wave.count >= 3)
-			{
-				for (int i = 0; i < 3; i++) 
-				{
-					GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
-					wave.count -= 1;
-					enemy.transform.position = new Vector3(ClosestSpawn [i].x, ClosestSpawn[i].y, zPosition);
-                    zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
-                    enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
-				}
-			} 
-			else 
-			{
-				GameObject enemy = Instantiate<GameObject>(wave.enemies[Random.Range(0, wave.enemies.Length)]);
-				wave.count -= 1;
-                enemy.transform.position = new Vector3(ClosestSpawn[mark].x, ClosestSpawn[mark].y, zPosition);
-                zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
-                enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
-			}
-            yield return new WaitForSeconds(0.5f);
-        }
+		foreach (KeyValuePair<GameObject, int> pair in wave.mustKillEnemies) {
+			StartCoroutine (SpawnEnemy(pair.Key, pair.Value, true));
+			yield return new WaitForSeconds(2f);
+		}
+			
 		isSpawning = false;
     }
+
+	IEnumerator SpawnEnemy(GameObject obj, int count, bool mustBeKilled) {
+		while (count > 0) {
+			GameObject enemy = Instantiate<GameObject> (obj);
+			enemy.transform.SetParent (mustBeKilled ? mustKillEnemies.transform : normalEnemies.transform);
+			enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
+			zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
+			if (count >= 3) {
+				for (int i = 0; i < 3; i++) {
+					enemy.transform.position = new Vector3 (ClosestSpawn [i].x, ClosestSpawn [i].y, zPosition);
+				}
+			} else {
+				enemy.transform.position = new Vector3 (ClosestSpawn [mark].x, ClosestSpawn [mark].y, zPosition);
+			}
+			count--;
+			yield return new WaitForSeconds(0.5f);
+		}
+
+
+	}
 }
 
 public class Wave
 {
-    public GameObject[] enemies;
-    public int count;
-    public Wave(GameObject[] enemies, int count) {
-        this.enemies = enemies;
-        this.count = count;
+	public List<KeyValuePair<GameObject, int>> normalEnemies, mustKillEnemies;
+    
+    public Wave() {
+		normalEnemies = new List<KeyValuePair<GameObject, int>> ();
+		mustKillEnemies = new List<KeyValuePair<GameObject, int>> ();
     }
+
+	public void AddEnemy (GameObject obj, int count, bool mustBeKilled) {
+		KeyValuePair<GameObject, int> pair = new KeyValuePair<GameObject, int> (obj, count);
+		if (mustBeKilled) {
+			mustKillEnemies.Add (pair);
+		} else {
+			normalEnemies.Add (pair);
+		}
+
+	}
+
+	public int GetTotalCount () {
+		return normalEnemies.Count + mustKillEnemies.Count;
+	}
+
+
 }

@@ -1,0 +1,13 @@
+{
+  "waves": [
+    "1"
+  ],
+
+  "1": {
+    "enemies": [
+      {"enemy": "Zombie", "count": 5, "mustBeKilled": true},
+      {"enemy": "Kamikaze", "count": 5, "mustBeKilled": false},
+      {"enemy": "Kamikaze", "count": 5, "mustBeKilled": true}
+    ]
+  }
+}
