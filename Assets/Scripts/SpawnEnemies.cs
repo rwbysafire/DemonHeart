@@ -10,7 +10,7 @@ public class SpawnEnemies : MonoBehaviour {
 	public GameObject mustKillEnemies, normalEnemies;
 
 	private List<Wave> waveList;
-	private bool isSpawning = false;
+	private bool isSpawnFinished = false;
 	private List<Vector3> ClosestSpawn;
 	private int mark = 0;
     private float zPosition = 0;
@@ -40,9 +40,8 @@ public class SpawnEnemies : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// need to fix, this method is slow (?)
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag ("Enemy");
-		if (enemies.Length == 0 && currentWave < waveList.Count - 1 && !isSpawning) {
+		if (mustKillEnemies.transform.childCount == 0 && currentWave < waveList.Count - 1 && isSpawnFinished) {
+			isSpawnFinished = false;
             currentWave += 1;
             StartCoroutine("spawnEnemy", waveList[currentWave]);
 			print ("Starting wave: " + currentWave.ToString ());
@@ -105,7 +104,6 @@ public class SpawnEnemies : MonoBehaviour {
 	}
 
     IEnumerator spawnEnemy(Wave wave) {
-		isSpawning = true;
 
 		// wait some seconds before start
 		WholeScreenTextScript.ShowText("Wave " + (currentWave + 1).ToString() + " is coming...");
@@ -120,7 +118,7 @@ public class SpawnEnemies : MonoBehaviour {
 			yield return new WaitForSeconds(2f);
 		}
 			
-		isSpawning = false;
+		isSpawnFinished = true;
     }
 
 	IEnumerator SpawnEnemy(GameObject obj, int count, bool mustBeKilled) {
