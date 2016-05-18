@@ -108,13 +108,8 @@ public class SpawnEnemies : MonoBehaviour {
 		// wait some seconds before start
 		WholeScreenTextScript.ShowText("Wave " + (currentWave + 1).ToString() + " is coming...");
 		yield return new WaitForSeconds(2.5f);
-		foreach (KeyValuePair<GameObject, int> pair in wave.normalEnemies) {
-			StartCoroutine (SpawnEnemy(pair.Key, pair.Value, false));
-			yield return new WaitForSeconds(2f);
-		}
-
-		foreach (KeyValuePair<GameObject, int> pair in wave.mustKillEnemies) {
-			StartCoroutine (SpawnEnemy(pair.Key, pair.Value, true));
+		foreach (SpawnSet spawnSet in wave.enemies) {
+			StartCoroutine (SpawnEnemy(spawnSet.obj, spawnSet.count, spawnSet.mustBeKilled));
 			yield return new WaitForSeconds(2f);
 		}
 			
@@ -144,26 +139,27 @@ public class SpawnEnemies : MonoBehaviour {
 
 public class Wave
 {
-	public List<KeyValuePair<GameObject, int>> normalEnemies, mustKillEnemies;
+	public List<SpawnSet> enemies;
     
     public Wave() {
-		normalEnemies = new List<KeyValuePair<GameObject, int>> ();
-		mustKillEnemies = new List<KeyValuePair<GameObject, int>> ();
+		enemies = new List<SpawnSet> ();
     }
 
 	public void AddEnemy (GameObject obj, int count, bool mustBeKilled) {
-		KeyValuePair<GameObject, int> pair = new KeyValuePair<GameObject, int> (obj, count);
-		if (mustBeKilled) {
-			mustKillEnemies.Add (pair);
-		} else {
-			normalEnemies.Add (pair);
-		}
-
+		SpawnSet spawnSet = new SpawnSet (obj, count, mustBeKilled);
+		enemies.Add (spawnSet);
 	}
 
-	public int GetTotalCount () {
-		return normalEnemies.Count + mustKillEnemies.Count;
+}
+
+public class SpawnSet {
+	public GameObject obj;
+	public int count;
+	public bool mustBeKilled;
+
+	public SpawnSet (GameObject obj, int count, bool mustBeKilled) {
+		this.obj = obj;
+		this.count = count;
+		this.mustBeKilled = mustBeKilled;
 	}
-
-
 }

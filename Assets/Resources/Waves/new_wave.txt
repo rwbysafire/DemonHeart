@@ -1,7 +1,8 @@
 {
   "waves": [
     "1",
-    "2"
+    "2",
+    "boss"
   ],
 
   "1": {
@@ -15,6 +16,16 @@
     "enemies": [
       {"enemy": "Zombie", "count": 2, "mustBeKilled": true},
       {"enemy": "Kamikaze", "count": 2, "mustBeKilled": false},
+    ]
+  },
+
+  "boss": {
+    "enemies": [
+      {"enemy": "Boss", "count": 1, "mustBeKilled": true},
+      {"enemy": "Kamikaze", "count": 2, "mustBeKilled": false},
+      {"enemy": "Zombie", "count": 2, "mustBeKilled": false},
+      {"enemy": "Kamikaze", "count": 2, "mustBeKilled": false},
+      {"enemy": "Zombie", "count": 2, "mustBeKilled": false}
     ]
   }
 }
