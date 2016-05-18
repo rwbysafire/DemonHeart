@@ -3,6 +3,7 @@ using System.Collections;
 
 public class DropItemScript : MonoBehaviour {
 
+	private static float TIMEOUT_SECOND = 3;
 	public Item item;
 
 	public void initItem () {
@@ -58,16 +59,20 @@ public class DropItemScript : MonoBehaviour {
 			Debug.Log ("Error with tag: " + gameObject.tag);
 			break;
 		}
-        item.tag = gameObject.tag;
-    }
+	}
+
+	private void Timeout () {
+		Destroy (gameObject);
+	}
 
 	// Use this for initialization
 	void Start () {
 		initItem ();
+		Invoke ("Timeout", TIMEOUT_SECOND);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 }

@@ -12,6 +12,8 @@ public class Player : Mob {
 	public InventoryUI inventory;
 	public HintTextScript hintText;
 
+	private DropItemScript drop;
+
 	public override string getName ()
 	{
 		return "Player";
@@ -70,6 +72,9 @@ public class Player : Mob {
 
 	public override void OnUpdate ()
 	{
+		if (drop == null) {
+			hintText.HideHint ();
+		}
 		if (Time.timeScale != 0) {
 			if (Input.GetKey (KeyCode.Mouse0)) {
 				skills[0].useSkill (this);
@@ -179,10 +184,8 @@ public class Player : Mob {
 	void OnTriggerEnter2D (Collider2D collider) {
 		if (collider.tag.ToLower ().StartsWith ("item")) {
 //			 show hint
-			DropItemScript drop = collider.gameObject.GetComponent<DropItemScript>();
+			drop = collider.gameObject.GetComponent<DropItemScript>();
 			hintText.ShowHint (drop.item.itemName, drop.item.itemDescription);
-//			Debug.Log(drop.item.itemName);
-//			Debug.Log(drop.item.itemDescription);
 		}
 	}
 
@@ -195,7 +198,7 @@ public class Player : Mob {
 			// pick up
 
 			if (Input.GetKey (KeyCode.Space)) {
-				DropItemScript drop = collider.gameObject.GetComponent<DropItemScript>();
+				drop = collider.gameObject.GetComponent<DropItemScript>();
 				if (inventory.AddItem (drop.item)) {
 					Destroy (collider.gameObject);
 					hintText.HideHint ();
