@@ -185,4 +185,11 @@ public abstract class Mob : MonoBehaviour , Entity{
 		this.stats.RemoveBuff (buff);
 		this.buff.RemoveBuff (buff);
 	}
+
+    public static string getEnemyTag(string tag) {
+        if (tag == "Player" || tag == "Ally")
+            return "Enemy";
+        else
+            return "Player";
+    }
 }

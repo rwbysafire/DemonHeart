@@ -61,8 +61,9 @@ public class SkillTeleport : Skill
 		flash.AddComponent<SpriteRenderer> ();
 		flash.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Skills/Teleport/flash");
 		flash.GetComponent<SpriteRenderer> ().color = Color.yellow;
-		flash.GetComponent<SpriteRenderer> ().sortingOrder = 4;
-		GameObject.Destroy (flash, 0.1f);
+        flash.GetComponent<SpriteRenderer> ().material = Resources.Load<Material>("MapMaterial");
+        flash.GetComponent<SpriteRenderer> ().sortingOrder = 4;
+		GameObject.Destroy (flash, 0.2f);
 	}
 }
 

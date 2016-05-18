@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2385242, y: -14.265808, z: 0}
+  m_LocalPosition: {x: 6.58, y: 3.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 430904}
@@ -84,7 +84,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0.59533465, b: 0.16176468, a: 1}
   m_Intensity: 1.5
-  m_Range: 20
+  m_Range: 60
   m_SpotAngle: 60.2
   m_CookieSize: 10
   m_Shadows:
@@ -195,6 +195,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Range
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114786}

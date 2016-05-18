@@ -42,6 +42,7 @@ public class Boss : Mob {
         skills[0].properties["projectileCount"] = 3;
         skills[0].properties["attackSpeed"] = 1f;
         skills[0].properties["cooldown"] = 0;
+        replaceSkill(1, new SkillMortar());
         replaceSkill(2, new SkillRighteousFire());
         skills[2].properties["manaCost"] = 0;
     }
@@ -65,6 +66,9 @@ public class Boss : Mob {
             lineOfSight = Physics2D.Raycast(body.transform.position + (playerPosition - body.transform.position).normalized * GetComponent<CircleCollider2D>().radius * transform.localScale.x * 1.1f, playerPosition - body.transform.position);
             if (distance >= 4 && distance <= 10 && lineOfSight.collider.CompareTag("Player")) {
                 skills[0].useSkill(this);
+            }
+            else if (distance <= 15 && lineOfSight.collider.CompareTag("Player")) {
+                skills[1].useSkill(this);
             }
         }
     }
