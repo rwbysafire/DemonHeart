@@ -228,7 +228,10 @@ public class InventoryUI : MonoBehaviour {
 	public void updateInventorySkillImages () {
 		// update the images for the skills
 		for (int i = 0; i < playerScript.skills.Length; i++) {
-			skillImages [i].overrideSprite = playerScript.skills [i].getImage ();
+			if (playerScript.skills[i] != null) {
+				skillImages [i].overrideSprite = playerScript.skills [i].getImage ();
+			}
+			
 		}
 	}
 
