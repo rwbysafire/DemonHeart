@@ -49,18 +49,19 @@ public class Player : Mob {
 		stats.baseDexterity = 30;
 		stats.baseIntelligence = 10;
 		stats.exp = 0;
-		listOfSkills = new Skill[12]{new SkillBasicAttack(),
-			new SkillChainLightning(),
-			new SkillCombatRoll(),
-			new SkillExplosiveArrow(),
-			new SkillPowershot(),
-			new SkillRighteousFire(),
-			new SkillScattershot(),
-			new SkillSelfDestruct(),
-			new SkillSlash(),
-			new SkillStunArrow(),
-			new SkillTeleport(),
-			new SkillFireBolt()};
+		listOfSkills = new Skill[11]{new SkillBasicAttack(),
+			new SkillChainLightning(), //1
+			new SkillCombatRoll(),  //2
+			new SkillExplosiveArrow(),//3
+			new SkillPowershot(),//4
+			new SkillRighteousFire(),  //5 fire aura
+			new SkillScattershot(),//6
+			new SkillMortar(),//7
+//			new SkillSlash(),
+//			new SkillStunArrow(),
+			new SkillVolley(),//8
+			new SkillTeleport(),//9
+			new SkillFireBolt()};//10
 		createPlayer ();
 		replaceSkill(0, listOfSkills[0]);
 //		replaceSkill(1, listOfSkills[1]);

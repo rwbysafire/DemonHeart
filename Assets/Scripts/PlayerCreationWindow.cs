@@ -1,24 +1,32 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerCreationWindow: MonoBehaviour {
 
 	GameObject display;
 	Text STR, DEX, INT;
+	List<int> CountSkills = new List<int> ();
 	
 	void Start () {
-		Pause.PauseGame ();
-		display = transform.FindChild("PlayerCreationBackground").gameObject;
-		STR = display.transform.FindChild("str").gameObject.GetComponent<Text>();
-		DEX = display.transform.FindChild("dex").gameObject.GetComponent<Text>();
-		INT = display.transform.FindChild("int").gameObject.GetComponent<Text>();
-		display.SetActive(true);
+		if (PlayerPrefs.GetInt (CharSaveLoadScript.PREFS_LOAD_GAME) == 0) {
+			Pause.PauseGame ();
+			display = transform.FindChild ("PlayerCreationBackground").gameObject;
+			STR = display.transform.FindChild ("str").gameObject.GetComponent<Text> ();
+			DEX = display.transform.FindChild ("dex").gameObject.GetComponent<Text> ();
+			INT = display.transform.FindChild ("int").gameObject.GetComponent<Text> ();
+			display.SetActive (true);
+		}
+
 	}
 
 	public void play()
 	{
-		Pause.ResumeGame ();
+		if (CountSkills.Count == 5) 
+		{
+			Pause.ResumeGame ();
+		}
 	}
 
 	public void setstr(int STR) {
@@ -54,5 +62,17 @@ public class PlayerCreationWindow: MonoBehaviour {
 //			}
 //		}
 
+	}
+
+	public void FullSkills(int index)
+	{
+		bool f = false;
+		for (int i = 0; i < CountSkills.Count; i++) 
+		{
+			if (CountSkills [i] == index)
+				f = true;
+		}
+		if (f == false)
+			CountSkills.Add (index);
 	}
 }
