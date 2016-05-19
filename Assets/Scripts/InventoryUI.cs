@@ -203,7 +203,7 @@ public class InventoryUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.B)) {
+		if (Input.GetKeyDown (KeyCode.C)) {
 			if (Pause.IsPaused () && inventory.activeSelf) {
 				// resume the game
 				Pause.ResumeGame ();

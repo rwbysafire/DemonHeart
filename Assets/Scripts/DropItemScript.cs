@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DropItemScript : MonoBehaviour {
 
-	private static float TIMEOUT_SECOND = 10;
+	private static float TIMEOUT_SECOND = 30;
 	public Item item;
 
 	public void initItem () {
@@ -31,7 +31,7 @@ public class DropItemScript : MonoBehaviour {
 			}
 			break;
 		case "item_skill":
-			switch (((int)Time.time) % 5) {
+			switch (((int)Time.time) % 6) {
 			case 0:
 				item = new GemAttackSpeed ();
 				break;
@@ -46,6 +46,9 @@ public class DropItemScript : MonoBehaviour {
 				break;
 			case 4:
 				item = new GemChainLightningOnHit();
+				break;
+			case 5:
+				item = new GemReducedDuration();
 				break;
 			default:
 				item = new Gem ();

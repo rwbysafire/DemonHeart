@@ -84,6 +84,14 @@ public class GemCooldownReduction : Gem {
     }
 }
 
+[System.Serializable]
+public class GemReducedDuration : Gem {
+    public GemReducedDuration() {
+        properties.Add("duration", new property(0.5f, "*"));
+        this.itemDescription = "Reduce skill duration";
+    }
+}
+
 // need to be fixed
 // for serialization, it cannot contain the skill class
 [System.Serializable]

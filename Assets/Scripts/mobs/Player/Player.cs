@@ -83,16 +83,16 @@ public class Player : Mob {
 			if (Input.GetKey (KeyCode.Mouse1)) {
 				skills[1].useSkill (this);
 			}
-			if (Input.GetKey (KeyCode.Alpha1)) {
+			if (Input.GetKey (KeyCode.Q)) {
 				skills[2].useSkill (this); 
 			}
-			if (Input.GetKey (KeyCode.Alpha2)) {
+			if (Input.GetKey (KeyCode.E)) {
 				skills[3].useSkill (this);
 			}
-			if (Input.GetKey (KeyCode.Alpha3)) {
+			if (Input.GetKey (KeyCode.R)) {
 				skills[4].useSkill (this);
 			}
-			if (Input.GetKey (KeyCode.Alpha4)) {
+			if (Input.GetKey (KeyCode.LeftShift)) {
 				skills[5].useSkill (this);
 			}
             foreach (Skill skill in skills) {

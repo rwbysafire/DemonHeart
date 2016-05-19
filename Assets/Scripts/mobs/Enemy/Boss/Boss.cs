@@ -12,6 +12,8 @@ public class Boss : Mob {
     private int walkingFrame;
     private int idleFrame;
 
+    private Vector3 overrideTarget = Vector3.zero;
+
     public override string getName() {
         return "Boss";
     }
@@ -64,12 +66,45 @@ public class Boss : Mob {
 
             distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2));
             lineOfSight = Physics2D.Raycast(body.transform.position + (playerPosition - body.transform.position).normalized * GetComponent<CircleCollider2D>().radius * transform.localScale.x * 1.1f, playerPosition - body.transform.position);
-            if (distance >= 4 && distance <= 10 && lineOfSight.collider.CompareTag("Player")) {
+            if (distance >= 4 && distance <= 9 && lineOfSight.collider.CompareTag("Player")) {
                 skills[0].useSkill(this);
             }
             else if (distance <= 15 && lineOfSight.collider.CompareTag("Player")) {
-                skills[1].useSkill(this);
+                Vector3 velocity = player.GetComponent<Rigidbody2D>().velocity;
+                Vector3 target = player.transform.position + (velocity * Random.Range(0.5f, 0.8f));
+                if (Vector3.Distance(transform.position, target) <= 17) {
+                    overrideTarget = target;
+                    skills[1].useSkill(this);
+                }
             }
+        }
+    }
+
+    public override Vector3 getTargetLocation() {
+        if (overrideTarget == Vector3.zero) {
+            GameObject player = GameObject.FindWithTag("Player");
+            float radius = GetComponent<CircleCollider2D>().radius * transform.localScale.x * 1.1f;
+            Debug.DrawLine(body.transform.position, body.transform.position + (player.transform.position - body.transform.position).normalized * 2, Color.red);
+            foreach (RaycastHit2D lineCast in Physics2D.LinecastAll(body.transform.position + (player.transform.position - body.transform.position).normalized * radius, body.transform.position + (player.transform.position - body.transform.position).normalized * 2)) {
+                if (lineCast.collider.CompareTag("Wall") || lineCast.collider.CompareTag("Enemy")) {
+                    Debug.DrawLine(body.transform.position, (body.transform.position + body.transform.up * 2), Color.blue);
+                    foreach (RaycastHit2D directionCast in Physics2D.LinecastAll(body.transform.position + body.transform.up * radius, (body.transform.position + body.transform.up * 2))) {
+                        if (directionCast.collider.CompareTag("Wall") || directionCast.collider.CompareTag("Enemy")) {
+                            Debug.DrawLine(body.transform.position, Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0))).point, Color.green);
+                            Debug.DrawLine(body.transform.position, Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0))).point, Color.green);
+                            if (Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0))).distance > Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0))).distance)
+                                return body.transform.position + body.transform.TransformDirection(new Vector3(0.1f, 1, 0).normalized);
+                            else
+                                return body.transform.position + body.transform.TransformDirection(new Vector3(-0.1f, 1, 0).normalized);
+                        }
+                    }
+                    return body.transform.position + body.transform.up;
+                }
+            }
+            return player.transform.position;
+        }
+        else {
+            return overrideTarget;
         }
     }
 
@@ -83,6 +118,7 @@ public class Boss : Mob {
     public override void movement() {
         if (isAttacking)
             return;
+        overrideTarget = Vector3.zero;
         GameObject player = GameObject.FindWithTag("Player");
         if (player) {
             playerPosition = player.transform.position;

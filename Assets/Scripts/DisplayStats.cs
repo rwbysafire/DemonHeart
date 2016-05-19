@@ -27,7 +27,7 @@ public class DisplayStats : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.C)) {
+		if (Input.GetKeyDown(KeyCode.X)) {
 			if (Pause.IsPaused () && display.activeSelf) {
 				// resume the game
 				Pause.ResumeGame ();

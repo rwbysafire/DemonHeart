@@ -95,7 +95,7 @@ public class Stats {
 	}
 	public float abilityPower {
 		get {
-			return 0 + (2 * intelligence);
+			return 0 + (1 * intelligence);
 		}
 	}
 	public float attackSpeed {

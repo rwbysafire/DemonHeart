@@ -96,6 +96,7 @@ public abstract class Mob : MonoBehaviour , Entity{
         }
         return player.transform.position;
     }
+
 	void Start() {
         stats = new Stats(tag);
         OnStart();

@@ -6,6 +6,7 @@ public class SkillMortar : Skill {
 
     public SkillMortar() : base() {
         addBaseProperty("baseDamage", 150);
+        addBaseProperty("duration", 1);
     }
 
     public override string getName() {
@@ -21,7 +22,7 @@ public class SkillMortar : Skill {
     }
 
     public override float getMaxCooldown() {
-        return 2;
+        return 1.5f;
     }
 
     public override void skillLogic(Entity entity, Stats stats) {
@@ -32,17 +33,15 @@ public class SkillMortar : Skill {
         hitIndicator.AddComponent<HitIndicator>();
         hitIndicator.GetComponent<HitIndicator>().skill = this;
         hitIndicator.GetComponent<HitIndicator>().stats = stats;
-        hitIndicator.GetComponent<HitIndicator>().delay = 1;
     }
 
     class HitIndicator : MonoBehaviour {
 
         public Skill skill;
         public Stats stats;
-        public float delay = 1;
 
         void Start() {
-            StartCoroutine("delayedExplosion", delay);
+            StartCoroutine("delayedExplosion", skill.properties["duration"]);
         }
 
         IEnumerator delayedExplosion(float delay) {

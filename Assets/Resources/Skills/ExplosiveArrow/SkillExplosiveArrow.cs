@@ -50,7 +50,10 @@ public class SkillExplosiveArrow : Skill {
     void fireArrow(Entity mob, Stats stats, float rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate (Resources.Load ("Skills/Arrow_Placeholder")) as GameObject;
-		projectile = new ExplosiveArrowProjectile (basicArrow, stats);
+        GameObject arrowGlow = MonoBehaviour.Instantiate(Resources.Load("ShotGlow")) as GameObject;
+        arrowGlow.transform.position = new Vector3(basicArrow.transform.position.x, basicArrow.transform.position.y, -0.3f);
+        arrowGlow.transform.SetParent(basicArrow.transform);
+        projectile = new ExplosiveArrowProjectile (basicArrow, stats);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = mob.headTransform.position;

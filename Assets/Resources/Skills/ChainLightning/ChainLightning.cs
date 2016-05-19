@@ -26,7 +26,7 @@ public class ChainLightning : MonoBehaviour {
 		lineRenderer.SetPosition(1, target);
 		displayFlash(target);
 		if (enemy != null) {
-			enemy.GetComponent<Mob>().hurt(2 * stats.abilityPower);
+			enemy.GetComponent<Mob>().hurt(20 + (1 * stats.abilityPower));
 			if (chainTimes > 0) {
 				lastHit.Insert(0, enemy.GetInstanceID());
 				if (lastHit.Count > 2)
