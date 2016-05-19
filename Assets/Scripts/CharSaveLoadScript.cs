@@ -65,7 +65,7 @@ public class CharSaveLoadScript : MonoBehaviour {
 		file.Close ();
 		player.stats = loadObject.stats;
 		player.buff = loadObject.buff;
-		inventory.setItemListDictionary (loadObject.items);
+		
 		for (int i = 0; i < loadObject.skillNames.Length; i++) {
 			for (int j = 0; j < player.listOfSkills.Length; j++) {
 				if (loadObject.skillNames[i] == player.listOfSkills[j].getName ()) {
@@ -75,7 +75,9 @@ public class CharSaveLoadScript : MonoBehaviour {
 			}
 		}
 		inventory.updateInventorySkillImages ();
-		WholeScreenTextScript.ShowText ("Game loaded");
+
+        inventory.setItemListDictionary(loadObject.items);
+        WholeScreenTextScript.ShowText ("Game loaded");
 		Debug.Log ("Player status loaded");
 	}
 
