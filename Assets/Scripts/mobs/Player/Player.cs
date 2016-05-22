@@ -39,7 +39,7 @@ public class Player : Mob {
 		feet.GetComponent<SpriteRenderer> ().sortingOrder = 1;
 		//Create flashlight
 		flashlight = Instantiate(Resources.Load ("Flashlight")) as GameObject;
-		flashlight.transform.position = new Vector3(transform.position.x, transform.position.y, -0.45f);
+		flashlight.transform.position = new Vector3(transform.position.x, transform.position.y, flashlight.transform.position.z);
 		flashlight.transform.SetParent(head.transform);
 	}
 

@@ -13,26 +13,26 @@
 
   "1": {
     "enemies": [
-      {"enemy": "Zombie", "count": 5, "mustBeKilled": true, "interval":4},
+      {"enemy": "Zombie", "count": 4, "mustBeKilled": true, "interval":2},
     ]
   },
 
   "2": {
     "enemies": [
-      {"enemy": "Kamikaze", "count": 8, "mustBeKilled": true, "interval":2},
+      {"enemy": "Kamikaze", "count": 8, "mustBeKilled": true, "interval":1},
     ]
   },
 
   "3": {
     "enemies": [
       {"enemy": "Zombie", "count": 10, "mustBeKilled": true, "interval":2},
-      {"enemy": "Kamikaze", "count": 5, "mustBeKilled": true, "interval":2.5},
+      {"enemy": "Kamikaze", "count": 5, "mustBeKilled": true, "interval":1.5},
     ]
   },
 
   "4": {
     "enemies": [
-      {"enemy": "RangedEnemy", "count": 20, "mustBeKilled": true, "interval":2},
+      {"enemy": "RangedEnemy", "count": 15, "mustBeKilled": true, "interval":2},
     ]
   },
 
@@ -68,7 +68,7 @@
 
   "endless": {
     "enemies": [
-      {"enemy": "Boss", "count": 999999, "mustBeKilled": true, "interval":120},
+      {"enemy": "Boss", "count": 999999, "mustBeKilled": true, "interval":20},
       {"enemy": "Kamikaze", "count": 999999, "mustBeKilled": true, "interval":1.2},
       {"enemy": "Zombie", "count": 999999, "mustBeKilled": true, "interval":1},
       {"enemy": "RangedEnemy", "count": 999999, "mustBeKilled": true, "interval":2},

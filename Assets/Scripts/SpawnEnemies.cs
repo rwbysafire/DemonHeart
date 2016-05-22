@@ -10,7 +10,7 @@ public class SpawnEnemies : MonoBehaviour {
 	public GameObject mustKillEnemies, normalEnemies;
 
 	private List<Wave> waveList;
-	private bool isSpawnFinished = false;
+	private int isSpawnFinished = 0;
 	private List<Vector3> ClosestSpawn;
 	private int mark = 0;
     private float zPosition = 0;
@@ -39,16 +39,16 @@ public class SpawnEnemies : MonoBehaviour {
 			waveList.Add (w);
 		}
 		Debug.Log (waveList.Count.ToString () + " waves loaded");
-		StartCoroutine("spawnEnemy", waveList[currentWave]);
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if (mustKillEnemies.transform.childCount == 0 && currentWave < waveList.Count - 1 && isSpawnFinished) {
-			isSpawnFinished = false;
-            currentWave += 1;
+        if (mustKillEnemies.transform.childCount == 0 && currentWave <= waveList.Count - 1 && isSpawnFinished <= 0) {
+            StopAllCoroutines();
+			isSpawnFinished = 1;
             StartCoroutine("spawnEnemy", waveList[currentWave]);
-			print ("Starting wave: " + currentWave.ToString ());
+            print ("Starting wave: " + currentWave.ToString ());
+            currentWave += 1;
         }
 		CalClosestPos ();
         if (zPosition > 0.1f)
@@ -113,11 +113,13 @@ public class SpawnEnemies : MonoBehaviour {
 		WholeScreenTextScript.ShowText("Wave " + (currentWave + 1).ToString() + " is coming...");
 		yield return new WaitForSeconds(2.5f);
 		foreach (SpawnSet spawnSet in wave.enemies) {
-			StartCoroutine (SpawnEnemy(spawnSet));
+            if (spawnSet.mustBeKilled)
+                isSpawnFinished += 1;
+            StartCoroutine (SpawnEnemy(spawnSet));
 			yield return new WaitForSeconds(1f);
 		}
 			
-		isSpawnFinished = true;
+		isSpawnFinished -= 1;
     }
 
 	IEnumerator SpawnEnemy(SpawnSet spawnSet) {
@@ -144,7 +146,8 @@ public class SpawnEnemies : MonoBehaviour {
 			}
 
 		}
-	}
+        isSpawnFinished -= 1;
+    }
 }
 
 public class Wave

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DropItemScript : MonoBehaviour {
 
-	private static float TIMEOUT_SECOND = 30;
+	private static float TIMEOUT_SECOND = 10;
 	public Item item;
 
 	public void initItem () {

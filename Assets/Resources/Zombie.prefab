@@ -131,7 +131,7 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &5818196
 CircleCollider2D:
@@ -282,8 +282,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
+    tag: 
     level: 0
     exp: 0
+    CurExp: 0
     strengthAddon: 0
     dexterityAddon: 0
     intelligenceAddon: 0
@@ -293,8 +295,10 @@ MonoBehaviour:
     health: 0
     mana: 0
   buff:
+    tag: 
     level: 0
     exp: 0
+    CurExp: 0
     strengthAddon: 0
     dexterityAddon: 0
     intelligenceAddon: 0
@@ -304,6 +308,7 @@ MonoBehaviour:
     health: 0
     mana: 0
   isAttacking: 0
+  body: {fileID: 0}
   dropTable:
   - Gems/ArmorGem
   - Gems/SkillGem
@@ -524,6 +529,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
