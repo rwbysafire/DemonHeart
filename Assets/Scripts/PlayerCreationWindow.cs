@@ -10,12 +10,13 @@ public class PlayerCreationWindow: MonoBehaviour {
 	List<int> CountSkills = new List<int> ();
 	
 	void Start () {
+		display = transform.FindChild ("PlayerCreationBackground").gameObject;
+		STR = display.transform.FindChild ("str").gameObject.GetComponent<Text> ();
+		DEX = display.transform.FindChild ("dex").gameObject.GetComponent<Text> ();
+		INT = display.transform.FindChild ("int").gameObject.GetComponent<Text> ();
+
 		if (PlayerPrefs.GetInt (CharSaveLoadScript.PREFS_LOAD_GAME) == 0) {
 			Pause.PauseGame ();
-			display = transform.FindChild ("PlayerCreationBackground").gameObject;
-			STR = display.transform.FindChild ("str").gameObject.GetComponent<Text> ();
-			DEX = display.transform.FindChild ("dex").gameObject.GetComponent<Text> ();
-			INT = display.transform.FindChild ("int").gameObject.GetComponent<Text> ();
 			display.SetActive (true);
 		}
 
