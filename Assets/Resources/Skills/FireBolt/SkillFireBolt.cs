@@ -73,7 +73,7 @@ class FireBoltProjectile : Projectile {
             }
         }
         GameObject explosion = GameObject.Instantiate(Resources.Load("Skills/FireBolt/fireBoltExplosion")) as GameObject;
-        explosion.GetComponent<FireBoltExplosion>().damage = 40 + (1.5f * stats.abilityPower);
+        explosion.GetComponent<FireBoltExplosion>().damage = 50 + (2f * stats.abilityPower);
         explosion.GetComponent<FireBoltExplosion>().enemyTag = Mob.getEnemyTag(stats.tag);
         explosion.transform.position = target;
         explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));

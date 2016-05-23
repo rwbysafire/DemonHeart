@@ -110,9 +110,14 @@ public class Player : Mob {
 	{
 		//Displays and modifies player rotations
 		headLogic();
+        Vector2 direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (direction != Vector2.zero) {
+            float feetDirection = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+            feet.transform.rotation = Quaternion.Euler(0f, 0f, feetDirection);
+        }
         foreach (Skill skill in skills) {
             if (skill != null)
-                skill.skillFixedUpdate();
+                skill.skillFixedUpdate(this);
         }
 	}
 
@@ -143,8 +148,6 @@ public class Player : Mob {
 			Vector2 directionMagnitude = new Vector2(Mathf.Abs(direction.normalized.x) * direction.x, Mathf.Abs(direction.normalized.y) * direction.y);
 			GetComponent<Rigidbody2D>().AddForce(directionMagnitude * speed);
 			//Feet
-			float feetDirection = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg - 90;
-			feet.transform.rotation = Quaternion.Euler (0f, 0f, feetDirection);
 			if(feetFrame >= feetSprite.Length - 1)
 				feetFrame = -1;
 			if (feetTimer + (1.28 - Mathf.Pow(gameObject.GetComponent<Rigidbody2D>().velocity.magnitude, 0.1f)) <= Time.fixedTime) {

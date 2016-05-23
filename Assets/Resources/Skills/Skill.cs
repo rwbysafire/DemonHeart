@@ -103,5 +103,5 @@ public abstract class Skill
 	public virtual float getManaCost() {return 0;}
 	public abstract void skillLogic(Entity entity, Stats stats); 
 	public virtual void skillPassive(Mob mob) {}
-	public virtual void skillFixedUpdate() {}
+	public virtual void skillFixedUpdate(Mob mob) {}
 }

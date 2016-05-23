@@ -6,6 +6,7 @@ public class SkillCombatRoll : Skill {
 	bool rolling;
 	float timer;
 	GameObject knockback;
+    Vector3 direction;
 
 	public SkillCombatRoll() : base() {}
 	
@@ -28,7 +29,8 @@ public class SkillCombatRoll : Skill {
 	public override void skillLogic(Entity mob, Stats stats) {
 		mob.gameObject.GetComponent<Mob>().disableMovement(0.2f);
 		timer = Time.fixedTime + 0.2f;
-		knockback = new GameObject();
+        direction = mob.feetTransform.up;
+        knockback = new GameObject();
 		knockback.transform.position = mob.feetTransform.position;
 		knockback.transform.SetParent(mob.feetTransform);
 		knockback.AddComponent<CircleCollider2D>();
@@ -40,8 +42,8 @@ public class SkillCombatRoll : Skill {
 		GameObject.Destroy(knockback, 0.2f);
 	}
 
-	public override void skillPassive(Mob mob) {
+	public override void skillFixedUpdate(Mob mob) {
 		if (timer > Time.fixedTime)
-			mob.gameObject.GetComponent<Rigidbody2D>().velocity = mob.feetTransform.up * 70 * (timer-Time.fixedTime)/0.2f;
+			mob.gameObject.GetComponent<Rigidbody2D>().velocity = direction * 70 * (timer-Time.fixedTime)/0.2f;
 	}
 }

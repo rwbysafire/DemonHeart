@@ -3,6 +3,7 @@
     "1",
     "2",
     "3",
+	"miniBoss",
     "4",
     "5",
     "6",
@@ -26,7 +27,14 @@
   "3": {
     "enemies": [
       {"enemy": "Zombie", "count": 10, "mustBeKilled": true, "interval":2},
-      {"enemy": "Kamikaze", "count": 5, "mustBeKilled": true, "interval":1.5},
+      {"enemy": "Kamikaze", "count": 13, "mustBeKilled": true, "interval":1.5},
+    ]
+  },
+
+  "miniBoss": {
+    "enemies": [
+      {"enemy": "Boss", "count": 1, "mustBeKilled": true, "interval":1},
+      {"enemy": "Zombie", "count": 999999, "mustBeKilled": false, "interval":3},
     ]
   },
 

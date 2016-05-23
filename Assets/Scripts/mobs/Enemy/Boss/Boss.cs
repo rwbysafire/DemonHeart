@@ -42,11 +42,13 @@ public class Boss : Mob {
         replaceSkill(0, new SkillFireBolt());
         skills[0].properties["manaCost"] = 0;
         skills[0].properties["projectileCount"] = 3;
-        skills[0].properties["attackSpeed"] = 1f;
-        skills[0].properties["cooldown"] = 0;
+        skills[0].properties["attackSpeed"] = 0.75f;
+        skills[0].properties["cooldown"] = 1;
         replaceSkill(1, new SkillMortar());
+        skills[0].properties["cooldown"] = 0;
         replaceSkill(2, new SkillRighteousFire());
         skills[2].properties["manaCost"] = 0;
+        replaceSkill(3, new SkillCombatRoll());
     }
 
     // Update is called once per frame
@@ -54,7 +56,8 @@ public class Boss : Mob {
         if (isAttacking)
             return;
         if (stats.health < stats.baseHealth / 2) {
-            skills[0].properties["attackSpeed"] = 0.75f;
+            skills[0].properties["attackSpeed"] = 0.56f;
+            skills[0].properties["cooldown"] = 0.75f;
             skills[2].useSkill(this);
         }
         GameObject player = GameObject.FindWithTag("Player");
@@ -66,17 +69,36 @@ public class Boss : Mob {
 
             distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2));
             lineOfSight = Physics2D.Raycast(body.transform.position + (playerPosition - body.transform.position).normalized * GetComponent<CircleCollider2D>().radius * transform.localScale.x * 1.1f, playerPosition - body.transform.position);
-            if (distance >= 4 && distance <= 9 && lineOfSight.collider.CompareTag("Player")) {
-                skills[0].useSkill(this);
-            }
-            else if (distance <= 15 && lineOfSight.collider.CompareTag("Player")) {
-                Vector3 velocity = player.GetComponent<Rigidbody2D>().velocity;
-                Vector3 target = player.transform.position + (velocity * Random.Range(0.5f, 0.8f));
-                if (Vector3.Distance(transform.position, target) <= 17) {
-                    overrideTarget = target;
-                    skills[1].useSkill(this);
+
+            if (lineOfSight.collider.CompareTag("Player")) {
+                if (stats.health < stats.baseHealth / 2 && distance >= 3 && lineOfSight.collider.CompareTag("Player")) {
+                    float chanceOfCastingPerSec = 0.75f;
+                    print((1 - Mathf.Pow(1 - chanceOfCastingPerSec, Time.deltaTime)).ToString() + " ,   " + (1 / Time.deltaTime).ToString());
+                    if (Random.Range(0f, 1f) <= 1 - Mathf.Pow(1 - chanceOfCastingPerSec, Time.deltaTime))
+                        skills[3].useSkill(this);
+                }
+                if (distance <= 9 && lineOfSight.collider.CompareTag("Player")) {
+                    float chanceOfCastingPerSec = 0.98f;
+                    print((1 - Mathf.Pow(1 - chanceOfCastingPerSec, Time.deltaTime)).ToString() + " ,   " + (1 / Time.deltaTime).ToString());
+                    if (Random.Range(0f, 1f) <= 1 - Mathf.Pow(1 - chanceOfCastingPerSec, Time.deltaTime))
+                        skills[0].useSkill(this);
+                }
+                else if (distance <= 15 && lineOfSight.collider.CompareTag("Player")) {
+                    Vector3 velocity = player.GetComponent<Rigidbody2D>().velocity;
+                    Vector3 target = player.transform.position + (velocity * Random.Range(0.5f, 0.8f));
+                    if (Vector3.Distance(transform.position, target) <= 17) {
+                        overrideTarget = target;
+                        skills[1].useSkill(this);
+                    }
                 }
             }
+        }
+    }
+
+    public override void OnFixedUpdate() {
+        foreach (Skill skill in skills) {
+            if (skill != null)
+                skill.skillFixedUpdate(this);
         }
     }
 
@@ -125,10 +147,12 @@ public class Boss : Mob {
             Vector3 diff = (getTargetLocation() - feetTransform.position).normalized;
             float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
             headTransform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-            if (distance >= 6 || !lineOfSight.collider.CompareTag("Player")) {
-                if (stats.health > stats.baseHealth / 2)
+            if (stats.health > stats.baseHealth / 2) {
+                if (distance >= 6 || !lineOfSight.collider.CompareTag("Player"))
                     GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed);
-                else
+            }
+            else {
+                if (distance >= 2 || !lineOfSight.collider.CompareTag("Player"))
                     GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed * 1.4f);
             }
         }
