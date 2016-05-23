@@ -80,10 +80,7 @@ class ExplosiveArrowProjectile : Projectile {
 		explosion.GetComponent<ExplosiveArrowExplosion>().damage = 2 * stats.attackDamage;
 		explosion.transform.position = target;
 		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
-		if (tag == "Player" || tag == "Ally")
-			explosion.GetComponent<ExplosiveArrowExplosion>().enemyTag = "Enemy"; 
-		else
-			explosion.GetComponent<ExplosiveArrowExplosion>().enemyTag = "Player";
+		explosion.GetComponent<ExplosiveArrowExplosion>().enemyTag = Mob.getEnemyTag(stats.tag); 
 	}
 	public override float getSpeed () {
 		return 40;

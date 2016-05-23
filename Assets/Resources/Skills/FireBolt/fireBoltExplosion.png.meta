@@ -1,0 +1,480 @@
+fileFormatVersion: 2
+guid: 1f52b168cffd62446b34a136f327c877
+timeCreated: 1463969355
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: fireBoltExplosion_0
+    21300002: fireBoltExplosion_1
+    21300004: fireBoltExplosion_2
+    21300006: fireBoltExplosion_3
+    21300008: fireBoltExplosion_4
+    21300010: fireBoltExplosion_5
+    21300012: fireBoltExplosion_6
+    21300014: fireBoltExplosion_7
+    21300016: fireBoltExplosion_8
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 30
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: fireBoltExplosion_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -36, y: 36}
+        - {x: -36, y: -26}
+        - {x: -29, y: -36}
+        - {x: 35, y: -36}
+        - {x: 36, y: -34}
+        - {x: 36, y: 32}
+        - {x: 33, y: 36}
+    - name: fireBoltExplosion_1
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 33}
+        - {x: -32, y: -33}
+        - {x: -25, y: -36}
+        - {x: 19, y: -36}
+        - {x: 36, y: -14}
+        - {x: 36, y: 28}
+        - {x: 33, y: 33}
+    - name: fireBoltExplosion_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 34}
+        - {x: -32, y: -35}
+        - {x: -26, y: -36}
+        - {x: 26, y: -36}
+        - {x: 36, y: -24}
+        - {x: 36, y: 20}
+        - {x: 25, y: 34}
+    - name: fireBoltExplosion_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -31}
+        - {x: 1, y: -32}
+        - {x: 5, y: -32}
+        - {x: 8, y: -31}
+        - {x: 8, y: -24}
+        - {x: 1, y: -24}
+        - {x: 0, y: -26}
+      - - {x: -21, y: -3}
+        - {x: -29, y: -16}
+        - {x: -29, y: -30}
+        - {x: 3, y: -30}
+        - {x: 3, y: -10}
+        - {x: -5, y: -3}
+      - - {x: 9, y: -2}
+        - {x: 6, y: -6}
+        - {x: 6, y: -20}
+        - {x: 10, y: -26}
+        - {x: 32, y: -26}
+        - {x: 32, y: -4}
+        - {x: 27, y: -2}
+      - - {x: 36, y: -3}
+        - {x: 36, y: 34}
+        - {x: -13, y: 34}
+        - {x: -15, y: 32}
+        - {x: -31, y: 11}
+        - {x: -31, y: -3}
+        - {x: -27, y: -7}
+        - {x: 24, y: -7}
+      - - {x: -30, y: 31}
+        - {x: -30, y: 24}
+        - {x: -29, y: 21}
+        - {x: -21, y: 21}
+        - {x: -20, y: 24}
+        - {x: -20, y: 29}
+        - {x: -24, y: 31}
+    - name: fireBoltExplosion_4
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4, y: -31}
+        - {x: 7, y: -30}
+        - {x: 7, y: -27}
+        - {x: 4, y: -26}
+        - {x: 2, y: -28}
+      - - {x: -28, y: -22}
+        - {x: -28, y: -25}
+        - {x: -25, y: -28}
+        - {x: -22, y: -28}
+        - {x: -20, y: -26}
+        - {x: -20, y: -23}
+        - {x: -23, y: -20}
+      - - {x: -17, y: -7}
+        - {x: -19, y: -12}
+        - {x: -19, y: -26}
+        - {x: -16, y: -28}
+        - {x: -6, y: -28}
+        - {x: 0, y: -27}
+        - {x: 0, y: -13}
+        - {x: -5, y: -7}
+      - - {x: 32, y: -9}
+        - {x: 25, y: -6}
+        - {x: 14, y: -6}
+        - {x: 11, y: -9}
+        - {x: 11, y: -20}
+        - {x: 15, y: -25}
+        - {x: 31, y: -25}
+        - {x: 32, y: -23}
+      - - {x: -24, y: 7}
+        - {x: -29, y: 5}
+        - {x: -29, y: -1}
+        - {x: -25, y: -5}
+        - {x: -19, y: -5}
+        - {x: -18, y: -3}
+        - {x: -18, y: 6}
+        - {x: -19, y: 7}
+      - - {x: 5, y: 9}
+        - {x: -2, y: 9}
+        - {x: -4, y: 5}
+        - {x: -4, y: 0}
+        - {x: 0, y: -5}
+        - {x: 5, y: -5}
+        - {x: 9, y: -3}
+        - {x: 10, y: -1}
+        - {x: 10, y: 7}
+      - - {x: 28, y: 1}
+        - {x: 29, y: -2}
+        - {x: 32, y: -2}
+        - {x: 34, y: 0}
+        - {x: 33, y: 3}
+        - {x: 30, y: 3}
+      - - {x: 10, y: 4}
+        - {x: 12, y: 3}
+        - {x: 29, y: 3}
+        - {x: 29, y: 17}
+        - {x: 26, y: 28}
+        - {x: 11, y: 28}
+        - {x: 10, y: 22}
+      - - {x: -13, y: 29}
+        - {x: -21, y: 23}
+        - {x: -22, y: 19}
+        - {x: -22, y: 8}
+        - {x: -18, y: 6}
+        - {x: -6, y: 6}
+        - {x: 1, y: 15}
+        - {x: 1, y: 24}
+        - {x: -5, y: 29}
+      - - {x: -28, y: 31}
+        - {x: -29, y: 28}
+        - {x: -29, y: 23}
+        - {x: -20, y: 23}
+        - {x: -20, y: 28}
+        - {x: -21, y: 31}
+    - name: fireBoltExplosion_5
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -24, y: -22}
+        - {x: -26, y: -24}
+        - {x: -26, y: -26}
+        - {x: -24, y: -28}
+        - {x: -22, y: -28}
+        - {x: -20, y: -26}
+        - {x: -20, y: -24}
+        - {x: -22, y: -22}
+      - - {x: -8, y: -11}
+        - {x: -13, y: -11}
+        - {x: -16, y: -15}
+        - {x: -17, y: -17}
+        - {x: -17, y: -21}
+        - {x: -13, y: -27}
+        - {x: -3, y: -27}
+        - {x: -2, y: -24}
+        - {x: -2, y: -14}
+        - {x: -5, y: -12}
+      - - {x: 18, y: -9}
+        - {x: 14, y: -10}
+        - {x: 14, y: -18}
+        - {x: 17, y: -22}
+        - {x: 20, y: -23}
+        - {x: 27, y: -23}
+        - {x: 29, y: -18}
+        - {x: 29, y: -11}
+        - {x: 27, y: -9}
+      - - {x: -27, y: -4}
+        - {x: -21, y: -4}
+        - {x: -18, y: -3}
+        - {x: -18, y: 3}
+        - {x: -19, y: 5}
+        - {x: -24, y: 5}
+        - {x: -28, y: 3}
+        - {x: -28, y: -2}
+      - - {x: 1, y: 6}
+        - {x: -2, y: 3}
+        - {x: -2, y: 0}
+        - {x: 1, y: -3}
+        - {x: 5, y: -3}
+        - {x: 8, y: 0}
+        - {x: 8, y: 3}
+        - {x: 5, y: 6}
+      - - {x: 14, y: 17}
+        - {x: 14, y: 12}
+        - {x: 18, y: 7}
+        - {x: 23, y: 7}
+        - {x: 27, y: 9}
+        - {x: 27, y: 16}
+        - {x: 22, y: 21}
+        - {x: 18, y: 21}
+      - - {x: -14, y: 27}
+        - {x: -21, y: 21}
+        - {x: -21, y: 11}
+        - {x: -16, y: 9}
+        - {x: -5, y: 9}
+        - {x: -1, y: 17}
+        - {x: -1, y: 22}
+        - {x: -5, y: 27}
+      - - {x: -28, y: 24}
+        - {x: -23, y: 24}
+        - {x: -22, y: 25}
+        - {x: -22, y: 28}
+        - {x: -23, y: 30}
+        - {x: -26, y: 30}
+        - {x: -28, y: 29}
+    - name: fireBoltExplosion_6
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: -15}
+        - {x: -15, y: -19}
+        - {x: -15, y: -25}
+        - {x: -11, y: -27}
+        - {x: -5, y: -27}
+        - {x: -3, y: -23}
+        - {x: -3, y: -19}
+        - {x: -7, y: -15}
+      - - {x: 22, y: -10}
+        - {x: 17, y: -14}
+        - {x: 17, y: -17}
+        - {x: 21, y: -22}
+        - {x: 25, y: -22}
+        - {x: 28, y: -21}
+        - {x: 28, y: -14}
+        - {x: 27, y: -10}
+      - - {x: 3, y: 6}
+        - {x: 0, y: 3}
+        - {x: 0, y: -1}
+        - {x: 4, y: -3}
+        - {x: 7, y: -3}
+        - {x: 9, y: -1}
+        - {x: 9, y: 3}
+        - {x: 8, y: 6}
+      - - {x: -23, y: 4}
+        - {x: -26, y: 1}
+        - {x: -25, y: -2}
+        - {x: -21, y: -2}
+        - {x: -19, y: 0}
+        - {x: -19, y: 2}
+        - {x: -21, y: 4}
+      - - {x: 22, y: 20}
+        - {x: 18, y: 20}
+        - {x: 15, y: 15}
+        - {x: 15, y: 14}
+        - {x: 19, y: 9}
+        - {x: 23, y: 9}
+        - {x: 27, y: 13}
+        - {x: 27, y: 18}
+      - - {x: -8, y: 25}
+        - {x: -14, y: 25}
+        - {x: -18, y: 20}
+        - {x: -18, y: 13}
+        - {x: -15, y: 11}
+        - {x: -7, y: 11}
+        - {x: -5, y: 14}
+        - {x: -4, y: 17}
+        - {x: -4, y: 22}
+    - name: fireBoltExplosion_7
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14, y: -19}
+        - {x: -14, y: -23}
+        - {x: -13, y: -26}
+        - {x: -6, y: -26}
+        - {x: -4, y: -25}
+        - {x: -4, y: -20}
+        - {x: -7, y: -17}
+        - {x: -11, y: -17}
+      - - {x: 22, y: -12}
+        - {x: 20, y: -13}
+        - {x: 20, y: -19}
+        - {x: 22, y: -21}
+        - {x: 26, y: -21}
+        - {x: 29, y: -19}
+        - {x: 29, y: -17}
+        - {x: 27, y: -12}
+      - - {x: 4, y: 4}
+        - {x: 2, y: 2}
+        - {x: 2, y: 0}
+        - {x: 4, y: -2}
+        - {x: 6, y: -2}
+        - {x: 8, y: 0}
+        - {x: 8, y: 2}
+        - {x: 6, y: 4}
+      - - {x: 17, y: 15}
+        - {x: 17, y: 13}
+        - {x: 18, y: 10}
+        - {x: 22, y: 10}
+        - {x: 26, y: 11}
+        - {x: 26, y: 15}
+        - {x: 23, y: 18}
+        - {x: 20, y: 18}
+      - - {x: -13, y: 24}
+        - {x: -16, y: 20}
+        - {x: -16, y: 17}
+        - {x: -14, y: 13}
+        - {x: -10, y: 13}
+        - {x: -5, y: 15}
+        - {x: -5, y: 21}
+        - {x: -9, y: 24}
+    - name: fireBoltExplosion_8
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14, y: -18}
+        - {x: -16, y: -20}
+        - {x: -16, y: -23}
+        - {x: -14, y: -25}
+        - {x: -11, y: -25}
+        - {x: -8, y: -22}
+        - {x: -8, y: -20}
+        - {x: -10, y: -18}
+      - - {x: 17, y: -14}
+        - {x: 16, y: -17}
+        - {x: 16, y: -20}
+        - {x: 19, y: -21}
+        - {x: 23, y: -21}
+        - {x: 24, y: -19}
+        - {x: 24, y: -15}
+        - {x: 21, y: -14}
+      - - {x: 16, y: 17}
+        - {x: 14, y: 15}
+        - {x: 14, y: 12}
+        - {x: 16, y: 10}
+        - {x: 19, y: 10}
+        - {x: 21, y: 12}
+        - {x: 21, y: 15}
+        - {x: 19, y: 17}
+      - - {x: -18, y: 20}
+        - {x: -18, y: 17}
+        - {x: -17, y: 14}
+        - {x: -13, y: 14}
+        - {x: -10, y: 15}
+        - {x: -10, y: 20}
+        - {x: -12, y: 22}
+        - {x: -16, y: 22}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

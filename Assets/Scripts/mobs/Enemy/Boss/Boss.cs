@@ -26,7 +26,7 @@ public class Boss : Mob {
         body.AddComponent<SpriteRenderer>();
         body.GetComponent<SpriteRenderer>().material = (Material)Resources.Load("MapMaterial");
         body.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        stats.baseHealth = 10000;
+        stats.baseHealth = 50000;
         stats.baseStrength = 20;
         // Z exp = 100
         stats.exp = 100;

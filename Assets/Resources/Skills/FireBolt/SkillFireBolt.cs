@@ -64,7 +64,6 @@ public class SkillFireBolt : Skill {
 class FireBoltProjectile : Projectile {
     public FireBoltProjectile(GameObject gameObject, Stats stats) : base(gameObject, stats) { }
     public override void OnHit() {
-        GameObject explosion = GameObject.Instantiate(Resources.Load("Skills/Explosion")) as GameObject;
         RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
         Vector3 target = gameObject.transform.position;
         foreach (RaycastHit2D x in hit) {
@@ -73,6 +72,9 @@ class FireBoltProjectile : Projectile {
                 break;
             }
         }
+        GameObject explosion = GameObject.Instantiate(Resources.Load("Skills/FireBolt/fireBoltExplosion")) as GameObject;
+        explosion.GetComponent<FireBoltExplosion>().damage = 40 + (1.5f * stats.abilityPower);
+        explosion.GetComponent<FireBoltExplosion>().enemyTag = Mob.getEnemyTag(stats.tag);
         explosion.transform.position = target;
         explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
         AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/boom"), explosion.transform.position);
@@ -81,7 +83,7 @@ class FireBoltProjectile : Projectile {
         return 15;
     }
     public override float getDamage() {
-        return (1 * stats.abilityPower);
+        return 0;
     }
     public override float getDuration() {
         return 3f;

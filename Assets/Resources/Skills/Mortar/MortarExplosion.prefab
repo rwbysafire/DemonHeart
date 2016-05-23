@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21299912}
   - 114: {fileID: 11457078}
   - 58: {fileID: 5801112}
+  - 114: {fileID: 11421374}
   m_Layer: 0
   m_Name: MortarExplosion
   m_TagString: Untagged
@@ -106,6 +107,19 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11421374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ee9be381ecf1043a86d0f0ea7056f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightSpeed: 0.1
+  spriteSpeed: 0.01
 --- !u!114 &11457078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,6 +184,34 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: repeat
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spriteSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lightSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4a5eb162785f8f64f87d0265810ba735, type: 3}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Volume
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

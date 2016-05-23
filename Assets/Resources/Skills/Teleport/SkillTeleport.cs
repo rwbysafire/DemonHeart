@@ -56,14 +56,8 @@ public class SkillTeleport : Skill
 
 	void displayFlash(Entity mob)
 	{
-		GameObject flash = new GameObject ();
+        GameObject flash = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Skills/Teleport/flash"));
 		flash.transform.position = mob.feetTransform.position;
-		flash.AddComponent<SpriteRenderer> ();
-		flash.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Skills/Teleport/flash");
-		flash.GetComponent<SpriteRenderer> ().color = Color.yellow;
-        flash.GetComponent<SpriteRenderer> ().material = Resources.Load<Material>("MapMaterial");
-        flash.GetComponent<SpriteRenderer> ().sortingOrder = 4;
-		GameObject.Destroy (flash, 0.2f);
 	}
 }
 

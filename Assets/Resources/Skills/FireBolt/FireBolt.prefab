@@ -60,7 +60,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.945, y: -9.845, z: 0}
+  m_LocalPosition: {x: -2.5203507, y: -8.516363, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 492116}
@@ -132,7 +132,7 @@ TrailRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0b1ee660ca788884483bd944df6e8c39, type: 2}
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -154,19 +154,19 @@ TrailRenderer:
   m_Colors:
     m_Color[0]:
       serializedVersion: 2
-      rgba: 4278221311
+      rgba: 4284476159
     m_Color[1]:
       serializedVersion: 2
-      rgba: 3996948991
+      rgba: 3995702224
     m_Color[2]:
       serializedVersion: 2
-      rgba: 3094198527
+      rgba: 3090033311
     m_Color[3]:
       serializedVersion: 2
-      rgba: 1483854591
+      rgba: 1480276798
     m_Color[4]:
       serializedVersion: 2
-      rgba: 173270527
+      rgba: 169482778
   m_MinVertexDistance: 0.5
   m_Autodestruct: 0
 --- !u!108 &10807692
@@ -326,7 +326,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0b1ee660ca788884483bd944df6e8c39, type: 2}
+      objectReference: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 0}
       propertyPath: m_Time
       value: 0.25
@@ -341,23 +341,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_Color[0].rgba
-      value: 4294960640
+      value: 4284481279
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_Color[1].rgba
-      value: 4009752223
+      value: 3994331391
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_Color[2].rgba
-      value: 3103783899
+      value: 3089242879
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_Color[3].rgba
-      value: 1493171956
+      value: 1480540233
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Colors.m_Color[4].rgba
-      value: 184549375
+      value: 169482778
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_MinVertexDistance

@@ -65,7 +65,7 @@ public class MiniMapScript : MonoBehaviour {
 
 				enemyOutScreenList [i].transform.localRotation = Quaternion.Euler (0, 0, 90);
 				enemyOutScreenList [i].transform.localPosition = new Vector3 (
-					width / 2 - 15,
+					width / 2 - 10,
 					Mathf.Clamp(
 						enemyList [i].transform.localPosition.y,
 						height / -2 + 15,
@@ -83,7 +83,7 @@ public class MiniMapScript : MonoBehaviour {
 						width / -2 + 15,
 						width / 2 - 15
 					),
-					height / 2 - 15,
+					height / 2 - 10,
 					0);
 			} else if (enemyList [i].transform.localPosition.x < width / -2) {
 				enemyList [i].gameObject.SetActive (false);
@@ -91,7 +91,7 @@ public class MiniMapScript : MonoBehaviour {
 
 				enemyOutScreenList [i].transform.localRotation = Quaternion.Euler (0, 0, 270);
 				enemyOutScreenList [i].transform.localPosition = new Vector3 (
-					width / -2 + 15,
+					width / -2 + 10,
 					Mathf.Clamp(
 						enemyList [i].transform.localPosition.y,
 						height / -2 + 15,
@@ -109,7 +109,7 @@ public class MiniMapScript : MonoBehaviour {
 						width / -2 + 15,
 						width / 2 - 15
 					),
-					height / -2 + 15,
+					height / -2 + 10,
 					0);
 			} else {
 				enemyList [i].gameObject.SetActive (true);
