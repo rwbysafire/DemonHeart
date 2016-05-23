@@ -120,6 +120,7 @@ public class Stats {
 	}
 
 	public void AddBuff (Buff buff) {
+		this.level += buff.level;
 		this.baseStrength += buff.baseStrength;
 		this.baseDexterity += buff.baseDexterity;
 		this.baseIntelligence += buff.baseIntelligence;
@@ -134,6 +135,7 @@ public class Stats {
 	}
 
 	public void RemoveBuff (Buff buff) {
+		this.level -= buff.level;
 		this.baseHealth -= buff.baseHealth;
 		this.baseMana -= buff.baseMana;
 		this.threshold -= buff.threshold;
