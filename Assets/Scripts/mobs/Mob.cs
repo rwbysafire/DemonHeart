@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class Mob : MonoBehaviour , Entity{
 	
-	public Stats stats;
+	public Stats stats = new Stats();
 	public Buff buff = new Buff();
 	private float stunTime = 0;
 	private float canMove = 0;
@@ -98,7 +98,7 @@ public abstract class Mob : MonoBehaviour , Entity{
     }
 
 	void Start() {
-        stats = new Stats(tag);
+		stats.tag = tag;
         OnStart();
 		stats.health = stats.maxHealth;
 		stats.mana = stats.maxMana;
@@ -178,13 +178,17 @@ public abstract class Mob : MonoBehaviour , Entity{
 	public virtual void OnFixedUpdate() {}
 
 	public void AddBuffToStats (Buff buff) {
-		this.buff.AddBuff (buff);
-		this.stats.AddBuff (buff);
+		if (buff != null) {
+			this.buff.AddBuff (buff);
+			this.stats.AddBuff (buff);
+		}
 	}
 
 	public void RemoveBuffFromStats (Buff buff) {
-		this.stats.RemoveBuff (buff);
-		this.buff.RemoveBuff (buff);
+		if (buff != null) {
+			this.stats.RemoveBuff (buff);
+			this.buff.RemoveBuff (buff);
+		}
 	}
 
     public static string getEnemyTag(string tag) {

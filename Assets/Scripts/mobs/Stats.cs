@@ -5,6 +5,9 @@ using System.Collections;
 public class Stats {
     public string tag;
 
+	public Stats () {
+	}
+
     public Stats (string tag) {
         this.tag = tag;
     }

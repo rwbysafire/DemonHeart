@@ -30,11 +30,27 @@ public class SpawnEnemies : MonoBehaviour {
 			Wave w = new Wave();
 			for (int j = 0; j < enemies.Count; j++) {
 				JSONNode enemyData = enemies [j];
-				w.AddEnemy (new SpawnSet(
-					Resources.Load<GameObject>(enemyData ["enemy"]),
-					enemyData ["count"].AsInt,
-					enemyData ["mustBeKilled"].AsBool,
-					enemyData ["interval"].AsFloat));
+
+				SpawnSet spawnSet = new SpawnSet (
+					                    Resources.Load<GameObject> (enemyData ["enemy"]),
+					                    enemyData ["count"].AsInt,
+					                    enemyData ["mustBeKilled"].AsBool,
+					                    enemyData ["interval"].AsFloat);
+
+				// look for buff
+				if (enemyData ["buff"].Count > 0) {
+					JSONClass buffJson = enemyData ["buff"].AsObject;
+					Buff buff = new Buff ();
+					buff.strengthAddon = buffJson ["str"].AsInt;
+					buff.dexterityAddon = buffJson ["dex"].AsInt;
+					buff.intelligenceAddon = buffJson ["int"].AsInt;
+					buff.baseHealth = buffJson ["health"].AsInt;
+					buff.baseMana = buffJson ["mana"].AsInt;
+					buff.level = j + 1;
+					spawnSet.SetBuff (buff);
+				}
+
+				w.AddEnemy (spawnSet);
 			}
 			waveList.Add (w);
 		}
@@ -131,6 +147,9 @@ public class SpawnEnemies : MonoBehaviour {
 					enemy.transform.SetParent (spawnSet.mustBeKilled ? mustKillEnemies.transform : normalEnemies.transform);
 					enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
 					zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
+
+					enemy.GetComponent<Mob> ().AddBuffToStats (spawnSet.buff);
+
 					enemy.transform.position = new Vector3 (ClosestSpawn [i].x, ClosestSpawn [i].y, zPosition);
 					yield return new WaitForSeconds(spawnSet.interval);
 					count--;
@@ -140,6 +159,9 @@ public class SpawnEnemies : MonoBehaviour {
 				enemy.transform.SetParent (spawnSet.mustBeKilled ? mustKillEnemies.transform : normalEnemies.transform);
 				enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
 				zPosition += 0.000001f; //Makes sure that monsters always spawn on diffrent layers so there is no z-fighting
+
+				enemy.GetComponent<Mob> ().AddBuffToStats (spawnSet.buff);
+
 				enemy.transform.position = new Vector3 (ClosestSpawn [mark].x, ClosestSpawn [mark].y, zPosition);
 				yield return new WaitForSeconds(spawnSet.interval);
 				count--;
@@ -169,11 +191,16 @@ public class SpawnSet {
 	public int count;
 	public bool mustBeKilled;
 	public float interval;
+	public Buff buff;
 
 	public SpawnSet (GameObject obj, int count, bool mustBeKilled, float interval) {
 		this.obj = obj;
 		this.count = count;
 		this.mustBeKilled = mustBeKilled;
 		this.interval = interval;
+	}
+
+	public void SetBuff (Buff buff) {
+		this.buff = buff;
 	}
 }

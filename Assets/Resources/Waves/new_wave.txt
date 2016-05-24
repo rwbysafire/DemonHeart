@@ -14,13 +14,23 @@
 
   "1": {
     "enemies": [
-      {"enemy": "Zombie", "count": 4, "mustBeKilled": true, "interval":2},
+      {"enemy": "Zombie", "count": 4, "mustBeKilled": true, "interval":2, "buff": {
+      	"str": 10,
+      	"dex": 0,
+      	"health": 1000
+      }},
+      {"enemy": "Kamikaze", "count": 4, "mustBeKilled": true, "interval":2, "buff": {
+      	"health": 1000,
+      	"mana": 100
+      }},
     ]
   },
 
   "2": {
     "enemies": [
-      {"enemy": "Kamikaze", "count": 8, "mustBeKilled": true, "interval":1},
+      {"enemy": "Kamikaze", "count": 8, "mustBeKilled": true, "interval":2, "buff":{
+      	"int":10
+      }},
     ]
   },
 
