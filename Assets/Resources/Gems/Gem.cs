@@ -71,16 +71,16 @@ public class GemExtraChains : Gem {
 [System.Serializable]
 public class GemAttackSpeed : Gem {
     public GemAttackSpeed() {
-        properties.Add("attackSpeed", new property(0.5f, "*"));
-        this.itemDescription = "Double attack speed";
+        properties.Add("attackSpeed", new property(0.8f, "*"));
+        this.itemDescription = "Increase attack speed by 20%";
     }
 }
 
 [System.Serializable]
 public class GemCooldownReduction : Gem {
     public GemCooldownReduction() {
-        properties.Add("cooldown", new property(0.5f, "*"));
-        this.itemDescription = "Reduce cooldown";
+        properties.Add("cooldown", new property(0.8f, "*"));
+        this.itemDescription = "Reduce cooldown by 20%";
     }
 }
 
