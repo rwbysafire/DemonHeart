@@ -72,7 +72,6 @@ public abstract class Projectile {
 					fork();
 					Object.Destroy(gameObject);
 				} else if (chainTimes > 0) {
-					OnHit();
 					chainTimes -= 1;
 					chain();
 					timer = Time.fixedTime + duration;
@@ -92,7 +91,8 @@ public abstract class Projectile {
 	void chain() {
 		GameObject enemy = FindClosestEnemy();
 		if (enemy != null) {
-			Vector3 diff = enemy.transform.position - gameObject.transform.position;
+            OnHit();
+            Vector3 diff = enemy.transform.position - gameObject.transform.position;
 			diff.Normalize();
 			float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg - 90;
 			gameObject.transform.rotation = Quaternion.Euler(0f, 0f, rot_z);
