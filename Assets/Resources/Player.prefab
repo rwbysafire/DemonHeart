@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,9 +80,9 @@ MonoBehaviour:
     strengthAddon: 0
     dexterityAddon: 0
     intelligenceAddon: 0
-    baseHealth: 0
-    baseMana: 0
-    threshold: 0
+    baseHealth: 600
+    baseMana: 200
+    threshold: 200
     health: 0
     mana: 0
   buff:
