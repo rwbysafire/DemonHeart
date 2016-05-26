@@ -19,7 +19,7 @@ public class ExperienceBar : MonoBehaviour {
 		if (player) 
 		{
 			slider.value = player.GetComponent<Mob>().stats.CurExp / player.GetComponent<Mob>().stats.threshold;
-			text.text = "CurExp: " + Mathf.Ceil(player.GetComponent<Mob>().stats.CurExp).ToString() + " / " + Mathf.Ceil(player.GetComponent<Mob>().stats.threshold).ToString();
+			text.text = "Exp:\n" + Mathf.Ceil(player.GetComponent<Mob>().stats.CurExp).ToString() + " / " + Mathf.Ceil(player.GetComponent<Mob>().stats.threshold).ToString();
 		}
 	}
 }
