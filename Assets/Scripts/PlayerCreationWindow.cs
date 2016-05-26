@@ -6,18 +6,24 @@ using System.Collections.Generic;
 public class PlayerCreationWindow: MonoBehaviour {
 
 	GameObject display;
-	Text STR, DEX, INT;
+	Text STR, DEX, INT, pts;
+	Stats playerStats;
 	List<int> CountSkills = new List<int> ();
+
+	public List<Button> ptsButtons;
 	
 	void Start () {
 		display = transform.FindChild ("PlayerCreationBackground").gameObject;
 		STR = display.transform.FindChild ("str").gameObject.GetComponent<Text> ();
 		DEX = display.transform.FindChild ("dex").gameObject.GetComponent<Text> ();
 		INT = display.transform.FindChild ("int").gameObject.GetComponent<Text> ();
+		pts = display.transform.FindChild ("pts").gameObject.GetComponent<Text> ();
+		playerStats = GameObject.Find ("Player").GetComponent<Mob> ().stats;
 
 		if (PlayerPrefs.GetInt (CharSaveLoadScript.PREFS_LOAD_GAME) == 0) {
 			Pause.PauseGame ();
 			display.SetActive (true);
+			playerStats.pts = Stats.InitPoints;
 		}
 
 	}
@@ -31,37 +37,35 @@ public class PlayerCreationWindow: MonoBehaviour {
 	}
 
 	public void setstr(int STR) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.baseStrength += STR;
+		playerStats.baseStrength += STR;
+		playerStats.pts--;
 	}
 
 	public void setint(int INT) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.baseIntelligence += INT;
+		playerStats.baseIntelligence += INT;
+		playerStats.pts--;
 	}
 
 	public void setdex(int DEX) {
-		GameObject.Find ("Player").GetComponent<Mob> ().stats.baseDexterity += DEX;
+		playerStats.baseDexterity += DEX;
+		playerStats.pts--;
 	}
 
 	void Update () {
 		
-		STR.text = "STR:    " + Mathf.Ceil(GameObject.Find ("Player").GetComponent<Mob> ().stats.baseStrength).ToString();
-		DEX.text = "DEX:    " + Mathf.Ceil(GameObject.Find ("Player").GetComponent<Mob> ().stats.baseDexterity).ToString();
-		INT.text = "INT:    " + Mathf.Ceil(GameObject.Find ("Player").GetComponent<Mob> ().stats.baseIntelligence).ToString();
+		STR.text = "STR:    " + Mathf.Ceil(playerStats.baseStrength).ToString();
+		DEX.text = "DEX:    " + Mathf.Ceil(playerStats.baseDexterity).ToString();
+		INT.text = "INT:    " + Mathf.Ceil(playerStats.baseIntelligence).ToString();
+		pts.text = "Available Pts: " + playerStats.pts.ToString ();
+
+		bool shouldShowButtons = playerStats.pts > 0;
+		foreach (Button b in ptsButtons) {
+			b.interactable = shouldShowButtons;
+		}
 
 
 		if(!Pause.IsPaused())
 			display.SetActive(false);
-//		if (Input.GetKeyDown (KeyCode.V)) {
-//			if (Pause.IsPaused () && display.activeSelf) {
-//				// resume the game
-//				Pause.ResumeGame ();
-//				display.SetActive(false);
-//			} else if (!Pause.IsPaused () && !display.activeSelf) {
-//				// pause the game
-//				Pause.PauseGame ();
-//				display.SetActive(true);
-//			}
-//		}
 
 	}
 

@@ -46,7 +46,7 @@ public class DisplayStats : MonoBehaviour {
 
 			bool shouldShowButtons = playerStats.pts > 0; 
 			foreach (Button b in ptsButtons) {
-				b.gameObject.SetActive (shouldShowButtons);
+				b.interactable = shouldShowButtons;
 			}
 		}
 	}

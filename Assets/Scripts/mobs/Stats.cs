@@ -6,6 +6,7 @@ public class Stats {
     public string tag;
 
 	public static int ExtraPointsPerLevel = 3;
+	public static int InitPoints = 10;
 
 	public Stats () {
 	}
