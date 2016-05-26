@@ -60,6 +60,8 @@ public class InventoryUI : MonoBehaviour {
 		}
 
 		Destroy (itemTemplate);
+
+		inventory.SetActive (false);
 	}
 
 	// setter for ItemText
