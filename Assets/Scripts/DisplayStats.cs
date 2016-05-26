@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class DisplayStats : MonoBehaviour {
 
+	public List<Button> ptsButtons;
 	GameObject display;
-	Text level, exp, Curexp, STR, DEX, INT, health, mana, attackSpeed, cooldown;
+	Text level, exp, Curexp, STR, DEX, INT, health, mana, attackSpeed, cooldown, pts;
 	Stats playerStats;
 	Buff playerBuff;
 
@@ -14,8 +16,6 @@ public class DisplayStats : MonoBehaviour {
 		playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<Mob>().stats;
 		display = transform.FindChild("StatsDisplayBackground").gameObject;
 		level = display.transform.FindChild("level").gameObject.GetComponent<Text>();
-		exp = display.transform.FindChild("exp").gameObject.GetComponent<Text>();
-		Curexp = display.transform.FindChild("CurrentExp").gameObject.GetComponent<Text>();
 		STR = display.transform.FindChild("str").gameObject.GetComponent<Text>();
 		DEX = display.transform.FindChild("dex").gameObject.GetComponent<Text>();
 		INT = display.transform.FindChild("int").gameObject.GetComponent<Text>();
@@ -23,21 +23,10 @@ public class DisplayStats : MonoBehaviour {
 		mana = display.transform.FindChild("mana").gameObject.GetComponent<Text>();
 		attackSpeed = display.transform.FindChild("attackSpeed").gameObject.GetComponent<Text>();
 		cooldown = display.transform.FindChild("cooldown").gameObject.GetComponent<Text>();
-		display.SetActive(false);
+		pts = display.transform.FindChild("pts").gameObject.GetComponent<Text>();
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.X)) {
-			if (Pause.IsPaused () && display.activeSelf) {
-				// resume the game
-				Pause.ResumeGame ();
-				display.SetActive(false);
-			} else if (!Pause.IsPaused () && !display.activeSelf) {
-				// pause the game
-				Pause.PauseGame ();
-				display.SetActive(true);
-			}
-		}
 
 		if (display.activeSelf) {
 			if (GameObject.FindGameObjectWithTag ("Player")) {
@@ -46,15 +35,19 @@ public class DisplayStats : MonoBehaviour {
 				playerBuff = player.buff;
 			}
 			level.text = "Level: " + playerStats.level.ToString();
-			exp.text = "Exp: " + playerStats.exp.ToString();
-			Curexp.text = "CurrentExp: " + playerStats.CurExp.ToString();
 			STR.text = GetDisplayPropertyString ("STR", playerStats.strength, playerBuff.strength + playerStats.strengthActualAddon);
 			DEX.text = GetDisplayPropertyString ("DEX", playerStats.dexterity, playerBuff.dexterity + playerStats.dexterityActualAddon);
 			INT.text = GetDisplayPropertyString ("INT", playerStats.intelligence, playerBuff.intelligence + playerStats.intelligenceActualAddon);
 			health.text = GetDisplayProportionString ("Health", playerStats.health, playerStats.maxHealth, playerBuff.maxHealth);
 			mana.text = GetDisplayProportionString ("Mana", playerStats.mana, playerStats.maxMana, playerBuff.maxMana);
-			attackSpeed.text = "Attack Speed: " + playerStats.attackSpeed.ToString();
-			cooldown.text = "cooldown:     " + playerStats.cooldownReduction.ToString() + "%";
+			attackSpeed.text = "Atk Speed: " + playerStats.attackSpeed.ToString();
+			cooldown.text = "Cooldown: " + playerStats.cooldownReduction.ToString() + "%";
+			pts.text = "Available Pts: " + playerStats.pts.ToString();
+
+			bool shouldShowButtons = playerStats.pts > 0; 
+			foreach (Button b in ptsButtons) {
+				b.interactable = shouldShowButtons;
+			}
 		}
 	}
 
@@ -66,19 +59,18 @@ public class DisplayStats : MonoBehaviour {
 		return name + ": " + Math.Ceiling (statValue).ToString () + " / " + Math.Ceiling (maxValue - buffValue).ToString () + " (+" + Math.Ceiling (buffValue).ToString () + ")";
 	}
 	
-	public void setLevel(int lvl) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.level += lvl;
-	}
-	
 	public void setStr(int STR) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.baseStrength += STR;
+		playerStats.baseStrength += STR;
+		playerStats.pts--;
 	}
 	
 	public void setInt(int INT) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.baseIntelligence += INT;
+		playerStats.baseIntelligence += INT;
+		playerStats.pts--;
 	}
 	
 	public void setDex(int DEX) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.baseDexterity += DEX;
+		playerStats.baseDexterity += DEX;
+		playerStats.pts--;
 	}
 }

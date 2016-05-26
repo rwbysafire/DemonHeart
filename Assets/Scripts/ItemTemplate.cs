@@ -32,7 +32,6 @@ public class ItemTemplate : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		if (moveHolder == null) {
 			GameObject gameObject = GameObject.FindGameObjectWithTag ("item_move_holder");
 			moveHolder = gameObject.GetComponent<ItemTemplate> ();
-			moveHolder.gameObject.SetActive (false);
 		}
 	}
 
