@@ -14,6 +14,7 @@ public class SpawnEnemies : MonoBehaviour {
 	private List<Vector3> ClosestSpawn;
 	private int mark = 0;
     private float zPosition = 0;
+	private Buff globalBuff = new Buff();
 
     // Use this for initialization
     void Start () {
@@ -21,12 +22,20 @@ public class SpawnEnemies : MonoBehaviour {
         zPosition = 0;
         waveList = new List<Wave>();
 		JSONNode wavesData = JSON.Parse(waveFile.text);
+
+		// set up global buff
+		globalBuff.strengthAddon = wavesData ["options"] ["buff"] ["str"].AsInt;
+		globalBuff.dexterityAddon = wavesData ["options"] ["buff"] ["dex"].AsInt;
+		globalBuff.intelligenceAddon = wavesData ["options"] ["buff"] ["int"].AsInt;
+		globalBuff.baseHealth = wavesData ["options"] ["buff"] ["health"].AsInt;
+		globalBuff.baseMana = wavesData ["options"] ["buff"] ["mana"].AsInt;
+
 		JSONArray wavesName = wavesData ["waves"].AsArray;
 		for (int i = 0; i < wavesName.Count; i++) {
 			JSONNode waveData = wavesData [wavesName [i]];
 			int count = waveData ["count"].AsInt;
 			JSONArray enemies = waveData ["enemies"].AsArray;
-//			GameObject[] enemiesGameObject = new GameObject[enemies.Count];
+
 			Wave w = new Wave();
 			for (int j = 0; j < enemies.Count; j++) {
 				JSONNode enemyData = enemies [j];
@@ -47,6 +56,7 @@ public class SpawnEnemies : MonoBehaviour {
 					buff.baseHealth = buffJson ["health"].AsInt;
 					buff.baseMana = buffJson ["mana"].AsInt;
 					buff.level = j + 1;
+					buff.AddBuff (globalBuff);
 					spawnSet.SetBuff (buff);
 				}
 
