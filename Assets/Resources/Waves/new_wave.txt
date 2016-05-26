@@ -12,16 +12,26 @@
     "endless"
   ],
 
+  "options": {
+  	"buff": {
+  		"str": 5,
+      	"dex": 5,
+      	"int": 5,
+      	"health": 50,
+      	"mana": 50
+  	}
+  },
+
   "1": {
     "enemies": [
       {"enemy": "Zombie", "count": 4, "mustBeKilled": true, "interval":2, "buff": {
-      	"str": 10,
+      	"str": 0,
       	"dex": 0,
-      	"health": 1000
+      	"health": 0
       }},
       {"enemy": "Kamikaze", "count": 4, "mustBeKilled": true, "interval":2, "buff": {
-      	"health": 1000,
-      	"mana": 100
+      	"health": 0,
+      	"mana": 0
       }},
     ]
   },
@@ -29,7 +39,7 @@
   "2": {
     "enemies": [
       {"enemy": "Kamikaze", "count": 8, "mustBeKilled": true, "interval":2, "buff":{
-      	"int":10
+      	"int":0
       }},
     ]
   },
