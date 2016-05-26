@@ -4,8 +4,11 @@ using System.Collections;
 public class SkillPowershot : Skill
 {
 	int maxDistance = 20;
+    AoeSkill aoeSkill = new AoeSkill();
 
-	public SkillPowershot() : base() { }
+    public SkillPowershot() : base() {
+        addSkillType(aoeSkill);
+    }
 
 	public override string getName () {
 		return "Powershot";
@@ -42,7 +45,7 @@ public class SkillPowershot : Skill
         spriteRenderer.sortingOrder = 4;
         powershot.transform.position = new Vector2(startLocation.x + (targetLocation.x - startLocation.x)/2, startLocation.y + (targetLocation.y - startLocation.y)/2);
 		powershot.transform.rotation = mob.headTransform.rotation;
-        powershot.transform.localScale = new Vector3(1f, Vector2.Distance(startLocation, targetLocation), 1f);
+        powershot.transform.localScale = new Vector3(1f * properties["areaOfEffect"], Vector2.Distance(startLocation, targetLocation), 1f);
         BoxCollider2D collider = powershot.AddComponent<BoxCollider2D>();
 		collider.isTrigger = true;
         collider.size = new Vector2(0.5f, 1f);

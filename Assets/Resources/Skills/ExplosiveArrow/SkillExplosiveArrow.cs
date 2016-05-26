@@ -5,9 +5,11 @@ public class SkillExplosiveArrow : Skill {
 	
 	public Projectile projectile;
     SkillType projectileSkill = new ProjectileSkill();
+    AoeSkill aoeSkill = new AoeSkill();
 
     public SkillExplosiveArrow() : base() {
         addSkillType(projectileSkill);
+        addSkillType(aoeSkill);
     }
 	
 	public override string getName () {
@@ -53,7 +55,7 @@ public class SkillExplosiveArrow : Skill {
         GameObject arrowGlow = MonoBehaviour.Instantiate(Resources.Load("ShotGlow")) as GameObject;
         arrowGlow.transform.position = new Vector3(basicArrow.transform.position.x, basicArrow.transform.position.y, -0.3f);
         arrowGlow.transform.SetParent(basicArrow.transform);
-        projectile = new ExplosiveArrowProjectile (basicArrow, stats);
+        projectile = new ExplosiveArrowProjectile (basicArrow, stats, this);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = mob.headTransform.position;
@@ -66,7 +68,7 @@ public class SkillExplosiveArrow : Skill {
 }
 
 class ExplosiveArrowProjectile : Projectile {
-	public ExplosiveArrowProjectile(GameObject gameObject, Stats stats) : base(gameObject, stats) {}
+	public ExplosiveArrowProjectile(GameObject gameObject, Stats stats, Skill skill) : base(gameObject, stats, skill) {}
 	public override void OnHit () {
         RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
         Vector3 target = gameObject.transform.position;
@@ -79,7 +81,8 @@ class ExplosiveArrowProjectile : Projectile {
         GameObject explosion = GameObject.Instantiate(Resources.Load<GameObject>("Skills/ExplosiveArrow/FireExplosion"));
 		explosion.GetComponent<ExplosiveArrowExplosion>().damage = 2 * stats.attackDamage;
 		explosion.transform.position = target;
-		explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
+        explosion.transform.localScale = new Vector3(explosion.transform.localScale.x * skill.properties["areaOfEffect"], explosion.transform.localScale.y * skill.properties["areaOfEffect"], explosion.transform.localScale.z);
+        explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
 		explosion.GetComponent<ExplosiveArrowExplosion>().enemyTag = Mob.getEnemyTag(stats.tag); 
 	}
 	public override float getSpeed () {

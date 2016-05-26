@@ -5,9 +5,11 @@ public class SkillFireBolt : Skill {
 
     public Projectile projectile;
     ProjectileSkill projectileSkill = new ProjectileSkill();
+    AoeSkill aoeSkill = new AoeSkill();
 
     public SkillFireBolt() : base() {
         addSkillType(projectileSkill);
+        addSkillType(aoeSkill);
     }
 
     public override string getName() {
@@ -49,7 +51,7 @@ public class SkillFireBolt : Skill {
     void fireArrow(Entity mob, Stats stats, float rotate = 0) {
         //Instantiates the projectile with some speed
         GameObject basicArrow = MonoBehaviour.Instantiate<GameObject>(Resources.Load<GameObject>("Skills/FireBolt/FireBolt"));
-        projectile = new FireBoltProjectile(basicArrow, stats);
+        projectile = new FireBoltProjectile(basicArrow, stats, this);
         basicArrow.GetComponent<basic_projectile>().setProjectile(projectile);
         //Initiates the projectile's position and rotation
         basicArrow.transform.position = mob.headTransform.position;
@@ -62,7 +64,7 @@ public class SkillFireBolt : Skill {
 }
 
 class FireBoltProjectile : Projectile {
-    public FireBoltProjectile(GameObject gameObject, Stats stats) : base(gameObject, stats) { }
+    public FireBoltProjectile(GameObject gameObject, Stats stats, Skill skill) : base(gameObject, stats, skill) { }
     public override void OnHit() {
         RaycastHit2D[] hit = Physics2D.LinecastAll(gameObject.transform.position - gameObject.transform.up * 0.47f, gameObject.transform.position + gameObject.transform.up * 2f);
         Vector3 target = gameObject.transform.position;
@@ -76,6 +78,7 @@ class FireBoltProjectile : Projectile {
         explosion.GetComponent<FireBoltExplosion>().damage = 50 + (2f * stats.abilityPower);
         explosion.GetComponent<FireBoltExplosion>().enemyTag = Mob.getEnemyTag(stats.tag);
         explosion.transform.position = target;
+        explosion.transform.localScale = new Vector3(explosion.transform.localScale.x * skill.properties["areaOfEffect"], explosion.transform.localScale.y * skill.properties["areaOfEffect"], explosion.transform.localScale.z);
         explosion.transform.RotateAround(explosion.transform.position, Vector3.forward, Random.Range(0, 360));
         AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/boom"), explosion.transform.position);
     }

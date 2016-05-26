@@ -32,6 +32,13 @@ public class Boss : Mob {
         stats.exp = 100;
     }
 
+    class GemDoubleAoe : Gem {
+        public GemDoubleAoe() {
+            properties.Add("areaOfEffect", new property(2f, "*"));
+            this.itemDescription = "Double AOE\n*Only to be used by Boss*";
+        }
+    }
+
     // Use this for initialization
     public override void OnStart() {
         create();
@@ -47,6 +54,7 @@ public class Boss : Mob {
         replaceSkill(1, new SkillMortar());
         skills[0].properties["cooldown"] = 0;
         replaceSkill(2, new SkillRighteousFire());
+        skills[2].addGem(new GemDoubleAoe());
         skills[2].properties["manaCost"] = 0;
         replaceSkill(3, new SkillCombatRoll());
     }
@@ -73,13 +81,11 @@ public class Boss : Mob {
             if (lineOfSight.collider.CompareTag("Player")) {
                 if (stats.health < stats.baseHealth / 2 && distance >= 3 && lineOfSight.collider.CompareTag("Player")) {
                     float chanceOfCastingPerSec = 0.75f;
-                    print((1 - Mathf.Pow(1 - chanceOfCastingPerSec, Time.deltaTime)).ToString() + " ,   " + (1 / Time.deltaTime).ToString());
                     if (Random.Range(0f, 1f) <= 1 - Mathf.Pow(1 - chanceOfCastingPerSec, Time.deltaTime))
                         skills[3].useSkill(this);
                 }
                 if (distance <= 9 && lineOfSight.collider.CompareTag("Player")) {
                     float chanceOfCastingPerSec = 0.98f;
-                    print((1 - Mathf.Pow(1 - chanceOfCastingPerSec, Time.deltaTime)).ToString() + " ,   " + (1 / Time.deltaTime).ToString());
                     if (Random.Range(0f, 1f) <= 1 - Mathf.Pow(1 - chanceOfCastingPerSec, Time.deltaTime))
                         skills[0].useSkill(this);
                 }

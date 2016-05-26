@@ -92,8 +92,14 @@ public class GemReducedDuration : Gem {
     }
 }
 
-// need to be fixed
-// for serialization, it cannot contain the skill class
+[System.Serializable]
+public class GemIncreasedAoe : Gem {
+    public GemIncreasedAoe() {
+        properties.Add("areaOfEffect", new property(1.5f, "*"));
+        this.itemDescription = "50% Increase area of effect";
+    }
+}
+
 [System.Serializable]
 public class GemChainLightningOnHit : Gem {
 

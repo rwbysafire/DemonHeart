@@ -8,7 +8,7 @@ public abstract class Skill
     public Dictionary<string, float> properties = new Dictionary<string, float>();
     public Dictionary<string, float> baseProperties = new Dictionary<string, float>();
 	public List<Gem> gems = new List<Gem>();
-	public int gemLimitCount = 3;
+	public int gemLimitCount = 30;
     private List<SkillType> skillTypes = new List<SkillType>();
 
 	public Skill() {

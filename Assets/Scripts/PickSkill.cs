@@ -23,8 +23,6 @@ public class PickSkill : MonoBehaviour
 				{
 					if (GameObject.Find ("Player").GetComponent<Mob> ().skills [j].getName () == GameObject.Find ("Player").GetComponent<Player> ().listOfSkills [i].getName ())
 						mark = true;
-					else
-						mark = false;
 				}
 			}
 			if (mark == false)

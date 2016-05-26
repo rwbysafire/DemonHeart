@@ -26,7 +26,7 @@ public class RighteousFire : MonoBehaviour {
             if (!mob.useMana(manaCost * Time.deltaTime))
                 Destroy(gameObject);
             GameObject fire = Instantiate<GameObject>(groundFire);
-            float radius = GetComponent<CircleCollider2D>().radius * 0.75f;
+            float radius = GetComponent<CircleCollider2D>().radius * transform.lossyScale.x * 0.75f;
             fire.transform.position = transform.position + new Vector3(Random.Range(-radius, radius), Random.Range(-radius, radius));
             fire.GetComponent<GroundFire>().init(enemyTag, getDamage(), Random.Range(0.6f, 1.4f));
         }

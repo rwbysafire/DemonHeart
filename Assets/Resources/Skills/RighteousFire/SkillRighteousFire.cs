@@ -3,7 +3,11 @@ using System.Collections;
 
 public class SkillRighteousFire : Skill {
 
-	public SkillRighteousFire() : base() { }
+    AoeSkill aoeSkill = new AoeSkill();
+
+    public SkillRighteousFire() : base() {
+        addSkillType(aoeSkill);
+    }
 	
 	public override string getName () {
 		return "Fire Aura";
@@ -25,8 +29,10 @@ public class SkillRighteousFire : Skill {
 		if (mob.gameObject.transform.FindChild("RighteousFire(Clone)") == null) {
 			GameObject righteousFire = GameObject.Instantiate(Resources.Load<GameObject>("Skills/RighteousFire/RighteousFire"));
 			righteousFire.transform.position = mob.feetTransform.position;
-			righteousFire.transform.SetParent(mob.gameObject.transform);
-			righteousFire.GetComponent<RighteousFire>().mob = mob.gameObject.GetComponent<Mob>();
+            Debug.Log(properties["areaOfEffect"]);
+            righteousFire.transform.SetParent(mob.gameObject.transform);
+            righteousFire.transform.localScale = new Vector3(righteousFire.transform.localScale.x * properties["areaOfEffect"], righteousFire.transform.localScale.y * properties["areaOfEffect"], righteousFire.transform.localScale.z);
+            righteousFire.GetComponent<RighteousFire>().mob = mob.gameObject.GetComponent<Mob>();
             righteousFire.GetComponent<RighteousFire>().manaCost = properties["manaCost"];
         }
 	}

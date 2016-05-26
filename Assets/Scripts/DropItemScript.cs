@@ -31,7 +31,7 @@ public class DropItemScript : MonoBehaviour {
 			}
 			break;
 		case "item_skill":
-			switch (((int)Time.time) % 6) {
+			switch (((int)Time.time) % 7) {
 			case 0:
 				item = new GemAttackSpeed ();
 				break;
@@ -49,6 +49,9 @@ public class DropItemScript : MonoBehaviour {
 				break;
 			case 5:
 				item = new GemReducedDuration();
+				break;
+			case 6:
+				item = new GemIncreasedAoe();
 				break;
 			default:
 				item = new Gem ();

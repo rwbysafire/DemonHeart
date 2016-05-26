@@ -15470,7 +15470,6 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -17493,6 +17492,18 @@ Prefab:
       propertyPath: hintText
       value: 
       objectReference: {fileID: 471753483}
+    - target: {fileID: 11469942, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
+      propertyPath: stats.baseHealth
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 11469942, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
+      propertyPath: stats.baseMana
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11469942, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
+      propertyPath: stats.threshold
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
   m_IsPrefabParent: 0
@@ -22944,19 +22955,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 404112, guid: 83578e018e2f8a343822d11e6d746f39, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 459108, guid: 83578e018e2f8a343822d11e6d746f39, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 496992, guid: 83578e018e2f8a343822d11e6d746f39, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 423898, guid: 83578e018e2f8a343822d11e6d746f39, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 21221146, guid: 83578e018e2f8a343822d11e6d746f39, type: 2}
       propertyPath: m_SortingOrder
@@ -23077,6 +23088,22 @@ Prefab:
     - target: {fileID: 6036158, guid: 83578e018e2f8a343822d11e6d746f39, type: 2}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[10].y
       value: 73.99012
+      objectReference: {fileID: 0}
+    - target: {fileID: 496992, guid: 83578e018e2f8a343822d11e6d746f39, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -35.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 459108, guid: 83578e018e2f8a343822d11e6d746f39, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -55.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 404112, guid: 83578e018e2f8a343822d11e6d746f39, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 55.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 423898, guid: 83578e018e2f8a343822d11e6d746f39, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 35.6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6090908, guid: 83578e018e2f8a343822d11e6d746f39, type: 2}
