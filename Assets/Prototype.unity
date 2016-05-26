@@ -2613,7 +2613,7 @@ RectTransform:
   - {fileID: 1676611702}
   - {fileID: 311097548}
   m_Father: {fileID: 1325076731}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_AnchorMin: {x: 0.3, y: 0.3}
   m_AnchorMax: {x: 0.7, y: 0.7}
   m_AnchoredPosition: {x: 4.4872, y: -0.0000076293945}
@@ -5666,7 +5666,7 @@ GameObject:
   - 114: {fileID: 466458297}
   - 114: {fileID: 466458296}
   m_Layer: 5
-  m_Name: Button
+  m_Name: dex up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5737,7 +5737,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 100
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9190,6 +9190,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da034bfcae02eb4589cdeed54627fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ptsButtons:
+  - {fileID: 1216564117}
+  - {fileID: 466458296}
+  - {fileID: 2053439409}
 --- !u!1 &796709609
 GameObject:
   m_ObjectHideFlags: 0
@@ -12829,7 +12833,7 @@ GameObject:
   - 114: {fileID: 1216564118}
   - 114: {fileID: 1216564117}
   m_Layer: 5
-  m_Name: Button
+  m_Name: str up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12900,7 +12904,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 100
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -14587,9 +14591,9 @@ RectTransform:
   - {fileID: 1834696470}
   - {fileID: 924594104}
   - {fileID: 196778844}
+  - {fileID: 471753482}
   - {fileID: 211150778}
   - {fileID: 1973812761}
-  - {fileID: 471753482}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
@@ -16683,6 +16687,10 @@ Prefab:
       propertyPath: hintText
       value: 
       objectReference: {fileID: 471753483}
+    - target: {fileID: 11469942, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
+      propertyPath: stats.threshold
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 17c49a37d19b1bb43aa0f9828da01cb6, type: 2}
   m_IsPrefabParent: 0
@@ -20794,7 +20802,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22497446, guid: aef05e2a46bce465c81223ea41009294, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 22497446, guid: aef05e2a46bce465c81223ea41009294, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -22086,7 +22094,7 @@ RectTransform:
   - {fileID: 508343109}
   - {fileID: 1055593238}
   m_Father: {fileID: 1325076731}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_AnchorMin: {x: 0, y: 0.01573041}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 14, y: -40}
@@ -22951,7 +22959,7 @@ GameObject:
   - 114: {fileID: 2053439410}
   - 114: {fileID: 2053439409}
   m_Layer: 5
-  m_Name: Button
+  m_Name: int up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23022,7 +23030,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 100
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

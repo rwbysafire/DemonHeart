@@ -5,6 +5,8 @@ using System.Collections;
 public class Stats {
     public string tag;
 
+	public static int ExtraPointsPerLevel = 3;
+
 	public Stats () {
 	}
 
@@ -15,6 +17,7 @@ public class Stats {
 	public int level = 0;
 	public float exp = 0;
 	public float CurExp = 0;
+	public int pts = 0;
 
 	private int _strength = 10;
 	public int baseStrength {

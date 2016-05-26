@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class DisplayStats : MonoBehaviour {
 
+	public List<Button> ptsButtons;
 	GameObject display;
-	Text level, exp, Curexp, STR, DEX, INT, health, mana, attackSpeed, cooldown;
+	Text level, exp, Curexp, STR, DEX, INT, health, mana, attackSpeed, cooldown, pts;
 	Stats playerStats;
 	Buff playerBuff;
 
@@ -21,6 +23,7 @@ public class DisplayStats : MonoBehaviour {
 		mana = display.transform.FindChild("mana").gameObject.GetComponent<Text>();
 		attackSpeed = display.transform.FindChild("attackSpeed").gameObject.GetComponent<Text>();
 		cooldown = display.transform.FindChild("cooldown").gameObject.GetComponent<Text>();
+		pts = display.transform.FindChild("pts").gameObject.GetComponent<Text>();
 	}
 
 	void Update () {
@@ -37,8 +40,14 @@ public class DisplayStats : MonoBehaviour {
 			INT.text = GetDisplayPropertyString ("INT", playerStats.intelligence, playerBuff.intelligence + playerStats.intelligenceActualAddon);
 			health.text = GetDisplayProportionString ("Health", playerStats.health, playerStats.maxHealth, playerBuff.maxHealth);
 			mana.text = GetDisplayProportionString ("Mana", playerStats.mana, playerStats.maxMana, playerBuff.maxMana);
-			attackSpeed.text = "Attack Speed: " + playerStats.attackSpeed.ToString();
-			cooldown.text = "cooldown:     " + playerStats.cooldownReduction.ToString() + "%";
+			attackSpeed.text = "Atk Speed: " + playerStats.attackSpeed.ToString();
+			cooldown.text = "Cooldown: " + playerStats.cooldownReduction.ToString() + "%";
+			pts.text = "Available Pts: " + playerStats.pts.ToString();
+
+			bool shouldShowButtons = playerStats.pts > 0; 
+			foreach (Button b in ptsButtons) {
+				b.gameObject.SetActive (shouldShowButtons);
+			}
 		}
 	}
 
@@ -50,19 +59,18 @@ public class DisplayStats : MonoBehaviour {
 		return name + ": " + Math.Ceiling (statValue).ToString () + " / " + Math.Ceiling (maxValue - buffValue).ToString () + " (+" + Math.Ceiling (buffValue).ToString () + ")";
 	}
 	
-	public void setLevel(int lvl) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.level += lvl;
-	}
-	
 	public void setStr(int STR) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.baseStrength += STR;
+		playerStats.baseStrength += STR;
+		playerStats.pts--;
 	}
 	
 	public void setInt(int INT) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.baseIntelligence += INT;
+		playerStats.baseIntelligence += INT;
+		playerStats.pts--;
 	}
 	
 	public void setDex(int DEX) {
-		GameObject.Find("Player").GetComponent<Mob>().stats.baseDexterity += DEX;
+		playerStats.baseDexterity += DEX;
+		playerStats.pts--;
 	}
 }

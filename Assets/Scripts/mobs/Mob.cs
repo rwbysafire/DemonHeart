@@ -128,6 +128,7 @@ public abstract class Mob : MonoBehaviour , Entity{
 			stats.CurExp -= stats.threshold;
 			stats.level++;
 			stats.threshold = (stats.level+1) * 200;
+			stats.pts += Stats.ExtraPointsPerLevel;
 		}
 	}
 
