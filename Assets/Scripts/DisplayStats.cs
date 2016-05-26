@@ -14,8 +14,6 @@ public class DisplayStats : MonoBehaviour {
 		playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<Mob>().stats;
 		display = transform.FindChild("StatsDisplayBackground").gameObject;
 		level = display.transform.FindChild("level").gameObject.GetComponent<Text>();
-		exp = display.transform.FindChild("exp").gameObject.GetComponent<Text>();
-		Curexp = display.transform.FindChild("CurrentExp").gameObject.GetComponent<Text>();
 		STR = display.transform.FindChild("str").gameObject.GetComponent<Text>();
 		DEX = display.transform.FindChild("dex").gameObject.GetComponent<Text>();
 		INT = display.transform.FindChild("int").gameObject.GetComponent<Text>();
@@ -23,21 +21,9 @@ public class DisplayStats : MonoBehaviour {
 		mana = display.transform.FindChild("mana").gameObject.GetComponent<Text>();
 		attackSpeed = display.transform.FindChild("attackSpeed").gameObject.GetComponent<Text>();
 		cooldown = display.transform.FindChild("cooldown").gameObject.GetComponent<Text>();
-		display.SetActive(false);
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.X)) {
-			if (Pause.IsPaused () && display.activeSelf) {
-				// resume the game
-				Pause.ResumeGame ();
-				display.SetActive(false);
-			} else if (!Pause.IsPaused () && !display.activeSelf) {
-				// pause the game
-				Pause.PauseGame ();
-				display.SetActive(true);
-			}
-		}
 
 		if (display.activeSelf) {
 			if (GameObject.FindGameObjectWithTag ("Player")) {
@@ -46,8 +32,6 @@ public class DisplayStats : MonoBehaviour {
 				playerBuff = player.buff;
 			}
 			level.text = "Level: " + playerStats.level.ToString();
-			exp.text = "Exp: " + playerStats.exp.ToString();
-			Curexp.text = "CurrentExp: " + playerStats.CurExp.ToString();
 			STR.text = GetDisplayPropertyString ("STR", playerStats.strength, playerBuff.strength + playerStats.strengthActualAddon);
 			DEX.text = GetDisplayPropertyString ("DEX", playerStats.dexterity, playerBuff.dexterity + playerStats.dexterityActualAddon);
 			INT.text = GetDisplayPropertyString ("INT", playerStats.intelligence, playerBuff.intelligence + playerStats.intelligenceActualAddon);
