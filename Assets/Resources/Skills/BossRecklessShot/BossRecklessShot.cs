@@ -22,7 +22,7 @@ public class BossRecklessShot : Skill
 	}
 	
 	public override float getMaxCooldown () {
-		return 0.5f;
+		return 5f;
 	}
 	
 	public override float getManaCost () {
@@ -75,6 +75,7 @@ class BossRecklessShotAttack : MonoBehaviour {
         basicArrow.transform.RotateAround(basicArrow.transform.position, Vector3.forward, rotate);
         basicArrow.transform.Translate(Vector3.up * 0.7f);
         projectile.projectileOnStart();
+        projectile.chainTimes = skill.properties["chainCount"];
     }
 }
 
@@ -98,7 +99,7 @@ class BossRecklessShotProjectile : Projectile {
         AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Skills/boom"), explosion.transform.position);
     }
     public override float getSpeed() {
-        return 7;
+        return 15;
     }
     public override float getDamage() {
         return 0;

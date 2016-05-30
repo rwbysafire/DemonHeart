@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: d1e9eff94ebb96a4aa9539f3927dd663
-timeCreated: 1446612369
+timeCreated: 1464491382
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -23,7 +23,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -48,7 +48,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 30
   alphaIsTransparency: 1
@@ -59,24 +59,25 @@ TextureImporter:
     - name: head_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 1
-        width: 42
-        height: 66
-      alignment: 9
-      pivot: {x: .5, y: .200000003}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: head_1
-      rect:
-        serializedVersion: 2
         x: 48
         y: 1
         width: 42
         height: 66
       alignment: 9
-      pivot: {x: .5, y: .200000003}
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: head_2
+      outline:
+      - - {x: 7, y: 34.8}
+        - {x: 3, y: 36.8}
+        - {x: -3, y: 36.8}
+        - {x: -18, y: 15.799999}
+        - {x: -18, y: -10.200001}
+        - {x: -17, y: -12.200001}
+        - {x: 14, y: -12.200001}
+        - {x: 19, y: -9.200001}
+        - {x: 19, y: 6.799999}
+        - {x: 16, y: 15.799999}
+    - name: head_1
       rect:
         serializedVersion: 2
         x: 91
@@ -84,9 +85,18 @@ TextureImporter:
         width: 42
         height: 66
       alignment: 9
-      pivot: {x: .5, y: .200000003}
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: head_3
+      outline:
+      - - {x: -3, y: 52.8}
+        - {x: -18, y: 19.8}
+        - {x: -18, y: -9.200001}
+        - {x: -17, y: -12.200001}
+        - {x: 16, y: -12.200001}
+        - {x: 19, y: -11.200001}
+        - {x: 19, y: 13.799999}
+        - {x: 7, y: 52.8}
+    - name: head_2
       rect:
         serializedVersion: 2
         x: 134
@@ -94,9 +104,19 @@ TextureImporter:
         width: 42
         height: 66
       alignment: 9
-      pivot: {x: .5, y: .200000003}
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: head_4
+      outline:
+      - - {x: 3, y: 52.8}
+        - {x: -9, y: 52.8}
+        - {x: -18, y: 24.8}
+        - {x: -18, y: -11.200001}
+        - {x: -17, y: -12.200001}
+        - {x: 18, y: -12.200001}
+        - {x: 19, y: -8.200001}
+        - {x: 19, y: 20.8}
+        - {x: 12, y: 43.8}
+    - name: head_3
       rect:
         serializedVersion: 2
         x: 177
@@ -104,9 +124,20 @@ TextureImporter:
         width: 42
         height: 66
       alignment: 9
-      pivot: {x: .5, y: .200000003}
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: head_5
+      outline:
+      - - {x: 2, y: 50.8}
+        - {x: 1, y: 50.8}
+        - {x: -2, y: 49.8}
+        - {x: -18, y: 12.799999}
+        - {x: -18, y: -6.200001}
+        - {x: -16, y: -12.200001}
+        - {x: 15, y: -12.200001}
+        - {x: 19, y: -10.200001}
+        - {x: 19, y: 17.8}
+        - {x: 12, y: 42.8}
+    - name: head_4
       rect:
         serializedVersion: 2
         x: 220
@@ -114,8 +145,20 @@ TextureImporter:
         width: 42
         height: 66
       alignment: 9
-      pivot: {x: .5, y: .200000003}
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 3, y: 38.8}
+        - {x: -5, y: 38.8}
+        - {x: -7, y: 36.8}
+        - {x: -18, y: 6.799999}
+        - {x: -18, y: -11.200001}
+        - {x: -17, y: -12.200001}
+        - {x: 18, y: -12.200001}
+        - {x: 19, y: -8.200001}
+        - {x: 19, y: 14.799999}
+        - {x: 7, y: 37.8}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

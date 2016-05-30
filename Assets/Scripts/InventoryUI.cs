@@ -29,7 +29,7 @@ public class InventoryUI : MonoBehaviour {
 	private ItemTemplate[] itemHolder;
 	private static readonly Dictionary<Item.Type, int> itemListLength =
 		new Dictionary<Item.Type, int> {
-		{ Item.Type.General, 12 },
+		{ Item.Type.General, 15 },
 		{ Item.Type.Armor, 5 },
 		{ Item.Type.Skill, 13 }
 	};

@@ -220,7 +220,7 @@ public class Player : Mob {
         while (remainingTime > 0) {
             int currentFrame = (int)(((attackTime - remainingTime) / attackTime) * headSprite.Length);
             head.GetComponent<SpriteRenderer> ().sprite = headSprite[currentFrame];
-            if (hasntAttacked && currentFrame > 1) {
+            if (hasntAttacked && currentFrame > 0) {
                 hasntAttacked = false;
                 skill.skillLogic(this, stats);
             }

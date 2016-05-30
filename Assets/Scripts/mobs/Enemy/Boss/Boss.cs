@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Boss : Mob {
 
@@ -11,6 +13,8 @@ public class Boss : Mob {
     public Sprite[] spriteAttack, spriteWalk, spriteIdle;
     private int walkingFrame;
     private int idleFrame;
+
+    private Dictionary<int, int> skillPriorities = new Dictionary<int, int>();
 
     private Vector3 overrideTarget = Vector3.zero;
 
@@ -52,11 +56,23 @@ public class Boss : Mob {
         skills[0].properties["attackSpeed"] = 0.75f;
         skills[0].properties["cooldown"] = 1;
         replaceSkill(1, new SkillMortar());
-        skills[0].properties["cooldown"] = 0;
+        skills[1].properties["manaCost"] = 0;
+        skills[1].properties["cooldown"] = 1.5f;
         replaceSkill(2, new SkillRighteousFire());
         skills[2].addGem(new GemDoubleAoe());
         skills[2].properties["manaCost"] = 0;
         replaceSkill(3, new SkillCombatRoll());
+        skills[3].properties["manaCost"] = 0;
+        skills[3].properties["cooldown"] = 1f;
+        replaceSkill(4, new BossRecklessShot());
+        skills[4].properties["manaCost"] = 0;
+        skills[4].properties["cooldown"] = 10f;
+
+        skillPriorities.Add(0, 30); //FireBolt
+        skillPriorities.Add(1, 5); //Mortar
+        skillPriorities.Add(3, 3); //CombatRoll
+        skillPriorities.Add(4, 1); //RecklessShot
+        skillPriorities.Add(5, 10); //DoNothing
     }
 
     // Update is called once per frame
@@ -78,25 +94,35 @@ public class Boss : Mob {
             distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - transform.position.x, 2) + Mathf.Pow(playerPosition.y - transform.position.y, 2));
             lineOfSight = Physics2D.Raycast(body.transform.position + (playerPosition - body.transform.position).normalized * GetComponent<CircleCollider2D>().radius * transform.localScale.x * 1.1f, playerPosition - body.transform.position);
 
+            List<int> availableSkills = new List<int>();
             if (lineOfSight.collider.CompareTag("Player")) {
-                if (stats.health < stats.baseHealth / 2 && distance >= 3 && lineOfSight.collider.CompareTag("Player")) {
-                    float chanceOfCastingPerSec = 0.75f;
-                    if (Random.Range(0f, 1f) <= 1 - Mathf.Pow(1 - chanceOfCastingPerSec, Time.deltaTime))
-                        skills[3].useSkill(this);
+                if (distance <= 9 && skills[0].remainingCooldown() <= 0)
+                    availableSkills.Add(0);
+                if (distance >= 6 && distance <= 15 && skills[1].remainingCooldown() <= 0)
+                    availableSkills.Add(1);
+                if (stats.health < stats.baseHealth / 2) {
+                    if (distance <= 13 && skills[4].remainingCooldown() <= 0)
+                        availableSkills.Add(4);
                 }
-                if (distance <= 9 && lineOfSight.collider.CompareTag("Player")) {
-                    float chanceOfCastingPerSec = 0.98f;
-                    if (Random.Range(0f, 1f) <= 1 - Mathf.Pow(1 - chanceOfCastingPerSec, Time.deltaTime))
-                        skills[0].useSkill(this);
-                }
-                else if (distance <= 15 && lineOfSight.collider.CompareTag("Player")) {
-                    Vector3 velocity = player.GetComponent<Rigidbody2D>().velocity;
-                    Vector3 target = player.transform.position + (velocity * Random.Range(0.5f, 0.8f));
-                    if (Vector3.Distance(transform.position, target) <= 17) {
+            }
+            if (stats.health < stats.baseHealth / 2) {
+                if (distance >= 3 && skills[3].remainingCooldown() <= 0)
+                    availableSkills.Add(3);
+            }
+
+            int num = Random.Range(0, availableSkills.Sum(x => skillPriorities[x]));
+            int total = 0;
+            foreach (int x in availableSkills) {
+                if (num < skillPriorities[x] + total) {
+                    if (x == 1) {
+                        Vector3 velocity = player.GetComponent<Rigidbody2D>().velocity;
+                        Vector3 target = player.transform.position + (velocity * Random.Range(0.5f, 0.8f));
                         overrideTarget = target;
-                        skills[1].useSkill(this);
                     }
+                    skills[x].useSkill(this);
+                    break;
                 }
+                total += skillPriorities[x];
             }
         }
     }
@@ -112,14 +138,14 @@ public class Boss : Mob {
         if (overrideTarget == Vector3.zero) {
             GameObject player = GameObject.FindWithTag("Player");
             float radius = GetComponent<CircleCollider2D>().radius * transform.localScale.x * 1.1f;
-            Debug.DrawLine(body.transform.position, body.transform.position + (player.transform.position - body.transform.position).normalized * 2, Color.red);
+            //Debug.DrawLine(body.transform.position, body.transform.position + (player.transform.position - body.transform.position).normalized * 2, Color.red);
             foreach (RaycastHit2D lineCast in Physics2D.LinecastAll(body.transform.position + (player.transform.position - body.transform.position).normalized * radius, body.transform.position + (player.transform.position - body.transform.position).normalized * 2)) {
                 if (lineCast.collider.CompareTag("Wall") || lineCast.collider.CompareTag("Enemy")) {
-                    Debug.DrawLine(body.transform.position, (body.transform.position + body.transform.up * 2), Color.blue);
+                    //Debug.DrawLine(body.transform.position, (body.transform.position + body.transform.up * 2), Color.blue);
                     foreach (RaycastHit2D directionCast in Physics2D.LinecastAll(body.transform.position + body.transform.up * radius, (body.transform.position + body.transform.up * 2))) {
                         if (directionCast.collider.CompareTag("Wall") || directionCast.collider.CompareTag("Enemy")) {
-                            Debug.DrawLine(body.transform.position, Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0))).point, Color.green);
-                            Debug.DrawLine(body.transform.position, Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0))).point, Color.green);
+                            //Debug.DrawLine(body.transform.position, Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0))).point, Color.green);
+                            //Debug.DrawLine(body.transform.position, Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0))).point, Color.green);
                             if (Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(0.5f, 0.5f, 0))).distance > Physics2D.Raycast(body.transform.position + body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0)).normalized * radius, body.transform.TransformDirection(new Vector3(-0.5f, 0.5f, 0))).distance)
                                 return body.transform.position + body.transform.TransformDirection(new Vector3(0.1f, 1, 0).normalized);
                             else
