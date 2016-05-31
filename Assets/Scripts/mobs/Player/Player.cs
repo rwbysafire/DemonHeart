@@ -206,9 +206,9 @@ public class Player : Mob {
 				if (inventory.AddItem (drop.item)) {
 					Destroy (collider.gameObject);
 					hintText.HideHint ();
-				} else {
-					Debug.Log ("Item not picked due to full capacity");
-				}
+				} //else {
+					//Debug.Log ("Item not picked due to full capacity");
+				//}
 			}
 		}
 	}

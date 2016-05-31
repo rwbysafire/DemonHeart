@@ -73,6 +73,8 @@ public class Boss : Mob {
         skillPriorities.Add(3, 3); //CombatRoll
         skillPriorities.Add(4, 1); //RecklessShot
         skillPriorities.Add(5, 10); //DoNothing
+
+        lineOfSight = Physics2D.Raycast(body.transform.position + (playerPosition - body.transform.position).normalized * GetComponent<CircleCollider2D>().radius * transform.localScale.x * 1.1f, playerPosition - body.transform.position);
     }
 
     // Update is called once per frame

@@ -65,13 +65,13 @@ public class Stats {
 	public float threshold;
 	public float maxHealth {
 		get {
-			return baseHealth + (10 * level) + (2 * strength);
+			return baseHealth + (10 * level) + (4 * strength);
 		}
 	}
 	public float health;
 	public float healthRegen {
 		get {
-			return 3 + (0.1f * strength);
+			return 3 + (0.2f * strength);
 		}
 	}
 	public float maxMana {
