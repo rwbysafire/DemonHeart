@@ -46,8 +46,8 @@ public class Player : Mob {
 	public override void OnStart ()
 	{
         setDropRate(0);
-		stats.baseStrength = 20;
-		stats.baseDexterity = 30;
+		stats.baseStrength = 10;
+		stats.baseDexterity = 10;
 		stats.baseIntelligence = 10;
 		stats.exp = 0;
 		listOfSkills = new Skill[11]{new SkillBasicAttack(),

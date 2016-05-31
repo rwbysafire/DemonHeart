@@ -107,7 +107,7 @@ public class Stats {
 	}
 	public float attackSpeed {
 		get {
-			return 1f + (0.01f * dexterity);
+			return 1.5f + (0.01f * dexterity);
 		}
 	}
 	public float defence {

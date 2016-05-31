@@ -30,7 +30,7 @@ public class Zombie : Mob {
 
 	// Use this for initialization
 	public override void OnStart () {
-        setDropRate(20);
+        setDropRate(40);
         setArmourDrops(new int[] {0,1,2});
         setSkillDrops(new int[] {0,3});
         create ();

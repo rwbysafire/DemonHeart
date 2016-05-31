@@ -27,9 +27,16 @@ public class RangedEnemy : Mob {
         stats.exp = 100;
     }
 
+    class GemHalfAttackSpeed : Gem {
+        public GemHalfAttackSpeed() {
+            properties.Add("half attack speed", new property(0.5f, "*"));
+            this.itemDescription = "Half Attack Speed\n*Only to be used by Ranged Enemy*";
+        }
+    }
+
     // Use this for initialization
     public override void OnStart() {
-        setDropRate(30);
+        setDropRate(50);
         setArmourDrops(new int[] {3,4,5,6});
         setSkillDrops(new int[] {0,1,2,3});
         create();
@@ -38,7 +45,7 @@ public class RangedEnemy : Mob {
         spriteWalk = Resources.LoadAll<Sprite>("Sprite/zombieWalk");
         spriteIdle = Resources.LoadAll<Sprite>("Sprite/zombieIdle");
         replaceSkill(0, new SkillBasicAttack());
-        skills[0].properties["attackSpeed"] = .8f;
+        skills[0].addGem(new GemHalfAttackSpeed());
     }
 
     // Update is called once per frame

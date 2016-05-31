@@ -27,10 +27,10 @@
       {"enemy": "Zombie", "count": 4, "mustBeKilled": true, "interval":2, "buff": {
       	"str": 0,
       	"dex": 0,
-      	"health": 0
+      	"health": -600
       }},
       {"enemy": "Kamikaze", "count": 4, "mustBeKilled": true, "interval":2, "buff": {
-      	"health": 0,
+      	"health": -500,
       	"mana": 0
       }},
     ]
@@ -39,10 +39,12 @@
   "2": {
     "enemies": [
       {"enemy": "Kamikaze", "count": 8, "mustBeKilled": true, "interval":1.5, "buff":{
+      	"health": -450,
       	"int":0
       }},
       {"enemy": "RangedEnemy", "count": 6, "mustBeKilled": true, "interval":2, "buff":{
-      	"dex":5
+      	"health": -450,
+      	"dex":-20
       }},
     ]
   },
@@ -50,27 +52,36 @@
   "3": {
     "enemies": [
       {"enemy": "Zombie", "count": 10, "mustBeKilled": true, "interval":2, "buff":{
+      	"health": -400,
       	"str":20
       }},
       {"enemy": "Kamikaze", "count": 13, "mustBeKilled": true, "interval":1.5, "buff":{
+      	"health": -400,
       	"str":5
       }},
       {"enemy": "RangedEnemy", "count": 10, "mustBeKilled": true, "interval":2, "buff":{
-      	"dex":10
+      	"health": -400,
+      	"dex":-10
       }},
     ]
   },
 
   "miniBoss": {
     "enemies": [
-      {"enemy": "Boss", "count": 1, "mustBeKilled": true, "interval":1},
-      {"enemy": "Zombie", "count": 999999, "mustBeKilled": false, "interval":3},
+      {"enemy": "Boss", "count": 1, "mustBeKilled": true, "interval":1, "buff":{
+      	"health": -40000,
+	  }},
+      {"enemy": "Zombie", "count": 999999, "mustBeKilled": false, "interval":3, "buff":{
+      	"health": -300,
+	  }},
     ]
   },
 
   "4": {
     "enemies": [
-      {"enemy": "RangedEnemy", "count": 15, "mustBeKilled": true, "interval":2},
+      {"enemy": "RangedEnemy", "count": 15, "mustBeKilled": true, "interval":2, "buff":{
+      	"health": -200,
+	  }},
     ]
   },
 
