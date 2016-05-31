@@ -45,6 +45,9 @@ public class Boss : Mob {
 
     // Use this for initialization
     public override void OnStart() {
+        setDropRate(100);
+        setArmourDrops(new int[] {7});
+        setSkillDrops(new int[] {4,7});
         create();
         transform.rotation = new Quaternion(0, 0, 0, 0);
         spriteAttack = Resources.LoadAll<Sprite>("Sprite/zombieAttack");

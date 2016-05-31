@@ -5,25 +5,35 @@ public class DropItemScript : MonoBehaviour {
 
 	private static float TIMEOUT_SECOND = 10;
 	public Item item;
+    public int[] armourDrops, skillDrops;
 
 	public void initItem () {
 		switch (gameObject.tag) {
 		case "item_armor":
-			switch (((int)Time.time) % 5) {
+			switch (armourDrops[Random.Range(0, armourDrops.Length)]) {
 			case 0:
-				item = new ArmorGemOfDexterity ();
+				item = new ArmorGemOfStrength ();
 				break;
 			case 1:
-				item = new ArmorGemOfIntelligence ();
+				item = new ArmorGemOfDexterity ();
 				break;
 			case 2:
-				item = new ArmorGemOfPower ();
+				item = new ArmorGemOfIntelligence ();
 				break;
 			case 3:
-				item = new ArmorGemOfSpeed ();
+				item = new ArmorGemOfPower ();
 				break;
 			case 4:
-				item = new ArmorGemOfStrength ();
+				item = new ArmorGemOfSpeed ();
+				break;
+			case 5:
+				item = new ArmorGemOfEnergy ();
+				break;
+			case 6:
+				item = new ArmorGemOfWisdom ();
+				break;
+			case 7:
+				item = new ArmorGemOfAttributes ();
 				break;
 			default:
 				item = new Gem ();
@@ -31,7 +41,7 @@ public class DropItemScript : MonoBehaviour {
 			}
 			break;
 		case "item_skill":
-			switch (((int)Time.time) % 7) {
+			switch (skillDrops[Random.Range(0, skillDrops.Length)]) {
 			case 0:
 				item = new GemAttackSpeed ();
 				break;
@@ -52,6 +62,9 @@ public class DropItemScript : MonoBehaviour {
 				break;
 			case 6:
 				item = new GemIncreasedAoe();
+				break;
+			case 7:
+				item = new GemSuperiorIncreasedAoe();
 				break;
 			default:
 				item = new Gem ();
@@ -75,6 +88,8 @@ public class DropItemScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        GameObject dropSound = Instantiate<GameObject>(Resources.Load<GameObject>("Gems/DropSound"));
+        dropSound.transform.position = transform.position;
 		initItem ();
 		Invoke ("Timeout", TIMEOUT_SECOND);
 	}

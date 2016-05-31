@@ -15,9 +15,12 @@ public abstract class Mob : MonoBehaviour , Entity{
 
     public GameObject body;
 
-    public string[] dropTable = { "Gems/ArmorGem", "Gems/SkillGem" };/*"Gems/StrengthGem", "Gems/DexterityGem", "Gems/IntelGem",*/
+    public string[] dropTable = { "Gems/ArmorGem", "Gems/SkillGem" };
+    private int dropRate = 100;
+    private int[] armourDrops = { 0, 1, 2, 3, 4, 5, 6 };
+    private int[] skillDrops = { 0, 1, 2, 3, 4, 5, 6 };
 
-	public void replaceSkill(int skillNum, Skill skill) {
+    public void replaceSkill(int skillNum, Skill skill) {
 		skills[skillNum] = skill;
 	}
 
@@ -132,15 +135,29 @@ public abstract class Mob : MonoBehaviour , Entity{
 		}
 	}
 
-	public virtual void OnDeath() {}
+	public virtual void OnDeath() { }
+
+    public void setDropRate(int dropRate) {
+        this.dropRate = dropRate;
+    }
+
+    public void setArmourDrops(int[] armourDrops) {
+        this.armourDrops = armourDrops;
+    }
+
+    public void setSkillDrops(int[] skillDrops) {
+        this.skillDrops = skillDrops;
+    }
 
     void DropItem() {
-        if (Random.Range(1, 101) <= 100) {
+        if (Random.Range(1, 101) <= dropRate) {
 			GameObject Drop = (GameObject) Instantiate(
 				Resources.Load<GameObject>(dropTable[Random.Range(0, dropTable.Length)]),
 				this.gameObject.transform.position + new Vector3 (Random.Range (2f, 5f), Random.Range (2f, 5f), 0),
 				Quaternion.identity);
             Drop.transform.position = feetTransform.position;
+            Drop.GetComponent<DropItemScript>().armourDrops = armourDrops;
+            Drop.GetComponent<DropItemScript>().skillDrops = skillDrops;
         }
 
     }

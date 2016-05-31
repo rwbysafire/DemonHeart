@@ -29,7 +29,10 @@ public class Kamikaze : Mob {
 	
 	// Use this for initialization
 	public override void OnStart () {
-		create ();
+        setDropRate(10);
+        setArmourDrops(new int[] {0,1,2,3,4,5,6});
+        setSkillDrops(new int[] {3,5,6});
+        create ();
 		transform.rotation = new Quaternion(0,0,0,0);
 		spriteWalk = Resources.LoadAll<Sprite>("Sprite/demon");
         spriteAttack = Resources.LoadAll<Sprite>("Sprite/demonAttack");

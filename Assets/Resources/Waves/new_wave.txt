@@ -14,10 +14,10 @@
 
   "options": {
   	"buff": {
-  		"str": 5,
-      	"dex": 5,
-      	"int": 5,
-      	"health": 50,
+  		"str": 10,
+      	"dex": 10,
+      	"int": 10,
+      	"health": 100,
       	"mana": 50
   	}
   },
@@ -38,16 +38,26 @@
 
   "2": {
     "enemies": [
-      {"enemy": "Kamikaze", "count": 8, "mustBeKilled": true, "interval":2, "buff":{
+      {"enemy": "Kamikaze", "count": 8, "mustBeKilled": true, "interval":1.5, "buff":{
       	"int":0
+      }},
+      {"enemy": "RangedEnemy", "count": 6, "mustBeKilled": true, "interval":2, "buff":{
+      	"dex":5
       }},
     ]
   },
 
   "3": {
     "enemies": [
-      {"enemy": "Zombie", "count": 10, "mustBeKilled": true, "interval":2},
-      {"enemy": "Kamikaze", "count": 13, "mustBeKilled": true, "interval":1.5},
+      {"enemy": "Zombie", "count": 10, "mustBeKilled": true, "interval":2, "buff":{
+      	"str":20
+      }},
+      {"enemy": "Kamikaze", "count": 13, "mustBeKilled": true, "interval":1.5, "buff":{
+      	"str":5
+      }},
+      {"enemy": "RangedEnemy", "count": 10, "mustBeKilled": true, "interval":2, "buff":{
+      	"dex":10
+      }},
     ]
   },
 

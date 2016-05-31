@@ -30,7 +30,10 @@ public class Zombie : Mob {
 
 	// Use this for initialization
 	public override void OnStart () {
-		create ();
+        setDropRate(20);
+        setArmourDrops(new int[] {0,1,2});
+        setSkillDrops(new int[] {0,3});
+        create ();
 		transform.rotation = new Quaternion(0,0,0,0);
 		spriteAttack = Resources.LoadAll<Sprite>("Sprite/zombieAttack");
 		spriteWalk = Resources.LoadAll<Sprite>("Sprite/zombieWalk");

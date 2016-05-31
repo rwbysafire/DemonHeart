@@ -55,48 +55,63 @@ public class WeaponGem : Gem {
 [System.Serializable]
 public class GemExtraProjectiles : Gem {
     public GemExtraProjectiles() {
+        this.itemName = "Spread Gem";
         properties.Add("projectileCount", new property(2, "+"));
-		this.itemDescription = "Extra projectiles";
+		this.itemDescription = "Skill Gem\nSkill fires 2 extra projectiles";
     }
 }
 
 [System.Serializable]
 public class GemExtraChains : Gem {
     public GemExtraChains() {
+        this.itemName = "Chain Gem";
         properties.Add("chainCount", new property(2, "+"));
-		this.itemDescription = "Extra chains";
+		this.itemDescription = "Skill Gem\nSkill chains 2 additional times";
     }
 }
 
 [System.Serializable]
 public class GemAttackSpeed : Gem {
     public GemAttackSpeed() {
+        this.itemName = "Gem of the Tiger";
         properties.Add("attackSpeed", new property(0.8f, "*"));
-        this.itemDescription = "Increase attack speed by 20%";
+        this.itemDescription = "Skill Gem\nIncrease skill attack speed by 20%";
     }
 }
 
 [System.Serializable]
 public class GemCooldownReduction : Gem {
     public GemCooldownReduction() {
+        this.itemName = "Gem of cooldown";
         properties.Add("cooldown", new property(0.8f, "*"));
-        this.itemDescription = "Reduce cooldown by 20%";
+        this.itemDescription = "Skill Gem\nReduce skill cooldown by 20%";
     }
 }
 
 [System.Serializable]
 public class GemReducedDuration : Gem {
     public GemReducedDuration() {
+        this.itemName = "Less Duration";
         properties.Add("duration", new property(0.5f, "*"));
-        this.itemDescription = "Reduce skill duration";
+        this.itemDescription = "Skill Gem\nReduce skill duration by 50%";
     }
 }
 
 [System.Serializable]
 public class GemIncreasedAoe : Gem {
     public GemIncreasedAoe() {
+        this.itemName = "Increased Area of Effect";
         properties.Add("areaOfEffect", new property(1.5f, "*"));
-        this.itemDescription = "50% Increase area of effect";
+        this.itemDescription = "Skill Gem\n50% Increased area of effect";
+    }
+}
+
+[System.Serializable]
+public class GemSuperiorIncreasedAoe : Gem {
+    public GemSuperiorIncreasedAoe() {
+        this.itemName = "Superior Increased Area of Effect";
+        properties.Add("areaOfEffect", new property(2f, "*"));
+        this.itemDescription = "Skill Gem\n100% Increased area of effect";
     }
 }
 
@@ -106,7 +121,8 @@ public class GemChainLightningOnHit : Gem {
     public GemChainLightningOnHit() {
         //properties.Add("chainCount", new property(1, "+"));
 
-		this.itemDescription = "Chain lightning";
+        this.itemName = "Shock Gem";
+        this.itemDescription = "Skill Gem\nOnly effects Basic Attack\nChain lightning on hit";
     }
 
     public override void onHitEffect(Entity entity, Stats stats) {

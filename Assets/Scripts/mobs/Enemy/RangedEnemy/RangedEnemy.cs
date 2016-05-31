@@ -29,6 +29,9 @@ public class RangedEnemy : Mob {
 
     // Use this for initialization
     public override void OnStart() {
+        setDropRate(30);
+        setArmourDrops(new int[] {3,4,5,6});
+        setSkillDrops(new int[] {0,1,2,3});
         create();
         transform.rotation = new Quaternion(0, 0, 0, 0);
         spriteAttack = Resources.LoadAll<Sprite>("Sprite/zombieAttack");
