@@ -29,7 +29,7 @@ public class RangedEnemy : Mob {
 
     class GemHalfAttackSpeed : Gem {
         public GemHalfAttackSpeed() {
-            properties.Add("half attack speed", new property(0.5f, "*"));
+            properties.Add("attackSpeed", new property(1.25f, "*"));
             this.itemDescription = "Half Attack Speed\n*Only to be used by Ranged Enemy*";
         }
     }

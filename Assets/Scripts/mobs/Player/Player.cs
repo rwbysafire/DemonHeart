@@ -214,7 +214,12 @@ public class Player : Mob {
 		}
 	}
 
-	public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
+    public override void OnDeath() {
+        GameObject.Find("GameOverScreen").transform.GetChild(0).gameObject.SetActive(true);
+        Pause.PauseGame();
+    }
+
+    public override IEnumerator playAttackAnimation(Skill skill, float attackTime) {
         bool hasntAttacked = true;
         float endTime = Time.fixedTime + attackTime;
         float remainingTime = endTime - Time.fixedTime;

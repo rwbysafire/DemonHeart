@@ -26,10 +26,17 @@ public class Zombie : Mob {
         stats.baseDexterity = -50;
         // Z exp = 100
         stats.exp = 100;
-	}
+    }
 
-	// Use this for initialization
-	public override void OnStart () {
+    class GemHalfAttackSpeed : Gem {
+        public GemHalfAttackSpeed() {
+            properties.Add("attackSpeed", new property(2f, "*"));
+            this.itemDescription = "Half Attack Speed\n*Only to be used by Ranged Enemy*";
+        }
+    }
+
+    // Use this for initialization
+    public override void OnStart () {
         setDropRate(40);
         setArmourDrops(new int[] {0,1,2});
         setSkillDrops(new int[] {0,3});
@@ -39,7 +46,8 @@ public class Zombie : Mob {
 		spriteWalk = Resources.LoadAll<Sprite>("Sprite/zombieWalk");
 		spriteIdle = Resources.LoadAll<Sprite>("Sprite/zombieIdle");
 		replaceSkill(0, new SkillSlash ());
-		replaceSkill(1, new SkillCombatRoll ());
+        skills[0].addGem(new GemHalfAttackSpeed());
+        replaceSkill(1, new SkillCombatRoll ());
 	}
 
 	// Update is called once per frame
