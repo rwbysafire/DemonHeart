@@ -164,9 +164,6 @@ public class SpawnEnemies : MonoBehaviour {
 					enemy.transform.position = new Vector3 (ClosestSpawn [i].x, ClosestSpawn [i].y, zPosition);
 					yield return new WaitForSeconds(spawnSet.interval);
 					count--;
-                    foreach (Vector3 x in ClosestSpawn) {
-                        print(x);
-                    }
 				}
 			} else {
 				GameObject enemy = Instantiate<GameObject> (spawnSet.obj);
