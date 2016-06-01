@@ -79,9 +79,13 @@
 
   "4": {
     "enemies": [
-      {"enemy": "RangedEnemy", "count": 15, "mustBeKilled": true, "interval":2, "buff":{
+      {"enemy": "RangedEnemy", "count": 15, "mustBeKilled": true, "interval":1.5, "buff":{
       	"health": -200,
 	  }},
+      {"enemy": "Zombie", "count": 45, "mustBeKilled": true, "interval":0.5, "buff":{
+      	"health": -890,
+      	"str":20
+      }},
     ]
   },
 

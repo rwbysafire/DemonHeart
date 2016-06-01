@@ -85,35 +85,36 @@ public class SpawnEnemies : MonoBehaviour {
 	void CalClosestPos()
 	{
 		List<Vector3> SpawnSpots = new List<Vector3>();
-		SpawnSpots.Add(new Vector3(0f,-20f,0f));
-		SpawnSpots.Add(new Vector3(0f,20f,0f));
-		SpawnSpots.Add(new Vector3(0f,30f,0f));
-		SpawnSpots.Add(new Vector3(15f,0f,0f));
-		SpawnSpots.Add(new Vector3(-15f,0f,0f));
-		SpawnSpots.Add(new Vector3(30f,0f,0f));
-		SpawnSpots.Add(new Vector3(-30f,0f,0f));
-		SpawnSpots.Add(new Vector3(-15f,15f,0f));
-		SpawnSpots.Add(new Vector3(-30f,15f,0f));
-		SpawnSpots.Add(new Vector3(-15f,-15f,0f));
-		SpawnSpots.Add(new Vector3(15f,-15f,0f));
-		SpawnSpots.Add(new Vector3(20f,10f,0f));
-		SpawnSpots.Add(new Vector3(10f,20f,0f));
+		SpawnSpots.Add(new Vector3(-8.47f, -29.55f, 0f));
+		SpawnSpots.Add(new Vector3(8.47f, -29.55f, 0f));
+		SpawnSpots.Add(new Vector3(36.5f, 1.73f, 0f));
+		SpawnSpots.Add(new Vector3(32.29f, 8.75f, 0f));
+		SpawnSpots.Add(new Vector3(0f, 30f,0f));
+		SpawnSpots.Add(new Vector3(-39.7f, 23.5f, 0f));
+		SpawnSpots.Add(new Vector3(-37.56f, 11.21f, 0f));
+		SpawnSpots.Add(new Vector3(-37.56f, -8.72f, 0f));
+		//SpawnSpots.Add(new Vector3(-30f,15f,0f));
+		//SpawnSpots.Add(new Vector3(-15f,-15f,0f));
+		//SpawnSpots.Add(new Vector3(15f,-15f,0f));
+		//SpawnSpots.Add(new Vector3(20f,10f,0f));
+		//SpawnSpots.Add(new Vector3(10f,20f,0f));
 		GameObject curPlayer = GameObject.Find ("Player");
 		Vector3 PlayerPos = curPlayer.transform.position;
 
 		ClosestSpawn = new List<Vector3>();
-		ClosestSpawn.Add(new Vector3(0f, -20f, 0f));
-		ClosestSpawn.Add(new Vector3(0f, 20f, 0f));
-		ClosestSpawn.Add(new Vector3(0f, 30f, 0f));
+		ClosestSpawn.Add(new Vector3(-8.47f, -29.55f, 0f));
+		ClosestSpawn.Add(new Vector3(8.47f, -29.55f, 0f));
+		ClosestSpawn.Add(new Vector3(36.5f, 1.73f, 0f));
+        ClosestSpawn.Add(new Vector3(32.29f, 8.75f, 0f));
 
-		for (int i = 0; i < 13; i++) 
+        for (int i = 0; i < SpawnSpots.Count; i++) 
 		{
 			float temp = Vector3.Distance(PlayerPos, SpawnSpots[i]);
 			int index = 0;
 			bool f = false;
-			for (int j = 0; j < 3; j++) 
+			for (int j = 0; j < 4; j++) 
 			{
-				if (Vector3.Distance(PlayerPos, ClosestSpawn [j]) > temp)
+				if (Vector3.Distance(PlayerPos, ClosestSpawn [j]) > temp && !ClosestSpawn.Contains(SpawnSpots[i]))
 				{
 					temp = Vector3.Distance (PlayerPos, ClosestSpawn [j]);
 					index = j;
@@ -126,7 +127,7 @@ public class SpawnEnemies : MonoBehaviour {
 			}
 		}
 
-		for (int j = 1; j < 3; j++) 
+		for (int j = 0; j < 4; j++) 
 		{
 			if (Vector3.Distance (PlayerPos, ClosestSpawn [j]) < Vector3.Distance (PlayerPos, ClosestSpawn [mark]))
 				mark = j;
@@ -151,8 +152,8 @@ public class SpawnEnemies : MonoBehaviour {
 	IEnumerator SpawnEnemy(SpawnSet spawnSet) {
 		int count = spawnSet.count;
 		while (count > 0) {
-			if (count >= 3) {
-				for (int i = 0; i < 3; i++) {
+			if (count >= 4) {
+				for (int i = 0; i < 4; i++) {
 					GameObject enemy = Instantiate<GameObject> (spawnSet.obj);
 					enemy.transform.SetParent (spawnSet.mustBeKilled ? mustKillEnemies.transform : normalEnemies.transform);
 					enemy.transform.rotation = Quaternion.Euler (0f, 0f, Random.Range (0, 360));
@@ -163,6 +164,9 @@ public class SpawnEnemies : MonoBehaviour {
 					enemy.transform.position = new Vector3 (ClosestSpawn [i].x, ClosestSpawn [i].y, zPosition);
 					yield return new WaitForSeconds(spawnSet.interval);
 					count--;
+                    foreach (Vector3 x in ClosestSpawn) {
+                        print(x);
+                    }
 				}
 			} else {
 				GameObject enemy = Instantiate<GameObject> (spawnSet.obj);

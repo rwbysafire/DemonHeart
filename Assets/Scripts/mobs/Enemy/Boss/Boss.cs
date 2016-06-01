@@ -13,6 +13,7 @@ public class Boss : Mob {
     public Sprite[] spriteAttack, spriteWalk, spriteIdle;
     private int walkingFrame;
     private int idleFrame;
+    private bool halfHealth;
 
     private Dictionary<int, int> skillPriorities = new Dictionary<int, int>();
 
@@ -53,6 +54,7 @@ public class Boss : Mob {
         spriteAttack = Resources.LoadAll<Sprite>("Sprite/zombieAttack");
         spriteWalk = Resources.LoadAll<Sprite>("Sprite/zombieWalk");
         spriteIdle = Resources.LoadAll<Sprite>("Sprite/zombieIdle");
+        halfHealth = false;
         replaceSkill(0, new SkillFireBolt());
         skills[0].properties["manaCost"] = 0;
         skills[0].properties["projectileCount"] = 3;
@@ -66,16 +68,16 @@ public class Boss : Mob {
         skills[2].properties["manaCost"] = 0;
         replaceSkill(3, new SkillCombatRoll());
         skills[3].properties["manaCost"] = 0;
-        skills[3].properties["cooldown"] = 1f;
+        skills[3].properties["cooldown"] = 1.5f;
         replaceSkill(4, new BossRecklessShot());
         skills[4].properties["manaCost"] = 0;
         skills[4].properties["cooldown"] = 10f;
 
-        skillPriorities.Add(0, 30); //FireBolt
-        skillPriorities.Add(1, 5); //Mortar
-        skillPriorities.Add(3, 3); //CombatRoll
+        skillPriorities.Add(0, 100); //FireBolt
+        skillPriorities.Add(1, 10); //Mortar
+        skillPriorities.Add(3, 2); //CombatRoll
         skillPriorities.Add(4, 1); //RecklessShot
-        skillPriorities.Add(5, 10); //DoNothing
+        skillPriorities.Add(5, 75); //DoNothing
 
         lineOfSight = Physics2D.Raycast(body.transform.position + (playerPosition - body.transform.position).normalized * GetComponent<CircleCollider2D>().radius * transform.localScale.x * 1.1f, playerPosition - body.transform.position);
     }
@@ -84,10 +86,11 @@ public class Boss : Mob {
     public override void OnUpdate() {
         if (isAttacking)
             return;
-        if (stats.health < stats.baseHealth / 2) {
+        if (stats.health < stats.baseHealth / 2 && !halfHealth) {
             skills[0].properties["attackSpeed"] = 0.56f;
             skills[0].properties["cooldown"] = 0.75f;
             skills[2].useSkill(this);
+            halfHealth = true;
         }
         GameObject player = GameObject.FindWithTag("Player");
         if (player) {
@@ -110,7 +113,7 @@ public class Boss : Mob {
                         availableSkills.Add(4);
                 }
             }
-            if (stats.health < stats.baseHealth / 2) {
+            if (halfHealth) {
                 if (distance >= 3 && skills[3].remainingCooldown() <= 0)
                     availableSkills.Add(3);
             }
@@ -184,7 +187,7 @@ public class Boss : Mob {
             Vector3 diff = (getTargetLocation() - feetTransform.position).normalized;
             float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
             headTransform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-            if (stats.health > stats.baseHealth / 2) {
+            if (halfHealth) {
                 if (distance >= 6 || !lineOfSight.collider.CompareTag("Player"))
                     GetComponent<Rigidbody2D>().AddForce(feetTransform.up * speed);
             }
