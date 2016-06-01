@@ -110,8 +110,12 @@ public abstract class Mob : MonoBehaviour , Entity{
 	void Update() {
 		if (stats.health <= 0)
 		{
-			GameObject.Find ("Player").GetComponent<Mob> ().stats.exp += stats.exp;
-			GameObject.Find ("Player").GetComponent<Mob> ().stats.CurExp += stats.exp;
+			if (gameObject.tag != "Player") {
+				Mob player = GameObject.Find ("Player").GetComponent<Mob> ();
+				player.stats.exp += stats.exp;
+				player.stats.CurExp += stats.exp;
+				player.stats.killCount++;
+			}
 			DropItem();
 			OnDeath();
 			Destroy(gameObject);

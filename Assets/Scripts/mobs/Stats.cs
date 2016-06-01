@@ -19,6 +19,7 @@ public class Stats {
 	public float exp = 0;
 	public float CurExp = 0;
 	public int pts = 0;
+	public int killCount = 0;
 
 	private int _strength = 10;
 	public int baseStrength {
