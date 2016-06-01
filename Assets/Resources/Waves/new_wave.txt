@@ -43,7 +43,7 @@
       	"int":0
       }},
       {"enemy": "RangedEnemy", "count": 6, "mustBeKilled": true, "interval":2, "buff":{
-      	"health": -450,
+      	"health": -550,
       	"dex":-20
       }},
     ]
@@ -69,7 +69,7 @@
   "miniBoss": {
     "enemies": [
       {"enemy": "Boss", "count": 1, "mustBeKilled": true, "interval":1, "buff":{
-      	"health": -40000,
+      	"health": -43300,
 	  }},
       {"enemy": "Zombie", "count": 999999, "mustBeKilled": false, "interval":3, "buff":{
       	"health": -300,
