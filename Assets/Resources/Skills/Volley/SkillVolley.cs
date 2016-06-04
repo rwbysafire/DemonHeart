@@ -24,11 +24,11 @@ public class SkillVolley : Skill {
 	}
 	
 	public override float getMaxCooldown () {
-		return 0.5f;
+		return 0.25f;
 	}
 	
 	public override float getManaCost () {
-		return 25;
+		return 10;
 	}
 	
 	public override void skillLogic(Entity mob, Stats stats) {
@@ -51,7 +51,10 @@ public class SkillVolley : Skill {
     void fireArrow(Entity mob, Stats stats, float rotate = 0) {
 		//Instantiates the projectile with some speed
 		GameObject basicArrow = MonoBehaviour.Instantiate<GameObject>(Resources.Load<GameObject>("Skills/Arrow_Placeholder"));
-		projectile = new VolleyProjectile (basicArrow, stats);
+        GameObject arrowGlow = MonoBehaviour.Instantiate(Resources.Load("ShotGlow")) as GameObject;
+        arrowGlow.transform.position = new Vector3(basicArrow.transform.position.x, basicArrow.transform.position.y, -0.3f);
+        arrowGlow.transform.SetParent(basicArrow.transform);
+        projectile = new VolleyProjectile (basicArrow, stats);
 		basicArrow.GetComponent<basic_projectile> ().setProjectile (projectile);
 		//Initiates the projectile's position and rotation
 		basicArrow.transform.position = mob.headTransform.position;
@@ -83,21 +86,21 @@ class VolleyProjectile : Projectile {
 		return 40;
 	}
 	public override float getDamage () {
-		return (1 * stats.basicAttackDamage) + (0.3f * stats.attackDamage);
+		return (0.4f * stats.basicAttackDamage) + (0.2f * stats.attackDamage);
 	}
-	public override float getTurnSpeed () {
-		return 200;
-	}
+	//public override float getTurnSpeed () {
+	//	return 200;
+	//}
 	public override float getDuration () {
 		return 0.5f;
 	}
-	public override int getChaining () {
-		return 2;
-	}
-	public override bool getForking () {
-		return true;
-	}
-	public override bool getHoming () {
-		return true;
-	}
+	//public override int getChaining () {
+	//	return 2;
+	//}
+	//public override bool getForking () {
+	//	return true;
+	//}
+	//public override bool getHoming () {
+	//	return true;
+	//}
 }

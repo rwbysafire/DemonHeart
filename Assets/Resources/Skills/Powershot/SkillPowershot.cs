@@ -19,15 +19,15 @@ public class SkillPowershot : Skill
 	}
 	
 	public override float getAttackSpeed () {
-		return 1.5f;
+		return 1.25f;
 	}
 	
 	public override float getMaxCooldown () {
-		return 1.5f;
+		return 1f;
 	}
 	
 	public override float getManaCost () {
-		return 20;
+		return 15;
 	}
 	
 	public override void skillLogic(Entity mob, Stats stats) {
@@ -91,6 +91,6 @@ class PowershotEffect : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (collider.CompareTag(enemyTag))
-			collider.GetComponent<Mob>().hurt ((2 * mob.stats.basicAttackDamage) + (0.2f * mob.stats.attackDamage));
+			collider.GetComponent<Mob>().hurt ((2.5f * mob.stats.basicAttackDamage) + (0.4f * mob.stats.attackDamage));
 	}
 }

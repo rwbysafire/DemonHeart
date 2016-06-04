@@ -103,14 +103,15 @@ public class ArmorGemOfWisdom : ArmorGem {
 [System.Serializable]
 public class ArmorGemOfAttributes : ArmorGem {
     protected override void InitBuff() {
-        buff.baseStrength = Random.Range(3, 7);
+        int value = Random.Range(3, 7);
+        buff.baseStrength = value;
         buff.strengthAddon = 2;
-        buff.baseDexterity = Random.Range(3, 7);
+        buff.baseDexterity = value;
         buff.dexterityAddon = 2;
-        buff.baseIntelligence = Random.Range(3, 7);
+        buff.baseIntelligence = value;
         buff.intelligenceAddon = 2;
         this.itemName = "Gem of Attributes";
-        this.itemDescription = string.Format("Armour Gem\nSTR +{0}(+{1}/lv)\nDEX +{2}(+{3}/lv)\nDEX +{4}(+{5}/lv)",
-            buff.strength, buff.strengthAddon, buff.dexterity, buff.dexterityAddon, buff.intelligence, buff.intelligenceAddon);
+        this.itemDescription = string.Format("Armour Gem\nAll Atributes +{0}(+{1}/lv)",
+            buff.strength, buff.strengthAddon);
     }
 }

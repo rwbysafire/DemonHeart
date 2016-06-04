@@ -122,7 +122,7 @@ public class GemChainLightningOnHit : Gem {
         //properties.Add("chainCount", new property(1, "+"));
 
         this.itemName = "Shock Gem";
-        this.itemDescription = "Skill Gem\nOnly effects Basic Attack\nChain lightning on hit";
+        this.itemDescription = "Skill Gem\nOnly effects Basic Attack\nCast Chain lightning on hit";
     }
 
     public override void onHitEffect(Entity entity, Stats stats) {
